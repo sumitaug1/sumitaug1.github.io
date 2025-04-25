@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PNG Converter - Multi-Tools Hub</title>
+    <meta name="description" content="Convert any image format (JPG, GIF, WebP, etc.) to PNG format online. Free, fast, and easy to use image converter tool.">
+    <meta name="keywords" content="image converter, png converter, jpg to png, gif to png, webp to png, image tools">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container tool-container">
+        <!-- Tool Header -->
+        <div class="tool-header">
+            <h1>Image to PNG Converter</h1>
+            <p class="tool-description">
+                Convert your images to PNG format instantly. Supports JPG, GIF, WebP, and other popular image formats.
+                No registration required. Free and easy to use.
+            </p>
+        </div>
+
+        <!-- Main Tool Section -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="glass-card">
+                    <!-- File Upload Area -->
+                    <div class="upload-area text-center p-5 mb-4" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                        <h3>Drag & Drop Your Image Here</h3>
+                        <p class="text-muted">or</p>
+                        <input type="file" id="fileInput" accept="image/*" class="d-none">
+                        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-folder-open me-2"></i>Choose File
+                        </button>
+                        <p class="mt-2 text-muted">Supported formats: JPG, JPEG, GIF, WebP, BMP, TIFF</p>
+                    </div>
+
+                    <!-- Image Preview -->
+                    <div class="preview-area mb-4 d-none" id="previewArea">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Original Image</h5>
+                                <div class="preview-container mb-3">
+                                    <img id="originalPreview" class="img-fluid rounded">
+                                </div>
+                                <p class="text-muted small" id="originalInfo"></p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>PNG Preview</h5>
+                                <div class="preview-container mb-3">
+                                    <img id="pngPreview" class="img-fluid rounded">
+                                </div>
+                                <p class="text-muted small" id="pngInfo"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conversion Options -->
+                    <div class="conversion-options mb-4 d-none" id="conversionOptions">
+                        <h5>Conversion Options</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Quality</label>
+                                    <input type="range" class="form-range" id="qualityRange" min="0" max="100" value="100">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Low</span>
+                                        <span id="qualityValue">100%</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Resize</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="widthInput" placeholder="Width">
+                                        <span class="input-group-text">x</span>
+                                        <input type="number" class="form-control" id="heightInput" placeholder="Height">
+                                        <button class="btn btn-outline-secondary" type="button" id="lockAspectRatio">
+                                            <i class="fas fa-lock"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons text-center">
+                        <button class="btn btn-primary me-2" id="convertBtn" disabled>
+                            <i class="fas fa-exchange-alt me-2"></i>Convert to PNG
+                        </button>
+                        <button class="btn btn-secondary" id="downloadBtn" disabled>
+                            <i class="fas fa-download me-2"></i>Download PNG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-bolt fa-2x mb-3 text-primary"></i>
+                        <h5>Fast Conversion</h5>
+                        <p class="card-text">Convert your images to PNG format in seconds with our high-speed processing.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shield-alt fa-2x mb-3 text-primary"></i>
+                        <h5>Secure & Private</h5>
+                        <p class="card-text">Your images are processed locally and never uploaded to our servers.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-mobile-alt fa-2x mb-3 text-primary"></i>
+                        <h5>Mobile Friendly</h5>
+                        <p class="card-text">Works perfectly on all devices, from desktop to mobile phones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="ad-container text-center mt-5">
+            <p>Advertisement</p>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/image-tools/image-to-png.js"></script>
+</body>
+</html> 

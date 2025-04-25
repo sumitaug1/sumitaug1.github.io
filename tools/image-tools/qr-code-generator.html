@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Multi-Tools Hub</title>
+    <meta name="description" content="Generate QR codes for URLs, text, phone numbers, and more. Free online QR code generator with customization options.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="../../assets/css/image-tools.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">QR Code Generator</h1>
+                <p class="text-center mb-4">Create QR codes for URLs, text, phone numbers, and more. Customize the size, color, and error correction level.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="qrForm">
+                            <div class="mb-3">
+                                <label for="qrContent" class="form-label">Content</label>
+                                <textarea class="form-control" id="qrContent" rows="3" placeholder="Enter text, URL, phone number, etc." required></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="qrSize" class="form-label">Size (pixels)</label>
+                                        <input type="number" class="form-control" id="qrSize" min="100" max="1000" value="200">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="qrErrorLevel" class="form-label">Error Correction Level</label>
+                                        <select class="form-select" id="qrErrorLevel">
+                                            <option value="L">Low (7%)</option>
+                                            <option value="M" selected>Medium (15%)</option>
+                                            <option value="Q">Quartile (25%)</option>
+                                            <option value="H">High (30%)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="qrColor" class="form-label">QR Code Color</label>
+                                        <input type="color" class="form-control form-control-color" id="qrColor" value="#000000">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="qrBgColor" class="form-label">Background Color</label>
+                                        <input type="color" class="form-control form-control-color" id="qrBgColor" value="#ffffff">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-qrcode"></i> Generate QR Code
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" id="qrPreview" style="display: none;">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Generated QR Code</h5>
+                        <div class="text-center mb-3">
+                            <div id="qrCodeContainer" class="mb-3"></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span id="qrInfo" class="small text-muted"></span>
+                            <button class="btn btn-primary" id="downloadQrBtn">
+                                <i class="fas fa-download"></i> Download QR Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">About QR Code Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool allows you to:</p>
+                        <ul>
+                            <li>Generate QR codes for various types of content</li>
+                            <li>Customize QR code size and colors</li>
+                            <li>Adjust error correction level for better scanning</li>
+                            <li>Download QR codes in PNG format</li>
+                        </ul>
+                        <p>QR codes are widely used for sharing information, URLs, contact details, and more. They can be scanned by any smartphone camera.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/image-tools/qr-code-generator.js"></script>
+</body>
+</html> 

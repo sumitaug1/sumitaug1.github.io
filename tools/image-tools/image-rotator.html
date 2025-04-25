@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Rotator - Online Image Tools</title>
+    <link href="../../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Rotator</h1>
+        <p>Rotate and flip your images with ease.</p>
+
+        <div class="tool-container">
+            <div class="input-section">
+                <div class="file-upload">
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div id="dropZone" class="drop-zone">
+                        <div id="previewPlaceholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop your image here or click to browse</p>
+                        </div>
+                        <img id="previewImage" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="options-section">
+                    <div class="option-group">
+                        <label for="rotation">Rotation:</label>
+                        <div class="rotation-controls">
+                            <button id="rotateLeft" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i> Rotate Left
+                            </button>
+                            <button id="rotateRight" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> Rotate Right
+                            </button>
+                            <input type="range" id="rotationSlider" min="0" max="360" value="0">
+                            <span id="rotationValue">0°</span>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>Flip:</label>
+                        <div class="flip-controls">
+                            <button id="flipHorizontal" class="btn btn-secondary">
+                                <i class="fas fa-arrows-alt-h"></i> Flip Horizontal
+                            </button>
+                            <button id="flipVertical" class="btn btn-secondary">
+                                <i class="fas fa-arrows-alt-v"></i> Flip Vertical
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="format">Output Format:</label>
+                        <select id="format">
+                            <option value="original">Original Format</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="resetBtn" class="btn btn-warning" disabled>Reset</button>
+                    <button id="downloadBtn" class="btn btn-success" disabled>Download</button>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div id="previewContainer" style="display: none;">
+                    <div id="imageContainer">
+                        <img id="resultImage" src="" alt="Rotated image">
+                    </div>
+                    <div id="imageInfo">
+                        <p>Original Size: <span id="originalSize">-</span></p>
+                        <p>Processed Size: <span id="processedSize">-</span></p>
+                        <p>Dimensions: <span id="dimensions">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/image-tools/image-rotator.js"></script>
+</body>
+</html> 

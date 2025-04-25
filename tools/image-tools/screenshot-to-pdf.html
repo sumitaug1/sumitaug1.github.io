@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot to PDF Converter - Multi-Tools Hub</title>
+    <meta name="description" content="Capture screenshots and convert them to PDF format. Free online tool for creating PDFs from screenshots.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="../../assets/css/image-tools.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Screenshot to PDF Converter</h1>
+                <p class="text-center mb-4">Capture screenshots, upload images, or drag and drop files to create a PDF. Add multiple images to create a multi-page PDF.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Images</h5>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary" id="captureBtn">
+                                        <i class="fas fa-camera"></i> Capture Screenshot
+                                    </button>
+                                    <button class="btn btn-secondary" id="uploadBtn">
+                                        <i class="fas fa-upload"></i> Upload Images
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="screenshotsContainer" class="border rounded p-3" style="min-height: 200px;">
+                                <div id="noScreenshots" class="text-center text-muted">
+                                    <i class="fas fa-camera fa-3x mb-3"></i>
+                                    <p>No images added yet</p>
+                                    <p class="small">Drag and drop images here or use the buttons above</p>
+                                </div>
+                                <div id="screenshotsList" class="d-flex flex-wrap gap-2"></div>
+                            </div>
+                            <input type="file" id="fileInput" accept="image/*" multiple class="d-none">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="pdfTitle" class="form-label">PDF Title</label>
+                                    <input type="text" class="form-control" id="pdfTitle" placeholder="Enter PDF title">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="pdfOrientation" class="form-label">Page Orientation</label>
+                                    <select class="form-select" id="pdfOrientation">
+                                        <option value="portrait">Portrait</option>
+                                        <option value="landscape">Landscape</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-danger" id="clearAllBtn" disabled>
+                                <i class="fas fa-trash"></i> Clear All
+                            </button>
+                            <button class="btn btn-success" id="generatePdfBtn" disabled>
+                                <i class="fas fa-file-pdf"></i> Generate PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Screenshot to PDF Converter</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool allows you to:</p>
+                        <ul>
+                            <li>Capture screenshots of your screen</li>
+                            <li>Upload images from your device</li>
+                            <li>Drag and drop images directly</li>
+                            <li>Add multiple images to create a multi-page PDF</li>
+                            <li>Customize PDF title and page orientation</li>
+                            <li>Download the generated PDF</li>
+                        </ul>
+                        <p>Perfect for creating documentation, tutorials, or saving important information in PDF format.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- jspdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/image-tools/screenshot-to-pdf.js"></script>
+</body>
+</html> 

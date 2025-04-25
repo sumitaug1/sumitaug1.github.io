@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cropper - Online Image Tools</title>
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Cropper</h1>
+        <p>Crop your images to the perfect size and aspect ratio.</p>
+
+        <div class="tool-container">
+            <div class="input-section">
+                <div class="file-upload">
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div id="dropZone" class="drop-zone">
+                        <div id="previewPlaceholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop your image here or click to browse</p>
+                        </div>
+                        <img id="previewImage" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="options-section">
+                    <div class="option-group">
+                        <label for="aspectRatio">Aspect Ratio:</label>
+                        <select id="aspectRatio">
+                            <option value="free">Free</option>
+                            <option value="1:1">Square (1:1)</option>
+                            <option value="4:3">Standard (4:3)</option>
+                            <option value="16:9">Widescreen (16:9)</option>
+                            <option value="3:2">Photo (3:2)</option>
+                            <option value="2:3">Portrait (2:3)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="width">Width (px):</label>
+                        <input type="number" id="width" placeholder="Width">
+                    </div>
+
+                    <div class="option-group">
+                        <label for="height">Height (px):</label>
+                        <input type="number" id="height" placeholder="Height">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="cropBtn" class="btn btn-primary" disabled>Crop Image</button>
+                    <button id="downloadBtn" class="btn btn-success" disabled>Download</button>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div id="cropperContainer" style="display: none;">
+                    <img id="cropperImage" src="" alt="Image to crop">
+                </div>
+                <div id="resultContainer" style="display: none;">
+                    <img id="resultImage" src="" alt="Cropped image">
+                    <div id="imageInfo">
+                        <p>Original Size: <span id="originalSize">-</span></p>
+                        <p>Cropped Size: <span id="croppedSize">-</span></p>
+                        <p>Dimensions: <span id="croppedDimensions">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/image-tools/image-cropper.js"></script>
+</body>
+</html> 

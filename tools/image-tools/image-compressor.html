@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor - Multi-Tools Hub</title>
+    <meta name="description" content="Compress images to reduce file size while maintaining quality. Free online tool.">
+    <meta name="keywords" content="image compressor, compress image, reduce image size, free online tools">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <main class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">Image Compressor</h1>
+                <p class="lead mb-4">Compress your images to reduce file size while maintaining quality.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- File Upload Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Upload Image</h5>
+                        <div id="dropZone" class="drop-zone mb-3">
+                            <input type="file" id="fileInput" class="d-none" accept="image/*">
+                            <div class="text-center p-5">
+                                <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                                <p>Drag & drop your image here or click to browse</p>
+                                <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                                    Choose File
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-text">
+                            Supported formats: JPG, PNG, GIF, WebP
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Preview</h5>
+                        <div class="preview-container text-center">
+                            <img id="previewImage" class="img-fluid" style="max-height: 300px; display: none;">
+                            <div id="previewPlaceholder" class="text-muted">
+                                <i class="fas fa-image fa-3x mb-3"></i>
+                                <p>Image preview will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compression Options -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Compression Options</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="qualitySlider" class="form-label">Quality: <span id="qualityValue">80%</span></label>
+                                <input type="range" class="form-range" id="qualitySlider" min="1" max="100" value="80">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="maxWidth" class="form-label">Max Width (px)</label>
+                                <input type="number" class="form-control" id="maxWidth" placeholder="Optional">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="maxHeight" class="form-label">Max Height (px)</label>
+                                <input type="number" class="form-control" id="maxHeight" placeholder="Optional">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="formatSelect" class="form-label">Output Format</label>
+                                <select class="form-select" id="formatSelect">
+                                    <option value="auto">Auto (Same as input)</option>
+                                    <option value="jpeg">JPEG</option>
+                                    <option value="png">PNG</option>
+                                    <option value="webp">WebP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Info -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">File Information</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Original Size:</strong> <span id="originalSize">-</span></p>
+                                <p><strong>Original Dimensions:</strong> <span id="originalDimensions">-</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Compressed Size:</strong> <span id="compressedSize">-</span></p>
+                                <p><strong>Compressed Dimensions:</strong> <span id="compressedDimensions">-</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex gap-2">
+                    <button id="compressBtn" class="btn btn-primary" disabled>
+                        <i class="fas fa-compress me-2"></i>Compress Image
+                    </button>
+                    <button id="downloadBtn" class="btn btn-success" disabled>
+                        <i class="fas fa-download me-2"></i>Download
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Features</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Adjustable compression quality</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Optional resizing</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Multiple output formats</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Drag and drop support</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Instant preview</li>
+                            <li><i class="fas fa-check text-success me-2"></i>No file size limits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Advertisement</h5>
+                        <div class="ad-space">
+                            <!-- Ad content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/image-tools/image-compressor.js"></script>
+</body>
+</html> 
