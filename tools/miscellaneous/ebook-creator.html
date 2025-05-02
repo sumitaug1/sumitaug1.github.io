@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-book Creator - Create Professional E-books | Multi-Tools Hub</title>
+    <meta name="description" content="Create professional e-books with our E-book Creator. Add chapters, images, and format your content for various e-reader formats.">
+    <meta name="keywords" content="ebook creator, ebook maker, epub creator, mobi creator, digital book maker">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="E-book Creator - Create Professional E-books">
+    <meta property="og:description" content="Create professional e-books with our E-book Creator. Add chapters, images, and format your content for various e-reader formats.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/ebook-creator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="E-book Creator - Create Professional E-books">
+    <meta name="twitter:description" content="Create professional e-books with our E-book Creator. Add chapters, images, and format your content for various e-reader formats.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">E-book Creator</h1>
+                <p class="lead text-center mb-4">Create professional e-books with ease</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Creator Form Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form id="ebookForm">
+                            <!-- Book Details -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Book Details</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="bookTitle" class="form-label">Book Title</label>
+                                        <input type="text" class="form-control" id="bookTitle" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="authorName" class="form-label">Author Name</label>
+                                        <input type="text" class="form-control" id="authorName" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="bookDescription" class="form-label">Book Description</label>
+                                        <textarea class="form-control" id="bookDescription" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cover Image -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Cover Image</h5>
+                                <div class="cover-upload">
+                                    <input type="file" class="form-control" id="coverImage" accept="image/*">
+                                    <small class="text-muted">Recommended size: 1600x2400 pixels</small>
+                                </div>
+                            </div>
+
+                            <!-- Chapters -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Chapters</h5>
+                                <div id="chaptersList">
+                                    <!-- Chapters will be added here dynamically -->
+                                </div>
+                                <button type="button" class="btn btn-outline-primary mt-3" id="addChapterBtn">
+                                    <i class="fas fa-plus me-2"></i>Add Chapter
+                                </button>
+                            </div>
+
+                            <!-- Format Options -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Format Options</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="format" class="form-label">Output Format</label>
+                                        <select class="form-select" id="format">
+                                            <option value="epub">EPUB</option>
+                                            <option value="mobi">MOBI</option>
+                                            <option value="pdf">PDF</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="font" class="form-label">Font Style</label>
+                                        <select class="form-select" id="font">
+                                            <option value="serif">Serif</option>
+                                            <option value="sans-serif">Sans-serif</option>
+                                            <option value="monospace">Monospace</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Generate Button -->
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary btn-lg px-5" id="generateBtn">
+                                    <i class="fas fa-book me-2"></i>Create E-book
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Preview Card -->
+                <div class="card shadow-sm mb-4" id="previewCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">E-book Preview</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="previewContent" class="preview-content">
+                            <!-- Preview will be added here dynamically -->
+                        </div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="button" class="btn btn-outline-primary" id="downloadBtn">
+                                <i class="fas fa-download me-2"></i>Download E-book
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" id="editBtn">
+                                <i class="fas fa-edit me-2"></i>Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">About E-book Creator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Create professional e-books with our creator:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Multiple output formats</li>
+                            <li class="mb-2"><i class="fas fa-image text-info me-2"></i>Custom cover images</li>
+                            <li class="mb-2"><i class="fas fa-list text-info me-2"></i>Chapter management</li>
+                            <li class="mb-2"><i class="fas fa-font text-info me-2"></i>Customizable fonts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add a compelling book description</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use high-quality cover images</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Organize chapters logically</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose appropriate font styles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/ebook-creator.js"></script>
+</body>
+</html> 

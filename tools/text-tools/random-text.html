@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Text Generator - Text Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .options-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .option-group {
+            flex: 1;
+        }
+        #outputText {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .result-container {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container tool-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-random me-2"></i>
+            Random Text Generator
+        </h1>
+
+        <div class="options-container">
+            <div class="option-group">
+                <label for="textType" class="form-label">Text Type</label>
+                <select class="form-select" id="textType">
+                    <option value="lorem">Lorem Ipsum</option>
+                    <option value="words">Random Words</option>
+                    <option value="sentences">Random Sentences</option>
+                    <option value="paragraphs">Random Paragraphs</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label for="length" class="form-label">Length</label>
+                <input type="number" class="form-control" id="length" min="1" max="1000" value="100">
+            </div>
+        </div>
+
+        <div class="result-container mb-3">
+            <label for="outputText" class="form-label">Generated Text</label>
+            <textarea class="form-control" id="outputText" placeholder="Generated text will appear here..." readonly></textarea>
+            <button class="btn btn-outline-primary copy-btn" id="copyBtn">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+
+        <div class="info-text">
+            <p><strong>Lorem Ipsum:</strong> Classic Latin placeholder text</p>
+            <p><strong>Random Words:</strong> Common English words in random order</p>
+            <p><strong>Random Sentences:</strong> Grammatically correct sentences</p>
+            <p><strong>Random Paragraphs:</strong> Coherent paragraphs with multiple sentences</p>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-secondary" id="clearBtn">
+                <i class="fas fa-trash me-2"></i>Clear
+            </button>
+            <button class="btn btn-primary" id="generateBtn">
+                <i class="fas fa-sync-alt me-2"></i>Generate
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const textType = document.getElementById('textType');
+        const length = document.getElementById('length');
+        const outputText = document.getElementById('outputText');
+        const generateBtn = document.getElementById('generateBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyBtn = document.getElementById('copyBtn');
+
+        const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+        const words = "the be to of and a in that have I it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us";
+        const sentences = [
+            "The quick brown fox jumps over the lazy dog.",
+            "She sells seashells by the seashore.",
+            "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+            "All that glitters is not gold.",
+            "A journey of a thousand miles begins with a single step.",
+            "The early bird catches the worm.",
+            "Actions speak louder than words.",
+            "Beauty is in the eye of the beholder.",
+            "Don't count your chickens before they hatch.",
+            "Every cloud has a silver lining."
+        ];
+        const paragraphs = [
+            "The sun was setting behind the mountains, casting long shadows across the valley. Birds were returning to their nests, and the air was filled with the sounds of nature settling down for the night. A gentle breeze rustled the leaves of the trees, creating a soothing melody that seemed to echo through the hills.",
+            "Technology has transformed the way we live our lives. From smartphones to artificial intelligence, innovations continue to shape our future. While these advancements bring convenience and efficiency, they also raise important questions about privacy, security, and the impact on human relationships.",
+            "Education is the foundation of a prosperous society. It empowers individuals with knowledge and skills, enabling them to contribute meaningfully to their communities. Through learning, we gain the ability to think critically, solve problems, and adapt to an ever-changing world.",
+            "Nature has a way of healing and inspiring us. The beauty of a sunrise, the sound of waves crashing on the shore, or the sight of a majestic mountain range can bring peace to our minds and rejuvenate our spirits. These moments remind us of the importance of preserving our natural world."
+        ];
+
+        function generateLoremIpsum(length) {
+            const words = loremIpsum.split(' ');
+            let result = [];
+            while (result.length < length) {
+                result = result.concat(words);
+            }
+            return result.slice(0, length).join(' ');
+        }
+
+        function generateRandomWords(length) {
+            const wordList = words.split(' ');
+            let result = [];
+            for (let i = 0; i < length; i++) {
+                result.push(wordList[Math.floor(Math.random() * wordList.length)]);
+            }
+            return result.join(' ');
+        }
+
+        function generateRandomSentences(length) {
+            let result = [];
+            for (let i = 0; i < length; i++) {
+                result.push(sentences[Math.floor(Math.random() * sentences.length)]);
+            }
+            return result.join(' ');
+        }
+
+        function generateRandomParagraphs(length) {
+            let result = [];
+            for (let i = 0; i < length; i++) {
+                result.push(paragraphs[Math.floor(Math.random() * paragraphs.length)]);
+            }
+            return result.join('\n\n');
+        }
+
+        function generateText() {
+            const type = textType.value;
+            const len = parseInt(length.value);
+            
+            let generatedText = '';
+            switch (type) {
+                case 'lorem':
+                    generatedText = generateLoremIpsum(len);
+                    break;
+                case 'words':
+                    generatedText = generateRandomWords(len);
+                    break;
+                case 'sentences':
+                    generatedText = generateRandomSentences(len);
+                    break;
+                case 'paragraphs':
+                    generatedText = generateRandomParagraphs(len);
+                    break;
+            }
+            
+            outputText.value = generatedText;
+        }
+
+        generateBtn.addEventListener('click', generateText);
+
+        clearBtn.addEventListener('click', () => {
+            outputText.value = '';
+        });
+
+        copyBtn.addEventListener('click', () => {
+            outputText.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+            }, 2000);
+        });
+
+        // Generate initial text
+        generateText();
+    </script>
+</body>
+</html> 

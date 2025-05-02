@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy Text Generator - Text Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .style-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .style-option {
+            flex: 1;
+            min-width: 120px;
+        }
+        #inputText, #outputText {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .result-container {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .preview-text {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 1rem 0;
+            min-height: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container tool-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-magic me-2"></i>
+            Fancy Text Generator
+        </h1>
+
+        <div class="style-options">
+            <button class="btn btn-outline-primary style-option" data-style="bold">
+                <i class="fas fa-bold me-2"></i>Bold
+            </button>
+            <button class="btn btn-outline-primary style-option" data-style="italic">
+                <i class="fas fa-italic me-2"></i>Italic
+            </button>
+            <button class="btn btn-outline-primary style-option" data-style="cursive">
+                <i class="fas fa-pen me-2"></i>Cursive
+            </button>
+            <button class="btn btn-outline-primary style-option" data-style="double">
+                <i class="fas fa-text-width me-2"></i>Double
+            </button>
+            <button class="btn btn-outline-primary style-option" data-style="bubble">
+                <i class="fas fa-circle me-2"></i>Bubble
+            </button>
+            <button class="btn btn-outline-primary style-option" data-style="upside">
+                <i class="fas fa-undo me-2"></i>Upside Down
+            </button>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputText" class="form-label">Input Text</label>
+            <textarea class="form-control" id="inputText" placeholder="Enter your text here..."></textarea>
+        </div>
+
+        <div class="preview-text" id="previewText"></div>
+
+        <div class="result-container mb-3">
+            <label for="outputText" class="form-label">Fancy Text</label>
+            <textarea class="form-control" id="outputText" placeholder="Fancy text will appear here..." readonly></textarea>
+            <button class="btn btn-outline-primary copy-btn" id="copyBtn">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-secondary" id="clearBtn">
+                <i class="fas fa-trash me-2"></i>Clear
+            </button>
+            <button class="btn btn-outline-primary" id="swapBtn">
+                <i class="fas fa-exchange-alt me-2"></i>Swap
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const previewText = document.getElementById('previewText');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const swapBtn = document.getElementById('swapBtn');
+        const styleButtons = document.querySelectorAll('.style-option');
+
+        const styles = {
+            bold: {
+                transform: char => char + '\u0332',
+                preview: text => `<strong>${text}</strong>`
+            },
+            italic: {
+                transform: char => char + '\u0336',
+                preview: text => `<em>${text}</em>`
+            },
+            cursive: {
+                transform: char => {
+                    const cursiveMap = {
+                        'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': 'ℯ', 'f': '𝒻', 'g': 'ℊ', 'h': '𝒽',
+                        'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': 'ℴ', 'p': '𝓅',
+                        'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍',
+                        'y': '𝓎', 'z': '𝓏',
+                        'A': '𝒜', 'B': 'ℬ', 'C': '𝒞', 'D': '𝒟', 'E': 'ℰ', 'F': 'ℱ', 'G': '𝒢', 'H': 'ℋ',
+                        'I': 'ℐ', 'J': '𝒥', 'K': '𝒦', 'L': 'ℒ', 'M': 'ℳ', 'N': '𝒩', 'O': '𝒪', 'P': '𝒫',
+                        'Q': '𝒬', 'R': 'ℛ', 'S': '𝒮', 'T': '𝒯', 'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳',
+                        'Y': '𝒴', 'Z': '𝒵'
+                    };
+                    return cursiveMap[char] || char;
+                },
+                preview: text => `<span style="font-family: cursive">${text}</span>`
+            },
+            double: {
+                transform: char => char + '\u0305',
+                preview: text => `<span style="text-decoration: overline">${text}</span>`
+            },
+            bubble: {
+                transform: char => {
+                    const bubbleMap = {
+                        'a': 'ⓐ', 'b': 'ⓑ', 'c': 'ⓒ', 'd': 'ⓓ', 'e': 'ⓔ', 'f': 'ⓕ', 'g': 'ⓖ', 'h': 'ⓗ',
+                        'i': 'ⓘ', 'j': 'ⓙ', 'k': 'ⓚ', 'l': 'ⓛ', 'm': 'ⓜ', 'n': 'ⓝ', 'o': 'ⓞ', 'p': 'ⓟ',
+                        'q': 'ⓠ', 'r': 'ⓡ', 's': 'ⓢ', 't': 'ⓣ', 'u': 'ⓤ', 'v': 'ⓥ', 'w': 'ⓦ', 'x': 'ⓧ',
+                        'y': 'ⓨ', 'z': 'ⓩ',
+                        'A': 'Ⓐ', 'B': 'Ⓑ', 'C': 'Ⓒ', 'D': 'Ⓓ', 'E': 'Ⓔ', 'F': 'Ⓕ', 'G': 'Ⓖ', 'H': 'Ⓗ',
+                        'I': 'Ⓘ', 'J': 'Ⓙ', 'K': 'Ⓚ', 'L': 'Ⓛ', 'M': 'Ⓜ', 'N': 'Ⓝ', 'O': 'Ⓞ', 'P': 'Ⓟ',
+                        'Q': 'Ⓠ', 'R': 'Ⓡ', 'S': 'Ⓢ', 'T': 'Ⓣ', 'U': 'Ⓤ', 'V': 'Ⓥ', 'W': 'Ⓦ', 'X': 'Ⓧ',
+                        'Y': 'Ⓨ', 'Z': 'Ⓩ'
+                    };
+                    return bubbleMap[char] || char;
+                },
+                preview: text => `<span style="font-size: 1.2em">${text}</span>`
+            },
+            upside: {
+                transform: char => {
+                    const upsideMap = {
+                        'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ', 'h': 'ɥ',
+                        'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u', 'o': 'o', 'p': 'd',
+                        'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n', 'v': 'ʌ', 'w': 'ʍ', 'x': 'x',
+                        'y': 'ʎ', 'z': 'z',
+                        'A': '∀', 'B': '𐐒', 'C': 'Ɔ', 'D': '◖', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': '⅁', 'H': 'H',
+                        'I': 'I', 'J': 'ſ', 'K': '⋊', 'L': '˥', 'M': 'W', 'N': 'N', 'O': 'O', 'P': 'Ԁ',
+                        'Q': 'Ό', 'R': 'ᴚ', 'S': 'S', 'T': '⊥', 'U': '∩', 'V': 'Λ', 'W': 'M', 'X': 'X',
+                        'Y': '⅄', 'Z': 'Z'
+                    };
+                    return upsideMap[char] || char;
+                },
+                preview: text => `<span style="transform: rotate(180deg); display: inline-block">${text}</span>`
+            }
+        };
+
+        function applyStyle(text, style) {
+            if (!text) return '';
+            return text.split('').map(char => styles[style].transform(char)).join('');
+        }
+
+        function updateOutput() {
+            const text = inputText.value;
+            const activeStyle = document.querySelector('.style-option.active')?.dataset.style || 'bold';
+            
+            const fancyText = applyStyle(text, activeStyle);
+            outputText.value = fancyText;
+            previewText.innerHTML = styles[activeStyle].preview(fancyText);
+        }
+
+        styleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                styleButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                updateOutput();
+            });
+        });
+
+        inputText.addEventListener('input', updateOutput);
+
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            outputText.value = '';
+            previewText.innerHTML = '';
+        });
+
+        copyBtn.addEventListener('click', () => {
+            outputText.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+            }, 2000);
+        });
+
+        swapBtn.addEventListener('click', () => {
+            const temp = inputText.value;
+            inputText.value = outputText.value;
+            outputText.value = temp;
+            updateOutput();
+        });
+
+        // Initialize with bold as default
+        styleButtons[0].classList.add('active');
+        updateOutput();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Invitation Generator - Create Beautiful Birthday Invites | Multi-Tools Hub</title>
+    <meta name="description" content="Create beautiful birthday invitations with our free Birthday Invitation Generator. Design custom invites with themes, colors, and personalized messages.">
+    <meta name="keywords" content="birthday invitation generator, birthday invite maker, party invitation creator, custom birthday cards, invitation designer">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Birthday Invitation Generator - Create Beautiful Birthday Invites">
+    <meta property="og:description" content="Create beautiful birthday invitations with our free Birthday Invitation Generator. Design custom invites with themes, colors, and personalized messages.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/birthday-invitation-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Birthday Invitation Generator - Create Beautiful Birthday Invites">
+    <meta name="twitter:description" content="Create beautiful birthday invitations with our free Birthday Invitation Generator. Design custom invites with themes, colors, and personalized messages.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Birthday Invitation Generator</h1>
+                <p class="lead text-center mb-4">Create beautiful and personalized birthday invitations</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Main Tool Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <!-- Invitation Form -->
+                        <div class="invitation-form mb-4">
+                            <div class="row g-3">
+                                <!-- Theme Selection -->
+                                <div class="col-md-6">
+                                    <label for="themeSelect" class="form-label">Select Theme</label>
+                                    <select class="form-select" id="themeSelect">
+                                        <option value="elegant">Elegant</option>
+                                        <option value="fun">Fun & Playful</option>
+                                        <option value="modern">Modern</option>
+                                        <option value="vintage">Vintage</option>
+                                        <option value="minimal">Minimal</option>
+                                    </select>
+                                </div>
+
+                                <!-- Color Scheme -->
+                                <div class="col-md-6">
+                                    <label for="colorScheme" class="form-label">Color Scheme</label>
+                                    <select class="form-select" id="colorScheme">
+                                        <option value="blue">Blue & White</option>
+                                        <option value="pink">Pink & Gold</option>
+                                        <option value="green">Green & Silver</option>
+                                        <option value="purple">Purple & Gold</option>
+                                        <option value="rainbow">Rainbow</option>
+                                    </select>
+                                </div>
+
+                                <!-- Border Style -->
+                                <div class="col-md-6">
+                                    <label for="borderStyle" class="form-label">Border Style</label>
+                                    <select class="form-select" id="borderStyle">
+                                        <option value="solid">Solid</option>
+                                        <option value="dashed">Dashed</option>
+                                        <option value="dotted">Dotted</option>
+                                        <option value="double">Double</option>
+                                        <option value="groove">Groove</option>
+                                        <option value="ridge">Ridge</option>
+                                        <option value="inset">Inset</option>
+                                        <option value="outset">Outset</option>
+                                        <option value="animated-dots">Animated Dots</option>
+                                        <option value="animated-dashed">Animated Dashed</option>
+                                        <option value="animated-gradient">Animated Gradient</option>
+                                        <option value="animated-shine">Animated Shine</option>
+                                    </select>
+                                </div>
+
+                                <!-- Event Details -->
+                                <div class="col-md-6">
+                                    <label for="eventName" class="form-label">Event Name</label>
+                                    <input type="text" class="form-control" id="eventName" placeholder="e.g., John's 30th Birthday">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="hostName" class="form-label">Host Name</label>
+                                    <input type="text" class="form-control" id="hostName" placeholder="e.g., Sarah Smith">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="eventDate" class="form-label">Event Date</label>
+                                    <input type="date" class="form-control" id="eventDate">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="eventTime" class="form-label">Event Time</label>
+                                    <input type="time" class="form-control" id="eventTime">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="venue" class="form-label">Venue</label>
+                                    <input type="text" class="form-control" id="venue" placeholder="e.g., 123 Party Street, City">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Personal Message</label>
+                                    <textarea class="form-control" id="message" rows="3" placeholder="Add a personal message to your invitation"></textarea>
+                                </div>
+
+                                <!-- Additional Details -->
+                                <div class="col-md-6">
+                                    <label for="rsvpContact" class="form-label">RSVP Contact</label>
+                                    <input type="text" class="form-control" id="rsvpContact" placeholder="e.g., Phone or Email">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="rsvpDate" class="form-label">RSVP By</label>
+                                    <input type="date" class="form-control" id="rsvpDate">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="invitationImage" class="form-label">Invitation Image (Optional)</label>
+                                    <input type="file" class="form-control" id="invitationImage" accept="image/*">
+                                    <div class="form-text">Upload a custom image for your invitation (recommended size: 800x600px)</div>
+                                </div>
+                            </div>
+
+                            <!-- Generate Button -->
+                            <div class="text-center mt-4">
+                                <button class="btn btn-primary btn-lg" id="generateBtn">
+                                    <i class="fas fa-magic me-2"></i>Generate Invitation
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Preview Section -->
+                        <div id="previewSection" style="display: none;">
+                            <div class="preview-container mb-4">
+                                <div id="invitationPreview" class="invitation-preview">
+                                    <!-- Preview will be inserted here -->
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-outline-primary" id="downloadBtn">
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </button>
+                                <button class="btn btn-outline-success" id="shareBtn">
+                                    <i class="fas fa-share-alt me-2"></i>Share
+                                </button>
+                                <button class="btn btn-outline-secondary" id="editBtn">
+                                    <i class="fas fa-edit me-2"></i>Edit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Birthday Invitation Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Create beautiful birthday invitations with our tool:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-palette text-info me-2"></i>Multiple themes and color schemes</li>
+                            <li class="mb-2"><i class="fas fa-font text-info me-2"></i>Customizable text and messages</li>
+                            <li class="mb-2"><i class="fas fa-image text-info me-2"></i>Professional design templates</li>
+                            <li class="mb-2"><i class="fas fa-share-alt text-info me-2"></i>Easy sharing and downloading</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose a theme that matches your event style</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add all necessary event details</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Include RSVP information</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Preview before finalizing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/birthday-invitation-generator.js"></script>
+</body>
+</html> 

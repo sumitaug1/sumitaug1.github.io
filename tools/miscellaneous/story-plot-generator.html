@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Plot Generator - Create Unique Story Plots | Multi-Tools Hub</title>
+    <meta name="description" content="Generate unique and creative story plots with our Story Plot Generator. Choose genres, themes, and get instant plot ideas for your next story.">
+    <meta name="keywords" content="story plot generator, plot ideas, story ideas, creative writing, plot generator, story generator">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Story Plot Generator - Create Unique Story Plots">
+    <meta property="og:description" content="Generate unique and creative story plots with our Story Plot Generator. Choose genres, themes, and get instant plot ideas for your next story.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/story-plot-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Story Plot Generator - Create Unique Story Plots">
+    <meta name="twitter:description" content="Generate unique and creative story plots with our Story Plot Generator. Choose genres, themes, and get instant plot ideas for your next story.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Story Plot Generator</h1>
+                <p class="lead text-center mb-4">Generate unique and creative story plots for your next masterpiece</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Generator Form Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form id="plotForm">
+                            <!-- Genre Selection -->
+                            <div class="mb-4">
+                                <label class="form-label">Select Genre</label>
+                                <div class="row g-3" id="genreSelection">
+                                    <div class="col-md-4">
+                                        <div class="genre-card active" data-genre="fantasy">
+                                            <i class="fas fa-dragon"></i>
+                                            <span>Fantasy</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="genre-card" data-genre="mystery">
+                                            <i class="fas fa-search"></i>
+                                            <span>Mystery</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="genre-card" data-genre="romance">
+                                            <i class="fas fa-heart"></i>
+                                            <span>Romance</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="genre-card" data-genre="scifi">
+                                            <i class="fas fa-rocket"></i>
+                                            <span>Sci-Fi</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="genre-card" data-genre="horror">
+                                            <i class="fas fa-ghost"></i>
+                                            <span>Horror</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="genre-card" data-genre="adventure">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                            <span>Adventure</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Theme Selection -->
+                            <div class="mb-4">
+                                <label class="form-label">Select Themes</label>
+                                <div class="theme-selector">
+                                    <div class="theme-option" data-theme="redemption">Redemption</div>
+                                    <div class="theme-option" data-theme="betrayal">Betrayal</div>
+                                    <div class="theme-option" data-theme="love">Love</div>
+                                    <div class="theme-option" data-theme="revenge">Revenge</div>
+                                    <div class="theme-option" data-theme="power">Power</div>
+                                    <div class="theme-option" data-theme="identity">Identity</div>
+                                    <div class="theme-option" data-theme="survival">Survival</div>
+                                    <div class="theme-option" data-theme="justice">Justice</div>
+                                </div>
+                            </div>
+
+                            <!-- Plot Length -->
+                            <div class="mb-4">
+                                <label for="plotLength" class="form-label">Plot Length</label>
+                                <select class="form-select" id="plotLength">
+                                    <option value="short">Short Story</option>
+                                    <option value="novella">Novella</option>
+                                    <option value="novel">Novel</option>
+                                    <option value="series">Series</option>
+                                </select>
+                            </div>
+
+                            <!-- Additional Elements -->
+                            <div class="mb-4">
+                                <label class="form-label">Additional Elements</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="includeTwist">
+                                    <label class="form-check-label" for="includeTwist">Include Plot Twist</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="includeConflict">
+                                    <label class="form-check-label" for="includeConflict">Include Major Conflict</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="includeMoral">
+                                    <label class="form-check-label" for="includeMoral">Include Moral Lesson</label>
+                                </div>
+                            </div>
+
+                            <!-- Generate Button -->
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary btn-lg px-5" id="generateBtn">
+                                    <i class="fas fa-magic me-2"></i>Generate Plot
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Generated Plot Card -->
+                <div class="card shadow-sm mb-4" id="plotCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Generated Plot</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="plotContent" class="plot-content">
+                            <!-- Plot will be added here dynamically -->
+                        </div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="button" class="btn btn-outline-primary" id="copyBtn">
+                                <i class="fas fa-copy me-2"></i>Copy Plot
+                            </button>
+                            <button type="button" class="btn btn-outline-success" id="saveBtn">
+                                <i class="fas fa-save me-2"></i>Save Plot
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" id="regenerateBtn">
+                                <i class="fas fa-redo me-2"></i>Regenerate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Plots Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Saved Plots</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="savedPlots" class="saved-plots">
+                            <!-- Saved plots will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Story Plot Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Create unique and engaging story plots with our generator:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Multiple genres to choose from</li>
+                            <li class="mb-2"><i class="fas fa-palette text-info me-2"></i>Various themes and elements</li>
+                            <li class="mb-2"><i class="fas fa-magic text-info me-2"></i>Creative plot generation</li>
+                            <li class="mb-2"><i class="fas fa-save text-info me-2"></i>Save your favorite plots</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select a genre that matches your story idea</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose themes that resonate with your story</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add additional elements for more complexity</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Save plots you like for future reference</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/story-plot-generator.js"></script>
+</body>
+</html> 

@@ -600,4 +600,1103 @@ code {
     pre {
         background-color: var(--card-bg);
     }
+}
+
+/* Business Name Generator Styles */
+.name-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+}
+
+.name-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.name-card.selected {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.name-card h5 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.name-card .name-style {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.name-card .name-length {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.industry-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Coin Flip Simulator Styles */
+.coin-container {
+    perspective: 1000px;
+    margin: 50px auto;
+    width: 150px;
+    height: 150px;
+}
+
+.coin {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-out;
+}
+
+.coin .heads,
+.coin .tails {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 3rem;
+}
+
+.coin .heads {
+    background: linear-gradient(45deg, #ffd700, #ffed4a);
+    border: 2px solid #e5c100;
+}
+
+.coin .tails {
+    background: linear-gradient(45deg, #c0c0c0, #e5e5e5);
+    border: 2px solid #a8a8a8;
+    transform: rotateY(180deg);
+}
+
+.coin .heads i,
+.coin .tails i {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.result-display {
+    min-height: 50px;
+    transition: all 0.3s ease;
+}
+
+/* Dice Roller Styles */
+.dice {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    margin: 10px;
+}
+
+.dice-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+.dice-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: 2px solid #333;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 
+        inset 0 0 15px rgba(0,0,0,0.1),
+        0 0 10px rgba(0,0,0,0.1);
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.dice-face::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.dice-face span {
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+@keyframes roll {
+    0% {
+        transform: rotateX(0) rotateY(0) rotateZ(0) translateZ(0);
+    }
+    25% {
+        transform: rotateX(180deg) rotateY(90deg) rotateZ(45deg) translateZ(20px);
+    }
+    50% {
+        transform: rotateX(360deg) rotateY(180deg) rotateZ(90deg) translateZ(0);
+    }
+    75% {
+        transform: rotateX(540deg) rotateY(270deg) rotateZ(135deg) translateZ(20px);
+    }
+    100% {
+        transform: rotateX(720deg) rotateY(360deg) rotateZ(180deg) translateZ(0);
+    }
+}
+
+.dice.rolling {
+    animation: roll 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dice Container Styles */
+#diceContainer {
+    perspective: 1000px;
+    min-height: 120px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+/* Results Card Styles */
+#resultsCard {
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+#resultsList {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.result-item {
+    background: white;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .dice {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .dice-face {
+        font-size: 24px;
+    }
+}
+
+/* Button Styles */
+.btn-roll {
+    background: linear-gradient(145deg, #4a6bff, #6a11cb);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(74, 107, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-roll:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 107, 255, 0.4);
+}
+
+.btn-roll:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(74, 107, 255, 0.3);
+}
+
+/* Internet Speed Test Styles */
+.speed-card {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.speed-card:hover {
+    transform: translateY(-5px);
+}
+
+.speed-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.speed-label {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.speed-unit {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.progress {
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #4a6bff, #6a11cb);
+    transition: width 0.3s ease;
+}
+
+#historyTable {
+    margin-bottom: 0;
+}
+
+#historyTable th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+#historyTable td {
+    vertical-align: middle;
+}
+
+/* Server Selection Styles */
+.form-select {
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #4a6bff;
+    box-shadow: 0 0 0 0.2rem rgba(74, 107, 255, 0.25);
+}
+
+/* Test Button Styles */
+.btn-primary {
+    background: linear-gradient(145deg, #4a6bff, #6a11cb);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(74, 107, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 107, 255, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(74, 107, 255, 0.3);
+}
+
+.btn-primary:disabled {
+    background: #6c757d;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .speed-value {
+        font-size: 2rem;
+    }
+    
+    .speed-label {
+        font-size: 1rem;
+    }
+    
+    .speed-unit {
+        font-size: 0.8rem;
+    }
+}
+
+/* Wedding Invitation Generator Styles */
+.template-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.template-card.active {
+    border-color: #4a6bff;
+}
+
+.template-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.template-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.color-scheme-selector {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+}
+
+.color-option.active {
+    border-color: #4a6bff;
+    transform: scale(1.1);
+}
+
+/* Invitation Preview Styles */
+.invitation-preview {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.invitation {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.invitation-content {
+    text-align: center;
+}
+
+.couple-names {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.wedding-date {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.wedding-time {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.venue {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.address {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.additional-info {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Template-specific Styles */
+.template-elegant {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.template-modern {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+}
+
+.template-classic {
+    background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%);
+}
+
+/* Form Control Styles */
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #4a6bff;
+    box-shadow: 0 0 0 0.2rem rgba(74, 107, 255, 0.25);
+}
+
+/* Button Styles */
+.btn-primary, .btn-success {
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(145deg, #4a6bff, #6a11cb);
+    border: none;
+    box-shadow: 0 4px 15px rgba(74, 107, 255, 0.3);
+}
+
+.btn-success {
+    background: linear-gradient(145deg, #28a745, #20c997);
+    border: none;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-primary:hover, .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.btn-primary:active, .btn-success:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .template-card img {
+        height: 150px;
+    }
+    
+    .couple-names {
+        font-size: 2rem;
+    }
+    
+    .wedding-date {
+        font-size: 1.2rem;
+    }
+    
+    .wedding-time {
+        font-size: 1rem;
+    }
+    
+    .venue {
+        font-size: 1.1rem;
+    }
+    
+    .address {
+        font-size: 1rem;
+    }
+}
+
+/* Template Preview Styles */
+.template-preview {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.template-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.template-card:hover .template-content {
+    opacity: 1;
+}
+
+.template-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.template-content p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Template-specific preview styles */
+.elegant-preview {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border: 2px solid #D4AF37;
+}
+
+.modern-preview {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    border: 2px solid #000000;
+}
+
+.classic-preview {
+    background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%);
+    border: 2px solid #800020;
+}
+
+.template-card.active .template-preview {
+    box-shadow: 0 0 0 2px #4a6bff;
+}
+
+.template-card.active .template-content {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Story Plot Generator Styles */
+.genre-card {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genre-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.genre-card.active {
+    background-color: #e9ecef;
+    border-color: #0d6efd;
+}
+
+.genre-card i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #0d6efd;
+}
+
+.genre-card span {
+    display: block;
+    font-weight: 500;
+}
+
+.theme-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.theme-option {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-option:hover {
+    background-color: #e9ecef;
+}
+
+.theme-option.active {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
+/* Random Quote Generator Styles */
+.category-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-option {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1 1 calc(33.333% - 10px);
+    min-width: 120px;
+}
+
+.category-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.category-option.active {
+    background-color: #e9ecef;
+    border-color: #0d6efd;
+}
+
+.category-option i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #0d6efd;
+}
+
+.category-option span {
+    display: block;
+    font-weight: 500;
+}
+
+.quote-content {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.6;
+}
+
+.quote-content p {
+    margin-bottom: 1rem;
+}
+
+.saved-quote {
+    transition: all 0.3s ease;
+}
+
+.saved-quote:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* AI Chatbot Demo Styles */
+.chat-window {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.message {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.message.user {
+    align-items: flex-end;
+}
+
+.message.bot {
+    align-items: flex-start;
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.message.user .message-content {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.message.bot .message-content {
+    background-color: #fff;
+    color: #2c3e50;
+}
+
+.message.typing .message-content {
+    background-color: #e9ecef;
+    color: #6c757d;
+}
+
+.chat-input {
+    padding: 1rem;
+    background-color: #fff;
+    border-top: 1px solid #dee2e6;
+}
+
+.suggestion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestion-btn {
+    color: #0d6efd;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.suggestion-btn:hover {
+    background-color: #e9ecef;
+    color: #0d6efd;
+}
+
+/* IP Address Tracker Styles */
+.ip-tracker-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.ip-input-section {
+    margin-bottom: 2rem;
+}
+
+.ip-input-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ip-input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.ip-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.track-btn {
+    padding: 0.8rem 1.5rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.track-btn:hover {
+    background: #45a049;
+}
+
+.ip-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.ip-detail-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.ip-detail-card h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.ip-detail-card p {
+    color: #666;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.loading {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.loading i {
+    font-size: 2rem;
+    color: #4CAF50;
+    animation: spin 1s linear infinite;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8d7da;
+    border-radius: 5px;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .ip-tracker-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .ip-input-group {
+        flex-direction: column;
+    }
+
+    .track-btn {
+        width: 100%;
+    }
+}
+
+/* Leap Year Checker Styles */
+.year-input-section {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.year-input-section .form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.year-input-section .form-control {
+    border-color: #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.year-input-section .form-control:focus {
+    border-color: #4a6bff;
+    box-shadow: 0 0 0 0.2rem rgba(74, 107, 255, 0.25);
+}
+
+.result-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+}
+
+.result-card i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.result-card h3 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.result-card p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .year-input-section {
+        padding: 1rem;
+    }
+    
+    .result-card {
+        padding: 1.5rem;
+    }
+    
+    .result-card i {
+        font-size: 2.5rem;
+    }
+}
+
+/* Name to Numerology Calculator Styles */
+.name-input-section {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.name-input-section .form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.name-input-section .form-control {
+    border-color: #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.name-input-section .form-control:focus {
+    border-color: #4a6bff;
+    box-shadow: 0 0 0 0.2rem rgba(74, 107, 255, 0.25);
+}
+
+.numerology-details .card {
+    transition: transform 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.numerology-details .card:hover {
+    transform: translateY(-5px);
+}
+
+.numerology-details .card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.numerology-details .card-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #4a6bff;
+    margin-bottom: 0.25rem;
+}
+
+.numerology-details .text-muted {
+    font-size: 0.9rem;
+}
+
+.result-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+}
+
+.result-card i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.result-card h3 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.result-card p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .name-input-section {
+        padding: 1rem;
+    }
+    
+    .numerology-details .card {
+        margin-bottom: 1rem;
+    }
+    
+    .result-card {
+        padding: 1.5rem;
+    }
+    
+    .result-card i {
+        font-size: 2.5rem;
+    }
 } 

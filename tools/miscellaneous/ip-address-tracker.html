@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free IP Address Tracker - Look up IP address details including location, ISP, and more. Get instant IP information with our easy-to-use tool.">
+    <meta name="keywords" content="IP tracker, IP lookup, IP address finder, IP location, IP information, IP details">
+    <title>IP Address Tracker - Free IP Lookup Tool</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="ip-tracker-container">
+            <h1>IP Address Tracker</h1>
+            <p class="description">Look up any IP address to get detailed information about its location, ISP, and more.</p>
+
+            <div class="ip-input-section">
+                <div class="ip-input-group">
+                    <input type="text" class="ip-input" id="ipInput" placeholder="Enter IP address (e.g., 8.8.8.8)">
+                    <button class="track-btn" id="trackBtn">Track IP</button>
+                </div>
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <i class="fas fa-spinner"></i>
+                <p>Fetching IP details...</p>
+            </div>
+
+            <div class="ip-details" id="ipDetails" style="display: none;">
+                <div class="ip-detail-card">
+                    <h3>IP Address</h3>
+                    <p id="ipAddress">-</p>
+                </div>
+                <div class="ip-detail-card">
+                    <h3>Location</h3>
+                    <p id="location">-</p>
+                </div>
+                <div class="ip-detail-card">
+                    <h3>ISP</h3>
+                    <p id="isp">-</p>
+                </div>
+                <div class="ip-detail-card">
+                    <h3>Timezone</h3>
+                    <p id="timezone">-</p>
+                </div>
+                <div class="ip-detail-card">
+                    <h3>Latitude</h3>
+                    <p id="latitude">-</p>
+                </div>
+                <div class="ip-detail-card">
+                    <h3>Longitude</h3>
+                    <p id="longitude">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/ip-address-tracker.js"></script>
+</body>
+</html> 

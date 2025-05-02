@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Keyboard - Free Emoji Picker Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Find and copy emojis easily with our free emoji keyboard. Perfect for social media posts, messages, and more.">
+    <meta name="keywords" content="emoji keyboard, emoji picker, emoji finder, emoji tool, emoji copy">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Emoji Keyboard - Free Emoji Picker Tool">
+    <meta property="og:description" content="Find and copy emojis easily with our free emoji keyboard. Perfect for social media posts, messages, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/social-media-tools/emoji-keyboard.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Emoji Keyboard - Free Emoji Picker Tool">
+    <meta name="twitter:description" content="Find and copy emojis easily with our free emoji keyboard. Perfect for social media posts, messages, and more.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Emoji Keyboard</h1>
+                <p class="lead text-center mb-4">Find and copy emojis easily for your social media posts and messages</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="searchInput" class="form-label">Search Emojis</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search for emojis...">
+                                <button class="btn btn-outline-secondary" type="button" id="clearSearch">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Categories</label>
+                            <div class="d-flex flex-wrap gap-2" id="categoryButtons">
+                                <button class="btn btn-outline-primary active" data-category="all">All</button>
+                                <button class="btn btn-outline-primary" data-category="smileys">Smileys</button>
+                                <button class="btn btn-outline-primary" data-category="people">People</button>
+                                <button class="btn btn-outline-primary" data-category="animals">Animals</button>
+                                <button class="btn btn-outline-primary" data-category="food">Food</button>
+                                <button class="btn btn-outline-primary" data-category="travel">Travel</button>
+                                <button class="btn btn-outline-primary" data-category="activities">Activities</button>
+                                <button class="btn btn-outline-primary" data-category="objects">Objects</button>
+                                <button class="btn btn-outline-primary" data-category="symbols">Symbols</button>
+                                <button class="btn btn-outline-primary" data-category="flags">Flags</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label class="form-label mb-0">Emoji Grid</label>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-secondary active" data-view="grid">
+                                        <i class="fas fa-th"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" data-view="list">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="emojiGrid" class="emoji-grid">
+                                <!-- Emojis will be added here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Emojis Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Recent Emojis</h5>
+                        <button class="btn btn-sm btn-outline-danger" id="clearRecent">
+                            <i class="fas fa-trash me-2"></i>Clear
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentEmojis" class="d-flex flex-wrap gap-2">
+                            <!-- Recent emojis will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Emoji Keyboard</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool helps you find and copy emojis easily. Features include:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-search text-info me-2"></i>Search emojis by name</li>
+                            <li class="mb-2"><i class="fas fa-tags text-info me-2"></i>Browse by categories</li>
+                            <li class="mb-2"><i class="fas fa-history text-info me-2"></i>Recent emojis history</li>
+                            <li class="mb-2"><i class="fas fa-copy text-info me-2"></i>One-click copy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click on an emoji to copy it</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the search bar to find specific emojis</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Browse categories for quick access</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Switch between grid and list views</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/social-media-tools/emoji-keyboard.js"></script>
+</body>
+</html> 

@@ -90,101 +90,141 @@ const toolCategories = {
             popularity: 80
         }
     ],
+    'PDF Tools': [
+        {
+            name: 'JPG to PDF Converter',
+            path: 'tools/pdf-tools/jpg-to-pdf.html',
+            icon: 'fa-file-pdf',
+            description: 'Convert JPG images to high-quality PDF documents with customizable settings.',
+            category: 'Converters',
+            popularity: 90
+        },
+        {
+            name: 'PDF to JPG Converter',
+            path: 'tools/pdf-tools/pdf-to-jpg.html',
+            icon: 'fa-image',
+            description: 'Convert PDF pages to high-quality JPG images with customizable settings.',
+            category: 'Converters',
+            popularity: 88
+        },
+        {
+            name: 'PDF Merger',
+            path: 'tools/pdf-tools/pdf-merger.html',
+            icon: 'fa-compress-arrows-alt',
+            description: 'Merge multiple PDF files into a single document with customizable page order and quality settings.',
+            category: 'Editing',
+            popularity: 95
+        }
+    ],
     'SEO Tools': [
-        { name: 'Meta Tag Generator', path: '/tools/meta-tag-generator.html', icon: 'fa-tags' },
-        { name: 'Keyword Density Checker', path: '/tools/keyword-density.html', icon: 'fa-chart-bar' },
-        { name: 'Sitemap Generator', path: '/tools/sitemap-generator.html', icon: 'fa-sitemap' },
-        { name: 'Robots.txt Generator', path: '/tools/robots-txt.html', icon: 'fa-robot' },
-        { name: 'Google Index Checker', path: '/tools/google-index.html', icon: 'fa-google' },
-        { name: 'Domain Authority Checker', path: '/tools/domain-authority.html', icon: 'fa-globe' },
-        { name: 'Backlink Checker', path: '/tools/backlink-checker.html', icon: 'fa-link' },
-        { name: 'Page Speed Checker', path: '/tools/page-speed.html', icon: 'fa-tachometer-alt' },
-        { name: 'XML Sitemap Validator', path: '/tools/xml-sitemap.html', icon: 'fa-check-circle' },
-        { name: 'Mobile-Friendly Test', path: '/tools/mobile-friendly.html', icon: 'fa-mobile-alt' }
+        { name: 'Meta Tag Generator', path: 'tools/seo-tools/meta-tag-generator.html', icon: 'fa-tags' },
+        { name: 'Keyword Density Checker', path: 'tools/seo-tools/keyword-density.html', icon: 'fa-chart-bar' },
+        { name: 'Sitemap Generator', path: 'tools/seo-tools/sitemap-generator.html', icon: 'fa-sitemap' },
+        { name: 'Robots.txt Generator', path: 'tools/seo-tools/robots-txt.html', icon: 'fa-robot' },
+        { name: 'Google Index Checker', path: 'tools/seo-tools/google-index.html', icon: 'fa-google' },
+        { name: 'Domain Authority Checker', path: 'tools/seo-tools/domain-authority.html', icon: 'fa-globe' },
+        { name: 'Backlink Checker', path: 'tools/seo-tools/backlink-checker.html', icon: 'fa-link' },
+        { name: 'Page Speed Checker', path: 'tools/seo-tools/page-speed.html', icon: 'fa-tachometer-alt' },
+        { name: 'XML Sitemap Validator', path: 'tools/seo-tools/sitemap-validator.html', icon: 'fa-check-circle' },
+        { name: 'Mobile-Friendly Test', path: 'tools/seo-tools/mobile-friendly.html', icon: 'fa-mobile-alt' }
     ],
     'Text Tools': [
-        { name: 'Word Counter', path: '/tools/word-counter.html', icon: 'fa-calculator' },
-        { name: 'Character Counter', path: '/tools/character-counter.html', icon: 'fa-text-width' },
-        { name: 'Case Converter', path: '/tools/case-converter.html', icon: 'fa-font' },
-        { name: 'Plagiarism Checker', path: '/tools/plagiarism-checker.html', icon: 'fa-copy' },
-        { name: 'Grammar Checker', path: '/tools/grammar-checker.html', icon: 'fa-spell-check' },
-        { name: 'Text to Speech', path: '/tools/text-to-speech.html', icon: 'fa-volume-up' },
-        { name: 'Speech to Text', path: '/tools/speech-to-text.html', icon: 'fa-microphone' },
-        { name: 'URL Encoder/Decoder', path: '/tools/url-encoder.html', icon: 'fa-link' },
-        { name: 'Fancy Text Generator', path: '/tools/fancy-text.html', icon: 'fa-magic' },
-        { name: 'Random Text Generator', path: '/tools/random-text.html', icon: 'fa-random' }
+        { name: 'Word Counter', path: 'tools/text-tools/word-counter.html', icon: 'fa-calculator' },
+        { name: 'Character Counter', path: 'tools/text-tools/character-counter.html', icon: 'fa-text-width' },
+        { name: 'Case Converter', path: 'tools/text-tools/case-converter.html', icon: 'fa-font' },
+        { name: 'Plagiarism Checker', path: 'tools/text-tools/plagiarism-checker.html', icon: 'fa-copy' },
+        { name: 'Grammar Checker', path: 'tools/text-tools/grammar-checker.html', icon: 'fa-spell-check' },
+        { name: 'Text to Speech', path: 'tools/text-tools/text-to-speech.html', icon: 'fa-volume-up' },
+        { name: 'Speech to Text', path: 'tools/text-tools/speech-to-text.html', icon: 'fa-microphone' },
+        { name: 'URL Encoder/Decoder', path: 'tools/text-tools/url-encoder.html', icon: 'fa-link' },
+        { name: 'Fancy Text Generator', path: 'tools/text-tools/fancy-text.html', icon: 'fa-magic' },
+        { name: 'Random Text Generator', path: 'tools/text-tools/random-text.html', icon: 'fa-random' }
     ],
     'Developer Tools': [
-        { name: 'JSON Formatter', path: '/tools/json-formatter.html', icon: 'fa-code' },
-        { name: 'HTML to Markdown', path: '/tools/html-to-markdown.html', icon: 'fa-file-code' },
-        { name: 'CSS Minifier', path: '/tools/css-minifier.html', icon: 'fa-css3' },
-        { name: 'JavaScript Minifier', path: '/tools/js-minifier.html', icon: 'fa-js' },
-        { name: 'SQL Formatter', path: '/tools/sql-formatter.html', icon: 'fa-database' },
-        { name: 'HTACCESS Generator', path: '/tools/htaccess-generator.html', icon: 'fa-server' },
-        { name: 'Markdown to HTML', path: '/tools/markdown-to-html.html', icon: 'fa-file-code' },
-        { name: 'Color Picker', path: '/tools/color-picker.html', icon: 'fa-palette' },
-        { name: 'Base64 Encoder/Decoder', path: '/tools/base64.html', icon: 'fa-code' },
-        { name: 'IP Address Lookup', path: '/tools/ip-lookup.html', icon: 'fa-network-wired' }
+        { name: 'JSON Formatter', path: 'tools/developer-tools/json-formatter.html', icon: 'fa-code' },
+        { name: 'HTML to Markdown', path: 'tools/developer-tools/html-to-markdown.html', icon: 'fa-file-code' },
+        { name: 'CSS Minifier', path: 'tools/developer-tools/css-minifier.html', icon: 'fa-css3' },
+        { name: 'JavaScript Minifier', path: 'tools/developer-tools/javascript-minifier.html', icon: 'fa-js' },
+        { name: 'SQL Formatter', path: 'tools/developer-tools/sql-formatter.html', icon: 'fa-database' },
+        { name: 'HTACCESS Redirect Generator', path: 'tools/developer-tools/htaccess-redirect-generator.html', icon: 'fa-server' },
+        { name: 'Markdown to HTML', path: 'tools/developer-tools/markdown-to-html.html', icon: 'fa-file-code' },
+        { name: 'Color Picker', path: 'tools/developer-tools/color-code-picker.html', icon: 'fa-palette' },
+        { name: 'Base64 Encoder/Decoder', path: 'tools/developer-tools/base64-encoder-decoder.html', icon: 'fa-code' },
+        { name: 'IP Address Lookup', path: 'tools/developer-tools/ip-address-lookup.html', icon: 'fa-network-wired' }
     ],
     'Calculators': [
-        { name: 'Percentage Calculator', path: '/tools/percentage-calculator.html', icon: 'fa-percent' },
-        { name: 'Age Calculator', path: '/tools/age-calculator.html', icon: 'fa-birthday-cake' },
-        { name: 'BMI Calculator', path: '/tools/bmi-calculator.html', icon: 'fa-weight' },
-        { name: 'Loan EMI Calculator', path: '/tools/loan-emi.html', icon: 'fa-calculator' },
-        { name: 'Scientific Calculator', path: '/tools/scientific-calculator.html', icon: 'fa-square-root-alt' },
-        { name: 'Discount Calculator', path: '/tools/discount-calculator.html', icon: 'fa-tag' },
-        { name: 'Currency Converter', path: '/tools/currency-converter.html', icon: 'fa-money-bill-wave' },
-        { name: 'Time Zone Converter', path: '/tools/time-zone.html', icon: 'fa-clock' },
-        { name: 'Binary to Decimal', path: '/tools/binary-decimal.html', icon: 'fa-hashtag' },
-        { name: 'Tip Calculator', path: '/tools/tip-calculator.html', icon: 'fa-coins' }
+        { name: 'Percentage Calculator', path: 'tools/calculator-tools/percentage-calculator.html', icon: 'fa-percent' },
+        { name: 'Age Calculator', path: 'tools/calculator-tools/age-calculator.html', icon: 'fa-birthday-cake' },
+        { name: 'BMI Calculator', path: 'tools/calculator-tools/bmi-calculator.html', icon: 'fa-weight' },
+        { name: 'Loan EMI Calculator', path: 'tools/calculator-tools/loan-emi-calculator.html', icon: 'fa-calculator' },
+        { name: 'Scientific Calculator', path: 'tools/calculator-tools/scientific-calculator.html', icon: 'fa-square-root-alt' },
+        { name: 'Discount Calculator', path: 'tools/calculator-tools/discount-calculator.html', icon: 'fa-tag' },
+        { name: 'Currency Converter', path: 'tools/calculator-tools/currency-converter.html', icon: 'fa-money-bill-wave' },
+        { name: 'Time Zone Converter', path: 'tools/calculator-tools/time-zone-converter.html', icon: 'fa-clock' },
+        { name: 'Binary to Decimal', path: 'tools/calculator-tools/binary-decimal.html', icon: 'fa-hashtag' },
+        { name: 'Tip Calculator', path: 'tools/calculator-tools/tip-calculator.html', icon: 'fa-coins' }
     ],
     'Unit Converters': [
-        { name: 'Length Converter', path: '/tools/length-converter.html', icon: 'fa-ruler' },
-        { name: 'Weight Converter', path: '/tools/weight-converter.html', icon: 'fa-balance-scale' },
-        { name: 'Speed Converter', path: '/tools/speed-converter.html', icon: 'fa-tachometer-alt' },
-        { name: 'Temperature Converter', path: '/tools/temperature-converter.html', icon: 'fa-thermometer-half' },
-        { name: 'Volume Converter', path: '/tools/volume-converter.html', icon: 'fa-flask' },
-        { name: 'Data Storage Converter', path: '/tools/data-storage.html', icon: 'fa-hdd' },
-        { name: 'Energy Converter', path: '/tools/energy-converter.html', icon: 'fa-bolt' },
-        { name: 'Pressure Converter', path: '/tools/pressure-converter.html', icon: 'fa-compress-arrows-alt' },
-        { name: 'Fuel Efficiency Converter', path: '/tools/fuel-efficiency.html', icon: 'fa-gas-pump' },
-        { name: 'Angle Converter', path: '/tools/angle-converter.html', icon: 'fa-angle-double-right' }
+        { name: 'Length Converter', path: 'tools/unit-converters/length-converter.html', icon: 'fa-ruler' },
+        { name: 'Weight Converter', path: 'tools/unit-converters/weight-converter.html', icon: 'fa-balance-scale' },
+        { name: 'Speed Converter', path: 'tools/unit-converters/speed-converter.html', icon: 'fa-tachometer-alt' },
+        { name: 'Temperature Converter', path: 'tools/unit-converters/temperature-converter.html', icon: 'fa-thermometer-half' },
+        { name: 'Volume Converter', path: 'tools/unit-converters/volume-converter.html', icon: 'fa-flask' },
+        { name: 'Data Storage Converter', path: 'tools/unit-converters/data-storage-converter.html', icon: 'fa-hdd' },
+        { name: 'Energy Converter', path: 'tools/unit-converters/energy-converter.html', icon: 'fa-bolt' },
+        { name: 'Pressure Converter', path: 'tools/unit-converters/pressure-converter.html', icon: 'fa-compress-arrows-alt' },
+        { name: 'Fuel Efficiency Converter', path: 'tools/unit-converters/fuel-efficiency-converter.html', icon: 'fa-gas-pump' },
+        { name: 'Angle Converter', path: 'tools/unit-converters/angle-converter.html', icon: 'fa-angle-double-right' }
     ],
     'Security Tools': [
-        { name: 'MD5 Hash Generator', path: '/tools/md5-generator.html', icon: 'fa-hashtag' },
-        { name: 'SHA256 Hash Generator', path: '/tools/sha256-generator.html', icon: 'fa-hashtag' },
-        { name: 'Password Generator', path: '/tools/password-generator.html', icon: 'fa-key' },
-        { name: 'Random String Generator', path: '/tools/random-string.html', icon: 'fa-random' },
-        { name: 'URL Shortener', path: '/tools/url-shortener.html', icon: 'fa-link' },
-        { name: 'IP Geolocation', path: '/tools/ip-geolocation.html', icon: 'fa-map-marker-alt' },
-        { name: 'SSL Certificate Checker', path: '/tools/ssl-checker.html', icon: 'fa-shield-alt' },
-        { name: 'Whois Lookup', path: '/tools/whois.html', icon: 'fa-search' },
-        { name: 'HTTP Headers Checker', path: '/tools/http-headers.html', icon: 'fa-heading' },
-        { name: 'Privacy Policy Generator', path: '/tools/privacy-policy.html', icon: 'fa-file-contract' }
+        { name: 'MD5 Hash Generator', path: 'tools/security-tools/md5-hash-generator.html', icon: 'fa-hashtag' },
+        { name: 'SHA256 Hash Generator', path: 'tools/security-tools/sha256-hash-generator.html', icon: 'fa-hashtag' },
+        { name: 'Password Generator', path: 'tools/security-tools/password-generator.html', icon: 'fa-key' },
+        { name: 'Random String Generator', path: 'tools/security-tools/random-string-generator.html', icon: 'fa-random' },
+        { name: 'URL Shortener', path: 'tools/security-tools/url-shortener.html', icon: 'fa-link' },
+        { name: 'IP Geolocation', path: 'tools/security-tools/ip-geolocation-finder.html', icon: 'fa-map-marker-alt' },
+        { name: 'SSL Certificate Checker', path: 'tools/security-tools/ssl-certificate-checker.html', icon: 'fa-shield-alt' },
+        { name: 'Whois Lookup', path: 'tools/security-tools/whois-lookup.html', icon: 'fa-search' },
+        { name: 'HTTP Headers Checker', path: 'tools/security-tools/http-headers-checker.html', icon: 'fa-heading' },
+        { name: 'Privacy Policy Generator', path: 'tools/security-tools/privacy-policy-generator.html', icon: 'fa-file-contract' }
     ],
     'Social Media Tools': [
-        { name: 'YouTube Thumbnail Downloader', path: '/tools/youtube-thumbnail.html', icon: 'fa-youtube' },
-        { name: 'Instagram Photo Downloader', path: '/tools/instagram-downloader.html', icon: 'fa-instagram' },
-        { name: 'Twitter Video Downloader', path: '/tools/twitter-downloader.html', icon: 'fa-twitter' },
-        { name: 'Facebook Video Downloader', path: '/tools/facebook-downloader.html', icon: 'fa-facebook' },
-        { name: 'TikTok Video Downloader', path: '/tools/tiktok-downloader.html', icon: 'fa-music' },
-        { name: 'YouTube Tags Extractor', path: '/tools/youtube-tags.html', icon: 'fa-tags' },
-        { name: 'Hashtag Generator', path: '/tools/hashtag-generator.html', icon: 'fa-hashtag' },
-        { name: 'Social Media Post Generator', path: '/tools/social-post.html', icon: 'fa-share-alt' },
-        { name: 'Emoji Keyboard', path: '/tools/emoji-keyboard.html', icon: 'fa-smile' },
-        { name: 'Twitter Character Counter', path: '/tools/twitter-counter.html', icon: 'fa-twitter' }
+        { name: 'YouTube Thumbnail Downloader', path: 'tools/social-media-tools/youtube-thumbnail-downloader.html', icon: 'fa-youtube' },
+        { name: 'Instagram Photo Downloader', path: 'tools/social-media-tools/instagram-photo-downloader.html', icon: 'fa-instagram' },
+        { name: 'Twitter Video Downloader', path: 'tools/social-media-tools/twitter-video-downloader.html', icon: 'fa-twitter' },
+        { name: 'Facebook Video Downloader', path: 'tools/social-media-tools/facebook-video-downloader.html', icon: 'fa-facebook' },
+        { name: 'TikTok Video Downloader', path: 'tools/social-media-tools/tiktok-video-downloader.html', icon: 'fa-music' },
+        { name: 'YouTube Tags Extractor', path: 'tools/social-media-tools/youtube-tags-extractor.html', icon: 'fa-tags' },
+        { name: 'Hashtag Generator', path: 'tools/social-media-tools/hashtag-generator.html', icon: 'fa-hashtag' },
+        { name: 'Social Media Post Generator', path: 'tools/social-media-tools/social-media-post-generator.html', icon: 'fa-share-alt' },
+        { name: 'Emoji Keyboard', path: 'tools/social-media-tools/emoji-keyboard.html', icon: 'fa-smile' },
+        { name: 'Twitter Character Counter', path: 'tools/social-media-tools/twitter-character-counter.html', icon: 'fa-twitter' }
+    ],
+    'Business Tools': [
+        { name: 'Invoice Generator', path: 'tools/business-tools/invoice-generator.html', icon: 'fa-file-invoice' },
+        { name: 'Business Name Generator', path: 'tools/business-tools/business-name-generator.html', icon: 'fa-building' },
+        { name: 'Daily Planner Creator', path: 'tools/business-tools/daily-planner-creator.html', icon: 'fa-calendar' },
+        { name: 'Calculator for Electric Bills', path: 'tools/business-tools/electric-bill-calculator.html', icon: 'fa-bolt' }
     ],
     'Miscellaneous': [
-        { name: 'Barcode Generator', path: '/tools/barcode-generator.html', icon: 'fa-barcode' },
-        { name: 'Meme Generator', path: '/tools/meme-generator.html', icon: 'fa-laugh' },
-        { name: 'Resume Builder', path: '/tools/resume-builder.html', icon: 'fa-file-alt' },
-        { name: 'Invoice Generator', path: '/tools/invoice-generator.html', icon: 'fa-file-invoice' },
-        { name: 'Business Name Generator', path: '/tools/business-name.html', icon: 'fa-building' },
-        { name: 'Lottery Number Generator', path: '/tools/lottery-generator.html', icon: 'fa-ticket-alt' },
-        { name: 'Flip a Coin', path: '/tools/flip-coin.html', icon: 'fa-coins' },
-        { name: 'Random Number Generator', path: '/tools/random-number.html', icon: 'fa-dice' },
-        { name: 'Dice Roller', path: '/tools/dice-roller.html', icon: 'fa-dice' },
-        { name: 'Internet Speed Test', path: '/tools/speed-test.html', icon: 'fa-tachometer-alt' }
+        { name: 'Barcode Generator', path: 'tools/miscellaneous/barcode-generator.html', icon: 'fa-barcode' },
+        { name: 'Meme Generator', path: 'tools/miscellaneous/meme-generator.html', icon: 'fa-laugh' },
+        { name: 'Resume Builder', path: 'tools/miscellaneous/resume-builder.html', icon: 'fa-file-alt' },
+        { name: 'Lottery Number Generator', path: 'tools/miscellaneous/lottery-number-generator.html', icon: 'fa-ticket-alt' },
+        { name: 'Flip a Coin Simulator', path: 'tools/miscellaneous/flip-coin-simulator.html', icon: 'fa-coins' },
+        { name: 'Random Number Generator', path: 'tools/miscellaneous/random-number-generator.html', icon: 'fa-dice' },
+        { name: 'Dice Roller Simulator', path: 'tools/miscellaneous/dice-roller.html', icon: 'fa-dice' },
+        { name: 'Internet Speed Test', path: 'tools/miscellaneous/internet-speed-test.html', icon: 'fa-tachometer-alt' },
+        { name: 'Wedding Invitation Generator', path: 'tools/miscellaneous/wedding-invitation-generator.html', icon: 'fa-envelope' },
+        { name: 'Story Plot Generator', path: 'tools/miscellaneous/story-plot-generator.html', icon: 'fa-book' },
+        { name: 'E-book Creator', path: 'tools/miscellaneous/ebook-creator.html', icon: 'fa-book-open' },
+        { name: 'AI Chatbot Demo', path: 'tools/miscellaneous/ai-chatbot-demo.html', icon: 'fa-robot' },
+        { name: 'IP Address Tracker', path: 'tools/miscellaneous/ip-address-tracker.html', icon: 'fa-map-marker-alt' },
+        { name: 'Fake Address Generator', path: 'tools/miscellaneous/fake-address-generator.html', icon: 'fa-map' },
+        { name: 'Leap Year Checker', path: 'tools/miscellaneous/leap-year-checker.html', icon: 'fa-calendar-check' },
+        { name: 'Name to Numerology Calculator', path: 'tools/miscellaneous/name-numerology-calculator.html', icon: 'fa-calculator' },
+        { name: 'Random Quote Generator', path: 'tools/miscellaneous/random-quote-generator.html', icon: 'fa-quote-right' },
+        { name: 'Birthday Invitation Generator', path: 'tools/miscellaneous/birthday-invitation-generator.html', icon: 'fa-birthday-cake' }
     ]
 };
 
@@ -312,15 +352,19 @@ function loadCategories() {
     container.innerHTML = '';
 
     Object.entries(toolCategories).forEach(([category, tools]) => {
+        // Handle both array and object structures
+        const toolList = Array.isArray(tools) ? tools : (tools.tools || []);
+        const categoryName = tools.name || category;
+        
         const categoryCard = document.createElement('div');
         categoryCard.className = 'col-md-6 col-lg-4';
         
         categoryCard.innerHTML = `
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">${category}</h5>
+                    <h5 class="card-title">${categoryName}</h5>
                     <ul class="list-unstyled">
-                        ${tools.slice(0, 5).map(tool => `
+                        ${toolList.slice(0, 5).map(tool => `
                             <li>
                                 <a href="${tool.path}" class="text-decoration-none">
                                     <i class="fas ${tool.icon} me-2"></i>
@@ -329,10 +373,10 @@ function loadCategories() {
                             </li>
                         `).join('')}
                     </ul>
-                    ${tools.length > 5 ? `
-                        <a href="#" class="btn btn-sm btn-outline-primary mt-2" data-category="${category}">
-                            View All ${tools.length} Tools
-                        </a>
+                    ${category === 'PDF Tools' || toolList.length > 5 ? `
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-2 view-all-btn" data-category="${category}">
+                            View All ${toolList.length} Tools
+                        </button>
                     ` : ''}
                 </div>
             </div>
@@ -342,32 +386,38 @@ function loadCategories() {
     });
 
     // Add click handler for "View All" buttons
-    document.querySelectorAll('[data-category]').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const category = e.target.dataset.category;
-            const tools = toolCategories[category];
+    document.querySelectorAll('.view-all-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            const tools = Array.isArray(toolCategories[category]) 
+                ? toolCategories[category] 
+                : (toolCategories[category].tools || []);
             
             // Create modal content
             const modalContent = `
-                <div class="modal fade" id="toolsModal" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
+                <div class="modal fade" id="toolsModal" tabindex="-1" aria-labelledby="toolsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">${category} Tools</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <h5 class="modal-title" id="toolsModalLabel">
+                                    <i class="fas fa-tools me-2"></i>
+                                    ${category} Tools
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="row g-3">
+                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                                     ${tools.map(tool => `
-                                        <div class="col-md-6">
+                                        <div class="col">
                                             <div class="card h-100">
                                                 <div class="card-body">
                                                     <h6 class="card-title">
                                                         <i class="fas ${tool.icon} me-2"></i>
                                                         ${tool.name}
                                                     </h6>
-                                                    <p class="card-text small text-muted">${tool.description || ''}</p>
+                                                    ${tool.description ? `
+                                                        <p class="card-text small text-muted">${tool.description}</p>
+                                                    ` : ''}
                                                     <a href="${tool.path}" class="btn btn-primary btn-sm">Use Tool</a>
                                                 </div>
                                             </div>
@@ -375,18 +425,30 @@ function loadCategories() {
                                     `).join('')}
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
             
-            // Add modal to body and show it
+            // Remove any existing modal
+            const existingModal = document.getElementById('toolsModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add modal to body
             document.body.insertAdjacentHTML('beforeend', modalContent);
-            const modal = new bootstrap.Modal(document.getElementById('toolsModal'));
+            
+            // Initialize and show modal
+            const modalElement = document.getElementById('toolsModal');
+            const modal = new bootstrap.Modal(modalElement);
             modal.show();
             
             // Remove modal from DOM after it's hidden
-            document.getElementById('toolsModal').addEventListener('hidden.bs.modal', function () {
+            modalElement.addEventListener('hidden.bs.modal', function () {
                 this.remove();
             });
         });
@@ -427,74 +489,64 @@ function loadPopularTools() {
     });
 }
 
-// Load all tools
+function createToolCard(tool) {
+    return `
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas ${tool.icon} me-2"></i>
+                        ${tool.name}
+                    </h5>
+                    ${tool.description ? `
+                        <p class="card-text small text-muted">${tool.description}</p>
+                    ` : ''}
+                    <a href="${tool.path}" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function loadAllTools() {
-    const allTools = [
-        // Image Tools
-        {
-            name: 'Image Compressor',
-            description: 'Compress your images to reduce file size while maintaining quality.',
-            icon: 'fas fa-compress-alt',
-            url: 'tools/image-tools/image-compressor.html',
-            category: 'Image Tools',
-            popularity: 90
-        },
-        {
-            name: 'Image Cropper',
-            description: 'Crop your images to the perfect size and aspect ratio.',
-            icon: 'fas fa-crop-alt',
-            url: 'tools/image-tools/image-cropper.html',
-            category: 'Image Tools',
-            popularity: 85
-        },
-        {
-            name: 'Image Rotator',
-            description: 'Rotate and flip your images with ease.',
-            icon: 'fas fa-sync-alt',
-            url: 'tools/image-tools/image-rotator.html',
-            category: 'Image Tools',
-            popularity: 80
-        },
-        // ... existing tools ...
-    ];
-
-    const toolsContainer = document.getElementById('all-tools-container');
+    const allToolsContainer = document.getElementById('all-tools-container');
     const imageToolsContainer = document.getElementById('image-tools-container');
+    const pdfToolsContainer = document.getElementById('pdf-tools-container');
     
-    if (toolsContainer) {
-        toolsContainer.innerHTML = allTools.map(tool => `
-            <div class="col-md-4 col-lg-3">
-                <div class="tool-card">
-                    <div class="tool-icon">
-                        <i class="${tool.icon}"></i>
-                    </div>
-                    <div class="tool-info">
-                        <h3>${tool.name}</h3>
-                        <p>${tool.description}</p>
-                        <span class="tool-category">${tool.category}</span>
-                    </div>
-                    <a href="${tool.url}" class="btn btn-primary">Use Tool</a>
-                </div>
+    // Get all tools from all categories
+    const allTools = Object.values(toolCategories).flatMap(category => 
+        Array.isArray(category) ? category : (category.tools || [])
+    );
+    
+    // Load all tools
+    if (allToolsContainer) {
+        allToolsContainer.innerHTML = `
+            <div class="row">
+                ${allTools.map(tool => createToolCard(tool)).join('')}
             </div>
-        `).join('');
+        `;
     }
-
+    
+    // Load image tools
     if (imageToolsContainer) {
-        const imageTools = allTools.filter(tool => tool.category === 'Image Tools');
-        imageToolsContainer.innerHTML = imageTools.map(tool => `
-            <div class="col-md-4 col-lg-3">
-                <div class="tool-card">
-                    <div class="tool-icon">
-                        <i class="${tool.icon}"></i>
-                    </div>
-                    <div class="tool-info">
-                        <h3>${tool.name}</h3>
-                        <p>${tool.description}</p>
-                    </div>
-                    <a href="${tool.url}" class="btn btn-primary">Use Tool</a>
-                </div>
+        const imageTools = Array.isArray(toolCategories['Image Tools']) 
+            ? toolCategories['Image Tools'] 
+            : [];
+        imageToolsContainer.innerHTML = `
+            <div class="row">
+                ${imageTools.map(tool => createToolCard(tool)).join('')}
             </div>
-        `).join('');
+        `;
+    }
+    
+    // Load PDF tools
+    if (pdfToolsContainer) {
+        const pdfTools = toolCategories['pdf-tools']?.tools || [];
+        pdfToolsContainer.innerHTML = `
+            <div class="row">
+                ${pdfTools.map(tool => createToolCard(tool)).join('')}
+            </div>
+        `;
     }
 }
 

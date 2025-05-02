@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap Year Checker - Check if a Year is a Leap Year | Multi-Tools Hub</title>
+    <meta name="description" content="Check if any year is a leap year with our free Leap Year Checker tool. Get instant results and learn about leap year rules and calculations.">
+    <meta name="keywords" content="leap year checker, leap year calculator, is leap year, leap year rules, leap year calculation">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Leap Year Checker - Check if a Year is a Leap Year">
+    <meta property="og:description" content="Check if any year is a leap year with our free Leap Year Checker tool. Get instant results and learn about leap year rules and calculations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/leap-year-checker.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Leap Year Checker - Check if a Year is a Leap Year">
+    <meta name="twitter:description" content="Check if any year is a leap year with our free Leap Year Checker tool. Get instant results and learn about leap year rules and calculations.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Leap Year Checker</h1>
+                <p class="lead text-center mb-4">Check if any year is a leap year and learn about leap year rules</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Main Tool Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <!-- Year Input Section -->
+                        <div class="year-input-section mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-8 mx-auto">
+                                    <label for="yearInput" class="form-label">Enter Year</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="yearInput" placeholder="Enter a year (e.g., 2024)" min="1" max="9999">
+                                        <button class="btn btn-primary" type="button" id="checkBtn">
+                                            <i class="fas fa-calendar-check me-2"></i>Check
+                                        </button>
+                                    </div>
+                                    <div class="form-text">Enter any year between 1 and 9999</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Results Section -->
+                        <div id="resultsSection" style="display: none;">
+                            <div class="result-card text-center p-4 mb-4">
+                                <div id="resultIcon" class="mb-3">
+                                    <!-- Icon will be inserted here -->
+                                </div>
+                                <h3 id="resultTitle" class="mb-2">
+                                    <!-- Result title will be inserted here -->
+                                </h3>
+                                <p id="resultDescription" class="mb-0">
+                                    <!-- Result description will be inserted here -->
+                                </p>
+                            </div>
+
+                            <!-- Next Leap Year Info -->
+                            <div id="nextLeapYearInfo" class="alert alert-info" style="display: none;">
+                                <!-- Next leap year information will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Leap Years</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Learn about leap year rules and calculations:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-calendar-alt text-info me-2"></i>A year is a leap year if it's divisible by 4</li>
+                            <li class="mb-2"><i class="fas fa-exclamation-circle text-info me-2"></i>Exception: Years divisible by 100 are not leap years</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i>Exception to exception: Years divisible by 400 are leap years</li>
+                            <li class="mb-2"><i class="fas fa-clock text-info me-2"></i>Leap years help keep our calendar in sync with Earth's orbit</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter any year to check if it's a leap year</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Get instant results with detailed explanations</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Learn about the next leap year</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Understand leap year rules and calculations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/leap-year-checker.js"></script>
+</body>
+</html> 

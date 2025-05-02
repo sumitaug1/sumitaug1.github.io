@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Tag Generator - Free SEO Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Generate optimized meta tags for your website. Create title, description, keywords, and other meta tags to improve your SEO ranking.">
+    <meta name="keywords" content="meta tag generator, SEO meta tags, meta description generator, meta keywords generator, SEO tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Meta Tag Generator - Free SEO Tool">
+    <meta property="og:description" content="Generate optimized meta tags for your website. Create title, description, keywords, and other meta tags to improve your SEO ranking.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/seo-tools/meta-tag-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meta Tag Generator - Free SEO Tool">
+    <meta name="twitter:description" content="Generate optimized meta tags for your website. Create title, description, keywords, and other meta tags to improve your SEO ranking.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Meta Tag Generator</h1>
+                <p class="lead text-center mb-4">Generate optimized meta tags for your website to improve SEO ranking</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="metaTagForm">
+                            <div class="mb-3">
+                                <label for="pageTitle" class="form-label">Page Title</label>
+                                <input type="text" class="form-control" id="pageTitle" placeholder="Enter your page title" required>
+                                <div class="form-text">Recommended length: 50-60 characters</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="metaDescription" class="form-label">Meta Description</label>
+                                <textarea class="form-control" id="metaDescription" rows="3" placeholder="Enter your meta description" required></textarea>
+                                <div class="form-text">Recommended length: 150-160 characters</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="metaKeywords" class="form-label">Meta Keywords</label>
+                                <input type="text" class="form-control" id="metaKeywords" placeholder="Enter keywords separated by commas">
+                                <div class="form-text">Enter up to 5-7 relevant keywords</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="author" class="form-label">Author</label>
+                                <input type="text" class="form-control" id="author" placeholder="Enter author name">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="robots" class="form-label">Robots Meta Tag</label>
+                                <select class="form-select" id="robots">
+                                    <option value="index,follow">Index, Follow</option>
+                                    <option value="noindex,follow">No Index, Follow</option>
+                                    <option value="index,nofollow">Index, No Follow</option>
+                                    <option value="noindex,nofollow">No Index, No Follow</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="canonicalUrl" class="form-label">Canonical URL</label>
+                                <input type="url" class="form-control" id="canonicalUrl" placeholder="Enter canonical URL">
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Generate Meta Tags</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="copyButton">Copy to Clipboard</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Generated Meta Tags</h5>
+                    </div>
+                    <div class="card-body">
+                        <pre id="generatedCode" class="bg-light p-3 rounded"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Use Meta Tags?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Improve search engine visibility</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enhance click-through rates from search results</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Provide clear information to search engines</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Control how your pages are indexed</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Prevent duplicate content issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/seo-tools/meta-tag-generator.js"></script>
+</body>
+</html> 

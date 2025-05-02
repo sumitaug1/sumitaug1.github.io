@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Minifier - Free Developer Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Minify your JavaScript code to reduce file size and improve loading speed. Remove unnecessary whitespace, comments, and optimize your code structure.">
+    <meta name="keywords" content="javascript minifier, js minifier, js compressor, developer tool, javascript tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Highlight.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JavaScript Minifier - Free Developer Tool">
+    <meta property="og:description" content="Minify your JavaScript code to reduce file size and improve loading speed. Remove unnecessary whitespace, comments, and optimize your code structure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/developer-tools/javascript-minifier.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JavaScript Minifier - Free Developer Tool">
+    <meta name="twitter:description" content="Minify your JavaScript code to reduce file size and improve loading speed. Remove unnecessary whitespace, comments, and optimize your code structure.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">JavaScript Minifier</h1>
+                <p class="lead text-center mb-4">Minify your JavaScript code to reduce file size and improve loading speed</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="minifierForm">
+                            <div class="mb-3">
+                                <label for="jsInput" class="form-label">JavaScript Input</label>
+                                <textarea class="form-control" id="jsInput" rows="10" placeholder="Enter your JavaScript code here" required></textarea>
+                                <div class="form-text">Paste your JavaScript code to minify</div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="minificationOptions" class="form-label">Minification Options</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="removeComments" checked>
+                                        <label class="form-check-label" for="removeComments">
+                                            Remove Comments
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="removeWhitespace" checked>
+                                        <label class="form-check-label" for="removeWhitespace">
+                                            Remove Whitespace
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="mangleNames" checked>
+                                        <label class="form-check-label" for="mangleNames">
+                                            Mangle Variable Names
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="outputFormat" class="form-label">Output Format</label>
+                                    <select class="form-select" id="outputFormat">
+                                        <option value="minified">Minified</option>
+                                        <option value="beautified">Beautified</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Minify JavaScript</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
+                                <button type="button" class="btn btn-outline-primary ms-2" id="copyButton">Copy to Clipboard</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Minified JavaScript</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" id="downloadButton">
+                                <i class="fas fa-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="loadingSpinner" class="text-center" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Minifying JavaScript...</p>
+                        </div>
+
+                        <div id="minificationResults">
+                            <div class="mb-3">
+                                <h6>Minification Status</h6>
+                                <div id="minificationStatus"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Minified JavaScript</h6>
+                                <div class="position-relative">
+                                    <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2" id="copyOutputButton">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                    <pre><code id="minifiedOutput" class="language-javascript"></code></pre>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Statistics</h6>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body text-center">
+                                                <h3 id="originalSize">0</h3>
+                                                <p class="mb-0">Original Size (bytes)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body text-center">
+                                                <h3 id="minifiedSize">0</h3>
+                                                <p class="mb-0">Minified Size (bytes)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body text-center">
+                                                <h3 id="savings">0%</h3>
+                                                <p class="mb-0">Size Reduction</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Minify JavaScript?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Reduce file size</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Improve loading speed</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimize bandwidth usage</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Better performance</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>SEO benefits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <!-- Terser for JavaScript minification -->
+    <script src="https://cdn.jsdelivr.net/npm/terser@5.19.2/dist/bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/developer-tools/javascript-minifier.js"></script>
+</body>
+</html> 

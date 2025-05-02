@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Name Generator - Create Unique Business Names | Multi-Tools Hub</title>
+    <meta name="description" content="Generate unique and creative business names based on your industry and preferences. Get instant suggestions for your new business.">
+    <meta name="keywords" content="business name generator, company name generator, business name ideas, creative business names">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Business Name Generator - Create Unique Business Names">
+    <meta property="og:description" content="Generate unique and creative business names based on your industry and preferences. Get instant suggestions for your new business.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/business-tools/business-name-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Business Name Generator - Create Unique Business Names">
+    <meta name="twitter:description" content="Generate unique and creative business names based on your industry and preferences. Get instant suggestions for your new business.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Business Name Generator</h1>
+                <p class="lead text-center mb-4">Create unique and memorable business names for your venture</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Generator Form Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form id="nameGeneratorForm">
+                            <!-- Industry Selection -->
+                            <div class="mb-4">
+                                <label for="industry" class="form-label">Select Industry</label>
+                                <select class="form-select" id="industry" required>
+                                    <option value="">Choose an industry...</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="retail">Retail</option>
+                                    <option value="food">Food & Beverage</option>
+                                    <option value="health">Healthcare</option>
+                                    <option value="education">Education</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="real-estate">Real Estate</option>
+                                    <option value="creative">Creative Services</option>
+                                    <option value="consulting">Consulting</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Business Type -->
+                            <div class="mb-4">
+                                <label for="businessType" class="form-label">Business Type</label>
+                                <select class="form-select" id="businessType" required>
+                                    <option value="">Select business type...</option>
+                                    <option value="startup">Startup</option>
+                                    <option value="small-business">Small Business</option>
+                                    <option value="enterprise">Enterprise</option>
+                                    <option value="freelance">Freelance</option>
+                                    <option value="agency">Agency</option>
+                                </select>
+                            </div>
+
+                            <!-- Name Style -->
+                            <div class="mb-4">
+                                <label class="form-label">Name Style</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="styleModern" checked>
+                                            <label class="form-check-label" for="styleModern">Modern</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="styleProfessional" checked>
+                                            <label class="form-check-label" for="styleProfessional">Professional</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="styleCreative" checked>
+                                            <label class="form-check-label" for="styleCreative">Creative</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Keywords -->
+                            <div class="mb-4">
+                                <label for="keywords" class="form-label">Keywords (optional)</label>
+                                <input type="text" class="form-control" id="keywords" placeholder="Enter keywords separated by commas">
+                                <div class="form-text">Add specific words you'd like to include in your business name</div>
+                            </div>
+
+                            <!-- Name Length -->
+                            <div class="mb-4">
+                                <label for="nameLength" class="form-label">Preferred Name Length</label>
+                                <select class="form-select" id="nameLength">
+                                    <option value="any">Any Length</option>
+                                    <option value="short">Short (1-2 words)</option>
+                                    <option value="medium">Medium (2-3 words)</option>
+                                    <option value="long">Long (3+ words)</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary flex-grow-1">
+                                    <i class="fas fa-magic me-2"></i>Generate Names
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary flex-grow-1" id="resetBtn">
+                                    <i class="fas fa-redo me-2"></i>Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="card shadow-sm mb-4" style="display: none;">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Generated Names</h5>
+                        <button class="btn btn-sm btn-outline-primary" id="saveBtn">
+                            <i class="fas fa-save me-2"></i>Save Favorites
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="nameResults" class="row">
+                            <!-- Names will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Business Name Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool helps you create unique and memorable business names. Features include:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-palette text-info me-2"></i>Industry-specific suggestions</li>
+                            <li class="mb-2"><i class="fas fa-edit text-info me-2"></i>Customizable name styles</li>
+                            <li class="mb-2"><i class="fas fa-save text-info me-2"></i>Save favorite names</li>
+                            <li class="mb-2"><i class="fas fa-mobile-alt text-info me-2"></i>Mobile-friendly</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose an industry that matches your business</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add relevant keywords for better results</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Consider name length for branding</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Save your favorite names for later</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/business-tools/business-name-generator.js"></script>
+</body>
+</html> 

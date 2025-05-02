@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - Calculator Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .calculator-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .calculator {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .result-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .bmi-display {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .bmi-category {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .bmi-chart {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right, 
+                #198754 0%, 
+                #198754 18.5%, 
+                #ffc107 18.5%, 
+                #ffc107 25%, 
+                #fd7e14 25%, 
+                #fd7e14 30%, 
+                #dc3545 30%, 
+                #dc3545 100%
+            );
+            border-radius: 10px;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .bmi-marker {
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background-color: #000;
+            top: -5px;
+        }
+        .bmi-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+        .health-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+        .health-info h6 {
+            margin-bottom: 0.5rem;
+        }
+        .ideal-weight {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .unit-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .unit-toggle .btn {
+            margin: 0 0.25rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container calculator-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-weight me-2"></i>
+            BMI Calculator
+        </h1>
+
+        <div class="calculator">
+            <div class="unit-toggle">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="unit-toggle">
+                    <label class="form-check-label" for="unit-toggle">Imperial Units</label>
+                </div>
+            </div>
+
+            <div id="metric-inputs">
+                <div class="input-group">
+                    <input type="number" class="form-control" id="cm" placeholder="Height in cm">
+                    <span class="input-group-text">cm</span>
+                </div>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="kg" placeholder="Weight in kg">
+                    <span class="input-group-text">kg</span>
+                </div>
+            </div>
+
+            <div id="imperial-inputs" style="display: none;">
+                <div class="input-group">
+                    <input type="number" class="form-control" id="feet" placeholder="Feet">
+                    <span class="input-group-text">ft</span>
+                </div>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="inches" placeholder="Inches">
+                    <span class="input-group-text">in</span>
+                </div>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="pounds" placeholder="Weight in pounds">
+                    <span class="input-group-text">lbs</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary w-100" id="calculate">
+                <i class="fas fa-calculator me-2"></i>Calculate BMI
+            </button>
+
+            <div id="result-container" class="result-box">
+                <div class="bmi-display" id="bmi-value">0</div>
+                <div class="bmi-category" id="bmi-category">Normal weight</div>
+                <div class="bmi-chart" id="bmi-chart">
+                    <div class="bmi-marker" id="bmi-marker"></div>
+                </div>
+                <div class="bmi-labels">
+                    <span>Underweight</span>
+                    <span>Normal</span>
+                    <span>Overweight</span>
+                    <span>Obese</span>
+                </div>
+                <div class="health-info" id="health-info"></div>
+                <div class="ideal-weight" id="ideal-weight"></div>
+            </div>
+        </div>
+
+        <div class="info-text">
+            <p><strong>BMI Categories:</strong></p>
+            <ul>
+                <li><strong>Underweight:</strong> BMI less than 18.5</li>
+                <li><strong>Normal weight:</strong> BMI 18.5 to 24.9</li>
+                <li><strong>Overweight:</strong> BMI 25 to 29.9</li>
+                <li><strong>Obese:</strong> BMI 30 or greater</li>
+            </ul>
+            <p><small>Note: BMI is a screening tool and not a diagnostic tool. Consult your healthcare provider for more information.</small></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/calculator-tools/bmi-calculator.js"></script>
+</body>
+</html> 

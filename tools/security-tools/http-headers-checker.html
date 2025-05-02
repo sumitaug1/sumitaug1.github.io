@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Headers Checker - Free Website Headers Analysis Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Check and analyze HTTP headers of any website. Free, easy to use headers checker tool with comprehensive security and performance insights.">
+    <meta name="keywords" content="http headers checker, website headers, security headers, headers analysis, website security">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HTTP Headers Checker - Free Website Headers Analysis Tool">
+    <meta property="og:description" content="Check and analyze HTTP headers of any website. Free, easy to use headers checker tool with comprehensive security and performance insights.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/security-tools/http-headers-checker.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HTTP Headers Checker - Free Website Headers Analysis Tool">
+    <meta name="twitter:description" content="Check and analyze HTTP headers of any website. Free, easy to use headers checker tool with comprehensive security and performance insights.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">HTTP Headers Checker</h1>
+                <p class="lead text-center mb-4">Check and analyze HTTP headers of any website</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="headersCheckForm">
+                            <div class="mb-4">
+                                <label for="url" class="form-label">Enter Website URL</label>
+                                <div class="input-group">
+                                    <input type="url" class="form-control" id="url" placeholder="Enter URL (e.g., https://example.com)" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="checkBtn">
+                                        <i class="fas fa-search me-2"></i>Check Headers
+                                    </button>
+                                </div>
+                                <small class="form-text text-muted">Enter the complete URL including http:// or https://</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="card mt-4 shadow-sm d-none" id="resultsCard">
+                    <div class="card-header">
+                        <h5 class="mb-0">Headers Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Status Alert -->
+                        <div class="alert mb-4" id="statusAlert" role="alert">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <span id="statusText">Checking headers...</span>
+                        </div>
+
+                        <!-- Headers Table -->
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Header Name</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="headersTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Security Analysis -->
+                        <div class="mt-4">
+                            <h6 class="mb-3">Security Analysis</h6>
+                            <div id="securityAnalysis" class="border rounded p-3 bg-light">
+                                <ul class="list-unstyled mb-0" id="securityList">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About HTTP Headers Checker</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>HTTP headers are important components of web communication that provide information about the request, response, or the body of the message. This tool helps you analyze:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-shield-alt text-info me-2"></i>Security headers</li>
+                            <li class="mb-2"><i class="fas fa-tachometer-alt text-info me-2"></i>Performance headers</li>
+                            <li class="mb-2"><i class="fas fa-cookie text-info me-2"></i>Cookie settings</li>
+                            <li class="mb-2"><i class="fas fa-server text-info me-2"></i>Server information</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter the complete URL including http:// or https://</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>View all HTTP headers</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Analyze security headers</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Check performance headers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/security-tools/http-headers-checker.js"></script>
+</body>
+</html> 

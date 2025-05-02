@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Authority Checker - Free SEO Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Check your website's domain authority score. Get insights about your domain's strength and authority in search engines.">
+    <meta name="keywords" content="domain authority checker, DA checker, domain strength, SEO tool, website authority">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Domain Authority Checker - Free SEO Tool">
+    <meta property="og:description" content="Check your website's domain authority score. Get insights about your domain's strength and authority in search engines.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/seo-tools/domain-authority.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Domain Authority Checker - Free SEO Tool">
+    <meta name="twitter:description" content="Check your website's domain authority score. Get insights about your domain's strength and authority in search engines.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Domain Authority Checker</h1>
+                <p class="lead text-center mb-4">Check your website's domain authority score and get insights about your domain's strength</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="daCheckForm">
+                            <div class="mb-3">
+                                <label for="websiteUrl" class="form-label">Website URL</label>
+                                <input type="url" class="form-control" id="websiteUrl" placeholder="https://example.com" required>
+                                <div class="form-text">Enter your website's URL to check its domain authority</div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Check Domain Authority</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Domain Authority Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="loadingSpinner" class="text-center" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Checking domain authority...</p>
+                        </div>
+
+                        <div id="daResults">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Domain Authority Score</h6>
+                                    <div id="daScore" class="mb-3"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Domain Metrics</h6>
+                                    <div id="domainMetrics" class="mb-3"></div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <h6>Domain Insights</h6>
+                                <div id="domainInsights"></div>
+                            </div>
+
+                            <div class="mt-4">
+                                <h6>Improvement Recommendations</h6>
+                                <div id="recommendations"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Check Domain Authority?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Measure website strength</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Track SEO progress</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Compare with competitors</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Identify improvement areas</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Get actionable recommendations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/seo-tools/domain-authority.js"></script>
+</body>
+</html> 
