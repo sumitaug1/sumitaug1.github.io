@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator - Calculator Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .calculator-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .calculator {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .result-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .amount-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #198754;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .tip-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .tip-btn {
+            flex: 1;
+            min-width: 80px;
+        }
+        .tip-btn.active {
+            background-color: #198754;
+            color: white;
+        }
+        .split-display {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            align-items: center;
+        }
+        .split-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .split-control button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .split-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+        }
+        .summary-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+        .summary-card h6 {
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+        .summary-card .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #198754;
+        }
+        .custom-tip {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .custom-tip input {
+            width: 100px;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 1rem;
+        }
+        .rounding-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container calculator-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-money-bill-wave me-2"></i>
+            Tip Calculator
+        </h1>
+
+        <div class="calculator">
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="billAmount" placeholder="Enter bill amount" min="0" step="0.01">
+            </div>
+
+            <div class="tip-buttons">
+                <button class="btn btn-outline-primary tip-btn" data-tip="10">10%</button>
+                <button class="btn btn-outline-primary tip-btn" data-tip="15">15%</button>
+                <button class="btn btn-outline-primary tip-btn active" data-tip="20">20%</button>
+                <button class="btn btn-outline-primary tip-btn" data-tip="25">25%</button>
+                <div class="custom-tip">
+                    <input type="number" class="form-control" id="customTip" placeholder="Custom %" min="0" max="100">
+                    <span>%</span>
+                </div>
+            </div>
+
+            <div class="rounding-option">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="roundTotal">
+                    <label class="form-check-label" for="roundTotal">
+                        Round total to nearest dollar
+                    </label>
+                </div>
+            </div>
+
+            <div class="split-display">
+                <span>Split between</span>
+                <div class="split-control">
+                    <button class="btn btn-outline-secondary" onclick="updateSplit(-1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="split-amount" id="splitAmount">1</span>
+                    <button class="btn btn-outline-secondary" onclick="updateSplit(1)">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <span>people</span>
+            </div>
+
+            <div class="result-box">
+                <div class="summary-card">
+                    <h6>Tip Amount</h6>
+                    <div class="amount" id="tipAmount">$0.00</div>
+                </div>
+
+                <div class="summary-card">
+                    <h6>Total with Tip</h6>
+                    <div class="amount" id="totalAmount">$0.00</div>
+                </div>
+
+                <div class="summary-card">
+                    <h6>Each Person Pays</h6>
+                    <div class="amount" id="splitAmountDisplay">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-text">
+            <p><strong>About Tip Calculation:</strong></p>
+            <ul>
+                <li>Enter the bill amount and select a tip percentage</li>
+                <li>Choose from preset tip percentages or enter a custom percentage</li>
+                <li>Split the bill between multiple people</li>
+                <li>Option to round the total to the nearest dollar</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/calculator-tools/tip-calculator.js"></script>
+</body>
+</html> 

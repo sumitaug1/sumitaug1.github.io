@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTACCESS Redirect Generator - Free Developer Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Generate Apache .htaccess redirect rules for various scenarios. Create redirects for domains, URLs, and more with proper syntax and options.">
+    <meta name="keywords" content="htaccess redirect, apache redirect, url redirect, developer tool, htaccess tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Highlight.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HTACCESS Redirect Generator - Free Developer Tool">
+    <meta property="og:description" content="Generate Apache .htaccess redirect rules for various scenarios. Create redirects for domains, URLs, and more with proper syntax and options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/developer-tools/htaccess-redirect-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HTACCESS Redirect Generator - Free Developer Tool">
+    <meta name="twitter:description" content="Generate Apache .htaccess redirect rules for various scenarios. Create redirects for domains, URLs, and more with proper syntax and options.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">HTACCESS Redirect Generator</h1>
+                <p class="lead text-center mb-4">Generate Apache .htaccess redirect rules for various scenarios</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="redirectForm">
+                            <div class="mb-3">
+                                <label for="redirectType" class="form-label">Redirect Type</label>
+                                <select class="form-select" id="redirectType" required>
+                                    <option value="domain">Domain Redirect</option>
+                                    <option value="url">URL Redirect</option>
+                                    <option value="www">WWW to Non-WWW</option>
+                                    <option value="nonwww">Non-WWW to WWW</option>
+                                    <option value="https">HTTP to HTTPS</option>
+                                    <option value="custom">Custom Redirect</option>
+                                </select>
+                            </div>
+
+                            <div id="domainFields" class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="sourceDomain" class="form-label">Source Domain</label>
+                                        <input type="text" class="form-control" id="sourceDomain" placeholder="example.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="targetDomain" class="form-label">Target Domain</label>
+                                        <input type="text" class="form-control" id="targetDomain" placeholder="newexample.com">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="urlFields" class="mb-3" style="display: none;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="sourceUrl" class="form-label">Source URL</label>
+                                        <input type="text" class="form-control" id="sourceUrl" placeholder="/old-page">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="targetUrl" class="form-label">Target URL</label>
+                                        <input type="text" class="form-control" id="targetUrl" placeholder="/new-page">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="redirectCode" class="form-label">Redirect Code</label>
+                                <select class="form-select" id="redirectCode">
+                                    <option value="301">301 (Permanent)</option>
+                                    <option value="302">302 (Temporary)</option>
+                                    <option value="307">307 (Temporary)</option>
+                                    <option value="308">308 (Permanent)</option>
+                                </select>
+                                <div class="form-text">Choose the appropriate HTTP status code for your redirect</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="additionalOptions" class="form-label">Additional Options</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="preserveQueryString" checked>
+                                    <label class="form-check-label" for="preserveQueryString">
+                                        Preserve Query String
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="forceRedirect">
+                                    <label class="form-check-label" for="forceRedirect">
+                                        Force Redirect
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Generate Redirect</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Generated Redirect Rules</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" id="downloadButton">
+                                <i class="fas fa-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="redirectResults">
+                            <div class="mb-3">
+                                <h6>Redirect Rules</h6>
+                                <div class="position-relative">
+                                    <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2" id="copyButton">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                    <pre><code id="redirectOutput" class="language-apache"></code></pre>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Explanation</h6>
+                                <div id="redirectExplanation" class="alert alert-info"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Common Redirect Scenarios</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Domain changes</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>URL structure updates</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>WWW to non-WWW</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>HTTP to HTTPS</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Custom redirects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/apache.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/developer-tools/htaccess-redirect-generator.js"></script>
+</body>
+</html> 

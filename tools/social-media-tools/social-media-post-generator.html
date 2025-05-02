@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post Generator - Free Post Creation Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Generate engaging social media posts with customizable templates. Free, easy to use post generator for Instagram, Twitter, and Facebook.">
+    <meta name="keywords" content="social media post generator, post creator, instagram post, twitter post, facebook post">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Social Media Post Generator - Free Post Creation Tool">
+    <meta property="og:description" content="Generate engaging social media posts with customizable templates. Free, easy to use post generator for Instagram, Twitter, and Facebook.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/social-media-tools/social-media-post-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Social Media Post Generator - Free Post Creation Tool">
+    <meta name="twitter:description" content="Generate engaging social media posts with customizable templates. Free, easy to use post generator for Instagram, Twitter, and Facebook.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Social Media Post Generator</h1>
+                <p class="lead text-center mb-4">Create engaging social media posts with customizable templates</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="postForm">
+                            <div class="mb-4">
+                                <label for="platform" class="form-label">Select Platform</label>
+                                <select class="form-select" id="platform" required>
+                                    <option value="">Choose a platform...</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="facebook">Facebook</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="postType" class="form-label">Post Type</label>
+                                <select class="form-select" id="postType" required>
+                                    <option value="">Choose a post type...</option>
+                                    <option value="promotional">Promotional</option>
+                                    <option value="informative">Informative</option>
+                                    <option value="engagement">Engagement</option>
+                                    <option value="story">Story</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="keywords" class="form-label">Keywords</label>
+                                <input type="text" class="form-control" id="keywords" placeholder="Enter keywords (e.g., product launch, sale, event)">
+                                <small class="form-text text-muted">Enter keywords separated by commas</small>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="tone" class="form-label">Tone</label>
+                                <select class="form-select" id="tone" required>
+                                    <option value="">Choose a tone...</option>
+                                    <option value="professional">Professional</option>
+                                    <option value="casual">Casual</option>
+                                    <option value="friendly">Friendly</option>
+                                    <option value="humorous">Humorous</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="callToAction" class="form-label">Call to Action</label>
+                                <select class="form-select" id="callToAction">
+                                    <option value="">Choose a call to action...</option>
+                                    <option value="shop">Shop Now</option>
+                                    <option value="learn">Learn More</option>
+                                    <option value="follow">Follow Us</option>
+                                    <option value="share">Share This</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-magic me-2"></i>Generate Post
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="card mt-4 shadow-sm d-none" id="resultsCard">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Generated Post</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary me-2" id="copyBtn">
+                                <i class="fas fa-copy me-2"></i>Copy
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" id="exportBtn">
+                                <i class="fas fa-download me-2"></i>Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label class="form-label">Post Content</label>
+                            <textarea class="form-control" id="postContent" rows="5" readonly></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Suggested Hashtags</label>
+                            <div class="d-flex flex-wrap gap-2" id="hashtagsContainer">
+                                <!-- Hashtags will be added here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Social Media Post Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool helps you create engaging social media posts. Features include:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-pencil-alt text-info me-2"></i>Customizable post templates</li>
+                            <li class="mb-2"><i class="fas fa-hashtag text-info me-2"></i>Automatic hashtag generation</li>
+                            <li class="mb-2"><i class="fas fa-copy text-info me-2"></i>Copy post to clipboard</li>
+                            <li class="mb-2"><i class="fas fa-download text-info me-2"></i>Export post to file</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your target platform</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose appropriate post type</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add relevant keywords</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select desired tone</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/social-media-tools/social-media-post-generator.js"></script>
+</body>
+</html> 

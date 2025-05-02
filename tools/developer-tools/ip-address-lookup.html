@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Address Lookup - Free Developer Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Look up detailed information about IP addresses, including location, ISP, and network details. A useful tool for network administrators and developers.">
+    <meta name="keywords" content="ip lookup, ip address, ip geolocation, ip information, network tool, developer tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="IP Address Lookup - Free Developer Tool">
+    <meta property="og:description" content="Look up detailed information about IP addresses, including location, ISP, and network details. A useful tool for network administrators and developers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/developer-tools/ip-address-lookup.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IP Address Lookup - Free Developer Tool">
+    <meta name="twitter:description" content="Look up detailed information about IP addresses, including location, ISP, and network details. A useful tool for network administrators and developers.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">IP Address Lookup</h1>
+                <p class="lead text-center mb-4">Get detailed information about IP addresses</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="ipLookupForm">
+                            <div class="mb-4">
+                                <label for="ipAddress" class="form-label">IP Address</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="ipAddress" placeholder="Enter IP address (e.g., 8.8.8.8)" required>
+                                    <button type="button" class="btn btn-outline-primary" id="lookupButton">
+                                        <i class="fas fa-search me-1"></i>Lookup
+                                    </button>
+                                </div>
+                                <div class="form-text">Enter a valid IPv4 or IPv6 address</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="autoLookup" checked>
+                                    <label class="form-check-label" for="autoLookup">
+                                        Auto-lookup my IP address
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">IP Address Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="loadingSpinner" class="text-center" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Looking up IP address information...</p>
+                        </div>
+
+                        <div id="lookupResults">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <h6>Basic Information</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th>IP Address</th>
+                                                    <td id="ipAddressResult"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <td id="ipType"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Hostname</th>
+                                                    <td id="hostname"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <h6>Location</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Country</th>
+                                                    <td id="country"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Region</th>
+                                                    <td id="region"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>City</th>
+                                                    <td id="city"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Coordinates</th>
+                                                    <td id="coordinates"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <h6>Network Information</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th>ISP</th>
+                                                    <td id="isp"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Organization</th>
+                                                    <td id="organization"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>ASN</th>
+                                                    <td id="asn"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <h6>Additional Information</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Timezone</th>
+                                                    <td id="timezone"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Postal Code</th>
+                                                    <td id="postalCode"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Continent</th>
+                                                    <td id="continent"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <h6>Map Location</h6>
+                                        <div id="map" class="border rounded" style="height: 300px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Use an IP Address Lookup?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Identify IP address location</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Get network information</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Track IP address details</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Verify IP address validity</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Network troubleshooting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Custom JS -->
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/developer-tools/ip-address-lookup.js"></script>
+</body>
+</html> 

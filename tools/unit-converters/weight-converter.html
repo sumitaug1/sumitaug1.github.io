@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter - Free Unit Conversion Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Convert weight measurements between different units including kilograms, pounds, ounces, grams, and more. Fast, accurate, and easy to use.">
+    <meta name="keywords" content="weight converter, mass converter, unit converter, kg to lbs, pounds to kilograms, measurement tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Weight Converter - Free Unit Conversion Tool">
+    <meta property="og:description" content="Convert weight measurements between different units including kilograms, pounds, ounces, grams, and more. Fast, accurate, and easy to use.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/unit-converters/weight-converter.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Weight Converter - Free Unit Conversion Tool">
+    <meta name="twitter:description" content="Convert weight measurements between different units including kilograms, pounds, ounces, grams, and more. Fast, accurate, and easy to use.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Weight Converter</h1>
+                <p class="lead text-center mb-4">Convert between different units of weight measurement</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="weightConverterForm">
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="fromValue" class="form-label">From</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="fromValue" placeholder="Enter value" step="any" required>
+                                        <select class="form-select" id="fromUnit">
+                                            <option value="kilograms">Kilograms (kg)</option>
+                                            <option value="grams">Grams (g)</option>
+                                            <option value="milligrams">Milligrams (mg)</option>
+                                            <option value="pounds">Pounds (lb)</option>
+                                            <option value="ounces">Ounces (oz)</option>
+                                            <option value="stones">Stones (st)</option>
+                                            <option value="metricTons">Metric Tons (t)</option>
+                                            <option value="usTons">US Tons (short ton)</option>
+                                            <option value="ukTons">UK Tons (long ton)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="toValue" class="form-label">To</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="toValue" readonly>
+                                        <select class="form-select" id="toUnit">
+                                            <option value="pounds">Pounds (lb)</option>
+                                            <option value="kilograms">Kilograms (kg)</option>
+                                            <option value="grams">Grams (g)</option>
+                                            <option value="milligrams">Milligrams (mg)</option>
+                                            <option value="ounces">Ounces (oz)</option>
+                                            <option value="stones">Stones (st)</option>
+                                            <option value="metricTons">Metric Tons (t)</option>
+                                            <option value="usTons">US Tons (short ton)</option>
+                                            <option value="ukTons">UK Tons (long ton)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12 text-center">
+                                    <button type="button" class="btn btn-primary me-2" id="convertBtn">
+                                        <i class="fas fa-exchange-alt me-2"></i>Convert
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="swapBtn">
+                                        <i class="fas fa-sync me-2"></i>Swap Units
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="alert alert-primary d-none" role="alert" id="conversionFormula">
+                                        <!-- Conversion formula will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Common Conversions Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Weight Conversions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">1 kilogram = 2.20462 pounds</li>
+                                    <li class="mb-2">1 pound = 0.453592 kilograms</li>
+                                    <li class="mb-2">1 ounce = 28.3495 grams</li>
+                                    <li class="mb-2">1 stone = 6.35029 kilograms</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">1 metric ton = 1000 kilograms</li>
+                                    <li class="mb-2">1 US ton = 907.185 kilograms</li>
+                                    <li class="mb-2">1 UK ton = 1016.05 kilograms</li>
+                                    <li class="mb-2">1 gram = 1000 milligrams</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter any numeric value in the "From" field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your input unit from the dropdown menu</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose your desired output unit</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "Convert" to see the result</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use "Swap Units" to quickly reverse the conversion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/unit-converters/weight-converter.js"></script>
+</body>
+</html> 

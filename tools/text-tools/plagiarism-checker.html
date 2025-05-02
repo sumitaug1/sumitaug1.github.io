@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker - Text Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tool-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        #inputText {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .stats-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .match-card {
+            margin-bottom: 1rem;
+            border-left: 4px solid #dc3545;
+        }
+        .match-card .card-body {
+            padding: 1rem;
+        }
+        .match-text {
+            background-color: #fff3cd;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+        .highlight {
+            background-color: #ffc107;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        .similarity-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        .similarity-fill {
+            height: 100%;
+            background-color: #dc3545;
+            transition: width 0.3s ease;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+        }
+        .loading .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container tool-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-copy me-2"></i>
+            Plagiarism Checker
+        </h1>
+
+        <div class="stats-container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-value" id="wordCount">0</div>
+                        <div class="stat-label">Words</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-value" id="charCount">0</div>
+                        <div class="stat-label">Characters</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-value" id="similarityScore">0%</div>
+                        <div class="stat-label">Similarity</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-box">
+                        <div class="stat-value" id="matchCount">0</div>
+                        <div class="stat-label">Matches Found</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputText" class="form-label">Enter Text to Check</label>
+            <textarea class="form-control" id="inputText" placeholder="Enter your text here..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+            <button class="btn btn-outline-secondary" id="clearBtn">
+                <i class="fas fa-trash me-2"></i>Clear
+            </button>
+            <button class="btn btn-primary" id="checkBtn">
+                <i class="fas fa-check me-2"></i>Check for Plagiarism
+            </button>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Analyzing text...</p>
+        </div>
+
+        <div id="resultsContainer">
+            <!-- Results will be displayed here -->
+        </div>
+
+        <div class="info-text">
+            <p><strong>Note:</strong> This tool uses a basic text comparison algorithm to detect potential plagiarism.</p>
+            <p><strong>Features:</strong> Word count, character count, similarity analysis, and match detection.</p>
+            <p><strong>Limitations:</strong> This is a basic plagiarism checker. For more accurate results, consider using professional plagiarism detection services.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const inputText = document.getElementById('inputText');
+        const checkBtn = document.getElementById('checkBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const loading = document.getElementById('loading');
+        const wordCountElement = document.getElementById('wordCount');
+        const charCountElement = document.getElementById('charCount');
+        const similarityScoreElement = document.getElementById('similarityScore');
+        const matchCountElement = document.getElementById('matchCount');
+
+        // Common phrases and sentences for comparison
+        const commonPhrases = [
+            "In today's world",
+            "As we all know",
+            "It is important to note that",
+            "In conclusion",
+            "The purpose of this",
+            "This paper will discuss",
+            "According to research",
+            "Studies have shown",
+            "It can be argued that",
+            "In recent years",
+            "The main objective",
+            "This essay will explore",
+            "It is evident that",
+            "The results indicate",
+            "Based on the findings",
+            "In order to",
+            "The following section",
+            "This chapter will",
+            "The research suggests",
+            "It is clear that"
+        ];
+
+        function countWords(text) {
+            return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+        }
+
+        function countCharacters(text) {
+            return text.length;
+        }
+
+        function findMatches(text) {
+            const matches = [];
+            let highlightedText = text;
+
+            commonPhrases.forEach(phrase => {
+                const regex = new RegExp(phrase, 'gi');
+                const matchesFound = [...text.matchAll(regex)];
+
+                matchesFound.forEach(match => {
+                    const startIndex = match.index;
+                    const endIndex = startIndex + phrase.length;
+                    const matchedText = text.substring(startIndex, endIndex);
+
+                    matches.push({
+                        phrase: matchedText,
+                        startIndex,
+                        endIndex
+                    });
+
+                    // Add highlight to the matched text
+                    highlightedText = highlightedText.substring(0, startIndex) +
+                        `<span class="highlight">${matchedText}</span>` +
+                        highlightedText.substring(endIndex);
+                });
+            });
+
+            return { matches, highlightedText };
+        }
+
+        function calculateSimilarity(text, matches) {
+            if (!text.trim()) return 0;
+
+            const totalWords = countWords(text);
+            if (totalWords === 0) return 0;
+
+            const matchedWords = matches.reduce((count, match) => {
+                return count + countWords(match.phrase);
+            }, 0);
+
+            return Math.round((matchedWords / totalWords) * 100);
+        }
+
+        function displayResults(matches, highlightedText, similarity) {
+            resultsContainer.innerHTML = '';
+
+            if (matches.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>
+                        No matches found!
+                    </div>
+                `;
+                return;
+            }
+
+            // Display similarity bar
+            resultsContainer.innerHTML += `
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Similarity Score</span>
+                        <span>${similarity}%</span>
+                    </div>
+                    <div class="similarity-bar">
+                        <div class="similarity-fill" style="width: ${similarity}%"></div>
+                    </div>
+                </div>
+            `;
+
+            // Display matches
+            matches.forEach((match, index) => {
+                const card = document.createElement('div');
+                card.className = 'card match-card';
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">Match ${index + 1}</h5>
+                        <div class="match-text">${match.phrase}</div>
+                        <p class="card-text small text-muted">
+                            Found at position ${match.startIndex}
+                        </p>
+                    </div>
+                `;
+                resultsContainer.appendChild(card);
+            });
+
+            // Update input text with highlights
+            inputText.innerHTML = highlightedText;
+        }
+
+        function updateStats(text, matches, similarity) {
+            wordCountElement.textContent = countWords(text);
+            charCountElement.textContent = countCharacters(text);
+            similarityScoreElement.textContent = `${similarity}%`;
+            matchCountElement.textContent = matches.length;
+        }
+
+        checkBtn.addEventListener('click', () => {
+            const text = inputText.value;
+            loading.style.display = 'block';
+            resultsContainer.innerHTML = '';
+
+            setTimeout(() => {
+                const { matches, highlightedText } = findMatches(text);
+                const similarity = calculateSimilarity(text, matches);
+                
+                displayResults(matches, highlightedText, similarity);
+                updateStats(text, matches, similarity);
+                loading.style.display = 'none';
+            }, 1000);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            resultsContainer.innerHTML = '';
+            wordCountElement.textContent = '0';
+            charCountElement.textContent = '0';
+            similarityScoreElement.textContent = '0%';
+            matchCountElement.textContent = '0';
+        });
+
+        // Initialize stats
+        updateStats('', [], 0);
+    </script>
+</body>
+</html> 

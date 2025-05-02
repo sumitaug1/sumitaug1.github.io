@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Address Generator - Generate Random Addresses | Multi-Tools Hub</title>
+    <meta name="description" content="Generate realistic fake addresses for testing purposes. Create random street addresses, cities, states, and postal codes with our free fake address generator tool.">
+    <meta name="keywords" content="fake address generator, random address generator, test address generator, dummy address creator, sample address generator">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Fake Address Generator - Generate Random Addresses">
+    <meta property="og:description" content="Generate realistic fake addresses for testing purposes. Create random street addresses, cities, states, and postal codes with our free fake address generator tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/fake-address-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fake Address Generator - Generate Random Addresses">
+    <meta name="twitter:description" content="Generate realistic fake addresses for testing purposes. Create random street addresses, cities, states, and postal codes with our free fake address generator tool.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Fake Address Generator</h1>
+                <p class="lead text-center mb-4">Generate realistic random addresses for testing purposes</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Main Tool Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <!-- Generator Options -->
+                        <div class="generator-options mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="country" class="form-label">Country</label>
+                                    <select class="form-select" id="country">
+                                        <option value="US">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="AU">Australia</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="addressCount" class="form-label">Number of Addresses</label>
+                                    <select class="form-select" id="addressCount">
+                                        <option value="1">1 Address</option>
+                                        <option value="5">5 Addresses</option>
+                                        <option value="10">10 Addresses</option>
+                                        <option value="20">20 Addresses</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <div class="text-center mb-4">
+                            <button class="btn btn-primary btn-lg" id="generateBtn">
+                                <i class="fas fa-map-marker-alt me-2"></i>Generate Addresses
+                            </button>
+                        </div>
+
+                        <!-- Results Section -->
+                        <div id="resultsSection" style="display: none;">
+                            <div class="alert alert-success" role="alert">
+                                <i class="fas fa-check-circle me-2"></i>Addresses generated successfully!
+                            </div>
+                            
+                            <div class="addresses-container" id="addressesContainer">
+                                <!-- Generated addresses will be inserted here -->
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-center gap-2 mt-4">
+                                <button class="btn btn-outline-primary" id="copyBtn">
+                                    <i class="fas fa-copy me-2"></i>Copy All
+                                </button>
+                                <button class="btn btn-outline-success" id="downloadBtn">
+                                    <i class="fas fa-download me-2"></i>Download CSV
+                                </button>
+                                <button class="btn btn-outline-secondary" id="clearBtn">
+                                    <i class="fas fa-trash me-2"></i>Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Fake Address Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Generate realistic fake addresses for testing purposes:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-globe text-info me-2"></i>Multiple country formats supported</li>
+                            <li class="mb-2"><i class="fas fa-list text-info me-2"></i>Generate multiple addresses at once</li>
+                            <li class="mb-2"><i class="fas fa-file-csv text-info me-2"></i>Export to CSV format</li>
+                            <li class="mb-2"><i class="fas fa-check-double text-info me-2"></i>Realistic and properly formatted</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your desired country for proper formatting</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Generate multiple addresses to save time</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the copy feature for quick clipboard access</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Download as CSV for spreadsheet compatibility</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/fake-address-generator.js"></script>
+</body>
+</html> 

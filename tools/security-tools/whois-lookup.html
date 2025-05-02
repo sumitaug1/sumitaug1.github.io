@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whois Lookup - Free Domain Information Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Look up domain registration and ownership information. Free, easy to use Whois lookup tool with comprehensive domain details.">
+    <meta name="keywords" content="whois lookup, domain lookup, domain information, whois checker, domain checker">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Whois Lookup - Free Domain Information Tool">
+    <meta property="og:description" content="Look up domain registration and ownership information. Free, easy to use Whois lookup tool with comprehensive domain details.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/security-tools/whois-lookup.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Whois Lookup - Free Domain Information Tool">
+    <meta name="twitter:description" content="Look up domain registration and ownership information. Free, easy to use Whois lookup tool with comprehensive domain details.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Whois Lookup</h1>
+                <p class="lead text-center mb-4">Look up domain registration and ownership information</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="whoisLookupForm">
+                            <div class="mb-4">
+                                <label for="domain" class="form-label">Enter Domain</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="domain" placeholder="Enter domain (e.g., example.com)" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="lookupBtn">
+                                        <i class="fas fa-search me-2"></i>Lookup Domain
+                                    </button>
+                                </div>
+                                <small class="form-text text-muted">Enter domain without http:// or https://</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="card mt-4 shadow-sm d-none" id="resultsCard">
+                    <div class="card-header">
+                        <h5 class="mb-0">Domain Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Domain Status -->
+                        <div class="alert mb-4" id="statusAlert" role="alert">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <span id="statusText">Checking domain information...</span>
+                        </div>
+
+                        <!-- Domain Details -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Registration Details</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>Domain Name:</strong> <span id="domainName"></span></li>
+                                    <li class="mb-2"><strong>Registrar:</strong> <span id="registrar"></span></li>
+                                    <li class="mb-2"><strong>Creation Date:</strong> <span id="creationDate"></span></li>
+                                    <li class="mb-2"><strong>Expiration Date:</strong> <span id="expirationDate"></span></li>
+                                    <li class="mb-2"><strong>Updated Date:</strong> <span id="updatedDate"></span></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Contact Information</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>Registrant:</strong> <span id="registrant"></span></li>
+                                    <li class="mb-2"><strong>Admin Contact:</strong> <span id="adminContact"></span></li>
+                                    <li class="mb-2"><strong>Technical Contact:</strong> <span id="techContact"></span></li>
+                                    <li class="mb-2"><strong>Name Servers:</strong> <span id="nameServers"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Raw Whois Data -->
+                        <div class="mt-4">
+                            <h6 class="mb-3">Raw Whois Data</h6>
+                            <div id="rawWhois" class="border rounded p-3 bg-light">
+                                <pre class="mb-0"><code id="whoisText"></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Whois Lookup</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Whois is a protocol used to query databases that store information about registered domain names. This tool helps you find:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Domain registration details</li>
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Domain ownership information</li>
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Registration and expiration dates</li>
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Name server information</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter the domain name without http:// or https://</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>View registration and ownership details</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Check domain expiration dates</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Access raw Whois data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/security-tools/whois-lookup.js"></script>
+</body>
+</html> 

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter - Free Developer Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Format and validate your JSON data. Beautify, minify, and validate JSON with syntax highlighting and error detection.">
+    <meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, developer tool, json tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Highlight.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JSON Formatter - Free Developer Tool">
+    <meta property="og:description" content="Format and validate your JSON data. Beautify, minify, and validate JSON with syntax highlighting and error detection.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/developer-tools/json-formatter.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSON Formatter - Free Developer Tool">
+    <meta name="twitter:description" content="Format and validate your JSON data. Beautify, minify, and validate JSON with syntax highlighting and error detection.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">JSON Formatter</h1>
+                <p class="lead text-center mb-4">Format, validate, and beautify your JSON data with syntax highlighting</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="jsonFormatterForm">
+                            <div class="mb-3">
+                                <label for="jsonInput" class="form-label">JSON Input</label>
+                                <textarea class="form-control" id="jsonInput" rows="10" placeholder='{"example": "Enter your JSON here"}' required></textarea>
+                                <div class="form-text">Paste your JSON data to format and validate</div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="formatType" class="form-label">Format Type</label>
+                                    <select class="form-select" id="formatType">
+                                        <option value="beautify">Beautify</option>
+                                        <option value="minify">Minify</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="indentSize" class="form-label">Indent Size</label>
+                                    <select class="form-select" id="indentSize">
+                                        <option value="2">2 Spaces</option>
+                                        <option value="4">4 Spaces</option>
+                                        <option value="8">8 Spaces</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Format JSON</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
+                                <button type="button" class="btn btn-outline-primary ms-2" id="copyButton">Copy to Clipboard</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Formatted JSON</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" id="downloadButton">
+                                <i class="fas fa-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="loadingSpinner" class="text-center" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Formatting JSON...</p>
+                        </div>
+
+                        <div id="formatResults">
+                            <div class="mb-3">
+                                <h6>Validation Status</h6>
+                                <div id="validationStatus"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Formatted Output</h6>
+                                <div class="position-relative">
+                                    <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2" id="copyFormattedButton">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                    <pre><code id="formattedOutput" class="language-json"></code></pre>
+                                </div>
+                            </div>
+
+                            <div id="errorDetails" class="alert alert-danger" style="display: none;">
+                                <h6>Error Details</h6>
+                                <div id="errorMessage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Use JSON Formatter?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Validate JSON syntax</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Improve readability</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Detect errors easily</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimize JSON size</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enhance development workflow</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/json.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/developer-tools/json-formatter.js"></script>
+</body>
+</html> 

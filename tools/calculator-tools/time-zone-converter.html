@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Zone Converter - Calculator Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .calculator-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .calculator {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .time-input {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .time-input select,
+        .time-input input {
+            flex: 1;
+        }
+        .time-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #198754;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .time-zone-select {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .time-zone-flag {
+            width: 24px;
+            height: 16px;
+            border: 1px solid #dee2e6;
+        }
+        .meeting-planner {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .time-slots {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem;
+        }
+        .time-slot {
+            min-width: 100px;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .time-slot.working {
+            background-color: #d1e7dd;
+        }
+        .time-slot.non-working {
+            background-color: #f8d7da;
+        }
+        .favorites-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .favorite-item {
+            background-color: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .favorite-item:hover {
+            background-color: #e9ecef;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container calculator-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-clock me-2"></i>
+            Time Zone Converter
+        </h1>
+
+        <div class="calculator">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="time-zone-select mb-3">
+                        <img src="https://flagcdn.com/w20/us.png" class="time-zone-flag" id="fromFlag">
+                        <select class="form-select" id="fromTimeZone">
+                            <!-- Time zones will be populated by JavaScript -->
+                        </select>
+                        <i class="fas fa-star favorite-btn" onclick="toggleFavorite('from')"></i>
+                    </div>
+                    <div class="time-input">
+                        <input type="time" class="form-control" id="fromTime">
+                        <select class="form-select" id="fromAmPm" style="width: 80px;">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        <input type="date" class="form-control" id="fromDate">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="time-zone-select mb-3">
+                        <img src="https://flagcdn.com/w20/gb.png" class="time-zone-flag" id="toFlag">
+                        <select class="form-select" id="toTimeZone">
+                            <!-- Time zones will be populated by JavaScript -->
+                        </select>
+                        <i class="fas fa-star favorite-btn" onclick="toggleFavorite('to')"></i>
+                    </div>
+                    <div class="time-input">
+                        <input type="time" class="form-control" id="toTime" readonly>
+                        <select class="form-select" id="toAmPm" style="width: 80px;" disabled>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        <input type="date" class="form-control" id="toDate" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-display" id="timeDisplay">
+                Converting...
+            </div>
+
+            <div class="favorites-list" id="favoritesList">
+                <!-- Favorite time zones will be populated here -->
+            </div>
+
+            <div class="meeting-planner">
+                <h5 class="mb-3">Meeting Planner</h5>
+                <div class="time-slots" id="timeSlots">
+                    <!-- Time slots will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div class="info-text">
+            <p><strong>About Time Zone Conversion:</strong></p>
+            <ul>
+                <li>Select your source and target time zones</li>
+                <li>Enter the time and date you want to convert</li>
+                <li>The converted time will update automatically</li>
+                <li>Use the meeting planner to find suitable meeting times</li>
+                <li>Save your favorite time zones for quick access</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/calculator-tools/time-zone-converter.js"></script>
+</body>
+</html> </html> 

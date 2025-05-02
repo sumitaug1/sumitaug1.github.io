@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery Number Generator - Generate Random Lottery Numbers | Multi-Tools Hub</title>
+    <meta name="description" content="Generate random lottery numbers for various lottery games. Our lottery number generator creates unique combinations for Powerball, Mega Millions, and more.">
+    <meta name="keywords" content="lottery number generator, random lottery numbers, powerball numbers, mega millions numbers, lottery combinations">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Lottery Number Generator - Generate Random Lottery Numbers">
+    <meta property="og:description" content="Generate random lottery numbers for various lottery games. Our lottery number generator creates unique combinations for Powerball, Mega Millions, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/lottery-number-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lottery Number Generator - Generate Random Lottery Numbers">
+    <meta name="twitter:description" content="Generate random lottery numbers for various lottery games. Our lottery number generator creates unique combinations for Powerball, Mega Millions, and more.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Lottery Number Generator</h1>
+                <p class="lead text-center mb-4">Generate random numbers for various lottery games</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Generator Form Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form id="generatorForm">
+                            <!-- Lottery Type -->
+                            <div class="mb-4">
+                                <label for="lotteryType" class="form-label">Select Lottery Type</label>
+                                <select class="form-select" id="lotteryType" required>
+                                    <option value="powerball">Powerball</option>
+                                    <option value="megaMillions">Mega Millions</option>
+                                    <option value="euroMillions">EuroMillions</option>
+                                    <option value="lotto">Lotto</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+
+                            <!-- Custom Settings (initially hidden) -->
+                            <div id="customSettings" class="mb-4" style="display: none;">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="minNumber" class="form-label">Minimum Number</label>
+                                        <input type="number" class="form-control" id="minNumber" min="1" value="1">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="maxNumber" class="form-label">Maximum Number</label>
+                                        <input type="number" class="form-control" id="maxNumber" min="1" value="69">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="numberCount" class="form-label">Number of Numbers</label>
+                                        <input type="number" class="form-control" id="numberCount" min="1" value="5">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="specialNumber" class="form-label">Special Number (Optional)</label>
+                                        <input type="number" class="form-control" id="specialNumber" min="1" value="1">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Number of Sets -->
+                            <div class="mb-4">
+                                <label for="setCount" class="form-label">Number of Sets</label>
+                                <input type="number" class="form-control" id="setCount" min="1" max="10" value="1" required>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary flex-grow-1">
+                                    <i class="fas fa-random me-2"></i>Generate Numbers
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary flex-grow-1" id="resetBtn">
+                                    <i class="fas fa-redo me-2"></i>Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="card shadow-sm mb-4" id="resultsCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Generated Numbers</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="resultsContainer">
+                            <!-- Results will be added here dynamically -->
+                        </div>
+                        <div class="mt-3">
+                            <button type="button" class="btn btn-outline-primary" id="downloadBtn">
+                                <i class="fas fa-download me-2"></i>Download Numbers
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Lottery Number Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool helps you generate random lottery numbers for various games. Features include:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-dice text-info me-2"></i>Multiple lottery types</li>
+                            <li class="mb-2"><i class="fas fa-cog text-info me-2"></i>Custom number settings</li>
+                            <li class="mb-2"><i class="fas fa-list text-info me-2"></i>Multiple number sets</li>
+                            <li class="mb-2"><i class="fas fa-file-pdf text-info me-2"></i>PDF download</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your preferred lottery type</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Customize number ranges if needed</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Generate multiple sets for variety</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Download your numbers for future reference</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/lottery-number-generator.js"></script>
+</body>
+</html> 

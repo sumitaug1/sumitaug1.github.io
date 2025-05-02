@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSL Certificate Checker - Free SSL Certificate Validation Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Check SSL certificate details for any domain. Free, easy to use SSL certificate checker tool with comprehensive certificate information.">
+    <meta name="keywords" content="ssl certificate checker, ssl validator, ssl checker, certificate checker, ssl tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="SSL Certificate Checker - Free SSL Certificate Validation Tool">
+    <meta property="og:description" content="Check SSL certificate details for any domain. Free, easy to use SSL certificate checker tool with comprehensive certificate information.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/security-tools/ssl-certificate-checker.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SSL Certificate Checker - Free SSL Certificate Validation Tool">
+    <meta name="twitter:description" content="Check SSL certificate details for any domain. Free, easy to use SSL certificate checker tool with comprehensive certificate information.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">SSL Certificate Checker</h1>
+                <p class="lead text-center mb-4">Check SSL certificate details for any domain</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="sslCheckerForm">
+                            <div class="mb-4">
+                                <label for="domain" class="form-label">Enter Domain</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="domain" placeholder="Enter domain (e.g., example.com)" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="checkBtn">
+                                        <i class="fas fa-search me-2"></i>Check Certificate
+                                    </button>
+                                </div>
+                                <small class="form-text text-muted">Enter domain without http:// or https://</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="card mt-4 shadow-sm d-none" id="resultsCard">
+                    <div class="card-header">
+                        <h5 class="mb-0">Certificate Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Certificate Status -->
+                        <div class="alert mb-4" id="statusAlert" role="alert">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <span id="statusText">Checking certificate status...</span>
+                        </div>
+
+                        <!-- Certificate Details -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Certificate Details</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>Common Name:</strong> <span id="commonName"></span></li>
+                                    <li class="mb-2"><strong>Issuer:</strong> <span id="issuer"></span></li>
+                                    <li class="mb-2"><strong>Valid From:</strong> <span id="validFrom"></span></li>
+                                    <li class="mb-2"><strong>Valid Until:</strong> <span id="validUntil"></span></li>
+                                    <li class="mb-2"><strong>Serial Number:</strong> <span id="serialNumber"></span></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Additional Information</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>Protocol:</strong> <span id="protocol"></span></li>
+                                    <li class="mb-2"><strong>Cipher:</strong> <span id="cipher"></span></li>
+                                    <li class="mb-2"><strong>Key Size:</strong> <span id="keySize"></span></li>
+                                    <li class="mb-2"><strong>Signature Algorithm:</strong> <span id="signatureAlgorithm"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Certificate Chain -->
+                        <div class="mt-4">
+                            <h6 class="mb-3">Certificate Chain</h6>
+                            <div id="certificateChain" class="border rounded p-3 bg-light">
+                                <pre class="mb-0"><code id="chainText"></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About SSL Certificates</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>SSL (Secure Sockets Layer) certificates are digital certificates that authenticate the identity of a website and enable encrypted connections. This tool helps you verify:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Certificate validity and expiration</li>
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Certificate issuer and chain</li>
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Encryption details</li>
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Security protocols</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter the domain name without http:// or https://</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Check certificate validity and expiration dates</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Verify certificate issuer and chain</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review encryption and security details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/security-tools/ssl-certificate-checker.js"></script>
+</body>
+</html> 

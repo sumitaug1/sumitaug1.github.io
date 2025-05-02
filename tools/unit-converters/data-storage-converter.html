@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Storage Converter - Free Unit Conversion Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Convert data storage measurements between different units including bytes, kilobytes, megabytes, gigabytes, terabytes, and more. Fast, accurate, and easy to use.">
+    <meta name="keywords" content="data storage converter, unit converter, bytes to kilobytes, megabytes to gigabytes, storage measurement tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Data Storage Converter - Free Unit Conversion Tool">
+    <meta property="og:description" content="Convert data storage measurements between different units including bytes, kilobytes, megabytes, gigabytes, terabytes, and more. Fast, accurate, and easy to use.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/unit-converters/data-storage-converter.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data Storage Converter - Free Unit Conversion Tool">
+    <meta name="twitter:description" content="Convert data storage measurements between different units including bytes, kilobytes, megabytes, gigabytes, terabytes, and more. Fast, accurate, and easy to use.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Data Storage Converter</h1>
+                <p class="lead text-center mb-4">Convert between different units of data storage measurement</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="dataStorageConverterForm">
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="fromValue" class="form-label">From</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="fromValue" placeholder="Enter value" step="any" required>
+                                        <select class="form-select" id="fromUnit">
+                                            <option value="bytes">Bytes (B)</option>
+                                            <option value="kilobytes">Kilobytes (KB)</option>
+                                            <option value="megabytes">Megabytes (MB)</option>
+                                            <option value="gigabytes">Gigabytes (GB)</option>
+                                            <option value="terabytes">Terabytes (TB)</option>
+                                            <option value="petabytes">Petabytes (PB)</option>
+                                            <option value="exabytes">Exabytes (EB)</option>
+                                            <option value="zettabytes">Zettabytes (ZB)</option>
+                                            <option value="yottabytes">Yottabytes (YB)</option>
+                                            <option value="kibibytes">Kibibytes (KiB)</option>
+                                            <option value="mebibytes">Mebibytes (MiB)</option>
+                                            <option value="gibibytes">Gibibytes (GiB)</option>
+                                            <option value="tebibytes">Tebibytes (TiB)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="toValue" class="form-label">To</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="toValue" readonly>
+                                        <select class="form-select" id="toUnit">
+                                            <option value="megabytes">Megabytes (MB)</option>
+                                            <option value="bytes">Bytes (B)</option>
+                                            <option value="kilobytes">Kilobytes (KB)</option>
+                                            <option value="gigabytes">Gigabytes (GB)</option>
+                                            <option value="terabytes">Terabytes (TB)</option>
+                                            <option value="petabytes">Petabytes (PB)</option>
+                                            <option value="exabytes">Exabytes (EB)</option>
+                                            <option value="zettabytes">Zettabytes (ZB)</option>
+                                            <option value="yottabytes">Yottabytes (YB)</option>
+                                            <option value="kibibytes">Kibibytes (KiB)</option>
+                                            <option value="mebibytes">Mebibytes (MiB)</option>
+                                            <option value="gibibytes">Gibibytes (GiB)</option>
+                                            <option value="tebibytes">Tebibytes (TiB)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12 text-center">
+                                    <button type="button" class="btn btn-primary me-2" id="convertBtn">
+                                        <i class="fas fa-exchange-alt me-2"></i>Convert
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="swapBtn">
+                                        <i class="fas fa-sync me-2"></i>Swap Units
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="alert alert-primary d-none" role="alert" id="conversionFormula">
+                                        <!-- Conversion formula will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Common Conversions Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Data Storage Conversions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">1 KB = 1,024 bytes (Binary)</li>
+                                    <li class="mb-2">1 MB = 1,024 KB</li>
+                                    <li class="mb-2">1 GB = 1,024 MB</li>
+                                    <li class="mb-2">1 TB = 1,024 GB</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">1 KiB = 1,024 bytes</li>
+                                    <li class="mb-2">1 MiB = 1,024 KiB</li>
+                                    <li class="mb-2">1 GiB = 1,024 MiB</li>
+                                    <li class="mb-2">1 TiB = 1,024 GiB</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter any numeric value in the "From" field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your input unit from the dropdown menu</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose your desired output unit</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "Convert" to see the result</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use "Swap Units" to quickly reverse the conversion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/unit-converters/data-storage-converter.js"></script>
+</body>
+</html> 

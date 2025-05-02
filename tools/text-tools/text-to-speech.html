@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech - Text Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .options-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .option-group {
+            flex: 1;
+        }
+        #inputText {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .play-btn {
+            flex: 1;
+        }
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .volume-slider {
+            flex: 1;
+        }
+        .rate-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .rate-slider {
+            flex: 1;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .status {
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container tool-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-volume-up me-2"></i>
+            Text to Speech
+        </h1>
+
+        <div class="options-container">
+            <div class="option-group">
+                <label for="voiceSelect" class="form-label">Voice</label>
+                <select class="form-select" id="voiceSelect">
+                    <option value="">Loading voices...</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label for="languageSelect" class="form-label">Language</label>
+                <select class="form-select" id="languageSelect">
+                    <option value="en-US">English (US)</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="es-ES">Spanish</option>
+                    <option value="fr-FR">French</option>
+                    <option value="de-DE">German</option>
+                    <option value="it-IT">Italian</option>
+                    <option value="ja-JP">Japanese</option>
+                    <option value="ko-KR">Korean</option>
+                    <option value="zh-CN">Chinese (Simplified)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputText" class="form-label">Text to Speak</label>
+            <textarea class="form-control" id="inputText" placeholder="Enter text to convert to speech..."></textarea>
+        </div>
+
+        <div class="controls">
+            <div class="volume-control">
+                <i class="fas fa-volume-down"></i>
+                <input type="range" class="form-range volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+                <i class="fas fa-volume-up"></i>
+            </div>
+            <div class="rate-control">
+                <i class="fas fa-turtle"></i>
+                <input type="range" class="form-range rate-slider" id="rateSlider" min="0.5" max="2" step="0.1" value="1">
+                <i class="fas fa-rabbit"></i>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-outline-secondary" id="clearBtn">
+                <i class="fas fa-trash me-2"></i>Clear
+            </button>
+            <button class="btn btn-primary play-btn" id="playBtn">
+                <i class="fas fa-play me-2"></i>Play
+            </button>
+            <button class="btn btn-danger" id="stopBtn" disabled>
+                <i class="fas fa-stop me-2"></i>Stop
+            </button>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="info-text">
+            <p><strong>Note:</strong> This tool uses the Web Speech API, which is supported in most modern browsers.</p>
+            <p><strong>Volume:</strong> Adjust the volume of the speech (0-100%)</p>
+            <p><strong>Rate:</strong> Adjust the speaking rate (0.5x - 2x)</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const inputText = document.getElementById('inputText');
+        const voiceSelect = document.getElementById('voiceSelect');
+        const languageSelect = document.getElementById('languageSelect');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const rateSlider = document.getElementById('rateSlider');
+        const playBtn = document.getElementById('playBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const status = document.getElementById('status');
+
+        let speechSynthesis = window.speechSynthesis;
+        let voices = [];
+        let currentUtterance = null;
+
+        function loadVoices() {
+            voices = speechSynthesis.getVoices();
+            voiceSelect.innerHTML = '';
+            
+            // Filter voices by selected language
+            const selectedLanguage = languageSelect.value;
+            const filteredVoices = voices.filter(voice => voice.lang.startsWith(selectedLanguage));
+            
+            if (filteredVoices.length === 0) {
+                voiceSelect.innerHTML = '<option value="">No voices available for this language</option>';
+                return;
+            }
+
+            filteredVoices.forEach(voice => {
+                const option = document.createElement('option');
+                option.value = voice.name;
+                option.textContent = `${voice.name} (${voice.lang})`;
+                voiceSelect.appendChild(option);
+            });
+        }
+
+        function speak() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+
+            const text = inputText.value.trim();
+            if (!text) {
+                status.textContent = 'Please enter some text to speak';
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice
+            const selectedVoice = voices.find(voice => voice.name === voiceSelect.value);
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+
+            // Set properties
+            utterance.volume = parseFloat(volumeSlider.value);
+            utterance.rate = parseFloat(rateSlider.value);
+
+            // Event handlers
+            utterance.onstart = () => {
+                playBtn.disabled = true;
+                stopBtn.disabled = false;
+                status.textContent = 'Speaking...';
+            };
+
+            utterance.onend = () => {
+                playBtn.disabled = false;
+                stopBtn.disabled = true;
+                status.textContent = 'Speech completed';
+            };
+
+            utterance.onerror = (event) => {
+                playBtn.disabled = false;
+                stopBtn.disabled = true;
+                status.textContent = `Error: ${event.error}`;
+            };
+
+            currentUtterance = utterance;
+            speechSynthesis.speak(utterance);
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                playBtn.disabled = false;
+                stopBtn.disabled = true;
+                status.textContent = 'Speech stopped';
+            }
+        }
+
+        // Event listeners
+        speechSynthesis.onvoiceschanged = loadVoices;
+
+        languageSelect.addEventListener('change', loadVoices);
+
+        playBtn.addEventListener('click', speak);
+
+        stopBtn.addEventListener('click', stopSpeaking);
+
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            status.textContent = '';
+        });
+
+        // Initialize
+        loadVoices();
+    </script>
+</body>
+</html> 

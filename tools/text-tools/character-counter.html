@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter - Text Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .stats-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        #textInput {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .limit-input {
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container tool-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-text-width me-2"></i>
+            Character Counter
+        </h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <div class="stat-value" id="charCount">0</div>
+                    <div class="stat-label">Characters</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <div class="stat-value" id="charNoSpaceCount">0</div>
+                    <div class="stat-label">Characters (no spaces)</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <div class="stat-value" id="remainingCount">0</div>
+                    <div class="stat-label">Remaining</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Character Limit</span>
+                <input type="number" class="form-control limit-input" id="charLimit" value="280" min="1">
+                <button class="btn btn-outline-secondary" type="button" id="resetLimit">
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-secondary" id="clearBtn">
+                <i class="fas fa-trash me-2"></i>Clear
+            </button>
+            <button class="btn btn-outline-primary" id="copyBtn">
+                <i class="fas fa-copy me-2"></i>Copy
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const textInput = document.getElementById('textInput');
+        const charCount = document.getElementById('charCount');
+        const charNoSpaceCount = document.getElementById('charNoSpaceCount');
+        const remainingCount = document.getElementById('remainingCount');
+        const charLimit = document.getElementById('charLimit');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const resetLimit = document.getElementById('resetLimit');
+
+        function updateCounts() {
+            const text = textInput.value;
+            const limit = parseInt(charLimit.value) || 0;
+            
+            // Character count
+            const count = text.length;
+            charCount.textContent = count;
+            
+            // Character count (no spaces)
+            const noSpaceCount = text.replace(/\s/g, '').length;
+            charNoSpaceCount.textContent = noSpaceCount;
+            
+            // Remaining count
+            const remaining = limit - count;
+            remainingCount.textContent = remaining;
+            
+            // Update colors based on limit
+            if (remaining < 0) {
+                remainingCount.style.color = '#dc3545';
+            } else if (remaining < limit * 0.2) {
+                remainingCount.style.color = '#ffc107';
+            } else {
+                remainingCount.style.color = '#0d6efd';
+            }
+        }
+
+        textInput.addEventListener('input', updateCounts);
+        charLimit.addEventListener('input', updateCounts);
+
+        clearBtn.addEventListener('click', () => {
+            textInput.value = '';
+            updateCounts();
+        });
+
+        resetLimit.addEventListener('click', () => {
+            charLimit.value = '280';
+            updateCounts();
+        });
+
+        copyBtn.addEventListener('click', () => {
+            textInput.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        });
+
+        // Initialize counts
+        updateCounts();
+    </script>
+</body>
+</html> 

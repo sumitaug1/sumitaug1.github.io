@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text - Text Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .options-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .option-group {
+            flex: 1;
+        }
+        #outputText {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .record-btn {
+            flex: 1;
+        }
+        .status {
+            text-align: center;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #6c757d;
+        }
+        .visualizer {
+            height: 100px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+        .bar {
+            width: 4px;
+            background-color: #0d6efd;
+            border-radius: 2px;
+            transition: height 0.1s ease;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .recording-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container tool-container">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-microphone me-2"></i>
+            Speech to Text
+        </h1>
+
+        <div class="options-container">
+            <div class="option-group">
+                <label for="languageSelect" class="form-label">Language</label>
+                <select class="form-select" id="languageSelect">
+                    <option value="en-US">English (US)</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="es-ES">Spanish</option>
+                    <option value="fr-FR">French</option>
+                    <option value="de-DE">German</option>
+                    <option value="it-IT">Italian</option>
+                    <option value="ja-JP">Japanese</option>
+                    <option value="ko-KR">Korean</option>
+                    <option value="zh-CN">Chinese (Simplified)</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label for="interimResults" class="form-label">Display Mode</label>
+                <select class="form-select" id="interimResults">
+                    <option value="true">Show interim results</option>
+                    <option value="false">Show final results only</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="visualizer" id="visualizer"></div>
+
+        <div class="status" id="status">Click the Record button to start</div>
+
+        <div class="mb-3">
+            <label for="outputText" class="form-label">Transcribed Text</label>
+            <textarea class="form-control" id="outputText" placeholder="Transcribed text will appear here..." readonly></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-secondary" id="clearBtn">
+                <i class="fas fa-trash me-2"></i>Clear
+            </button>
+            <button class="btn btn-primary record-btn" id="recordBtn">
+                <i class="fas fa-microphone me-2"></i>Record
+            </button>
+            <button class="btn btn-outline-primary" id="copyBtn">
+                <i class="fas fa-copy me-2"></i>Copy
+            </button>
+        </div>
+
+        <div class="info-text">
+            <p><strong>Note:</strong> This tool uses the Web Speech API, which is supported in most modern browsers.</p>
+            <p><strong>Browser Support:</strong> Chrome, Edge, and Opera support this feature. Firefox and Safari have limited support.</p>
+            <p><strong>Microphone Access:</strong> You'll need to grant microphone access when prompted.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const languageSelect = document.getElementById('languageSelect');
+        const interimResults = document.getElementById('interimResults');
+        const outputText = document.getElementById('outputText');
+        const recordBtn = document.getElementById('recordBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const status = document.getElementById('status');
+        const visualizer = document.getElementById('visualizer');
+
+        let recognition = null;
+        let isRecording = false;
+        let audioContext = null;
+        let analyser = null;
+        let dataArray = null;
+        let animationId = null;
+
+        // Create visualizer bars
+        for (let i = 0; i < 50; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.height = '0px';
+            visualizer.appendChild(bar);
+        }
+
+        function initializeRecognition() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                status.textContent = 'Speech recognition is not supported in this browser.';
+                recordBtn.disabled = true;
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            
+            recognition.continuous = true;
+            recognition.interimResults = interimResults.value === 'true';
+            recognition.lang = languageSelect.value;
+
+            recognition.onstart = () => {
+                isRecording = true;
+                recordBtn.innerHTML = '<i class="fas fa-stop me-2"></i>Stop';
+                recordBtn.classList.remove('btn-primary');
+                recordBtn.classList.add('btn-danger');
+                status.innerHTML = '<span class="recording-indicator"></span>Recording...';
+                startVisualizer();
+            };
+
+            recognition.onend = () => {
+                isRecording = false;
+                recordBtn.innerHTML = '<i class="fas fa-microphone me-2"></i>Record';
+                recordBtn.classList.remove('btn-danger');
+                recordBtn.classList.add('btn-primary');
+                status.textContent = 'Click the Record button to start';
+                stopVisualizer();
+            };
+
+            recognition.onresult = (event) => {
+                let finalTranscript = '';
+                let interimTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript + ' ';
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+
+                outputText.value = finalTranscript + interimTranscript;
+            };
+
+            recognition.onerror = (event) => {
+                status.textContent = `Error: ${event.error}`;
+                stopRecording();
+            };
+        }
+
+        function startVisualizer() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+            }
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    const source = audioContext.createMediaStreamSource(stream);
+                    source.connect(analyser);
+                    animateVisualizer();
+                })
+                .catch(err => {
+                    console.error('Error accessing microphone:', err);
+                });
+        }
+
+        function animateVisualizer() {
+            if (!isRecording) return;
+
+            analyser.getByteFrequencyData(dataArray);
+            const bars = visualizer.getElementsByClassName('bar');
+            
+            for (let i = 0; i < bars.length; i++) {
+                const value = dataArray[i] / 255;
+                const height = value * 100;
+                bars[i].style.height = `${height}px`;
+            }
+
+            animationId = requestAnimationFrame(animateVisualizer);
+        }
+
+        function stopVisualizer() {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+            const bars = visualizer.getElementsByClassName('bar');
+            for (let bar of bars) {
+                bar.style.height = '0px';
+            }
+        }
+
+        function startRecording() {
+            if (!recognition) {
+                initializeRecognition();
+            }
+            recognition.start();
+        }
+
+        function stopRecording() {
+            if (recognition) {
+                recognition.stop();
+            }
+        }
+
+        function toggleRecording() {
+            if (isRecording) {
+                stopRecording();
+            } else {
+                startRecording();
+            }
+        }
+
+        // Event listeners
+        languageSelect.addEventListener('change', () => {
+            if (recognition) {
+                recognition.lang = languageSelect.value;
+            }
+        });
+
+        interimResults.addEventListener('change', () => {
+            if (recognition) {
+                recognition.interimResults = interimResults.value === 'true';
+            }
+        });
+
+        recordBtn.addEventListener('click', toggleRecording);
+
+        clearBtn.addEventListener('click', () => {
+            outputText.value = '';
+            status.textContent = 'Click the Record button to start';
+        });
+
+        copyBtn.addEventListener('click', () => {
+            outputText.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+            }, 2000);
+        });
+
+        // Initialize
+        initializeRecognition();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML Converter - Free Developer Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Convert your Markdown content to HTML format. Transform your Markdown text into clean, properly formatted HTML with customizable options.">
+    <meta name="keywords" content="markdown to html, markdown converter, html converter, developer tool, markdown tool">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Highlight.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Markdown to HTML Converter - Free Developer Tool">
+    <meta property="og:description" content="Convert your Markdown content to HTML format. Transform your Markdown text into clean, properly formatted HTML with customizable options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/developer-tools/markdown-to-html.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Markdown to HTML Converter - Free Developer Tool">
+    <meta name="twitter:description" content="Convert your Markdown content to HTML format. Transform your Markdown text into clean, properly formatted HTML with customizable options.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Markdown to HTML Converter</h1>
+                <p class="lead text-center mb-4">Convert your Markdown content to HTML format</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="converterForm">
+                            <div class="mb-3">
+                                <label for="markdownInput" class="form-label">Markdown Input</label>
+                                <textarea class="form-control" id="markdownInput" rows="10" placeholder="Enter your Markdown content here" required></textarea>
+                                <div class="form-text">Paste your Markdown content to convert to HTML</div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="conversionOptions" class="form-label">Conversion Options</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sanitizeHtml" checked>
+                                        <label class="form-check-label" for="sanitizeHtml">
+                                            Sanitize HTML
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="highlightCode" checked>
+                                        <label class="form-check-label" for="highlightCode">
+                                            Highlight Code Blocks
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="addTableClass" checked>
+                                        <label class="form-check-label" for="addTableClass">
+                                            Add Table Classes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="outputFormat" class="form-label">Output Format</label>
+                                    <select class="form-select" id="outputFormat">
+                                        <option value="html">HTML</option>
+                                        <option value="xhtml">XHTML</option>
+                                        <option value="html5">HTML5</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Convert to HTML</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
+                                <button type="button" class="btn btn-outline-primary ms-2" id="copyButton">Copy to Clipboard</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Converted HTML</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" id="downloadButton">
+                                <i class="fas fa-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="loadingSpinner" class="text-center" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Converting Markdown to HTML...</p>
+                        </div>
+
+                        <div id="conversionResults">
+                            <div class="mb-3">
+                                <h6>Conversion Status</h6>
+                                <div id="conversionStatus"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>HTML Output</h6>
+                                <div class="position-relative">
+                                    <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2" id="copyOutputButton">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                    <pre><code id="htmlOutput" class="language-html"></code></pre>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Preview</h6>
+                                <div id="previewOutput" class="border p-3 bg-light"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Convert Markdown to HTML?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Easy content creation</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Clean HTML output</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Consistent formatting</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Code highlighting</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Table support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/html.min.js"></script>
+    <!-- Marked for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- DOMPurify for HTML sanitization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/developer-tools/markdown-to-html.js"></script>
+</body>
+</html> 

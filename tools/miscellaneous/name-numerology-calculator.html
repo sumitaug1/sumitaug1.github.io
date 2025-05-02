@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name to Numerology Calculator - Calculate Your Name's Numerology | Multi-Tools Hub</title>
+    <meta name="description" content="Calculate your name's numerology with our free Name to Numerology Calculator. Get detailed insights about your name's numerical value and its meaning.">
+    <meta name="keywords" content="name numerology calculator, name numerology, name number calculator, numerology calculator, name meaning calculator">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Name to Numerology Calculator - Calculate Your Name's Numerology">
+    <meta property="og:description" content="Calculate your name's numerology with our free Name to Numerology Calculator. Get detailed insights about your name's numerical value and its meaning.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/name-numerology-calculator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Name to Numerology Calculator - Calculate Your Name's Numerology">
+    <meta name="twitter:description" content="Calculate your name's numerology with our free Name to Numerology Calculator. Get detailed insights about your name's numerical value and its meaning.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Name to Numerology Calculator</h1>
+                <p class="lead text-center mb-4">Calculate your name's numerology and discover its meaning</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Main Tool Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <!-- Name Input Section -->
+                        <div class="name-input-section mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-8 mx-auto">
+                                    <label for="nameInput" class="form-label">Enter Your Full Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="nameInput" placeholder="Enter your full name (e.g., John Smith)">
+                                        <button class="btn btn-primary" type="button" id="calculateBtn">
+                                            <i class="fas fa-calculator me-2"></i>Calculate
+                                        </button>
+                                    </div>
+                                    <div class="form-text">Enter your full name to calculate its numerology</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Results Section -->
+                        <div id="resultsSection" style="display: none;">
+                            <div class="result-card text-center p-4 mb-4">
+                                <div id="resultIcon" class="mb-3">
+                                    <!-- Icon will be inserted here -->
+                                </div>
+                                <h3 id="resultTitle" class="mb-2">
+                                    <!-- Result title will be inserted here -->
+                                </h3>
+                                <p id="resultDescription" class="mb-0">
+                                    <!-- Result description will be inserted here -->
+                                </p>
+                            </div>
+
+                            <!-- Numerology Details -->
+                            <div class="numerology-details">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Expression Number</h5>
+                                                <p id="expressionNumber" class="card-text">-</p>
+                                                <p id="expressionMeaning" class="card-text small text-muted">-</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Soul Urge Number</h5>
+                                                <p id="soulUrgeNumber" class="card-text">-</p>
+                                                <p id="soulUrgeMeaning" class="card-text small text-muted">-</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Personality Number</h5>
+                                                <p id="personalityNumber" class="card-text">-</p>
+                                                <p id="personalityMeaning" class="card-text small text-muted">-</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Life Path Number</h5>
+                                                <p id="lifePathNumber" class="card-text">-</p>
+                                                <p id="lifePathMeaning" class="card-text small text-muted">-</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Numerology</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Learn about numerology and its significance:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-star text-info me-2"></i>Expression Number: Represents your natural abilities and talents</li>
+                            <li class="mb-2"><i class="fas fa-heart text-info me-2"></i>Soul Urge Number: Reveals your inner desires and motivations</li>
+                            <li class="mb-2"><i class="fas fa-user text-info me-2"></i>Personality Number: Shows how others perceive you</li>
+                            <li class="mb-2"><i class="fas fa-road text-info me-2"></i>Life Path Number: Indicates your life's purpose and direction</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter your full name for accurate calculations</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Get detailed insights about your name's numerology</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Understand the meaning of each number</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Discover your life's purpose and potential</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/name-numerology-calculator.js"></script>
+</body>
+</html> 

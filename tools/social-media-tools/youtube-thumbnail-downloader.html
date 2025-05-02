@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Downloader - Free YouTube Video Thumbnail Extractor | Multi-Tools Hub</title>
+    <meta name="description" content="Download high-quality thumbnails from YouTube videos. Free, easy to use YouTube thumbnail downloader with multiple resolution options.">
+    <meta name="keywords" content="youtube thumbnail downloader, youtube thumbnail extractor, youtube video thumbnail, youtube thumbnail saver, youtube thumbnail grabber">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="YouTube Thumbnail Downloader - Free YouTube Video Thumbnail Extractor">
+    <meta property="og:description" content="Download high-quality thumbnails from YouTube videos. Free, easy to use YouTube thumbnail downloader with multiple resolution options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/social-media-tools/youtube-thumbnail-downloader.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YouTube Thumbnail Downloader - Free YouTube Video Thumbnail Extractor">
+    <meta name="twitter:description" content="Download high-quality thumbnails from YouTube videos. Free, easy to use YouTube thumbnail downloader with multiple resolution options.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">YouTube Thumbnail Downloader</h1>
+                <p class="lead text-center mb-4">Download high-quality thumbnails from YouTube videos</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="thumbnailForm">
+                            <div class="mb-4">
+                                <label for="videoUrl" class="form-label">YouTube Video URL</label>
+                                <div class="input-group">
+                                    <input type="url" class="form-control" id="videoUrl" placeholder="Enter YouTube video URL (e.g., https://www.youtube.com/watch?v=...)" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="extractBtn">
+                                        <i class="fas fa-download me-2"></i>Extract Thumbnails
+                                    </button>
+                                </div>
+                                <small class="form-text text-muted">Enter the complete YouTube video URL</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="card mt-4 shadow-sm d-none" id="resultsCard">
+                    <div class="card-header">
+                        <h5 class="mb-0">Available Thumbnails</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Status Alert -->
+                        <div class="alert mb-4" id="statusAlert" role="alert">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <span id="statusText">Extracting thumbnails...</span>
+                        </div>
+
+                        <!-- Thumbnails Grid -->
+                        <div class="row g-3" id="thumbnailsGrid">
+                            <!-- Thumbnails will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About YouTube Thumbnail Downloader</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool helps you download high-quality thumbnails from YouTube videos. You can get thumbnails in different resolutions:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-image text-info me-2"></i>Maximum Resolution (1280x720)</li>
+                            <li class="mb-2"><i class="fas fa-image text-info me-2"></i>High Quality (480x360)</li>
+                            <li class="mb-2"><i class="fas fa-image text-info me-2"></i>Medium Quality (320x180)</li>
+                            <li class="mb-2"><i class="fas fa-image text-info me-2"></i>Default Quality (120x90)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter the complete YouTube video URL</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose your preferred thumbnail quality</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click the download button to save the thumbnail</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the highest quality for best results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/social-media-tools/youtube-thumbnail-downloader.js"></script>
+</body>
+</html> 

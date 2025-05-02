@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Sitemap Validator - Free SEO Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Validate your XML sitemap. Check for errors, warnings, and get recommendations to improve your sitemap structure.">
+    <meta name="keywords" content="xml sitemap validator, sitemap checker, sitemap analyzer, SEO tool, website sitemap">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="XML Sitemap Validator - Free SEO Tool">
+    <meta property="og:description" content="Validate your XML sitemap. Check for errors, warnings, and get recommendations to improve your sitemap structure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/seo-tools/sitemap-validator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="XML Sitemap Validator - Free SEO Tool">
+    <meta name="twitter:description" content="Validate your XML sitemap. Check for errors, warnings, and get recommendations to improve your sitemap structure.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">XML Sitemap Validator</h1>
+                <p class="lead text-center mb-4">Validate your XML sitemap and get detailed analysis of its structure</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="sitemapValidatorForm">
+                            <div class="mb-3">
+                                <label for="sitemapUrl" class="form-label">Sitemap URL</label>
+                                <input type="url" class="form-control" id="sitemapUrl" placeholder="https://example.com/sitemap.xml" required>
+                                <div class="form-text">Enter your sitemap's URL to validate its structure</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="validationType" class="form-label">Validation Type</label>
+                                <select class="form-select" id="validationType">
+                                    <option value="basic">Basic Validation</option>
+                                    <option value="detailed">Detailed Analysis</option>
+                                </select>
+                                <div class="form-text">Choose the type of validation you want to perform</div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Validate Sitemap</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Sitemap Validation Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="loadingSpinner" class="text-center" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Validating sitemap...</p>
+                        </div>
+
+                        <div id="validationResults">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Validation Status</h6>
+                                    <div id="validationStatus" class="mb-3"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Sitemap Statistics</h6>
+                                    <div id="sitemapStats" class="mb-3"></div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <h6>URL Analysis</h6>
+                                <div id="urlAnalysis"></div>
+                            </div>
+
+                            <div class="mt-4">
+                                <h6>Issues Found</h6>
+                                <div id="issuesFound"></div>
+                            </div>
+
+                            <div class="mt-4">
+                                <h6>Recommendations</h6>
+                                <div id="recommendations"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Validate Your Sitemap?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Ensure proper indexing</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Identify structural issues</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Improve crawl efficiency</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Fix broken URLs</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimize for search engines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/seo-tools/sitemap-validator.js"></script>
+</body>
+</html> 

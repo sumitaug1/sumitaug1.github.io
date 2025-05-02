@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Generator - Free Online Barcode Creator | Multi-Tools Hub</title>
+    <meta name="description" content="Generate barcodes online for free. Create various barcode formats including Code 128, EAN-13, UPC-A, and more. Perfect for product labeling and inventory management.">
+    <meta name="keywords" content="barcode generator, barcode creator, online barcode maker, code 128, ean-13, upc-a, product labeling">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Barcode Generator - Free Online Barcode Creator">
+    <meta property="og:description" content="Generate barcodes online for free. Create various barcode formats including Code 128, EAN-13, UPC-A, and more. Perfect for product labeling and inventory management.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/barcode-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Barcode Generator - Free Online Barcode Creator">
+    <meta name="twitter:description" content="Generate barcodes online for free. Create various barcode formats including Code 128, EAN-13, UPC-A, and more. Perfect for product labeling and inventory management.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Barcode Generator</h1>
+                <p class="lead text-center mb-4">Create professional barcodes for your products and inventory</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="barcodeForm">
+                            <div class="mb-4">
+                                <label for="barcodeType" class="form-label">Barcode Type</label>
+                                <select class="form-select" id="barcodeType" required>
+                                    <option value="">Select barcode type...</option>
+                                    <option value="CODE128">Code 128</option>
+                                    <option value="EAN13">EAN-13</option>
+                                    <option value="UPCA">UPC-A</option>
+                                    <option value="CODE39">Code 39</option>
+                                    <option value="ITF14">ITF-14</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="barcodeData" class="form-label">Barcode Data</label>
+                                <input type="text" class="form-control" id="barcodeData" placeholder="Enter barcode data..." required>
+                                <small class="form-text text-muted">Enter the data you want to encode in the barcode</small>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="barcodeSize" class="form-label">Barcode Size</label>
+                                <select class="form-select" id="barcodeSize">
+                                    <option value="small">Small</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="large">Large</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="showText" checked>
+                                    <label class="form-check-label" for="showText">Show text below barcode</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-barcode me-2"></i>Generate Barcode
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card -->
+                <div class="card mt-4 shadow-sm d-none" id="resultsCard">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Generated Barcode</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary me-2" id="downloadBtn">
+                                <i class="fas fa-download me-2"></i>Download
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" id="printBtn">
+                                <i class="fas fa-print me-2"></i>Print
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <div id="barcodeContainer" class="mb-3">
+                            <!-- Barcode will be added here dynamically -->
+                        </div>
+                        <div id="barcodeText" class="text-muted">
+                            <!-- Barcode text will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">About Barcode Generator</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This tool helps you create professional barcodes. Features include:</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-barcode text-info me-2"></i>Multiple barcode formats</li>
+                            <li class="mb-2"><i class="fas fa-ruler text-info me-2"></i>Customizable size</li>
+                            <li class="mb-2"><i class="fas fa-download text-info me-2"></i>Download as image</li>
+                            <li class="mb-2"><i class="fas fa-print text-info me-2"></i>Print directly</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select appropriate barcode type</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter valid barcode data</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose desired size</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Download or print when ready</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JsBarcode Library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/miscellaneous/barcode-generator.js"></script>
+</body>
+</html> 

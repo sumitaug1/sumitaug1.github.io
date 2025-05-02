@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to JPG Converter - Multi-Tools Hub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/image-tools.css">
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">Multi-Tools Hub</a>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">PDF to JPG Converter</h1>
+                        <p class="text-center mb-4">Convert your PDF pages to high-quality JPG images</p>
+                        
+                        <div class="pdf-tool-container">
+                            <div class="drop-zone" id="dropZone">
+                                <i class="fas fa-file-pdf fa-3x mb-3"></i>
+                                <p>Drag & drop your PDF file here</p>
+                                <p class="small text-muted">or</p>
+                                <input type="file" id="fileInput" accept=".pdf" class="d-none">
+                                <button class="btn btn-primary" id="selectFileBtn">Select PDF File</button>
+                            </div>
+
+                            <div class="tool-controls mt-4" id="toolControls" style="display: none;">
+                                <div class="mb-3">
+                                    <label for="qualitySelect" class="form-label">Image Quality</label>
+                                    <select class="form-select" id="qualitySelect">
+                                        <option value="1">High (Best Quality)</option>
+                                        <option value="2" selected>Medium (Recommended)</option>
+                                        <option value="3">Low (Smaller File Size)</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="pageSelect" class="form-label">Pages to Convert</label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" class="form-control me-2" id="startPage" min="1" value="1" placeholder="Start">
+                                        <span>to</span>
+                                        <input type="number" class="form-control ms-2" id="endPage" min="1" value="1" placeholder="End">
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary w-100" id="convertBtn">Convert to JPG</button>
+                            </div>
+
+                            <div class="preview-container mt-4" id="previewContainer" style="display: none;">
+                                <h3 class="text-center mb-3">Preview</h3>
+                                <div class="row" id="previewGrid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Multi-Tools Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toastContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <script src="../../assets/js/pdf-tools/pdf-to-jpg.js"></script>
+</body>
+</html> 

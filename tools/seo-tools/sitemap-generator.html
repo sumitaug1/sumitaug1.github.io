@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap Generator - Free SEO Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Generate XML sitemaps for your website. Create SEO-friendly sitemaps with priority settings, change frequency, and last modified dates.">
+    <meta name="keywords" content="sitemap generator, XML sitemap, SEO sitemap, website sitemap, sitemap creator">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Sitemap Generator - Free SEO Tool">
+    <meta property="og:description" content="Generate XML sitemaps for your website. Create SEO-friendly sitemaps with priority settings, change frequency, and last modified dates.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/seo-tools/sitemap-generator.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sitemap Generator - Free SEO Tool">
+    <meta name="twitter:description" content="Generate XML sitemaps for your website. Create SEO-friendly sitemaps with priority settings, change frequency, and last modified dates.">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Sitemap Generator</h1>
+                <p class="lead text-center mb-4">Generate XML sitemaps for your website with advanced SEO settings</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="sitemapForm">
+                            <div class="mb-3">
+                                <label for="websiteUrl" class="form-label">Website URL</label>
+                                <input type="url" class="form-control" id="websiteUrl" placeholder="https://example.com" required>
+                                <div class="form-text">Enter your website's base URL</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="urls" class="form-label">URLs</label>
+                                <textarea class="form-control" id="urls" rows="10" placeholder="Enter one URL per line" required></textarea>
+                                <div class="form-text">Enter your website URLs (one per line)</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="defaultPriority" class="form-label">Default Priority</label>
+                                        <select class="form-select" id="defaultPriority">
+                                            <option value="1.0">1.0 - Highest</option>
+                                            <option value="0.8">0.8 - High</option>
+                                            <option value="0.6" selected>0.6 - Medium</option>
+                                            <option value="0.4">0.4 - Low</option>
+                                            <option value="0.2">0.2 - Lowest</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="defaultChangeFreq" class="form-label">Default Change Frequency</label>
+                                        <select class="form-select" id="defaultChangeFreq">
+                                            <option value="always">Always</option>
+                                            <option value="hourly">Hourly</option>
+                                            <option value="daily" selected>Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="yearly">Yearly</option>
+                                            <option value="never">Never</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="includeLastMod" checked>
+                                    <label class="form-check-label" for="includeLastMod">
+                                        Include Last Modified Date
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Generate Sitemap</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Generated Sitemap</h5>
+                        <button class="btn btn-sm btn-primary" id="downloadButton">
+                            <i class="fas fa-download me-2"></i>Download XML
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <pre id="generatedSitemap" class="bg-light p-3 rounded"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Use a Sitemap?</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Help search engines discover your pages</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Improve website indexing</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Set page priorities for crawlers</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Specify update frequency</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enhance SEO performance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/seo-tools/sitemap-generator.js"></script>
+</body>
+</html> 

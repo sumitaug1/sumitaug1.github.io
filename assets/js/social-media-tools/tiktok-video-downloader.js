@@ -1,0 +1,100 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const tiktokUrl = document.getElementById('tiktokUrl');
+    const extractBtn = document.getElementById('extractBtn');
+    const resultsCard = document.getElementById('resultsCard');
+    const statusAlert = document.getElementById('statusAlert');
+    const statusText = document.getElementById('statusText');
+    const videoPreview = document.getElementById('videoPreview');
+    const downloadOptions = document.getElementById('downloadOptions');
+
+    // Update status alert
+    function updateStatusAlert(status, message) {
+        statusAlert.className = 'alert mb-4';
+        statusAlert.classList.add(`alert-${status}`);
+        statusText.textContent = message;
+    }
+
+    // Extract video ID from URL
+    function extractVideoId(url) {
+        const regExp = /tiktok.com\/@[\w.-]+\/video\/(\d+)/;
+        const match = url.match(regExp);
+        return match ? match[1] : null;
+    }
+
+    // Create download option card
+    function createDownloadOption(quality, url, videoId) {
+        const col = document.createElement('div');
+        col.className = 'col-md-6';
+        
+        col.innerHTML = `
+            <div class="card h-100">
+                <div class="card-body">
+                    <h6 class="card-title">${quality} Quality</h6>
+                    <a href="${url}" class="btn btn-primary btn-sm w-100" download="tiktok-video-${videoId}-${quality}.mp4">
+                        <i class="fas fa-download me-2"></i>Download
+                    </a>
+                </div>
+            </div>
+        `;
+        
+        return col;
+    }
+
+    // Extract video
+    async function extractVideo() {
+        const url = tiktokUrl.value.trim();
+
+        if (!url) {
+            alert('Please enter a TikTok video URL');
+            return;
+        }
+
+        // Show loading state
+        updateStatusAlert('info', 'Extracting video...');
+        resultsCard.classList.remove('d-none');
+        videoPreview.innerHTML = '';
+        downloadOptions.innerHTML = '';
+
+        try {
+            const videoId = extractVideoId(url);
+            
+            if (!videoId) {
+                updateStatusAlert('danger', 'Invalid TikTok video URL');
+                return;
+            }
+
+            // Note: Due to TikTok's API restrictions, we'll show a message about the limitation
+            updateStatusAlert('warning', 'Due to TikTok\'s API restrictions, we cannot directly access the videos. Please use TikTok\'s official app or website to download videos.');
+
+            // Show a message about the limitation
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'col-12';
+            messageDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Note:</strong> Due to TikTok's API restrictions, we cannot directly access the videos. To download TikTok videos, you can:
+                    <ul class="mt-2">
+                        <li>Use TikTok's official app</li>
+                        <li>Use TikTok's website</li>
+                        <li>Use TikTok's built-in download feature</li>
+                    </ul>
+                </div>
+            `;
+            downloadOptions.appendChild(messageDiv);
+
+        } catch (error) {
+            console.error('Error extracting video:', error);
+            updateStatusAlert('danger', 'Error extracting video. Please make sure the URL is valid.');
+        }
+    }
+
+    // Extract button click handler
+    extractBtn.addEventListener('click', extractVideo);
+
+    // Form submission handler
+    document.getElementById('videoForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        extractVideo();
+    });
+}); 
