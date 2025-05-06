@@ -14,33 +14,33 @@
             
             <div class="col-md-2 mb-4">
                 <h5>Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/" class="text-light">Home</a></li>
-                    <li><a href="/about.html" class="text-light">About</a></li>
-                    <li><a href="/contact.html" class="text-light">Contact</a></li>
-                    <li><a href="/privacy.html" class="text-light">Privacy Policy</a></li>
-                    <li><a href="/terms.html" class="text-light">Terms of Service</a></li>
+                <ul class="list-unstyled footer-links">
+                    <li><a href="index.html" class="text-light">Home</a></li>
+                    <li><a href="about.html" class="text-light">About</a></li>
+                    <li><a href="contact.html" class="text-light">Contact</a></li>
+                    <li><a href="privacy.html" class="text-light">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="text-light">Terms of Service</a></li>
                 </ul>
             </div>
             
             <div class="col-md-3 mb-4">
                 <h5>Tool Categories</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/tools/image-tools.html" class="text-light">Image Tools</a></li>
-                    <li><a href="/tools/seo-tools.html" class="text-light">SEO Tools</a></li>
-                    <li><a href="/tools/text-tools.html" class="text-light">Text Tools</a></li>
-                    <li><a href="/tools/developer-tools.html" class="text-light">Developer Tools</a></li>
-                    <li><a href="/tools/calculators.html" class="text-light">Calculators</a></li>
+                <ul class="list-unstyled tool-links">
+                    <li><a href="tools/image-tools.html" class="text-light">Image Tools</a></li>
+                    <li><a href="tools/seo-tools.html" class="text-light">SEO Tools</a></li>
+                    <li><a href="tools/text-tools.html" class="text-light">Text Tools</a></li>
+                    <li><a href="tools/developer-tools.html" class="text-light">Developer Tools</a></li>
+                    <li><a href="tools/calculators.html" class="text-light">Calculators</a></li>
                 </ul>
             </div>
             
             <div class="col-md-3 mb-4">
                 <h5>More Categories</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/tools/converters.html" class="text-light">Unit Converters</a></li>
-                    <li><a href="/tools/security-tools.html" class="text-light">Security Tools</a></li>
-                    <li><a href="/tools/social-media-tools.html" class="text-light">Social Media Tools</a></li>
-                    <li><a href="/tools/miscellaneous.html" class="text-light">Miscellaneous</a></li>
+                <ul class="list-unstyled tool-links">
+                    <li><a href="tools/converters.html" class="text-light">Unit Converters</a></li>
+                    <li><a href="tools/security-tools.html" class="text-light">Security Tools</a></li>
+                    <li><a href="tools/social-media-tools.html" class="text-light">Social Media Tools</a></li>
+                    <li><a href="tools/miscellaneous.html" class="text-light">Miscellaneous</a></li>
                 </ul>
             </div>
         </div>
@@ -56,4 +56,50 @@
             </div>
         </div>
     </div>
-</footer> 
+</footer>
+
+<script>
+    // Function to update all links in the footer
+    function updateFooterLinks() {
+        // Get the current path and determine if we're in the tools directory
+        const currentPath = window.location.pathname;
+        const isInToolsDirectory = currentPath.includes('/tools/');
+        const prefix = isInToolsDirectory ? '../' : '';
+
+        // Update all quick links
+        const footerLinks = document.querySelectorAll('.footer-links a');
+        footerLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href) {
+                link.href = prefix + href;
+            }
+        });
+
+        // Update all tool category links
+        const toolLinks = document.querySelectorAll('.tool-links a');
+        toolLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href) {
+                link.href = prefix + href;
+            }
+        });
+    }
+
+    // Run the update when the DOM is loaded
+    document.addEventListener('DOMContentLoaded', updateFooterLinks);
+
+    // Also run the update when the footer is loaded dynamically
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+                updateFooterLinks();
+            }
+        });
+    });
+
+    // Start observing the document body for changes
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+</script> 

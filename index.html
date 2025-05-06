@@ -13,6 +13,39 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        .search-section {
+            background-color: #34eba4;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        .search-section .form-control {
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+        .search-section .btn-primary {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+        .search-section .form-control:focus {
+            box-shadow: none;
+            border-color: #34eba4;
+        }
+        .search-section .btn-primary:hover {
+            background-color: #2bc48f;
+            border-color: #2bc48f;
+        }
+        .search-section .btn-primary:focus {
+            background-color: #2bc48f;
+            border-color: #2bc48f;
+            box-shadow: none;
+        }
+        .search-section .btn-primary:active {
+            background-color: #2bc48f !important;
+            border-color: #2bc48f !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Header will be loaded dynamically -->
@@ -34,81 +67,108 @@
         </div>
 
         <!-- Categories Section -->
-        <div class="categories-section mb-5">
+        <section id="tool-categories" class="categories-section mb-5">
             <h2 class="text-center mb-4">Tool Categories</h2>
             <div class="row g-4" id="categories-container">
                 <!-- Categories will be loaded dynamically -->
             </div>
-        </div>
+        </section>
 
         <!-- Popular Tools Section -->
-        <div class="popular-tools-section mb-5">
+        <section id="popular-tools" class="popular-tools-section mb-5">
             <h2 class="text-center mb-4">Popular Tools</h2>
             <div class="row g-4" id="popular-tools-container">
                 <!-- Popular tools will be loaded dynamically -->
             </div>
-        </div>
+        </section>
 
         <!-- Image Tools Section -->
-        <div class="image-tools-section mb-5">
+        <section id="image-tools" class="image-tools-section mb-5">
             <h2 class="text-center mb-4">Image Tools</h2>
             <div class="row g-4" id="image-tools-container">
                 <!-- Image tools will be loaded dynamically -->
             </div>
-        </div>
+        </section>
 
-        <!-- All Tools Section -->
-        <div class="all-tools-section mb-5">
-            <h2 class="text-center mb-4">All Tools</h2>
-            <div class="row g-4" id="all-tools-container">
-                <!-- All tools will be loaded dynamically -->
+        <!-- PDF Tools Section -->
+        <section id="pdf-tools" class="pdf-tools-section mb-5">
+            <h2 class="text-center mb-4">PDF Tools</h2>
+            <div class="row g-4" id="pdf-tools-container">
+                <!-- PDF tools will be loaded dynamically -->
             </div>
-        </div>
+        </section>
 
-        <!-- Ad Section -->
-        <div class="ad-container text-center mb-5">
-            <p>Advertisement</p>
-        </div>
+        <!-- SEO Tools Section -->
+        <section id="seo-tools" class="seo-tools-section mb-5">
+            <h2 class="text-center mb-4">SEO Tools</h2>
+            <div class="row g-4" id="seo-tools-container">
+                <!-- SEO tools will be loaded dynamically -->
+            </div>
+        </section>
 
-        <div class="tool-card">
-            <a href="tools/miscellaneous/dice-roller.html" class="text-decoration-none">
-                <div class="tool-icon">
-                    <i class="fas fa-dice"></i>
-                </div>
-                <h3 class="tool-title">Dice Roller Simulator</h3>
-                <p class="tool-description">Roll virtual dice with realistic 3D animations and multiple dice types.</p>
-            </a>
-        </div>
+        <!-- Text Tools Section -->
+        <section id="text-tools" class="text-tools-section mb-5">
+            <h2 class="text-center mb-4">Text Tools</h2>
+            <div class="row g-4" id="text-tools-container">
+                <!-- Text tools will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Developer Tools Section -->
+        <section id="developer-tools" class="developer-tools-section mb-5">
+            <h2 class="text-center mb-4">Developer Tools</h2>
+            <div class="row g-4" id="developer-tools-container">
+                <!-- Developer tools will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Calculators Section -->
+        <section id="calculators" class="calculators-section mb-5">
+            <h2 class="text-center mb-4">Calculators</h2>
+            <div class="row g-4" id="calculators-container">
+                <!-- Calculators will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Unit Converters Section -->
+        <section id="unit-converters" class="unit-converters-section mb-5">
+            <h2 class="text-center mb-4">Unit Converters</h2>
+            <div class="row g-4" id="unit-converters-container">
+                <!-- Unit converters will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Security Tools Section -->
+        <section id="security-tools" class="security-tools-section mb-5">
+            <h2 class="text-center mb-4">Security Tools</h2>
+            <div class="row g-4" id="security-tools-container">
+                <!-- Security tools will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Social Media Tools Section -->
+        <section id="social-media-tools" class="social-media-tools-section mb-5">
+            <h2 class="text-center mb-4">Social Media Tools</h2>
+            <div class="row g-4" id="social-media-tools-container">
+                <!-- Social media tools will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Business Tools Section -->
+        <section id="business-tools" class="business-tools-section mb-5">
+            <h2 class="text-center mb-4">Business Tools</h2>
+            <div class="row g-4" id="business-tools-container">
+                <!-- Business tools will be loaded dynamically -->
+            </div>
+        </section>
 
         <!-- Miscellaneous Section -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Miscellaneous</h5>
+        <section id="miscellaneous" class="miscellaneous-section mb-5">
+            <h2 class="text-center mb-4">Miscellaneous</h2>
+            <div class="row g-4" id="miscellaneous-container">
+                <!-- Miscellaneous tools will be loaded dynamically -->
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <a href="tools/miscellaneous/story-plot-generator.html" class="text-decoration-none">
-                            <div class="tool-card">
-                                <i class="fas fa-book tool-icon"></i>
-                                <h6 class="tool-title">Story Plot Generator</h6>
-                                <p class="tool-description">Generate unique and creative story plots</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <a href="tools/miscellaneous/random-quote-generator.html" class="text-decoration-none">
-                            <div class="tool-card">
-                                <i class="fas fa-quote-right tool-icon"></i>
-                                <h6 class="tool-title">Random Quote Generator</h6>
-                                <p class="tool-description">Generate inspiring and motivational quotes</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- ... other miscellaneous tools ... -->
-                </div>
-            </div>
-        </div>
+        </section>
     </div>
 
     <!-- Footer will be loaded dynamically -->
