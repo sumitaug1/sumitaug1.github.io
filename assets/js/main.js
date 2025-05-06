@@ -471,10 +471,10 @@ function loadHeader() {
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${isInToolsDirectory ? '../about.html' : 'about.html'}">About</a>
+                                    <a class="nav-link" href="${isInToolsDirectory ? '../tools/about.html' : 'tools/about.html'}">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${isInToolsDirectory ? '../contact.html' : 'contact.html'}">Contact</a>
+                                    <a class="nav-link" href="${isInToolsDirectory ? '../tools/contact.html' : 'tools/contact.html'}">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -530,8 +530,8 @@ function loadFooter() {
                                     <h5>Quick Links</h5>
                                     <ul class="list-unstyled">
                                         <li><a href="${prefix}index.html" class="text-light">Home</a></li>
-                                        <li><a href="${prefix}about.html" class="text-light">About</a></li>
-                                        <li><a href="${prefix}contact.html" class="text-light">Contact</a></li>
+                                        <li><a href="${prefix}tools/about.html" class="text-light">About</a></li>
+                                        <li><a href="${prefix}tools/contact.html" class="text-light">Contact</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-md-6 text-md-end">
