@@ -1,51 +1,67 @@
 <header class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="index.html">
             <i class="fas fa-tools me-2"></i>
             Multi-Tools Hub
         </a>
-        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="index.html">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Tools
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/tools/image-tools.html">Image Tools</a></li>
-                        <li><a class="dropdown-item" href="/tools/seo-tools.html">SEO Tools</a></li>
-                        <li><a class="dropdown-item" href="/tools/text-tools.html">Text Tools</a></li>
-                        <li><a class="dropdown-item" href="/tools/developer-tools.html">Developer Tools</a></li>
-                        <li><a class="dropdown-item" href="/tools/calculators.html">Calculators</a></li>
-                        <li><a class="dropdown-item" href="/tools/converters.html">Unit Converters</a></li>
-                        <li><a class="dropdown-item" href="/tools/security-tools.html">Security Tools</a></li>
-                        <li><a class="dropdown-item" href="/tools/social-media-tools.html">Social Media Tools</a></li>
-                        <li><a class="dropdown-item" href="/tools/miscellaneous.html">Miscellaneous</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
+                        <li><a class="dropdown-item" href="index.html#image-tools">Image Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#pdf-tools">PDF Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#seo-tools">SEO Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#text-tools">Text Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#developer-tools">Developer Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#calculators">Calculators</a></li>
+                        <li><a class="dropdown-item" href="index.html#unit-converters">Unit Converters</a></li>
+                        <li><a class="dropdown-item" href="index.html#security-tools">Security Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#social-media-tools">Social Media Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#business-tools">Business Tools</a></li>
+                        <li><a class="dropdown-item" href="index.html#miscellaneous">Miscellaneous</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about.html">About</a>
+                    <a class="nav-link" href="about.html">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact.html">Contact</a>
+                    <a class="nav-link" href="contact.html">Contact</a>
                 </li>
             </ul>
-            
-            <form class="d-flex" id="headerSearchForm">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search tools..." id="headerSearchInput">
-                    <button class="btn btn-light" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
-</header> 
+</header>
+
+<script>
+    // Update navigation links based on current location
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPath = window.location.pathname;
+        const isInToolsDirectory = currentPath.includes('/tools/');
+        const prefix = isInToolsDirectory ? '../' : '';
+
+        // Update all navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#')) {
+                link.href = prefix + href;
+            }
+        });
+
+        // Update dropdown links
+        document.querySelectorAll('.dropdown-item').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href) {
+                link.href = prefix + href;
+            }
+        });
+    });
+</script> 
