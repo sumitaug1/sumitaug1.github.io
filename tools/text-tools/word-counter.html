@@ -3,142 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Counter - Text Tools</title>
-    <meta name="description" content="Free online word counter tool to count words, characters, sentences, and paragraphs. Ideal for writers, students, and SEO professionals.">
-    <meta name="keywords" content="word counter, online word count, character counter, text analysis, count words online, writing tool, SEO word counter, paragraph counter">
-
+    <title>Word Counter - Free Text Analysis Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Count words, characters, and analyze text with our free online word counter tool. Perfect for essays, articles, and content writing.">
+    <meta name="keywords" content="word counter, text analysis, word count, character count, online word counter, word counter online, text analyzer, content analysis">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .tool-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        .stats-container {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        .stat-box {
-            text-align: center;
-            padding: 1rem;
-            border-radius: 8px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #0d6efd;
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        #textInput {
-            min-height: 200px;
-            resize: vertical;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Word Counter - Free Text Analysis Tool">
+    <meta property="og:description" content="Count words, characters, and analyze text with our free online word counter tool. Perfect for essays, articles, and content writing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/word-counter.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Word Counter - Free Text Analysis Tool">
+    <meta name="twitter:description" content="Count words, characters, and analyze text with our free online word counter tool. Perfect for essays, articles, and content writing.">
 </head>
 <body>
-    <div class="container tool-container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-calculator me-2"></i>
-            Word Counter
-        </h1>
-        
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="stat-box">
-                    <div class="stat-value" id="wordCount">0</div>
-                    <div class="stat-label">Words</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-box">
-                    <div class="stat-value" id="charCount">0</div>
-                    <div class="stat-label">Characters</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-box">
-                    <div class="stat-value" id="charNoSpaceCount">0</div>
-                    <div class="stat-label">Characters (no spaces)</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-box">
-                    <div class="stat-value" id="lineCount">0</div>
-                    <div class="stat-label">Lines</div>
-                </div>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Word Counter</h1>
+                <p class="lead text-center mb-4">Analyze your text with detailed word and character counts</p>
             </div>
         </div>
 
-        <div class="mb-3">
-            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..."></textarea>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..." rows="6"></textarea>
+                        </div>
 
-        <div class="d-flex justify-content-between">
-            <button class="btn btn-outline-secondary" id="clearBtn">
-                <i class="fas fa-trash me-2"></i>Clear
-            </button>
-            <button class="btn btn-outline-primary" id="copyBtn">
-                <i class="fas fa-copy me-2"></i>Copy
-            </button>
+                        <div class="row text-center mb-4">
+                            <div class="col-md-4 col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Words</h6>
+                                        <h3 id="wordCount">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Characters</h6>
+                                        <h3 id="charCount">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Reading Time</h6>
+                                        <h3 id="readingTime">0 min</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary" id="clearBtn">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn btn-outline-primary" id="copyBtn">
+                                <i class="fas fa-copy me-2"></i>Copy Text
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter or paste your text in the input field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Counts update automatically as you type</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Reading time is calculated at 200 words per minute</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Copy button to copy your text</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Clear button to reset the counter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Common Use Cases Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Use Cases</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Academic:</strong> Essays, research papers</li>
+                                    <li class="mb-2"><strong>Content Writing:</strong> Blog posts, articles</li>
+                                    <li class="mb-2"><strong>SEO:</strong> Meta descriptions, content length</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Social Media:</strong> Post length optimization</li>
+                                    <li class="mb-2"><strong>Technical Writing:</strong> Documentation</li>
+                                    <li class="mb-2"><strong>Creative Writing:</strong> Stories, scripts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const textInput = document.getElementById('textInput');
-        const wordCount = document.getElementById('wordCount');
-        const charCount = document.getElementById('charCount');
-        const charNoSpaceCount = document.getElementById('charNoSpaceCount');
-        const lineCount = document.getElementById('lineCount');
-        const clearBtn = document.getElementById('clearBtn');
-        const copyBtn = document.getElementById('copyBtn');
-
-        function updateCounts() {
-            const text = textInput.value;
-            
-            // Word count
-            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-            wordCount.textContent = words;
-            
-            // Character count
-            charCount.textContent = text.length;
-            
-            // Character count (no spaces)
-            charNoSpaceCount.textContent = text.replace(/\s/g, '').length;
-            
-            // Line count
-            lineCount.textContent = text ? text.split('\n').length : 0;
-        }
-
-        textInput.addEventListener('input', updateCounts);
-
-        clearBtn.addEventListener('click', () => {
-            textInput.value = '';
-            updateCounts();
-        });
-
-        copyBtn.addEventListener('click', () => {
-            textInput.select();
-            document.execCommand('copy');
-            
-            // Show feedback
-            const originalText = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
-            setTimeout(() => {
-                copyBtn.innerHTML = originalText;
-            }, 2000);
-        });
-
-        // Initialize counts
-        updateCounts();
-    </script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/text-tools/word-counter.js"></script>
 </body>
 </html> 

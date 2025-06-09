@@ -416,4 +416,350 @@ document.addEventListener('DOMContentLoaded', function() {
     const rsvpDateValue = new Date(nextMonth);
     rsvpDateValue.setDate(rsvpDateValue.getDate() - 7);
     rsvpDate.value = rsvpDateValue.toISOString().split('T')[0];
+
+    // Template Gallery
+    const templateCards = document.querySelectorAll('.template-card');
+    if (templateCards.length > 0) {
+        templateCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove selected class from all cards
+                templateCards.forEach(c => c.classList.remove('selected'));
+                // Add selected class to clicked card
+                card.classList.add('selected');
+                // Update theme select
+                if (themeSelect) {
+                    themeSelect.value = card.dataset.theme;
+                }
+                // Update preview
+                updatePreview();
+            });
+        });
+    }
+
+    // Export Options
+    const downloadPDF = document.getElementById('downloadPDF');
+    const downloadPNG = document.getElementById('downloadPNG');
+    const downloadJPG = document.getElementById('downloadJPG');
+    const downloadSocial = document.getElementById('downloadSocial');
+
+    if (downloadPDF) {
+        downloadPDF.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await exportInvitation('pdf');
+        });
+    }
+
+    if (downloadPNG) {
+        downloadPNG.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await exportInvitation('png');
+        });
+    }
+
+    if (downloadJPG) {
+        downloadJPG.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await exportInvitation('jpg');
+        });
+    }
+
+    if (downloadSocial) {
+        downloadSocial.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await exportInvitation('social');
+        });
+    }
+
+    async function exportInvitation(format) {
+        const invitationElement = document.getElementById('invitationPreview');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        
+        if (!invitationElement) {
+            console.error('Invitation preview element not found');
+            return;
+        }
+
+        try {
+            if (loadingSpinner) loadingSpinner.style.display = 'block';
+
+            switch(format) {
+                case 'pdf':
+                    await exportToPDF(invitationElement);
+                    break;
+                case 'png':
+                    await exportToImage(invitationElement, 'png');
+                    break;
+                case 'jpg':
+                    await exportToImage(invitationElement, 'jpg');
+                    break;
+                case 'social':
+                    await exportToSocialMedia(invitationElement);
+                    break;
+            }
+        } catch (error) {
+            console.error('Export error:', error);
+            alert('Error exporting invitation. Please try again.');
+        } finally {
+            if (loadingSpinner) loadingSpinner.style.display = 'none';
+        }
+    }
+
+    async function exportToPDF(element) {
+        if (!window.jspdf) {
+            console.error('jsPDF library not loaded');
+            return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        const canvas = await html2canvas(element);
+        const imgData = canvas.toDataURL('image/png');
+        
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('birthday-invitation.pdf');
+    }
+
+    async function exportToImage(element, format) {
+        if (!window.html2canvas) {
+            console.error('html2canvas library not loaded');
+            return;
+        }
+
+        const canvas = await html2canvas(element);
+        const link = document.createElement('a');
+        link.download = `birthday-invitation.${format}`;
+        link.href = canvas.toDataURL(`image/${format}`);
+        link.click();
+    }
+
+    async function exportToSocialMedia(element) {
+        if (!window.html2canvas) {
+            console.error('html2canvas library not loaded');
+            return;
+        }
+
+        const socialSizes = {
+            facebook: { width: 1200, height: 630 },
+            instagram: { width: 1080, height: 1080 },
+            twitter: { width: 1200, height: 675 }
+        };
+
+        const canvas = await html2canvas(element, {
+            width: socialSizes.facebook.width,
+            height: socialSizes.facebook.height
+        });
+
+        const link = document.createElement('a');
+        link.download = 'birthday-invitation-social.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    // Countdown Timer
+    let countdownInterval = null;
+
+    function initializeCountdown() {
+        if (!eventDate || !eventTime) return;
+
+        const eventDateTime = new Date(`${eventDate.value}T${eventTime.value}`);
+        const countdownTimer = document.getElementById('countdownTimer');
+        
+        if (!countdownTimer) return;
+
+        // Clear any existing interval
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diff = eventDateTime - now;
+            
+            if (diff <= 0) {
+                countdownTimer.innerHTML = '<p class="text-center">Event has started!</p>';
+                clearInterval(countdownInterval);
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const daysElement = document.getElementById('days');
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+
+            if (daysElement) daysElement.textContent = String(days).padStart(2, '0');
+            if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
+            if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
+            if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
+        }
+        
+        updateCountdown();
+        countdownInterval = setInterval(updateCountdown, 1000);
+    }
+
+    // Venue Map
+    let map = null;
+    let marker = null;
+
+    function initializeMap() {
+        if (!venue || !window.google) {
+            const mapContainer = document.getElementById('venueMap');
+            if (mapContainer) {
+                mapContainer.innerHTML = '<div class="map-error">Google Maps is not available. Please check your internet connection.</div>';
+            }
+            return;
+        }
+        
+        const mapContainer = document.getElementById('venueMap');
+        if (!mapContainer) return;
+
+        // Clear existing map
+        if (map) {
+            map = null;
+            marker = null;
+        }
+
+        // Initialize map
+        map = new google.maps.Map(mapContainer, {
+            zoom: 15,
+            center: { lat: 0, lng: 0 },
+            mapTypeControl: true,
+            streetViewControl: true,
+            fullscreenControl: true
+        });
+
+        // Geocode the address
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: venue.value }, (results, status) => {
+            if (status === 'OK' && results[0]) {
+                // Center map on the location
+                map.setCenter(results[0].geometry.location);
+
+                // Add marker
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    title: venue.value,
+                    animation: google.maps.Animation.DROP
+                });
+
+                // Add info window
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<div class="p-2"><strong>${venue.value}</strong></div>`
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+
+                // Open info window by default
+                infoWindow.open(map, marker);
+            } else {
+                mapContainer.innerHTML = '<div class="map-error">Could not find the location. Please check the address.</div>';
+            }
+        });
+    }
+
+    // Initialize interactive elements when preview is shown
+    if (generateBtn) {
+        generateBtn.addEventListener('click', () => {
+            // Clear existing intervals and maps
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            if (map) {
+                map = null;
+                marker = null;
+            }
+
+            // Initialize new elements
+            initializeCountdown();
+            initializeWeather();
+            initializeMap();
+        });
+    }
+
+    // Update interactive elements when date/time changes
+    if (eventDate) {
+        eventDate.addEventListener('change', () => {
+            if (previewSection && previewSection.style.display !== 'none') {
+                initializeCountdown();
+                initializeWeather();
+            }
+        });
+    }
+
+    if (eventTime) {
+        eventTime.addEventListener('change', () => {
+            if (previewSection && previewSection.style.display !== 'none') {
+                initializeCountdown();
+            }
+        });
+    }
+
+    if (venue) {
+        venue.addEventListener('change', () => {
+            if (previewSection && previewSection.style.display !== 'none') {
+                initializeWeather();
+                initializeMap();
+            }
+        });
+    }
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+    });
+
+    async function initializeWeather() {
+        if (!eventDate || !venue) return;
+        
+        const weatherForecast = document.getElementById('weatherForecast');
+        if (!weatherForecast) return;
+
+        try {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(venue.value)}&appid=YOUR_API_KEY&units=metric`);
+            const data = await response.json();
+            
+            const eventDateObj = new Date(eventDate.value);
+            const weatherData = data.list.find(item => {
+                const itemDate = new Date(item.dt * 1000);
+                return itemDate.getDate() === eventDateObj.getDate();
+            });
+            
+            if (weatherData) {
+                const weatherTemp = document.getElementById('weatherTemp');
+                const weatherDesc = document.getElementById('weatherDesc');
+                const weatherIcon = document.querySelector('.weather-icon i');
+
+                if (weatherTemp) weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°C`;
+                if (weatherDesc) weatherDesc.textContent = weatherData.weather[0].description;
+                if (weatherIcon) weatherIcon.className = getWeatherIcon(weatherData.weather[0].id);
+            }
+        } catch (error) {
+            console.error('Weather API error:', error);
+            weatherForecast.innerHTML = '<p>Weather data unavailable</p>';
+        }
+    }
+
+    function getWeatherIcon(weatherId) {
+        if (weatherId >= 200 && weatherId < 300) return 'fas fa-bolt';
+        if (weatherId >= 300 && weatherId < 400) return 'fas fa-cloud-rain';
+        if (weatherId >= 500 && weatherId < 600) return 'fas fa-cloud-showers-heavy';
+        if (weatherId >= 600 && weatherId < 700) return 'fas fa-snowflake';
+        if (weatherId >= 700 && weatherId < 800) return 'fas fa-smog';
+        if (weatherId === 800) return 'fas fa-sun';
+        if (weatherId > 800) return 'fas fa-cloud';
+        return 'fas fa-cloud-sun';
+    }
 }); 

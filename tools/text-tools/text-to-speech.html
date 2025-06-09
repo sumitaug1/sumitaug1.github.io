@@ -3,244 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text to Speech - Text Tools</title>
-    <meta name="description" content="Convert text to natural-sounding speech with our free online text-to-speech tool. Supports multiple voices and languages. Listen or download instantly.">
-    <meta name="keywords" content="text to speech, TTS, text reader, online voice generator, convert text to voice, speech synthesis, text to audio, natural voice reader, online text to speech, text to speech online, online text to voice, text to voice online">
+    <title>Text to Speech - Free Online Converter | Multi-Tools Hub</title>
+    <meta name="description" content="Convert text to speech with our free online text-to-speech tool. Choose from multiple voices and languages. Perfect for accessibility and content creation.">
+    <meta name="keywords" content="text to speech, tts, speech synthesis, voice generator, text to voice, online tts, text to speech online, voice converter">
     
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .tool-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        .options-container {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        .option-group {
-            flex: 1;
-        }
-        #inputText {
-            min-height: 200px;
-            resize: vertical;
-        }
-        .controls {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .play-btn {
-            flex: 1;
-        }
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .volume-slider {
-            flex: 1;
-        }
-        .rate-control {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .rate-slider {
-            flex: 1;
-        }
-        .info-text {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-top: 0.5rem;
-        }
-        .status {
-            text-align: center;
-            margin-top: 1rem;
-            font-style: italic;
-            color: #6c757d;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Text to Speech - Free Online Converter">
+    <meta property="og:description" content="Convert text to speech with our free online text-to-speech tool. Choose from multiple voices and languages. Perfect for accessibility and content creation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/text-to-speech.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Text to Speech - Free Online Converter">
+    <meta name="twitter:description" content="Convert text to speech with our free online text-to-speech tool. Choose from multiple voices and languages. Perfect for accessibility and content creation.">
 </head>
 <body>
-    <div class="container tool-container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-volume-up me-2"></i>
-            Text to Speech
-        </h1>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
 
-        <div class="options-container">
-            <div class="option-group">
-                <label for="voiceSelect" class="form-label">Voice</label>
-                <select class="form-select" id="voiceSelect">
-                    <option value="">Loading voices...</option>
-                </select>
-            </div>
-            <div class="option-group">
-                <label for="languageSelect" class="form-label">Language</label>
-                <select class="form-select" id="languageSelect">
-                    <option value="en-US">English (US)</option>
-                    <option value="en-GB">English (UK)</option>
-                    <option value="es-ES">Spanish</option>
-                    <option value="fr-FR">French</option>
-                    <option value="de-DE">German</option>
-                    <option value="it-IT">Italian</option>
-                    <option value="ja-JP">Japanese</option>
-                    <option value="ko-KR">Korean</option>
-                    <option value="zh-CN">Chinese (Simplified)</option>
-                </select>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Text to Speech</h1>
+                <p class="lead text-center mb-4">Convert your text into natural-sounding speech</p>
             </div>
         </div>
 
-        <div class="mb-3">
-            <label for="inputText" class="form-label">Text to Speak</label>
-            <textarea class="form-control" id="inputText" placeholder="Enter text to convert to speech..."></textarea>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="textInput" class="form-label">Enter text to convert</label>
+                            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..." rows="6"></textarea>
+                        </div>
 
-        <div class="controls">
-            <div class="volume-control">
-                <i class="fas fa-volume-down"></i>
-                <input type="range" class="form-range volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="1">
-                <i class="fas fa-volume-up"></i>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <label for="voiceSelect" class="form-label">Select Voice</label>
+                                <select class="form-select" id="voiceSelect">
+                                    <option value="">Loading voices...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="rateSelect" class="form-label">Speech Rate</label>
+                                <select class="form-select" id="rateSelect">
+                                    <option value="0.5">Slow</option>
+                                    <option value="1" selected>Normal</option>
+                                    <option value="1.5">Fast</option>
+                                    <option value="2">Very Fast</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary" id="clearBtn">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn btn-primary" id="speakBtn">
+                                <i class="fas fa-play me-2"></i>Speak
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter or paste your text in the input field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose a voice from the dropdown menu</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Adjust the speech rate as needed</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "Speak" to hear the text</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Clear button to reset the input</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Common Use Cases Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Use Cases</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Accessibility:</strong> Screen readers, learning aids</li>
+                                    <li class="mb-2"><strong>Content Creation:</strong> Podcasts, videos</li>
+                                    <li class="mb-2"><strong>Education:</strong> Language learning, pronunciation</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Business:</strong> Presentations, training</li>
+                                    <li class="mb-2"><strong>Entertainment:</strong> Games, animations</li>
+                                    <li class="mb-2"><strong>Personal:</strong> Reading assistance, reminders</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="rate-control">
-                <i class="fas fa-turtle"></i>
-                <input type="range" class="form-range rate-slider" id="rateSlider" min="0.5" max="2" step="0.1" value="1">
-                <i class="fas fa-rabbit"></i>
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-3">
-            <button class="btn btn-outline-secondary" id="clearBtn">
-                <i class="fas fa-trash me-2"></i>Clear
-            </button>
-            <button class="btn btn-primary play-btn" id="playBtn">
-                <i class="fas fa-play me-2"></i>Play
-            </button>
-            <button class="btn btn-danger" id="stopBtn" disabled>
-                <i class="fas fa-stop me-2"></i>Stop
-            </button>
-        </div>
-
-        <div class="status" id="status"></div>
-
-        <div class="info-text">
-            <p><strong>Note:</strong> This tool uses the Web Speech API, which is supported in most modern browsers.</p>
-            <p><strong>Volume:</strong> Adjust the volume of the speech (0-100%)</p>
-            <p><strong>Rate:</strong> Adjust the speaking rate (0.5x - 2x)</p>
         </div>
     </div>
 
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const inputText = document.getElementById('inputText');
-        const voiceSelect = document.getElementById('voiceSelect');
-        const languageSelect = document.getElementById('languageSelect');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const rateSlider = document.getElementById('rateSlider');
-        const playBtn = document.getElementById('playBtn');
-        const stopBtn = document.getElementById('stopBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const status = document.getElementById('status');
-
-        let speechSynthesis = window.speechSynthesis;
-        let voices = [];
-        let currentUtterance = null;
-
-        function loadVoices() {
-            voices = speechSynthesis.getVoices();
-            voiceSelect.innerHTML = '';
-            
-            // Filter voices by selected language
-            const selectedLanguage = languageSelect.value;
-            const filteredVoices = voices.filter(voice => voice.lang.startsWith(selectedLanguage));
-            
-            if (filteredVoices.length === 0) {
-                voiceSelect.innerHTML = '<option value="">No voices available for this language</option>';
-                return;
-            }
-
-            filteredVoices.forEach(voice => {
-                const option = document.createElement('option');
-                option.value = voice.name;
-                option.textContent = `${voice.name} (${voice.lang})`;
-                voiceSelect.appendChild(option);
-            });
-        }
-
-        function speak() {
-            if (speechSynthesis.speaking) {
-                speechSynthesis.cancel();
-            }
-
-            const text = inputText.value.trim();
-            if (!text) {
-                status.textContent = 'Please enter some text to speak';
-                return;
-            }
-
-            const utterance = new SpeechSynthesisUtterance(text);
-            
-            // Set voice
-            const selectedVoice = voices.find(voice => voice.name === voiceSelect.value);
-            if (selectedVoice) {
-                utterance.voice = selectedVoice;
-            }
-
-            // Set properties
-            utterance.volume = parseFloat(volumeSlider.value);
-            utterance.rate = parseFloat(rateSlider.value);
-
-            // Event handlers
-            utterance.onstart = () => {
-                playBtn.disabled = true;
-                stopBtn.disabled = false;
-                status.textContent = 'Speaking...';
-            };
-
-            utterance.onend = () => {
-                playBtn.disabled = false;
-                stopBtn.disabled = true;
-                status.textContent = 'Speech completed';
-            };
-
-            utterance.onerror = (event) => {
-                playBtn.disabled = false;
-                stopBtn.disabled = true;
-                status.textContent = `Error: ${event.error}`;
-            };
-
-            currentUtterance = utterance;
-            speechSynthesis.speak(utterance);
-        }
-
-        function stopSpeaking() {
-            if (speechSynthesis.speaking) {
-                speechSynthesis.cancel();
-                playBtn.disabled = false;
-                stopBtn.disabled = true;
-                status.textContent = 'Speech stopped';
-            }
-        }
-
-        // Event listeners
-        speechSynthesis.onvoiceschanged = loadVoices;
-
-        languageSelect.addEventListener('change', loadVoices);
-
-        playBtn.addEventListener('click', speak);
-
-        stopBtn.addEventListener('click', stopSpeaking);
-
-        clearBtn.addEventListener('click', () => {
-            inputText.value = '';
-            status.textContent = '';
-        });
-
-        // Initialize
-        loadVoices();
-    </script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/text-tools/text-to-speech.js"></script>
 </body>
 </html> 

@@ -1,248 +1,243 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Elements
-    const chatStyle = document.getElementById('chatStyle');
-    const responseSpeed = document.getElementById('responseSpeed');
+    // DOM Elements
     const chatMessages = document.getElementById('chatMessages');
-    const userInput = document.getElementById('userInput');
+    const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    const suggestBtn = document.getElementById('suggestBtn');
+    const suggestionChips = document.querySelectorAll('.suggestion-chip');
 
-    // Chat styles and their responses
-    const chatStyles = {
-        friendly: {
-            greeting: "Hello! I'm your friendly AI assistant. How can I help you today?",
-            responses: [
-                "That's interesting! Tell me more about it.",
-                "I understand how you feel. Let's explore that together.",
-                "That's a great question! Here's what I think...",
-                "I'm here to help and support you.",
-                "Let's work together to find a solution."
-            ]
-        },
-        professional: {
-            greeting: "Good day. I am your professional AI assistant. How may I assist you?",
-            responses: [
-                "Based on the information provided, I would recommend...",
-                "From a professional standpoint, the best approach would be...",
-                "Let me analyze that for you.",
-                "I can provide you with detailed information on that topic.",
-                "Here's a comprehensive solution to your query."
-            ]
-        },
-        casual: {
-            greeting: "Hey there! What's up? I'm your AI buddy, ready to chat!",
-            responses: [
-                "Cool! Tell me more about that.",
-                "That's pretty interesting, dude!",
-                "No worries, I got you covered!",
-                "Let's figure this out together!",
-                "That's awesome! Here's what I think..."
-            ]
-        },
-        humorous: {
-            greeting: "Well, well, well... look who we have here! Your AI assistant, at your service!",
-            responses: [
-                "That's a good one! Let me add my two cents...",
-                "Hold on to your hats, here comes the wisdom!",
-                "Let me put on my thinking cap... *adjusts imaginary cap*",
-                "In the words of a wise AI: 'Beep boop, here's the scoop!'",
-                "Time to drop some knowledge bombs! 💣"
-            ]
-        }
+    // State
+    let isProcessing = false;
+    let conversationContext = {
+        lastTopic: null,
+        questionCount: 0,
+        userInterests: new Set()
     };
 
-    // Response templates
-    const responseTemplates = {
+    // Enhanced responses for more engaging conversation
+    const responses = {
         greeting: [
-            "Hello! How can I help you today?",
-            "Hi there! What can I do for you?",
-            "Greetings! How may I assist you?",
-            "Hey! What's on your mind?",
-            "Welcome! How can I be of service?"
+            "Hello! I'm your AI assistant. How can I help you today?",
+            "Hi there! I'm excited to chat with you. What's on your mind?",
+            "Greetings! I'm here to assist you. What would you like to explore?",
+            "Hey! I'm your friendly AI companion. How can I make your day better?",
+            "Welcome! I'm ready to help you with anything you need. What shall we discuss?"
         ],
-        question: [
-            "That's an interesting question. Let me think about it...",
-            "I'm glad you asked that. Here's what I know...",
-            "Let me help you understand that better...",
-            "That's a great question! Here's what I can tell you...",
-            "I'd be happy to explain that to you..."
+        joke: [
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "What do you call a fake noodle? An impasta!",
+            "Why did the computer go to the doctor? Because it had a virus!",
+            "What do you call a computer that sings? A Dell!",
+            "Why don't programmers like nature? It has too many bugs!",
+            "What did the AI say to the human? 'I'm not artificial, I'm just differently intelligent!'",
+            "Why did the AI go to therapy? It had too many processing issues!"
         ],
-        statement: [
-            "I understand what you're saying.",
-            "That's interesting! Tell me more.",
-            "I see your point.",
-            "That makes sense.",
-            "I agree with you on that."
+        weather: [
+            "I'm sorry, I don't have access to real-time weather data in this demo. But I can tell you it's a beautiful day for coding!",
+            "I wish I could check the weather for you, but I'm just a demo chatbot. Maybe try a weather app?",
+            "I'm not connected to weather services yet, but I can help you with other questions!",
+            "While I can't check the weather, I can help you plan indoor activities!",
+            "I'm still learning about weather patterns, but I'm great at other topics!"
         ],
-        farewell: [
-            "Goodbye! Have a great day!",
-            "See you later! Take care!",
-            "Bye for now! Come back soon!",
-            "Farewell! It was nice chatting with you!",
-            "Until next time! Stay awesome!"
+        coding: [
+            "I'd be happy to help with coding! What programming language are you working with?",
+            "Coding is my favorite topic! What specific problem are you trying to solve?",
+            "I can help you with coding questions. What would you like to know?",
+            "Let's dive into coding! Are you working on a specific project?",
+            "I love discussing programming! What's your preferred language?",
+            "Coding is fascinating! Are you a beginner or experienced developer?",
+            "I can help with debugging, best practices, or general programming concepts. What interests you?",
+            "Let's talk code! Are you working on frontend, backend, or something else?"
+        ],
+        ai: [
+            "Artificial Intelligence is a fascinating field! It's about creating systems that can learn and make decisions like humans.",
+            "AI combines computer science, mathematics, and cognitive science to create intelligent machines.",
+            "The goal of AI is to create systems that can perform tasks that typically require human intelligence.",
+            "AI is revolutionizing many fields, from healthcare to transportation. What aspect interests you most?",
+            "Machine learning is a subset of AI that focuses on training systems to learn from data.",
+            "AI can be categorized into narrow AI (specific tasks) and general AI (human-like intelligence).",
+            "The future of AI holds exciting possibilities! What would you like to know more about?",
+            "AI ethics is a crucial topic in development. Should we discuss that?"
+        ],
+        followUp: {
+            coding: [
+                "What specific programming concept would you like to explore?",
+                "Are you interested in learning about algorithms or data structures?",
+                "Would you like to discuss software architecture or design patterns?",
+                "I can help you with debugging techniques. What's your current challenge?",
+                "Let's talk about best practices in your chosen language. What are you working on?"
+            ],
+            ai: [
+                "Would you like to learn more about machine learning algorithms?",
+                "Should we discuss the ethical implications of AI?",
+                "Are you interested in neural networks or deep learning?",
+                "Let's explore how AI is transforming different industries. Which one interests you?",
+                "Would you like to know more about AI development tools and frameworks?"
+            ]
+        },
+        default: [
+            "That's an interesting topic! Could you tell me more about what you're thinking?",
+            "I'm curious about your perspective. What made you interested in this?",
+            "That's a great point! Would you like to explore this further?",
+            "I'm still learning about that topic. What aspects interest you most?",
+            "That's fascinating! Could you elaborate on your thoughts?",
+            "I'd love to hear more about your experience with this topic.",
+            "That's a unique perspective! What led you to this conclusion?",
+            "I'm intrigued! Could you share more details about your interest in this?"
         ]
     };
 
-    // Add message to chat
-    function addMessage(message, isUser = false) {
-        const messageElement = document.createElement('div');
-        messageElement.className = `message ${isUser ? 'user' : 'bot'}`;
-        messageElement.innerHTML = `
-            <div class="message-content">
-                <p>${message}</p>
-            </div>
-        `;
-        chatMessages.appendChild(messageElement);
+    // Function to get current time
+    function getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Function to add message to chat
+    function addMessage(text, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        
+        const messageText = document.createElement('div');
+        messageText.textContent = text;
+        
+        const messageTime = document.createElement('div');
+        messageTime.className = 'message-time';
+        messageTime.textContent = getCurrentTime();
+        
+        messageDiv.appendChild(messageText);
+        messageDiv.appendChild(messageTime);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Generate AI response
-    function generateResponse(userMessage) {
-        const style = chatStyles[chatStyle.value];
-        let response;
-
-        // Check for specific patterns in user message
-        if (userMessage.toLowerCase().includes('hello') || userMessage.toLowerCase().includes('hi')) {
-            response = style.greeting;
-        } else if (userMessage.includes('?')) {
-            response = getRandomResponse(responseTemplates.question);
-        } else if (userMessage.toLowerCase().includes('bye') || userMessage.toLowerCase().includes('goodbye')) {
-            response = getRandomResponse(responseTemplates.farewell);
-        } else {
-            response = getRandomResponse(style.responses);
-        }
-
-        return response;
-    }
-
-    // Get random response from array
-    function getRandomResponse(responses) {
-        return responses[Math.floor(Math.random() * responses.length)];
-    }
-
-    // Handle user input
-    function handleUserInput() {
-        const message = userInput.value.trim();
-        if (message) {
-            // Add user message
-            addMessage(message, true);
-            userInput.value = '';
-
-            // Simulate typing delay based on response speed
-            const delay = responseSpeed.value === 'fast' ? 500 : 
-                         responseSpeed.value === 'normal' ? 1000 : 2000;
-
-            // Show typing indicator
-            const typingElement = document.createElement('div');
-            typingElement.className = 'message bot typing';
-            typingElement.innerHTML = `
-                <div class="message-content">
-                    <p>Typing...</p>
-                </div>
-            `;
-            chatMessages.appendChild(typingElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            // Generate and show response after delay
-            setTimeout(() => {
-                typingElement.remove();
-                const response = generateResponse(message);
-                addMessage(response);
-            }, delay);
-        }
-    }
-
-    // Clear chat
-    function clearChat() {
-        chatMessages.innerHTML = `
-            <div class="message bot">
-                <div class="message-content">
-                    <p>${chatStyles[chatStyle.value].greeting}</p>
-                </div>
-            </div>
+    // Function to show typing indicator
+    function showTypingIndicator() {
+        const indicator = document.createElement('div');
+        indicator.className = 'typing-indicator';
+        indicator.innerHTML = `
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
         `;
+        chatMessages.appendChild(indicator);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return indicator;
     }
 
-    // Save conversation
-    function saveConversation() {
-        const messages = Array.from(chatMessages.querySelectorAll('.message')).map(message => {
-            const isUser = message.classList.contains('user');
-            const content = message.querySelector('p').textContent;
-            return {
-                type: isUser ? 'user' : 'bot',
-                content
-            };
-        });
+    // Function to analyze user input for context
+    function analyzeInput(text) {
+        const lowerText = text.toLowerCase();
+        
+        // Update conversation context
+        if (lowerText.includes('code') || lowerText.includes('programming') || lowerText.includes('developer')) {
+            conversationContext.lastTopic = 'coding';
+            conversationContext.userInterests.add('coding');
+        } else if (lowerText.includes('ai') || lowerText.includes('artificial intelligence')) {
+            conversationContext.lastTopic = 'ai';
+            conversationContext.userInterests.add('ai');
+        }
 
-        const conversation = {
-            date: new Date().toLocaleString(),
-            style: chatStyle.value,
-            messages
+        // Count questions
+        if (lowerText.includes('?')) {
+            conversationContext.questionCount++;
+        }
+
+        return {
+            isQuestion: lowerText.includes('?'),
+            containsGreeting: /^(hi|hello|hey|greetings)/i.test(lowerText),
+            topic: conversationContext.lastTopic
         };
-
-        // Save to localStorage
-        const savedConversations = JSON.parse(localStorage.getItem('chatbotConversations') || '[]');
-        savedConversations.unshift(conversation);
-        if (savedConversations.length > 10) savedConversations.pop();
-        localStorage.setItem('chatbotConversations', JSON.stringify(savedConversations));
-
-        alert('Conversation saved successfully!');
     }
 
-    // Get conversation suggestions
-    function getSuggestions() {
-        const suggestions = [
-            "Tell me about yourself",
-            "What can you do?",
-            "How does AI work?",
-            "What's the weather like?",
-            "Tell me a joke",
-            "What's your favorite book?",
-            "How do you learn?",
-            "What's the meaning of life?",
-            "Can you help me with a problem?",
-            "What's your opinion on AI?"
-        ];
+    // Function to get bot response
+    function getBotResponse(text) {
+        const analysis = analyzeInput(text);
+        const lowerText = text.toLowerCase();
+        
+        // Handle greetings
+        if (analysis.containsGreeting) {
+            return getRandomResponse('greeting');
+        }
 
-        const suggestionElement = document.createElement('div');
-        suggestionElement.className = 'message bot suggestions';
-        suggestionElement.innerHTML = `
-            <div class="message-content">
-                <p>Here are some things you can ask me:</p>
-                <ul class="suggestion-list">
-                    ${suggestions.map(suggestion => `
-                        <li><button class="btn btn-link suggestion-btn">${suggestion}</button></li>
-                    `).join('')}
-                </ul>
-            </div>
-        `;
-        chatMessages.appendChild(suggestionElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Handle specific topics
+        if (lowerText.includes('joke')) {
+            return getRandomResponse('joke');
+        } else if (lowerText.includes('weather')) {
+            return getRandomResponse('weather');
+        } else if (lowerText.includes('code') || lowerText.includes('programming') || lowerText.includes('developer')) {
+            return getRandomResponse('coding');
+        } else if (lowerText.includes('ai') || lowerText.includes('artificial intelligence')) {
+            return getRandomResponse('ai');
+        }
 
-        // Add click handlers for suggestion buttons
-        suggestionElement.querySelectorAll('.suggestion-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                userInput.value = this.textContent;
-                handleUserInput();
-                suggestionElement.remove();
-            });
-        });
+        // Handle follow-up questions based on context
+        if (analysis.isQuestion && conversationContext.lastTopic) {
+            const followUpResponses = responses.followUp[conversationContext.lastTopic];
+            if (followUpResponses) {
+                return getRandomResponse(followUpResponses);
+            }
+        }
+
+        // Default response
+        return getRandomResponse('default');
     }
 
-    // Event listeners
-    sendBtn.addEventListener('click', handleUserInput);
-    userInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            handleUserInput();
+    // Function to get random response from category
+    function getRandomResponse(category) {
+        const categoryResponses = Array.isArray(category) ? category : responses[category];
+        return categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
+    }
+
+    // Function to process user input
+    async function processUserInput(input) {
+        if (isProcessing) return;
+        isProcessing = true;
+        
+        // Add user message
+        addMessage(input, true);
+        
+        // Show typing indicator
+        const typingIndicator = showTypingIndicator();
+        
+        // Simulate processing delay with variable timing
+        const delay = 800 + Math.random() * 1200;
+        await new Promise(resolve => setTimeout(resolve, delay));
+        
+        // Remove typing indicator
+        typingIndicator.remove();
+        
+        // Get and add bot response
+        const response = getBotResponse(input);
+        addMessage(response);
+        
+        isProcessing = false;
+    }
+
+    // Event Listeners
+    sendBtn.addEventListener('click', () => {
+        const input = chatInput.value.trim();
+        if (input) {
+            processUserInput(input);
+            chatInput.value = '';
         }
     });
-    clearBtn.addEventListener('click', clearChat);
-    saveBtn.addEventListener('click', saveConversation);
-    suggestBtn.addEventListener('click', getSuggestions);
-    chatStyle.addEventListener('change', clearChat);
 
-    // Initialize
-    clearChat();
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendBtn.click();
+        }
+    });
+
+    // Add click handlers for suggestion chips
+    suggestionChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            processUserInput(chip.textContent);
+        });
+    });
+
+    // Focus input on load
+    chatInput.focus();
 }); 

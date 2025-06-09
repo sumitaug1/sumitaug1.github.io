@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plagiarism Checker - Free Online Tool | Multi-Tools Hub</title>
-    <meta name="description" content="Check your text for plagiarism with our free online plagiarism checker. Compare your content against billions of web pages and academic papers.">
-    <meta name="keywords" content="plagiarism checker, duplicate content checker, content similarity checker, online plagiarism detector, text similarity checker, academic plagiarism checker">
+    <title>Text Summarizer - Free Online Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Summarize your text with our free online text summarizer. Get concise summaries while maintaining key information. Perfect for articles, essays, and documents.">
+    <meta name="keywords" content="text summarizer, article summarizer, text summary generator, online summarizer, text compression, content summarizer, automatic summarization">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,15 +15,15 @@
     <link href="../../assets/css/style.css" rel="stylesheet">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Plagiarism Checker - Free Online Tool">
-    <meta property="og:description" content="Check your text for plagiarism with our free online plagiarism checker. Compare your content against billions of web pages and academic papers.">
+    <meta property="og:title" content="Text Summarizer - Free Online Tool">
+    <meta property="og:description" content="Summarize your text with our free online text summarizer. Get concise summaries while maintaining key information. Perfect for articles, essays, and documents.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/plagiarism-checker.html">
+    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/text-summarizer.html">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Plagiarism Checker - Free Online Tool">
-    <meta name="twitter:description" content="Check your text for plagiarism with our free online plagiarism checker. Compare your content against billions of web pages and academic papers.">
+    <meta name="twitter:title" content="Text Summarizer - Free Online Tool">
+    <meta name="twitter:description" content="Summarize your text with our free online text summarizer. Get concise summaries while maintaining key information. Perfect for articles, essays, and documents.">
 </head>
 <body>
     <!-- Header will be loaded dynamically -->
@@ -32,8 +32,8 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4">Plagiarism Checker</h1>
-                <p class="lead text-center mb-4">Check your text for plagiarism and duplicate content</p>
+                <h1 class="text-center mb-4">Text Summarizer</h1>
+                <p class="lead text-center mb-4">Create concise summaries of your text while preserving key information</p>
             </div>
         </div>
 
@@ -48,13 +48,11 @@
 
                         <div class="row mb-4">
                             <div class="col-md-6 mb-3">
-                                <label for="languageSelect" class="form-label">Language</label>
-                                <select class="form-select" id="languageSelect">
-                                    <option value="en">English</option>
-                                    <option value="es">Spanish</option>
-                                    <option value="fr">French</option>
-                                    <option value="de">German</option>
-                                    <option value="it">Italian</option>
+                                <label for="summaryLength" class="form-label">Summary Length</label>
+                                <select class="form-select" id="summaryLength">
+                                    <option value="25">25% of original</option>
+                                    <option value="50" selected>50% of original</option>
+                                    <option value="75">75% of original</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -62,7 +60,7 @@
                                 <div class="d-flex justify-content-between">
                                     <span id="wordCount">Words: 0</span>
                                     <span id="charCount">Characters: 0</span>
-                                    <span id="similarityScore">Similarity: 0%</span>
+                                    <span id="summaryRatio">Ratio: 0%</span>
                                 </div>
                             </div>
                         </div>
@@ -71,11 +69,11 @@
                             <button class="btn btn-outline-secondary" id="clearBtn">
                                 <i class="fas fa-trash me-2"></i>Clear
                             </button>
-                            <button class="btn btn-primary" id="checkBtn">
-                                <i class="fas fa-search me-2"></i>Check Plagiarism
+                            <button class="btn btn-primary" id="summarizeBtn">
+                                <i class="fas fa-compress-alt me-2"></i>Summarize
                             </button>
                             <button class="btn btn-success" id="copyBtn">
-                                <i class="fas fa-copy me-2"></i>Copy Text
+                                <i class="fas fa-copy me-2"></i>Copy Summary
                             </button>
                         </div>
                     </div>
@@ -84,17 +82,14 @@
                 <!-- Results Card -->
                 <div class="card mt-4 shadow-sm" id="resultsCard" style="display: none;">
                     <div class="card-header">
-                        <h5 class="mb-0">Plagiarism Check Results</h5>
+                        <h5 class="mb-0">Summary</h5>
                     </div>
                     <div class="card-body">
-                        <div class="progress mb-4" style="height: 25px;">
-                            <div id="similarityBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                        <div id="summaryOutput" class="mb-3">
+                            <!-- Summary will be displayed here -->
                         </div>
-                        <div id="matchList" class="mb-3">
-                            <!-- Matches will be listed here -->
-                        </div>
-                        <div id="suggestions" class="mt-3">
-                            <!-- Suggestions will be shown here -->
+                        <div id="keyPoints" class="mt-3">
+                            <!-- Key points will be shown here -->
                         </div>
                     </div>
                 </div>
@@ -107,10 +102,10 @@
                     <div class="card-body">
                         <ul class="list-unstyled">
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter or paste your text in the input field</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your preferred language</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "Check Plagiarism" to analyze your text</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review the similarity score and matches</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the suggestions to improve your content</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose your desired summary length</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "Summarize" to generate the summary</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review the summary and key points</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Copy button to save your summary</li>
                         </ul>
                     </div>
                 </div>
@@ -124,16 +119,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><strong>Academic:</strong> Essays, research papers</li>
-                                    <li class="mb-2"><strong>Content Creation:</strong> Blog posts, articles</li>
-                                    <li class="mb-2"><strong>Business:</strong> Marketing copy, reports</li>
+                                    <li class="mb-2"><strong>Academic:</strong> Research papers, articles</li>
+                                    <li class="mb-2"><strong>Business:</strong> Reports, documents</li>
+                                    <li class="mb-2"><strong>Content Creation:</strong> Blog posts, news articles</li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><strong>Education:</strong> Student assignments</li>
-                                    <li class="mb-2"><strong>Publishing:</strong> Books, manuscripts</li>
-                                    <li class="mb-2"><strong>SEO:</strong> Website content</li>
+                                    <li class="mb-2"><strong>Education:</strong> Study materials, notes</li>
+                                    <li class="mb-2"><strong>Research:</strong> Literature reviews</li>
+                                    <li class="mb-2"><strong>Personal:</strong> Reading comprehension</li>
                                 </ul>
                             </div>
                         </div>
@@ -150,6 +145,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/text-tools/plagiarism-checker.js"></script>
+    <script src="../../assets/js/text-tools/text-summarizer.js"></script>
 </body>
 </html> 

@@ -248,6 +248,15 @@ const toolCategories = {
         { name: 'Markdown to HTML', path: 'tools/developer-tools/markdown-to-html.html', icon: 'fa-file-code', keywords: ['markdown', 'html', 'convert', 'developer', 'code'], category: 'Developer' },
         { name: 'Color Picker', path: 'tools/developer-tools/color-code-picker.html', icon: 'fa-palette', keywords: ['color', 'picker', 'developer', 'code', 'color picker'], category: 'Developer' },
         { name: 'Base64 Encoder/Decoder', path: 'tools/developer-tools/base64-encoder-decoder.html', icon: 'fa-code', keywords: ['base64', 'encode', 'decode', 'developer', 'code'], category: 'Developer' },
+        { 
+            name: 'File Comparison Tool', 
+            path: 'tools/developer-tools/file-comparison.html', 
+            icon: 'fa-code-compare', 
+            description: 'Compare two files and highlight the differences with syntax highlighting.',
+            keywords: ['file', 'compare', 'diff', 'difference', 'developer', 'code', 'comparison'],
+            category: 'Developer',
+            popularity: 85
+        },
         { name: 'IP Address Lookup', path: 'tools/developer-tools/ip-address-lookup.html', icon: 'fa-network-wired', keywords: ['ip', 'address', 'lookup', 'developer', 'network'], category: 'Developer' }
     ],
     'Calculators': [
@@ -337,9 +346,21 @@ const popularTools = [
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
-    // Always load header and footer
-    loadHeader();
-    loadFooter();
+    // Load header
+    fetch('../../components/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading header:', error));
+
+    // Load footer
+    fetch('../../components/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
     
     // Load other content
     loadCategories();
@@ -406,144 +427,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-// Load header component
-function loadHeader() {
-    const headerContainer = document.getElementById('header-container');
-    if (!headerContainer) {
-        console.error('Header container not found');
-        return;
-    }
-
-    const currentPath = window.location.pathname;
-    const isInToolsDirectory = currentPath.includes('/tools/');
-    const headerPath = isInToolsDirectory ? '../components/header.html' : 'components/header.html';
-
-    fetch(headerPath)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(html => {
-            headerContainer.innerHTML = html;
-            
-            // Initialize Bootstrap components
-            const dropdowns = headerContainer.querySelectorAll('.dropdown-toggle');
-            dropdowns.forEach(dropdown => {
-                new bootstrap.Dropdown(dropdown);
-            });
-        })
-        .catch(error => {
-            console.error('Error loading header:', error);
-            headerContainer.innerHTML = `
-                <header class="navbar navbar-expand-lg navbar-dark bg-primary">
-                    <div class="container">
-                        <a class="navbar-brand" href="${isInToolsDirectory ? '../index.html' : 'index.html'}">
-                            <i class="fas fa-tools me-2"></i>
-                            Multi-Tools Hub
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="${isInToolsDirectory ? '../index.html' : 'index.html'}">Home</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tools
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#image-tools">Image Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#pdf-tools">PDF Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#seo-tools">SEO Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#text-tools">Text Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#developer-tools">Developer Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#calculators">Calculators</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#unit-converters">Unit Converters</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#security-tools">Security Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#social-media-tools">Social Media Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#business-tools">Business Tools</a></li>
-                                        <li><a class="dropdown-item" href="${isInToolsDirectory ? '../index.html' : 'index.html'}#miscellaneous">Miscellaneous</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="${isInToolsDirectory ? '../tools/about.html' : 'tools/about.html'}">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="${isInToolsDirectory ? '../tools/contact.html' : 'tools/contact.html'}">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </header>
-            `;
-        });
-}
-
-// Load footer component
-function loadFooter() {
-    const footerContainer = document.getElementById('footer-container');
-    if (footerContainer) {
-        // Get the current path and determine if we're in the tools directory
-        const currentPath = window.location.pathname;
-        const isInToolsDirectory = currentPath.includes('/tools/');
-        const prefix = isInToolsDirectory ? '../' : '';
-
-        fetch(prefix + 'components/footer.html')
-            .then(response => response.text())
-            .then(html => {
-                footerContainer.innerHTML = html;
-                
-                // Update all links in the footer after it's loaded
-                const footerLinks = footerContainer.querySelectorAll('.footer-links a');
-                footerLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href) {
-                        link.href = prefix + href;
-                    }
-                });
-
-                const toolLinks = footerContainer.querySelectorAll('.tool-links a');
-                toolLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href) {
-                        link.href = prefix + href;
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error loading footer:', error);
-                // Provide fallback footer content with correct paths
-                footerContainer.innerHTML = `
-                    <footer class="bg-dark text-light py-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-4 mb-4">
-                                    <h5>About Multi-Tools Hub</h5>
-                                    <p>Your one-stop solution for all online tools. We provide 100+ free tools to make your work easier and more efficient.</p>
-                                </div>
-                                <div class="col-md-2 mb-4">
-                                    <h5>Quick Links</h5>
-                                    <ul class="list-unstyled">
-                                        <li><a href="${prefix}index.html" class="text-light">Home</a></li>
-                                        <li><a href="${prefix}tools/about.html" class="text-light">About</a></li>
-                                        <li><a href="${prefix}tools/contact.html" class="text-light">Contact</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6 text-md-end">
-                                    <p class="mb-0">&copy; ${new Date().getFullYear()} Multi-Tools Hub. All rights reserved.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                `;
-            });
-    }
-}
 
 // Load categories
 function loadCategories() {
@@ -924,4 +807,199 @@ function loadImageTools() {
             </div>
         `).join('');
     }
-} 
+}
+
+// Common utility functions
+const utils = {
+    // Copy text to clipboard
+    copyToClipboard: function(text) {
+        return navigator.clipboard.writeText(text)
+            .then(() => true)
+            .catch(() => false);
+    },
+
+    // Show notification
+    showNotification: function(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} notification fade-in`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    },
+
+    // Format number with commas
+    formatNumber: function(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+
+    // Debounce function
+    debounce: function(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+
+    // Validate input
+    validateInput: function(input, type) {
+        switch(type) {
+            case 'number':
+                return !isNaN(input) && isFinite(input);
+            case 'email':
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+            case 'url':
+                try {
+                    new URL(input);
+                    return true;
+                } catch {
+                    return false;
+                }
+            default:
+                return true;
+        }
+    },
+
+    // Generate random string
+    generateRandomString: function(length = 8) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    },
+
+    // Format date
+    formatDate: function(date, format = 'YYYY-MM-DD') {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        
+        return format
+            .replace('YYYY', year)
+            .replace('MM', month)
+            .replace('DD', day);
+    },
+
+    // File size formatter
+    formatFileSize: function(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+};
+
+// Add global error handler
+window.addEventListener('error', function(event) {
+    console.error('Global error:', event.error);
+    utils.showNotification('An error occurred. Please try again.', 'danger');
+});
+
+// Add global unhandled promise rejection handler
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('Unhandled promise rejection:', event.reason);
+    utils.showNotification('An error occurred. Please try again.', 'danger');
+});
+
+// Function to load header and footer
+async function loadComponents() {
+    try {
+        // Load header
+        const headerContainer = document.getElementById('header-container');
+        if (headerContainer) {
+            const headerResponse = await fetch('/components/header.html');
+            if (headerResponse.ok) {
+                const headerContent = await headerResponse.text();
+                headerContainer.innerHTML = headerContent;
+            }
+        }
+
+        // Load footer
+        const footerContainer = document.getElementById('footer-container');
+        if (footerContainer) {
+            const footerResponse = await fetch('/components/footer.html');
+            if (footerResponse.ok) {
+                const footerContent = await footerResponse.text();
+                footerContainer.innerHTML = footerContent;
+            } else {
+                // Fallback footer if the file can't be loaded
+                footerContainer.innerHTML = `
+                    <footer class="footer mt-5 py-3 bg-light">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Multi-Tools Hub</h5>
+                                    <p class="text-muted">Your one-stop solution for all online tools and utilities.</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Quick Links</h5>
+                                    <ul class="list-unstyled">
+                                        <li><a href="/" class="text-decoration-none">Home</a></li>
+                                        <li><a href="/tools" class="text-decoration-none">Tools</a></li>
+                                        <li><a href="/about" class="text-decoration-none">About</a></li>
+                                        <li><a href="/contact" class="text-decoration-none">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Connect With Us</h5>
+                                    <div class="social-links">
+                                        <a href="#" class="text-decoration-none me-2"><i class="fab fa-facebook"></i></a>
+                                        <a href="#" class="text-decoration-none me-2"><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="text-decoration-none me-2"><i class="fab fa-linkedin"></i></a>
+                                        <a href="#" class="text-decoration-none"><i class="fab fa-github"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="mb-0">&copy; 2024 Multi-Tools Hub. All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                `;
+            }
+        }
+    } catch (error) {
+        console.error('Error loading components:', error);
+        // Add fallback content if components fail to load
+        const headerContainer = document.getElementById('header-container');
+        const footerContainer = document.getElementById('footer-container');
+        
+        if (headerContainer) {
+            headerContainer.innerHTML = `
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container">
+                        <a class="navbar-brand" href="/">Multi-Tools Hub</a>
+                    </div>
+                </nav>
+            `;
+        }
+        
+        if (footerContainer) {
+            footerContainer.innerHTML = `
+                <footer class="footer mt-5 py-3 bg-light">
+                    <div class="container text-center">
+                        <p class="mb-0">&copy; 2024 Multi-Tools Hub. All rights reserved.</p>
+                    </div>
+                </footer>
+            `;
+        }
+    }
+}
+
+// Load components when the DOM is ready
+document.addEventListener('DOMContentLoaded', loadComponents); 

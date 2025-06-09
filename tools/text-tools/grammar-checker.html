@@ -3,531 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grammar Checker - Text Tools</title>
-    <meta name="description" content="Free online grammar checker to detect and correct grammar, spelling, and punctuation errors. Improve your writing instantly and easily.">
-    <meta name="keywords" content="grammar checker, online grammar corrector, spell checker, punctuation checker, writing assistant, grammar correction tool, English grammar tool, online grammar checker, grammar checker online">
-
+    <title>Grammar Checker - Free Online Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Check your text for grammar, spelling, and punctuation errors with our free online grammar checker. Improve your writing with instant feedback and suggestions.">
+    <meta name="keywords" content="grammar checker, spell checker, punctuation checker, grammar correction, online grammar check, writing tool, text correction, grammar tool">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .tool-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        #inputText {
-            min-height: 200px;
-            resize: vertical;
-        }
-        .issues-container {
-            margin-top: 1rem;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .issue-card {
-            margin-bottom: 0.5rem;
-            border-left: 4px solid #dc3545;
-        }
-        .issue-card .card-body {
-            padding: 0.75rem;
-        }
-        .issue-card .card-title {
-            margin-bottom: 0.25rem;
-            font-size: 1rem;
-        }
-        .issue-card .card-text {
-            margin-bottom: 0.25rem;
-            font-size: 0.9rem;
-        }
-        .issue-card .suggestion {
-            color: #198754;
-            font-weight: 500;
-        }
-        .highlight {
-            background-color: #fff3cd;
-            padding: 0 2px;
-            border-radius: 2px;
-        }
-        .stats {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        .stat-card {
-            flex: 1;
-            text-align: center;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            background-color: #f8f9fa;
-        }
-        .stat-card .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #0d6efd;
-        }
-        .stat-card .stat-label {
-            font-size: 0.8rem;
-            color: #6c757d;
-        }
-        .info-text {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-top: 0.5rem;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Grammar Checker - Free Online Tool">
+    <meta property="og:description" content="Check your text for grammar, spelling, and punctuation errors with our free online grammar checker. Improve your writing with instant feedback and suggestions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/grammar-checker.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Grammar Checker - Free Online Tool">
+    <meta name="twitter:description" content="Check your text for grammar, spelling, and punctuation errors with our free online grammar checker. Improve your writing with instant feedback and suggestions.">
 </head>
 <body>
-    <div class="container tool-container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-spell-check me-2"></i>
-            Grammar Checker
-        </h1>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
 
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-value" id="wordCount">0</div>
-                <div class="stat-label">Words</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="issueCount">0</div>
-                <div class="stat-label">Issues Found</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="readabilityScore">0</div>
-                <div class="stat-label">Readability Score</div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Grammar Checker</h1>
+                <p class="lead text-center mb-4">Check your text for grammar, spelling, and punctuation errors</p>
             </div>
         </div>
 
-        <div class="mb-3">
-            <label for="inputText" class="form-label">Enter Text to Check</label>
-            <textarea class="form-control" id="inputText" placeholder="Enter your text here..."></textarea>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="textInput" class="form-label">Enter your text</label>
+                            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..." rows="6"></textarea>
+                        </div>
 
-        <div class="d-flex justify-content-between mb-3">
-            <button class="btn btn-outline-secondary" id="clearBtn">
-                <i class="fas fa-trash me-2"></i>Clear
-            </button>
-            <button class="btn btn-primary" id="checkBtn">
-                <i class="fas fa-check me-2"></i>Check Grammar
-            </button>
-        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <label for="languageSelect" class="form-label">Language</label>
+                                <select class="form-select" id="languageSelect">
+                                    <option value="en-US">English (US)</option>
+                                    <option value="en-GB">English (UK)</option>
+                                    <option value="es-ES">Spanish</option>
+                                    <option value="fr-FR">French</option>
+                                    <option value="de-DE">German</option>
+                                    <option value="it-IT">Italian</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Statistics</label>
+                                <div class="d-flex justify-content-between">
+                                    <span id="wordCount">Words: 0</span>
+                                    <span id="charCount">Characters: 0</span>
+                                    <span id="errorCount">Errors: 0</span>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="issues-container" id="issuesContainer">
-            <!-- Issues will be displayed here -->
-        </div>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary" id="clearBtn">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn btn-primary" id="checkBtn">
+                                <i class="fas fa-check me-2"></i>Check Grammar
+                            </button>
+                            <button class="btn btn-success" id="copyBtn">
+                                <i class="fas fa-copy me-2"></i>Copy Text
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="info-text">
-            <p><strong>Note:</strong> This tool checks for common grammar issues and provides suggestions for improvement.</p>
-            <p><strong>Features:</strong> Word count, readability score, and basic grammar checking.</p>
-            <p><strong>Limitations:</strong> This is a basic grammar checker. For more advanced checking, consider using a professional grammar checking service.</p>
+                <!-- Results Card -->
+                <div class="card mt-4 shadow-sm" id="resultsCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Grammar Check Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="errorList" class="mb-3">
+                            <!-- Errors will be listed here -->
+                        </div>
+                        <div id="suggestions" class="mt-3">
+                            <!-- Suggestions will be shown here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter or paste your text in the input field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your preferred language</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "Check Grammar" to analyze your text</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review the suggestions and corrections</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Copy button to save your corrected text</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Common Use Cases Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Use Cases</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Academic:</strong> Essays, research papers</li>
+                                    <li class="mb-2"><strong>Professional:</strong> Emails, reports</li>
+                                    <li class="mb-2"><strong>Creative:</strong> Blog posts, stories</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Business:</strong> Proposals, presentations</li>
+                                    <li class="mb-2"><strong>Social Media:</strong> Posts, comments</li>
+                                    <li class="mb-2"><strong>Personal:</strong> Letters, notes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const inputText = document.getElementById('inputText');
-        const checkBtn = document.getElementById('checkBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const issuesContainer = document.getElementById('issuesContainer');
-        const wordCountElement = document.getElementById('wordCount');
-        const issueCountElement = document.getElementById('issueCount');
-        const readabilityScoreElement = document.getElementById('readabilityScore');
-
-        // Common grammar rules and their suggestions
-        const grammarRules = [
-            {
-                pattern: /\b(i)\b/gi,
-                suggestion: 'Use "I" instead of "i"',
-                type: 'Capitalization'
-            },
-            {
-                pattern: /\b(their|there|they're)\b/gi,
-                suggestion: 'Check usage of "their", "there", or "they\'re"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(your|you're)\b/gi,
-                suggestion: 'Check usage of "your" or "you\'re"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(its|it's)\b/gi,
-                suggestion: 'Check usage of "its" or "it\'s"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(affect|effect)\b/gi,
-                suggestion: 'Check usage of "affect" or "effect"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(then|than)\b/gi,
-                suggestion: 'Check usage of "then" or "than"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(loose|lose)\b/gi,
-                suggestion: 'Check usage of "loose" or "lose"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(principal|principle)\b/gi,
-                suggestion: 'Check usage of "principal" or "principle"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(compliment|complement)\b/gi,
-                suggestion: 'Check usage of "compliment" or "complement"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(accept|except)\b/gi,
-                suggestion: 'Check usage of "accept" or "except"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(weather|whether)\b/gi,
-                suggestion: 'Check usage of "weather" or "whether"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(lead|led)\b/gi,
-                suggestion: 'Check usage of "lead" or "led"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(passed|past)\b/gi,
-                suggestion: 'Check usage of "passed" or "past"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(quiet|quite)\b/gi,
-                suggestion: 'Check usage of "quiet" or "quite"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(desert|dessert)\b/gi,
-                suggestion: 'Check usage of "desert" or "dessert"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(advice|advise)\b/gi,
-                suggestion: 'Check usage of "advice" or "advise"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(practice|practise)\b/gi,
-                suggestion: 'Check usage of "practice" or "practise"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(licence|license)\b/gi,
-                suggestion: 'Check usage of "licence" or "license"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(device|devise)\b/gi,
-                suggestion: 'Check usage of "device" or "devise"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(ensure|insure|assure)\b/gi,
-                suggestion: 'Check usage of "ensure", "insure", or "assure"',
-                type: 'Common Confusion'
-            },
-            {
-                pattern: /\b(among|between)\b/gi,
-                suggestion: 'Use "between" for two items, "among" for three or more',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(fewer|less)\b/gi,
-                suggestion: 'Use "fewer" for countable items, "less" for uncountable quantities',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(further|farther)\b/gi,
-                suggestion: 'Use "farther" for physical distance, "further" for metaphorical distance',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(lay|lie)\b/gi,
-                suggestion: 'Use "lie" for reclining, "lay" for placing something down',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(raise|rise)\b/gi,
-                suggestion: 'Use "raise" for lifting something, "rise" for moving upward',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(set|sit)\b/gi,
-                suggestion: 'Use "sit" for taking a seat, "set" for placing something',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(bring|take)\b/gi,
-                suggestion: 'Use "bring" for movement toward the speaker, "take" for movement away',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(emigrate|immigrate)\b/gi,
-                suggestion: 'Use "emigrate" for leaving a country, "immigrate" for entering a country',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(imply|infer)\b/gi,
-                suggestion: 'Use "imply" for suggesting, "infer" for deducing',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(disinterested|uninterested)\b/gi,
-                suggestion: 'Use "disinterested" for impartial, "uninterested" for not interested',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(historic|historical)\b/gi,
-                suggestion: 'Use "historic" for important events, "historical" for relating to history',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(continual|continuous)\b/gi,
-                suggestion: 'Use "continual" for repeated actions, "continuous" for uninterrupted actions',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(everyday|every day)\b/gi,
-                suggestion: 'Use "everyday" as an adjective, "every day" as an adverb',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(anyway|any way)\b/gi,
-                suggestion: 'Use "anyway" as an adverb, "any way" as a noun phrase',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(anytime|any time)\b/gi,
-                suggestion: 'Use "anytime" as an adverb, "any time" as a noun phrase',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(sometime|some time)\b/gi,
-                suggestion: 'Use "sometime" as an adverb, "some time" as a noun phrase',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(sometimes|some times)\b/gi,
-                suggestion: 'Use "sometimes" as an adverb, "some times" as a noun phrase',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(altogether|all together)\b/gi,
-                suggestion: 'Use "altogether" as an adverb, "all together" as a phrase',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(already|all ready)\b/gi,
-                suggestion: 'Use "already" as an adverb, "all ready" as a phrase',
-                type: 'Usage'
-            },
-            {
-                pattern: /\b(alright|all right)\b/gi,
-                suggestion: 'Use "all right" as the correct spelling',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(a lot)\b/gi,
-                suggestion: 'Use "a lot" as two words',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(alot)\b/gi,
-                suggestion: 'Use "a lot" as two words',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(its')\b/gi,
-                suggestion: 'Remove the apostrophe from "its" when used as a possessive pronoun',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(whos)\b/gi,
-                suggestion: 'Use "whose" for possession, "who\'s" for "who is" or "who has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(you're're)\b/gi,
-                suggestion: 'Use "you\'re" for "you are"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(they're're)\b/gi,
-                suggestion: 'Use "they\'re" for "they are"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(we're're)\b/gi,
-                suggestion: 'Use "we\'re" for "we are"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(he's's)\b/gi,
-                suggestion: 'Use "he\'s" for "he is" or "he has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(she's's)\b/gi,
-                suggestion: 'Use "she\'s" for "she is" or "she has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(it's's)\b/gi,
-                suggestion: 'Use "it\'s" for "it is" or "it has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(that's's)\b/gi,
-                suggestion: 'Use "that\'s" for "that is" or "that has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(who's's)\b/gi,
-                suggestion: 'Use "who\'s" for "who is" or "who has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(what's's)\b/gi,
-                suggestion: 'Use "what\'s" for "what is" or "what has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(where's's)\b/gi,
-                suggestion: 'Use "where\'s" for "where is" or "where has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(when's's)\b/gi,
-                suggestion: 'Use "when\'s" for "when is" or "when has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(why's's)\b/gi,
-                suggestion: 'Use "why\'s" for "why is" or "why has"',
-                type: 'Spelling'
-            },
-            {
-                pattern: /\b(how's's)\b/gi,
-                suggestion: 'Use "how\'s" for "how is" or "how has"',
-                type: 'Spelling'
-            }
-        ];
-
-        function countWords(text) {
-            return text.trim().split(/\s+/).filter(word => word.length > 0).length;
-        }
-
-        function calculateReadability(text) {
-            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
-            const sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0);
-            const characters = text.replace(/\s/g, '').length;
-
-            if (words.length === 0 || sentences.length === 0) return 0;
-
-            const averageWordsPerSentence = words.length / sentences.length;
-            const averageCharactersPerWord = characters / words.length;
-
-            // Simple readability score (higher is better)
-            let score = 100;
-            score -= (averageWordsPerSentence - 15) * 2; // Penalize long sentences
-            score -= (averageCharactersPerWord - 5) * 5; // Penalize long words
-            score = Math.max(0, Math.min(100, score)); // Clamp between 0 and 100
-
-            return Math.round(score);
-        }
-
-        function checkGrammar(text) {
-            const issues = [];
-            let highlightedText = text;
-
-            grammarRules.forEach(rule => {
-                const matches = [...text.matchAll(rule.pattern)];
-                matches.forEach(match => {
-                    const word = match[0];
-                    const index = match.index;
-                    
-                    issues.push({
-                        word,
-                        suggestion: rule.suggestion,
-                        type: rule.type,
-                        index
-                    });
-
-                    // Add highlight to the word
-                    highlightedText = highlightedText.substring(0, index) +
-                        `<span class="highlight">${word}</span>` +
-                        highlightedText.substring(index + word.length);
-                });
-            });
-
-            return { issues, highlightedText };
-        }
-
-        function displayIssues(issues, highlightedText) {
-            issuesContainer.innerHTML = '';
-            
-            if (issues.length === 0) {
-                issuesContainer.innerHTML = `
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle me-2"></i>
-                        No grammar issues found!
-                    </div>
-                `;
-                return;
-            }
-
-            issues.forEach(issue => {
-                const card = document.createElement('div');
-                card.className = 'card issue-card';
-                card.innerHTML = `
-                    <div class="card-body">
-                        <h5 class="card-title">${issue.type}</h5>
-                        <p class="card-text">Found: <strong>${issue.word}</strong></p>
-                        <p class="card-text suggestion">Suggestion: ${issue.suggestion}</p>
-                    </div>
-                `;
-                issuesContainer.appendChild(card);
-            });
-
-            inputText.innerHTML = highlightedText;
-        }
-
-        function updateStats(text, issues) {
-            const wordCount = countWords(text);
-            const readabilityScore = calculateReadability(text);
-
-            wordCountElement.textContent = wordCount;
-            issueCountElement.textContent = issues.length;
-            readabilityScoreElement.textContent = readabilityScore;
-        }
-
-        checkBtn.addEventListener('click', () => {
-            const text = inputText.value;
-            const { issues, highlightedText } = checkGrammar(text);
-            
-            displayIssues(issues, highlightedText);
-            updateStats(text, issues);
-        });
-
-        clearBtn.addEventListener('click', () => {
-            inputText.value = '';
-            issuesContainer.innerHTML = '';
-            wordCountElement.textContent = '0';
-            issueCountElement.textContent = '0';
-            readabilityScoreElement.textContent = '0';
-        });
-
-        // Initialize with empty text
-        updateStats('', []);
-    </script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/text-tools/grammar-checker.js"></script>
 </body>
 </html> 

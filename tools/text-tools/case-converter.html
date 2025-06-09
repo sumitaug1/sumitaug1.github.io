@@ -3,176 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Converter - Text Tools</title>
+    <title>Case Converter - Free Text Case Conversion Tool | Multi-Tools Hub</title>
     <meta name="description" content="Easily convert text to uppercase, lowercase, sentence case, title case, and more with our free online case converter tool. Simple, fast, and accurate.">
     <meta name="keywords" content="case converter, text case converter, uppercase to lowercase, lowercase to uppercase, title case converter, sentence case tool, online case converter, case converter online, online text case converter, text case converter online">
-
-
     
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .tool-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        .case-options {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        .case-option {
-            flex: 1;
-            min-width: 120px;
-        }
-        #textInput, #resultText {
-            min-height: 200px;
-            resize: vertical;
-        }
-        .result-container {
-            position: relative;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Case Converter - Free Text Case Conversion Tool">
+    <meta property="og:description" content="Easily convert text to uppercase, lowercase, sentence case, title case, and more with our free online case converter tool. Simple, fast, and accurate.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/case-converter.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Case Converter - Free Text Case Conversion Tool">
+    <meta name="twitter:description" content="Easily convert text to uppercase, lowercase, sentence case, title case, and more with our free online case converter tool. Simple, fast, and accurate.">
 </head>
 <body>
-    <div class="container tool-container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-font me-2"></i>
-            Case Converter
-        </h1>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
 
-        <div class="case-options">
-            <button class="btn btn-outline-primary case-option" data-case="upper">
-                <i class="fas fa-text-height me-2"></i>UPPERCASE
-            </button>
-            <button class="btn btn-outline-primary case-option" data-case="lower">
-                <i class="fas fa-text-height me-2"></i>lowercase
-            </button>
-            <button class="btn btn-outline-primary case-option" data-case="title">
-                <i class="fas fa-text-height me-2"></i>Title Case
-            </button>
-            <button class="btn btn-outline-primary case-option" data-case="sentence">
-                <i class="fas fa-text-height me-2"></i>Sentence case
-            </button>
-            <button class="btn btn-outline-primary case-option" data-case="camel">
-                <i class="fas fa-text-height me-2"></i>camelCase
-            </button>
-            <button class="btn btn-outline-primary case-option" data-case="pascal">
-                <i class="fas fa-text-height me-2"></i>PascalCase
-            </button>
-            <button class="btn btn-outline-primary case-option" data-case="snake">
-                <i class="fas fa-text-height me-2"></i>snake_case
-            </button>
-            <button class="btn btn-outline-primary case-option" data-case="kebab">
-                <i class="fas fa-text-height me-2"></i>kebab-case
-            </button>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Case Converter</h1>
+                <p class="lead text-center mb-4">Convert text between different case formats easily and quickly</p>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..."></textarea>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="case-options mb-4">
+                            <button class="btn btn-outline-primary case-option" data-case="upper">
+                                <i class="fas fa-text-height me-2"></i>UPPERCASE
+                            </button>
+                            <button class="btn btn-outline-primary case-option" data-case="lower">
+                                <i class="fas fa-text-height me-2"></i>lowercase
+                            </button>
+                            <button class="btn btn-outline-primary case-option" data-case="title">
+                                <i class="fas fa-text-height me-2"></i>Title Case
+                            </button>
+                            <button class="btn btn-outline-primary case-option" data-case="sentence">
+                                <i class="fas fa-text-height me-2"></i>Sentence case
+                            </button>
+                            <button class="btn btn-outline-primary case-option" data-case="camel">
+                                <i class="fas fa-text-height me-2"></i>camelCase
+                            </button>
+                            <button class="btn btn-outline-primary case-option" data-case="pascal">
+                                <i class="fas fa-text-height me-2"></i>PascalCase
+                            </button>
+                            <button class="btn btn-outline-primary case-option" data-case="snake">
+                                <i class="fas fa-text-height me-2"></i>snake_case
+                            </button>
+                            <button class="btn btn-outline-primary case-option" data-case="kebab">
+                                <i class="fas fa-text-height me-2"></i>kebab-case
+                            </button>
+                        </div>
 
-        <div class="result-container mb-3">
-            <textarea class="form-control" id="resultText" placeholder="Converted text will appear here..." readonly></textarea>
-            <button class="btn btn-outline-primary copy-btn" id="copyBtn">
-                <i class="fas fa-copy"></i>
-            </button>
-        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..." rows="6"></textarea>
+                        </div>
 
-        <div class="d-flex justify-content-between">
-            <button class="btn btn-outline-secondary" id="clearBtn">
-                <i class="fas fa-trash me-2"></i>Clear
-            </button>
-            <button class="btn btn-outline-primary" id="swapBtn">
-                <i class="fas fa-exchange-alt me-2"></i>Swap
-            </button>
+                        <div class="result-container mb-3">
+                            <textarea class="form-control" id="resultText" placeholder="Converted text will appear here..." readonly rows="6"></textarea>
+                            <button class="btn btn-outline-primary copy-btn" id="copyBtn">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary" id="clearBtn">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn btn-outline-primary" id="swapBtn">
+                                <i class="fas fa-exchange-alt me-2"></i>Swap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter or paste your text in the input field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your desired case format from the options above</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Copy button to copy the converted text</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Swap button to exchange input and output text</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Clear button to reset both fields</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Common Use Cases Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Use Cases</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>UPPERCASE:</strong> Headers, Acronyms</li>
+                                    <li class="mb-2"><strong>lowercase:</strong> URLs, File names</li>
+                                    <li class="mb-2"><strong>Title Case:</strong> Titles, Headings</li>
+                                    <li class="mb-2"><strong>Sentence case:</strong> Paragraphs, Articles</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>camelCase:</strong> JavaScript variables</li>
+                                    <li class="mb-2"><strong>PascalCase:</strong> Class names, Components</li>
+                                    <li class="mb-2"><strong>snake_case:</strong> Python variables, CSS classes</li>
+                                    <li class="mb-2"><strong>kebab-case:</strong> URLs, CSS classes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const textInput = document.getElementById('textInput');
-        const resultText = document.getElementById('resultText');
-        const clearBtn = document.getElementById('clearBtn');
-        const copyBtn = document.getElementById('copyBtn');
-        const swapBtn = document.getElementById('swapBtn');
-        const caseButtons = document.querySelectorAll('.case-option');
-
-        function convertCase(text, caseType) {
-            switch(caseType) {
-                case 'upper':
-                    return text.toUpperCase();
-                case 'lower':
-                    return text.toLowerCase();
-                case 'title':
-                    return text.toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
-                case 'sentence':
-                    return text.toLowerCase().replace(/^.|\.\s+./g, l => l.toUpperCase());
-                case 'camel':
-                    return text.toLowerCase()
-                        .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
-                case 'pascal':
-                    return text.toLowerCase()
-                        .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
-                        .replace(/^./, str => str.toUpperCase());
-                case 'snake':
-                    return text.toLowerCase().replace(/\s+/g, '_');
-                case 'kebab':
-                    return text.toLowerCase().replace(/\s+/g, '-');
-                default:
-                    return text;
-            }
-        }
-
-        function updateResult() {
-            const text = textInput.value;
-            const activeCase = document.querySelector('.case-option.active')?.dataset.case || 'upper';
-            resultText.value = convertCase(text, activeCase);
-        }
-
-        caseButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                caseButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                updateResult();
-            });
-        });
-
-        textInput.addEventListener('input', updateResult);
-
-        clearBtn.addEventListener('click', () => {
-            textInput.value = '';
-            resultText.value = '';
-        });
-
-        copyBtn.addEventListener('click', () => {
-            resultText.select();
-            document.execCommand('copy');
-            
-            // Show feedback
-            const originalHTML = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-            setTimeout(() => {
-                copyBtn.innerHTML = originalHTML;
-            }, 2000);
-        });
-
-        swapBtn.addEventListener('click', () => {
-            const temp = textInput.value;
-            textInput.value = resultText.value;
-            resultText.value = temp;
-        });
-
-        // Initialize with uppercase as default
-        caseButtons[0].classList.add('active');
-        updateResult();
-    </script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/text-tools/case-converter.js"></script>
 </body>
 </html> 

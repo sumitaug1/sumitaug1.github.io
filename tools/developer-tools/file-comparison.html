@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Comparison Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --diff-added-bg: #ffebee;
+            --diff-removed-bg: #ffebee;
+            --diff-changed-bg: #ffebee;
+            --diff-color: #d32f2f;
+        }
+
+        [data-theme="dark"] {
+            --diff-added-bg: #4d1b1b;
+            --diff-removed-bg: #4d1b1b;
+            --diff-changed-bg: #4d1b1b;
+            --diff-color: #ff8a80;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .card {
+            background-color: #2d2d2d;
+            border-color: #404040;
+        }
+
+        [data-theme="dark"] .form-control {
+            background-color: #333;
+            border-color: #404040;
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .btn-outline-secondary {
+            border-color: #404040;
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .btn-outline-secondary:hover {
+            background-color: #404040;
+            color: #ffffff;
+        }
+
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-container input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        [data-theme="dark"] .file-input-label {
+            background: #333;
+            border-color: #404040;
+            color: #ffffff;
+        }
+
+        .comparison-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .file-content {
+            position: relative;
+            height: 600px;
+            overflow: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        [data-theme="dark"] .file-content {
+            border-color: #404040;
+        }
+
+        .line-numbers {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 100%;
+            background: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            padding: 10px 5px;
+            text-align: right;
+            color: #6c757d;
+            user-select: none;
+            font-family: monospace;
+        }
+
+        [data-theme="dark"] .line-numbers {
+            background: #2d2d2d;
+            border-color: #404040;
+            color: #a0a0a0;
+        }
+
+        .code-content {
+            margin-left: 50px;
+            padding: 10px;
+            font-family: monospace;
+            white-space: pre;
+        }
+
+        .diff-added {
+            background-color: var(--diff-added-bg);
+            color: var(--diff-color);
+        }
+
+        .diff-removed {
+            background-color: var(--diff-removed-bg);
+            color: var(--diff-color);
+        }
+
+        .diff-changed {
+            background-color: var(--diff-changed-bg);
+            color: var(--diff-color);
+        }
+
+        .diff-info {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom-left-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        [data-theme="dark"] .diff-info {
+            background: rgba(45, 45, 45, 0.9);
+        }
+
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        .keyboard-shortcuts {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1000;
+        }
+
+        .search-container {
+            margin-top: 10px;
+        }
+
+        .search-highlight {
+            background-color: #ffd700;
+        }
+
+        .word-wrap-toggle {
+            margin-left: 10px;
+        }
+
+        .sync-scroll-toggle {
+            margin-left: 10px;
+        }
+
+        .diff-stats {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        [data-theme="dark"] .diff-stats {
+            background: #2d2d2d;
+        }
+
+        .file-content pre {
+            margin: 0;
+            padding: 0;
+        }
+
+        .file-content pre code {
+            padding: 0;
+            background: transparent;
+        }
+
+        .file-content pre code div {
+            padding: 2px 0;
+            min-height: 1.5em;
+        }
+
+        .file-content pre code div:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .file-content pre code div:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .line-number {
+            display: inline-block;
+            width: 40px;
+            text-align: right;
+            padding-right: 10px;
+            color: #6c757d;
+            user-select: none;
+        }
+
+        [data-theme="dark"] .line-number {
+            color: #a0a0a0;
+        }
+
+        .diff-content {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">File Comparison Tool</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">File 1</h5>
+                        <div class="file-input-container">
+                            <input type="file" id="file1" class="form-control" accept=".txt,.js,.html,.css,.json,.xml,.md">
+                            <label for="file1" class="file-input-label">
+                                <i class="fas fa-file"></i> Choose File
+                            </label>
+                        </div>
+                        <div id="file1Name" class="mt-2">No file selected</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">File 2</h5>
+                        <div class="file-input-container">
+                            <input type="file" id="file2" class="form-control" accept=".txt,.js,.html,.css,.json,.xml,.md">
+                            <label for="file2" class="file-input-label">
+                                <i class="fas fa-file"></i> Choose File
+                            </label>
+                        </div>
+                        <div id="file2Name" class="mt-2">No file selected</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2 mb-3">
+            <button id="compareBtn" class="btn btn-primary" disabled>
+                <i class="fas fa-code-compare"></i> Compare Files
+            </button>
+            <button id="clearBtn" class="btn btn-outline-secondary">
+                <i class="fas fa-trash"></i> Clear
+            </button>
+            <button id="toggleThemeBtn" class="btn btn-outline-secondary">
+                <i class="fas fa-moon"></i> Toggle Theme
+            </button>
+        </div>
+
+        <div class="search-container">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search in files...">
+                <button id="clearSearch" class="btn btn-outline-secondary">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button id="prevMatch" class="btn btn-outline-secondary">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+                <button id="nextMatch" class="btn btn-outline-secondary">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-check form-check-inline word-wrap-toggle">
+            <input class="form-check-input" type="checkbox" id="wordWrapToggle">
+            <label class="form-check-label" for="wordWrapToggle">Word Wrap</label>
+        </div>
+
+        <div class="form-check form-check-inline sync-scroll-toggle">
+            <input class="form-check-input" type="checkbox" id="syncScrollToggle" checked>
+            <label class="form-check-label" for="syncScrollToggle">Sync Scroll</label>
+        </div>
+
+        <div id="diffStats" class="diff-stats">
+            <div class="row">
+                <div class="col">
+                    <span class="text-success">
+                        <i class="fas fa-plus"></i> <span id="addedCount">0</span> added
+                    </span>
+                </div>
+                <div class="col">
+                    <span class="text-danger">
+                        <i class="fas fa-minus"></i> <span id="removedCount">0</span> removed
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="comparisonContainer" class="comparison-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="file1Content" class="file-content">
+                        <div class="line-numbers"></div>
+                        <div class="diff-info"></div>
+                        <pre><code></code></pre>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="file2Content" class="file-content">
+                        <div class="line-numbers"></div>
+                        <div class="diff-info"></div>
+                        <pre><code></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="keyboard-shortcuts">
+        <h5>Keyboard Shortcuts</h5>
+        <ul class="list-unstyled">
+            <li><kbd>Ctrl</kbd> + <kbd>D</kbd> - Toggle Theme</li>
+            <li><kbd>Ctrl</kbd> + <kbd>C</kbd> - Clear Files</li>
+            <li><kbd>Ctrl</kbd> + <kbd>F</kbd> - Search</li>
+            <li><kbd>Ctrl</kbd> + <kbd>W</kbd> - Toggle Word Wrap</li>
+            <li><kbd>Ctrl</kbd> + <kbd>S</kbd> - Toggle Sync Scroll</li>
+            <li><kbd>F3</kbd> - Next Match</li>
+            <li><kbd>Shift</kbd> + <kbd>F3</kbd> - Previous Match</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js"></script>
+    <script src="../../assets/js/developer-tools/file-comparison.js"></script>
+</body>
+</html>

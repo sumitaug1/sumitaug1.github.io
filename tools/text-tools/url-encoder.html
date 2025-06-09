@@ -3,162 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Encoder/Decoder - Text Tools</title>
-    <meta name="description" content="Encode URLs quickly and easily with our free online URL encoder tool. Convert special characters into safe, encoded URL format.">
-    <meta name="keywords" content="URL encoder, encode URL, online URL encoding tool, percent encoding, convert to URL safe format, web encoding tool, URL converter, online URL encoder, URL encoder online">
-
+    <title>URL Encoder - Free URL Encoding Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Encode URLs to make them web-safe with our free online URL encoder tool. Convert special characters and spaces to URL-friendly format.">
+    <meta name="keywords" content="url encoder, url encoding, percent encoding, url encode online, url encoder online, url encoding tool, url percent encoding">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .tool-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        .action-button {
-            flex: 1;
-        }
-        #inputText, #outputText {
-            min-height: 150px;
-            resize: vertical;
-        }
-        .result-container {
-            position: relative;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .info-text {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-top: 0.5rem;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="URL Encoder - Free URL Encoding Tool">
+    <meta property="og:description" content="Encode URLs to make them web-safe with our free online URL encoder tool. Convert special characters and spaces to URL-friendly format.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/url-encoder.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="URL Encoder - Free URL Encoding Tool">
+    <meta name="twitter:description" content="Encode URLs to make them web-safe with our free online URL encoder tool. Convert special characters and spaces to URL-friendly format.">
 </head>
 <body>
-    <div class="container tool-container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-link me-2"></i>
-            URL Encoder/Decoder
-        </h1>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
 
-        <div class="action-buttons">
-            <button class="btn btn-outline-primary action-button" id="encodeBtn">
-                <i class="fas fa-lock me-2"></i>Encode URL
-            </button>
-            <button class="btn btn-outline-primary action-button" id="decodeBtn">
-                <i class="fas fa-unlock me-2"></i>Decode URL
-            </button>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">URL Encoder</h1>
+                <p class="lead text-center mb-4">Encode URLs to make them web-safe and properly formatted</p>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="inputText" class="form-label">Input</label>
-            <textarea class="form-control" id="inputText" placeholder="Enter text to encode or decode..."></textarea>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="inputUrl" class="form-label">Enter URL to encode</label>
+                            <textarea class="form-control" id="inputUrl" placeholder="Enter your URL here..." rows="3"></textarea>
+                        </div>
 
-        <div class="result-container mb-3">
-            <label for="outputText" class="form-label">Output</label>
-            <textarea class="form-control" id="outputText" placeholder="Result will appear here..." readonly></textarea>
-            <button class="btn btn-outline-primary copy-btn" id="copyBtn">
-                <i class="fas fa-copy"></i>
-            </button>
-        </div>
+                        <div class="mb-3">
+                            <label for="encodedUrl" class="form-label">Encoded URL</label>
+                            <div class="input-group">
+                                <textarea class="form-control" id="encodedUrl" placeholder="Encoded URL will appear here..." rows="3" readonly></textarea>
+                                <button class="btn btn-outline-primary" id="copyBtn">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
 
-        <div class="info-text">
-            <p><strong>URL Encoding:</strong> Converts special characters to their percent-encoded representation (e.g., space becomes %20)</p>
-            <p><strong>URL Decoding:</strong> Converts percent-encoded characters back to their original form</p>
-        </div>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary" id="clearBtn">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn btn-outline-primary" id="encodeBtn">
+                                <i class="fas fa-code me-2"></i>Encode
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="d-flex justify-content-between">
-            <button class="btn btn-outline-secondary" id="clearBtn">
-                <i class="fas fa-trash me-2"></i>Clear
-            </button>
-            <button class="btn btn-outline-primary" id="swapBtn">
-                <i class="fas fa-exchange-alt me-2"></i>Swap
-            </button>
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter your URL in the input field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "Encode" to convert special characters</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Copy button to copy the encoded URL</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Clear button to reset both fields</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Common Use Cases Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Use Cases</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Web Development:</strong> Query parameters</li>
+                                    <li class="mb-2"><strong>API Integration:</strong> Request URLs</li>
+                                    <li class="mb-2"><strong>SEO:</strong> URL optimization</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Social Media:</strong> Sharing links</li>
+                                    <li class="mb-2"><strong>Email Marketing:</strong> Tracking links</li>
+                                    <li class="mb-2"><strong>Analytics:</strong> Campaign URLs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const inputText = document.getElementById('inputText');
-        const outputText = document.getElementById('outputText');
-        const encodeBtn = document.getElementById('encodeBtn');
-        const decodeBtn = document.getElementById('decodeBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const copyBtn = document.getElementById('copyBtn');
-        const swapBtn = document.getElementById('swapBtn');
-
-        function encodeURL(text) {
-            return encodeURIComponent(text);
-        }
-
-        function decodeURL(text) {
-            try {
-                return decodeURIComponent(text);
-            } catch (e) {
-                return "Error: Invalid URL encoding";
-            }
-        }
-
-        function updateOutput() {
-            const text = inputText.value;
-            const isEncoding = encodeBtn.classList.contains('active');
-            
-            if (isEncoding) {
-                outputText.value = encodeURL(text);
-            } else {
-                outputText.value = decodeURL(text);
-            }
-        }
-
-        encodeBtn.addEventListener('click', () => {
-            encodeBtn.classList.add('active');
-            decodeBtn.classList.remove('active');
-            updateOutput();
-        });
-
-        decodeBtn.addEventListener('click', () => {
-            decodeBtn.classList.add('active');
-            encodeBtn.classList.remove('active');
-            updateOutput();
-        });
-
-        inputText.addEventListener('input', updateOutput);
-
-        clearBtn.addEventListener('click', () => {
-            inputText.value = '';
-            outputText.value = '';
-        });
-
-        copyBtn.addEventListener('click', () => {
-            outputText.select();
-            document.execCommand('copy');
-            
-            // Show feedback
-            const originalHTML = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-            setTimeout(() => {
-                copyBtn.innerHTML = originalHTML;
-            }, 2000);
-        });
-
-        swapBtn.addEventListener('click', () => {
-            const temp = inputText.value;
-            inputText.value = outputText.value;
-            outputText.value = temp;
-        });
-
-        // Initialize with encoding as default
-        encodeBtn.classList.add('active');
-        updateOutput();
-    </script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/text-tools/url-encoder.js"></script>
 </body>
 </html> 

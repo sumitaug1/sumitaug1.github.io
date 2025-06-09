@@ -3,165 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Counter - Text Tools</title>
-    <meta name="description" content="Free online character counter tool to count characters, words, and spaces in your text. Perfect for tweets, meta tags, and academic writing.">
-    <meta name="keywords" content="character counter, word counter, text length checker, count characters online, online word counter, character count tool, text analyzer, online text analyzer, online word counter, word counter online, online character counter, character counter online">
-
+    <title>Character Counter - Free Text Analysis Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Count characters, words, sentences, and paragraphs in your text with our free online character counter tool. Fast, accurate, and easy to use.">
+    <meta name="keywords" content="character counter, word counter, text analysis, character count, word count, sentence count, paragraph count, online character counter, character counter online">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .tool-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        .stats-container {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        .stat-box {
-            text-align: center;
-            padding: 1rem;
-            border-radius: 8px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #0d6efd;
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        #textInput {
-            min-height: 200px;
-            resize: vertical;
-        }
-        .limit-input {
-            max-width: 100px;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Character Counter - Free Text Analysis Tool">
+    <meta property="og:description" content="Count characters, words, sentences, and paragraphs in your text with our free online character counter tool. Fast, accurate, and easy to use.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/tools/text-tools/character-counter.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Character Counter - Free Text Analysis Tool">
+    <meta name="twitter:description" content="Count characters, words, sentences, and paragraphs in your text with our free online character counter tool. Fast, accurate, and easy to use.">
 </head>
 <body>
-    <div class="container tool-container">
-        <h1 class="text-center mb-4">
-            <i class="fas fa-text-width me-2"></i>
-            Character Counter
-        </h1>
-        
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="stat-box">
-                    <div class="stat-value" id="charCount">0</div>
-                    <div class="stat-label">Characters</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-box">
-                    <div class="stat-value" id="charNoSpaceCount">0</div>
-                    <div class="stat-label">Characters (no spaces)</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-box">
-                    <div class="stat-value" id="remainingCount">0</div>
-                    <div class="stat-label">Remaining</div>
-                </div>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Character Counter</h1>
+                <p class="lead text-center mb-4">Analyze your text with detailed character, word, and sentence counts</p>
             </div>
         </div>
 
-        <div class="mb-3">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Character Limit</span>
-                <input type="number" class="form-control limit-input" id="charLimit" value="280" min="1">
-                <button class="btn btn-outline-secondary" type="button" id="resetLimit">
-                    <i class="fas fa-undo"></i>
-                </button>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..." rows="6"></textarea>
+                        </div>
+
+                        <div class="row text-center mb-4">
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Characters</h6>
+                                        <h3 id="charCount">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Words</h6>
+                                        <h3 id="wordCount">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Sentences</h6>
+                                        <h3 id="sentenceCount">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Paragraphs</h6>
+                                        <h3 id="paragraphCount">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary" id="clearBtn">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn btn-outline-primary" id="copyBtn">
+                                <i class="fas fa-copy me-2"></i>Copy Text
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Tips Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usage Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter or paste your text in the input field</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Counts update automatically as you type</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Copy button to copy your text</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use the Clear button to reset the counter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Common Use Cases Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Common Use Cases</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Social Media:</strong> Twitter (280 chars), Facebook posts</li>
+                                    <li class="mb-2"><strong>SEO:</strong> Meta descriptions (150-160 chars)</li>
+                                    <li class="mb-2"><strong>Academic:</strong> Essay word counts</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Content Writing:</strong> Blog post lengths</li>
+                                    <li class="mb-2"><strong>Email:</strong> Subject line length</li>
+                                    <li class="mb-2"><strong>Technical:</strong> Code documentation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="mb-3">
-            <textarea class="form-control" id="textInput" placeholder="Type or paste your text here..."></textarea>
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <button class="btn btn-outline-secondary" id="clearBtn">
-                <i class="fas fa-trash me-2"></i>Clear
-            </button>
-            <button class="btn btn-outline-primary" id="copyBtn">
-                <i class="fas fa-copy me-2"></i>Copy
-            </button>
         </div>
     </div>
 
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const textInput = document.getElementById('textInput');
-        const charCount = document.getElementById('charCount');
-        const charNoSpaceCount = document.getElementById('charNoSpaceCount');
-        const remainingCount = document.getElementById('remainingCount');
-        const charLimit = document.getElementById('charLimit');
-        const clearBtn = document.getElementById('clearBtn');
-        const copyBtn = document.getElementById('copyBtn');
-        const resetLimit = document.getElementById('resetLimit');
-
-        function updateCounts() {
-            const text = textInput.value;
-            const limit = parseInt(charLimit.value) || 0;
-            
-            // Character count
-            const count = text.length;
-            charCount.textContent = count;
-            
-            // Character count (no spaces)
-            const noSpaceCount = text.replace(/\s/g, '').length;
-            charNoSpaceCount.textContent = noSpaceCount;
-            
-            // Remaining count
-            const remaining = limit - count;
-            remainingCount.textContent = remaining;
-            
-            // Update colors based on limit
-            if (remaining < 0) {
-                remainingCount.style.color = '#dc3545';
-            } else if (remaining < limit * 0.2) {
-                remainingCount.style.color = '#ffc107';
-            } else {
-                remainingCount.style.color = '#0d6efd';
-            }
-        }
-
-        textInput.addEventListener('input', updateCounts);
-        charLimit.addEventListener('input', updateCounts);
-
-        clearBtn.addEventListener('click', () => {
-            textInput.value = '';
-            updateCounts();
-        });
-
-        resetLimit.addEventListener('click', () => {
-            charLimit.value = '280';
-            updateCounts();
-        });
-
-        copyBtn.addEventListener('click', () => {
-            textInput.select();
-            document.execCommand('copy');
-            
-            // Show feedback
-            const originalText = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
-            setTimeout(() => {
-                copyBtn.innerHTML = originalText;
-            }, 2000);
-        });
-
-        // Initialize counts
-        updateCounts();
-    </script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/text-tools/character-counter.js"></script>
 </body>
 </html> 
