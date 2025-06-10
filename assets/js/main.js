@@ -435,10 +435,26 @@ function loadCategories() {
 
     container.innerHTML = '';
 
+    // Map category names to their file paths
+    const categoryPaths = {
+        'Image Tools': 'tools/image-tools.html',
+        'PDF Tools': 'tools/pdf-tools.html',
+        'SEO Tools': 'tools/seo-tools.html',
+        'Text Tools': 'tools/text-tools.html',
+        'Developer Tools': 'tools/developer-tools.html',
+        'Calculators': 'tools/calculator-tools.html',
+        'Unit Converters': 'tools/unit-converters.html',
+        'Security Tools': 'tools/security-tools.html',
+        'Social Media Tools': 'tools/social-media-tools.html',
+        'Business Tools': 'tools/business-tools.html',
+        'Miscellaneous': 'tools/miscellaneous.html'
+    };
+
     Object.entries(toolCategories).forEach(([category, tools]) => {
         // Handle both array and object structures
         const toolList = Array.isArray(tools) ? tools : (tools.tools || []);
         const categoryName = tools.name || category;
+        const categoryPath = categoryPaths[category] || `tools/${category.toLowerCase().replace(/\s+/g, '-')}.html`;
         
         const categoryCard = document.createElement('div');
         categoryCard.className = 'col-md-6 col-lg-4';
@@ -446,7 +462,11 @@ function loadCategories() {
         categoryCard.innerHTML = `
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">${categoryName}</h5>
+                    <h5 class="card-title">
+                        <a href="${categoryPath}" class="text-decoration-none text-dark">
+                            ${categoryName}
+                        </a>
+                    </h5>
                     <ul class="list-unstyled">
                         ${toolList.slice(0, 5).map(tool => `
                             <li>
@@ -458,84 +478,15 @@ function loadCategories() {
                         `).join('')}
                     </ul>
                     ${category === 'PDF Tools' || toolList.length > 5 ? `
-                        <button type="button" class="btn btn-sm btn-outline-primary mt-2 view-all-btn" data-category="${category}">
+                        <a href="${categoryPath}" class="btn btn-sm btn-outline-primary mt-2">
                             View All ${toolList.length} Tools
-                        </button>
+                        </a>
                     ` : ''}
                 </div>
             </div>
         `;
         
         container.appendChild(categoryCard);
-    });
-
-    // Add click handler for "View All" buttons
-    document.querySelectorAll('.view-all-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            const tools = Array.isArray(toolCategories[category]) 
-                ? toolCategories[category] 
-                : (toolCategories[category].tools || []);
-            
-            // Create modal content
-            const modalContent = `
-                <div class="modal fade" id="toolsModal" tabindex="-1" aria-labelledby="toolsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="toolsModalLabel">
-                                    <i class="fas fa-tools me-2"></i>
-                                    ${category} Tools
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                                    ${tools.map(tool => `
-                                        <div class="col">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">
-                                                        <i class="fas ${tool.icon} me-2"></i>
-                                                        ${tool.name}
-                                                    </h6>
-                                                    ${tool.description ? `
-                                                        <p class="card-text small text-muted">${tool.description}</p>
-                                                    ` : ''}
-                                                    <a href="${tool.path}" class="btn btn-primary btn-sm">Use Tool</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Remove any existing modal
-            const existingModal = document.getElementById('toolsModal');
-            if (existingModal) {
-                existingModal.remove();
-            }
-            
-            // Add modal to body
-            document.body.insertAdjacentHTML('beforeend', modalContent);
-            
-            // Initialize and show modal
-            const modalElement = document.getElementById('toolsModal');
-            const modal = new bootstrap.Modal(modalElement);
-            modal.show();
-            
-            // Remove modal from DOM after it's hidden
-            modalElement.addEventListener('hidden.bs.modal', function () {
-                this.remove();
-            });
-        });
     });
 }
 
