@@ -923,6 +923,33 @@ async function loadComponents() {
             if (headerResponse.ok) {
                 const headerContent = await headerResponse.text();
                 headerContainer.innerHTML = headerContent;
+                
+                // Update navigation links based on current location
+                const currentPath = window.location.pathname;
+                const isInToolsDirectory = currentPath.includes('/tools/');
+                const prefix = isInToolsDirectory ? '../' : '';
+
+                // Update all navigation links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && !href.startsWith('#')) {
+                        if (href === 'about.html') {
+                            link.href = prefix + 'tools/about.html';
+                        } else if (href === 'contact.html') {
+                            link.href = prefix + 'tools/contact.html';
+                        } else {
+                            link.href = prefix + href;
+                        }
+                    }
+                });
+
+                // Update dropdown links
+                document.querySelectorAll('.dropdown-item').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href) {
+                        link.href = prefix + href;
+                    }
+                });
             }
         }
 
@@ -933,44 +960,24 @@ async function loadComponents() {
             if (footerResponse.ok) {
                 const footerContent = await footerResponse.text();
                 footerContainer.innerHTML = footerContent;
-            } else {
-                // Fallback footer if the file can't be loaded
-                footerContainer.innerHTML = `
-                    <footer class="footer mt-5 py-3 bg-light">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5>Multi-Tools Hub</h5>
-                                    <p class="text-muted">Your one-stop solution for all online tools and utilities.</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <h5>Quick Links</h5>
-                                    <ul class="list-unstyled">
-                                        <li><a href="/" class="text-decoration-none">Home</a></li>
-                                        <li><a href="/tools" class="text-decoration-none">Tools</a></li>
-                                        <li><a href="/about" class="text-decoration-none">About</a></li>
-                                        <li><a href="/contact" class="text-decoration-none">Contact</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3">
-                                    <h5>Connect With Us</h5>
-                                    <div class="social-links">
-                                        <a href="#" class="text-decoration-none me-2"><i class="fab fa-facebook"></i></a>
-                                        <a href="#" class="text-decoration-none me-2"><i class="fab fa-twitter"></i></a>
-                                        <a href="#" class="text-decoration-none me-2"><i class="fab fa-linkedin"></i></a>
-                                        <a href="#" class="text-decoration-none"><i class="fab fa-github"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <p class="mb-0">&copy; 2024 Multi-Tools Hub. All rights reserved.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                `;
+                
+                // Update footer links
+                const currentPath = window.location.pathname;
+                const isInToolsDirectory = currentPath.includes('/tools/');
+                const prefix = isInToolsDirectory ? '../' : '';
+
+                document.querySelectorAll('.footer-links a').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && !href.startsWith('#')) {
+                        if (href === 'about.html') {
+                            link.href = prefix + 'tools/about.html';
+                        } else if (href === 'contact.html') {
+                            link.href = prefix + 'tools/contact.html';
+                        } else {
+                            link.href = prefix + href;
+                        }
+                    }
+                });
             }
         }
     } catch (error) {
