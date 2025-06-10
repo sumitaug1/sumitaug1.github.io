@@ -30,16 +30,17 @@
                     <li><a href="tools/seo-tools.html" class="text-light">SEO Tools</a></li>
                     <li><a href="tools/text-tools.html" class="text-light">Text Tools</a></li>
                     <li><a href="tools/developer-tools.html" class="text-light">Developer Tools</a></li>
-                    <li><a href="tools/calculators.html" class="text-light">Calculators</a></li>
+                    <li><a href="tools/calculator-tools.html" class="text-light">Calculators</a></li>
                 </ul>
             </div>
             
             <div class="col-md-3 mb-4">
                 <h5>More Categories</h5>
                 <ul class="list-unstyled tool-links">
-                    <li><a href="tools/converters.html" class="text-light">Unit Converters</a></li>
+                    <li><a href="tools/unit-converters.html" class="text-light">Unit Converters</a></li>
                     <li><a href="tools/security-tools.html" class="text-light">Security Tools</a></li>
                     <li><a href="tools/social-media-tools.html" class="text-light">Social Media Tools</a></li>
+                    <li><a href="tools/business-tools.html" class="text-light">Business Tools</a></li>
                     <li><a href="tools/miscellaneous.html" class="text-light">Miscellaneous</a></li>
                 </ul>
             </div>
@@ -61,16 +62,24 @@
 <script>
     // Function to update all links in the footer
     function updateFooterLinks() {
-        // Get the current path and determine if we're in the tools directory
+        // Get the current path and determine the correct prefix
         const currentPath = window.location.pathname;
-        const isInToolsDirectory = currentPath.includes('/tools/');
-        const prefix = isInToolsDirectory ? '../' : '';
+        const pathParts = currentPath.split('/').filter(Boolean);
+        const isInToolsDirectory = pathParts.includes('tools');
+        const toolsIndex = pathParts.indexOf('tools');
+        const depth = pathParts.length - (toolsIndex + 1);
+        
+        // Calculate the correct prefix based on depth
+        let prefix = '';
+        if (isInToolsDirectory) {
+            prefix = '../'.repeat(depth);
+        }
 
         // Update all quick links
         const footerLinks = document.querySelectorAll('.footer-links a');
         footerLinks.forEach(link => {
             const href = link.getAttribute('href');
-            if (href) {
+            if (href && !href.startsWith('http')) {
                 link.href = prefix + href;
             }
         });
@@ -79,7 +88,7 @@
         const toolLinks = document.querySelectorAll('.tool-links a');
         toolLinks.forEach(link => {
             const href = link.getAttribute('href');
-            if (href) {
+            if (href && !href.startsWith('http')) {
                 link.href = prefix + href;
             }
         });
