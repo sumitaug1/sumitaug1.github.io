@@ -15,6 +15,183 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../../assets/css/style.css" rel="stylesheet">
+    <style>
+        .json-formatter {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tool-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        }
+        
+        .btn {
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #0d6efd, #0a58ca);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #0a58ca, #084298);
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid #0d6efd;
+        }
+        
+        .btn-outline-primary:hover {
+            background: #0d6efd;
+            transform: translateY(-1px);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #0d6efd;
+            font-size: 1.5rem;
+        }
+        
+        .stat-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-item h6 {
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item span {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0d6efd;
+        }
+        
+        .search-highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .tree-view .tree-node {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        
+        .tree-view .tree-toggle {
+            cursor: pointer;
+            margin-right: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .tree-view .tree-toggle.expanded {
+            transform: rotate(90deg);
+        }
+        
+        .tree-view .json-path {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .tree-view .json-type {
+            color: #0d6efd;
+            font-size: 0.75rem;
+            padding: 0.125rem 0.375rem;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+        
+        .dark-theme {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        .dark-theme .tool-card {
+            background-color: #2d2d2d;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark-theme .form-control,
+        .dark-theme .form-select {
+            background-color: #2d2d2d;
+            border-color: #404040;
+            color: #ffffff;
+        }
+        
+        .dark-theme .stat-item {
+            background-color: #2d2d2d;
+        }
+        
+        .dark-theme .stat-item h6 {
+            color: #adb5bd;
+        }
+        
+        .dark-theme .search-highlight {
+            background-color: #664d03;
+        }
+        
+        .tooltip-inner {
+            max-width: 300px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .keyboard-shortcut {
+            background: #e9ecef;
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+        
+        .dark-theme .keyboard-shortcut {
+            background: #404040;
+            color: #adb5bd;
+        }
+    </style>
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="JSON Formatter - Free Developer Tool">
@@ -31,7 +208,7 @@
     <!-- Header will be loaded dynamically -->
     <div id="header-container"></div>
 
-    <div class="container mt-4">
+    <div class="container mt-4 json-formatter">
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center mb-4">JSON Formatter</h1>
@@ -41,48 +218,108 @@
 
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card shadow-sm">
+                <div class="card tool-card">
                     <div class="card-body">
                         <form id="jsonFormatterForm">
                             <div class="mb-3">
-                                <label for="jsonInput" class="form-label">JSON Input</label>
-                                <textarea class="form-control" id="jsonInput" rows="10" placeholder='{"example": "Enter your JSON here"}' required></textarea>
+                                <label for="jsonInput" class="form-label">
+                                    JSON Input
+                                    <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" title="Paste your JSON data here to format and validate"></i>
+                                </label>
+                                <div id="jsonInput" class="form-control" style="resize: vertical; min-height: 200px; font-family: monospace; white-space: pre; overflow-wrap: normal; overflow-x: scroll;" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true"></div>
                                 <div class="form-text">Paste your JSON data to format and validate</div>
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="formatType" class="form-label">Format Type</label>
+                                <div class="col-md-4">
+                                    <label for="formatType" class="form-label">
+                                        Format Type
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" title="Choose how to format your JSON"></i>
+                                    </label>
                                     <select class="form-select" id="formatType">
                                         <option value="beautify">Beautify</option>
                                         <option value="minify">Minify</option>
+                                        <option value="tree">Tree View</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="indentSize" class="form-label">Indent Size</label>
+                                <div class="col-md-4">
+                                    <label for="indentSize" class="form-label">
+                                        Indent Size
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" title="Choose the number of spaces for indentation"></i>
+                                    </label>
                                     <select class="form-select" id="indentSize">
                                         <option value="2">2 Spaces</option>
                                         <option value="4">4 Spaces</option>
                                         <option value="8">8 Spaces</option>
                                     </select>
                                 </div>
+                                <div class="col-md-4">
+                                    <label for="schemaType" class="form-label">
+                                        Schema Validation
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" title="Validate your JSON against a schema"></i>
+                                    </label>
+                                    <select class="form-select" id="schemaType">
+                                        <option value="none">No Validation</option>
+                                        <option value="draft-07">JSON Schema Draft-07</option>
+                                        <option value="custom">Custom Schema</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3" id="customSchemaContainer" style="display: none;">
+                                <div class="col-12">
+                                    <label for="customSchema" class="form-label">
+                                        Custom JSON Schema
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" title="Enter your custom JSON Schema for validation"></i>
+                                    </label>
+                                    <textarea class="form-control" id="customSchema" rows="5" placeholder='{"type": "object", "properties": {...}}'></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-secondary" id="themeToggle" data-bs-toggle="tooltip" title="Toggle between light and dark theme">
+                                            <i class="fas fa-moon"></i> Toggle Theme
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary" id="searchButton" data-bs-toggle="tooltip" title="Search in JSON (F3 to navigate)">
+                                            <i class="fas fa-search"></i> Search
+                                            <span class="keyboard-shortcut ms-1">F3</span>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary" id="statsButton" data-bs-toggle="tooltip" title="Show JSON statistics">
+                                            <i class="fas fa-chart-bar"></i> Show Stats
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Format JSON</button>
-                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">Clear</button>
-                                <button type="button" class="btn btn-outline-primary ms-2" id="copyButton">Copy to Clipboard</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-magic me-1"></i> Format JSON
+                                </button>
+                                <button type="button" class="btn btn-secondary ms-2" id="clearButton">
+                                    <i class="fas fa-eraser me-1"></i> Clear
+                                </button>
+                                <button type="button" class="btn btn-outline-primary ms-2" id="copyButton">
+                                    <i class="fas fa-copy me-1"></i> Copy to Clipboard
+                                </button>
+                                <button type="button" class="btn btn-outline-success ms-2" id="downloadButton">
+                                    <i class="fas fa-download me-1"></i> Download
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
 
-                <div class="card mt-4 shadow-sm" id="resultCard" style="display: none;">
+                <div class="card tool-card mt-4" id="resultCard" style="display: none;">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Formatted JSON</h5>
-                        <div>
-                            <button class="btn btn-sm btn-outline-primary" id="downloadButton">
-                                <i class="fas fa-download me-1"></i>Download
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-primary" id="copyFormattedButton" data-bs-toggle="tooltip" title="Copy formatted JSON">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" id="downloadFormattedButton" data-bs-toggle="tooltip" title="Download formatted JSON">
+                                <i class="fas fa-download"></i> Download
                             </button>
                         </div>
                     </div>
@@ -103,9 +340,6 @@
                             <div class="mb-3">
                                 <h6>Formatted Output</h6>
                                 <div class="position-relative">
-                                    <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2" id="copyFormattedButton">
-                                        <i class="fas fa-copy me-1"></i>Copy
-                                    </button>
                                     <pre><code id="formattedOutput" class="language-json"></code></pre>
                                 </div>
                             </div>
@@ -113,6 +347,40 @@
                             <div id="errorDetails" class="alert alert-danger" style="display: none;">
                                 <h6>Error Details</h6>
                                 <div id="errorMessage"></div>
+                            </div>
+
+                            <div id="jsonStats" class="card mt-3" style="display: none;">
+                                <div class="card-header">
+                                    <h6 class="mb-0">JSON Statistics</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="stat-item">
+                                                <h6>Total Keys</h6>
+                                                <span id="totalKeys">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="stat-item">
+                                                <h6>Array Items</h6>
+                                                <span id="arrayItems">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="stat-item">
+                                                <h6>Nested Objects</h6>
+                                                <span id="nestedObjects">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="stat-item">
+                                                <h6>File Size</h6>
+                                                <span id="fileSize">0 KB</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,16 +390,38 @@
 
         <div class="row mt-5">
             <div class="col-12">
-                <div class="card shadow-sm">
+                <div class="card tool-card">
                     <div class="card-body">
-                        <h2 class="h4 mb-3">Why Use JSON Formatter?</h2>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Validate JSON syntax</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Improve readability</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Detect errors easily</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimize JSON size</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enhance development workflow</li>
-                        </ul>
+                        <h2 class="h4 mb-4 text-center">Why Use JSON Formatter?</h2>
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center">
+                                    <div class="feature-icon mx-auto">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <h5>Validate JSON Syntax</h5>
+                                    <p class="text-muted">Ensure your JSON is valid and properly formatted</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center">
+                                    <div class="feature-icon mx-auto">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <h5>Improve Readability</h5>
+                                    <p class="text-muted">Make your JSON more readable with proper formatting</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center">
+                                    <div class="feature-icon mx-auto">
+                                        <i class="fas fa-bug"></i>
+                                    </div>
+                                    <h5>Detect Errors</h5>
+                                    <p class="text-muted">Quickly identify and fix JSON syntax errors</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
