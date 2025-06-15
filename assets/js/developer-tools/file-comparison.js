@@ -1,395 +1,372 @@
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
-    const file1Input = document.getElementById('file1');
-    const file2Input = document.getElementById('file2');
-    const file1Name = document.getElementById('file1Name');
-    const file2Name = document.getElementById('file2Name');
-    const compareBtn = document.getElementById('compareBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const toggleThemeBtn = document.getElementById('toggleThemeBtn');
-    const comparisonContainer = document.getElementById('comparisonContainer');
-    const file1Content = document.getElementById('file1Content');
-    const file2Content = document.getElementById('file2Content');
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    const keyboardShortcuts = document.querySelector('.keyboard-shortcuts');
-    const searchInput = document.getElementById('searchInput');
-    const clearSearch = document.getElementById('clearSearch');
-    const prevMatch = document.getElementById('prevMatch');
-    const nextMatch = document.getElementById('nextMatch');
-    const wordWrapToggle = document.getElementById('wordWrapToggle');
-    const syncScrollToggle = document.getElementById('syncScrollToggle');
-    const diffStats = document.getElementById('diffStats');
-    const addedCount = document.getElementById('addedCount');
-    const removedCount = document.getElementById('removedCount');
-
-    // State variables
-    let currentTheme = localStorage.getItem('theme') || 'light';
-    let file1Data = null;
-    let file2Data = null;
-    let searchMatches = [];
-    let currentMatchIndex = -1;
-    let isWordWrapEnabled = localStorage.getItem('wordWrap') === 'true';
-    let isSyncScrollEnabled = localStorage.getItem('syncScroll') !== 'false';
-
-    // Initialize theme and settings
-    document.body.setAttribute('data-theme', currentTheme);
-    wordWrapToggle.checked = isWordWrapEnabled;
-    syncScrollToggle.checked = isSyncScrollEnabled;
-    updateWordWrap();
-
-    // Event Listeners
-    file1Input.addEventListener('change', handleFileSelect);
-    file2Input.addEventListener('change', handleFileSelect);
-    compareBtn.addEventListener('click', compareFiles);
-    clearBtn.addEventListener('click', clearFiles);
-    toggleThemeBtn.addEventListener('click', toggleTheme);
-    searchInput.addEventListener('input', handleSearch);
-    clearSearch.addEventListener('click', clearSearchInput);
-    prevMatch.addEventListener('click', () => navigateSearch(-1));
-    nextMatch.addEventListener('click', () => navigateSearch(1));
-    wordWrapToggle.addEventListener('change', toggleWordWrap);
-    syncScrollToggle.addEventListener('change', toggleSyncScroll);
-
-    // Handle file selection
-    function handleFileSelect(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        const fileNameElement = event.target.id === 'file1' ? file1Name : file2Name;
-        fileNameElement.textContent = file.name;
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            if (event.target.id === 'file1') {
-                file1Data = e.target.result;
-            } else {
-                file2Data = e.target.result;
-            }
-            updateCompareButton();
-        };
-        reader.readAsText(file);
-    }
-
-    // Update compare button state
-    function updateCompareButton() {
-        compareBtn.disabled = !(file1Data && file2Data);
-    }
-
-    // Compare files
-    async function compareFiles() {
-        if (!file1Data || !file2Data) {
-            alert('Please select both files to compare');
-            return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Comparison Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
         }
-
-        try {
-            const spinner = document.getElementById('loadingSpinner');
-            const container = document.querySelector('.comparison-container');
-            const file1Content = document.getElementById('file1Content');
-            const file2Content = document.getElementById('file2Content');
-            const diffStats = document.getElementById('diffStats');
-
-            if (spinner) spinner.style.display = 'block';
-            if (container) container.style.display = 'block';
-            if (file1Content) file1Content.innerHTML = '';
-            if (file2Content) file2Content.innerHTML = '';
-            if (diffStats) diffStats.style.display = 'none';
-
-            const diff = Diff.createTwoFilesPatch(
-                'file1',
-                'file2',
-                file1Data,
-                file2Data,
-                undefined,
-                undefined,
-                { context: 3 }
-            );
-
-            const diffLines = diff.split('\n');
-            let lineNumber1 = 1;
-            let lineNumber2 = 1;
-            let addedLines = 0;
-            let removedLines = 0;
-            let changedLines = 0;
-
-            let file1Html = '';
-            let file2Html = '';
-
-            for (let i = 0; i < diffLines.length; i++) {
-                const line = diffLines[i];
-                
-                if (line.startsWith('@@')) {
-                    // Skip the diff header
-                    continue;
-                } else if (line.startsWith('+') && !line.startsWith('+++')) {
-                    file2Html += `<div class="diff-added">${lineNumber2}: ${escapeHtml(line.substring(1))}</div>`;
-                    lineNumber2++;
-                    addedLines++;
-                } else if (line.startsWith('-') && !line.startsWith('---')) {
-                    file1Html += `<div class="diff-removed">${lineNumber1}: ${escapeHtml(line.substring(1))}</div>`;
-                    lineNumber1++;
-                    removedLines++;
-                } else if (line.startsWith(' ')) {
-                    const content = line.substring(1);
-                    file1Html += `<div>${lineNumber1}: ${escapeHtml(content)}</div>`;
-                    file2Html += `<div>${lineNumber2}: ${escapeHtml(content)}</div>`;
-                    lineNumber1++;
-                    lineNumber2++;
-                }
-            }
-
-            if (file1Content) file1Content.innerHTML = file1Html;
-            if (file2Content) file2Content.innerHTML = file2Html;
-
-            if (diffStats) {
-                diffStats.innerHTML = `
-                    <div class="row">
-                        <div class="col">
-                            <strong>Added:</strong> ${addedLines} lines
-                        </div>
-                        <div class="col">
-                            <strong>Removed:</strong> ${removedLines} lines
-                        </div>
-                        <div class="col">
-                            <strong>Changed:</strong> ${changedLines} lines
-                        </div>
-                    </div>
-                `;
-                diffStats.style.display = 'block';
-            }
-
-            if (spinner) spinner.style.display = 'none';
-        } catch (error) {
-            console.error('Error comparing files:', error);
-            alert('Error comparing files. Please try again.');
-            const spinner = document.getElementById('loadingSpinner');
-            if (spinner) spinner.style.display = 'none';
+        .file-content {
+            height: 60vh;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Consolas', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.5;
+            tab-size: 4;
         }
-    }
-
-    // Clear files
-    function clearFiles() {
-        file1Input.value = '';
-        file2Input.value = '';
-        file1Name.textContent = 'No file selected';
-        file2Name.textContent = 'No file selected';
-        file1Data = null;
-        file2Data = null;
-        comparisonContainer.style.display = 'none';
-        diffStats.style.display = 'none';
-        clearSearchInput();
-        updateCompareButton();
-    }
-
-    // Toggle theme
-    function toggleTheme() {
-        currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-        document.body.setAttribute('data-theme', currentTheme);
-        localStorage.setItem('theme', currentTheme);
-    }
-
-    // Handle search
-    function handleSearch() {
-        const searchText = searchInput.value.toLowerCase();
-        if (!searchText) {
-            clearSearchInput();
-            return;
+        .line {
+            padding: 2px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+            position: relative;
         }
-
-        // Clear previous highlights
-        document.querySelectorAll('.search-highlight').forEach(el => {
-            const parent = el.parentNode;
-            parent.replaceChild(document.createTextNode(el.textContent), el);
-            parent.normalize();
-        });
-
-        // Find matches
-        searchMatches = [];
-        const content1 = file1Content.querySelector('pre code');
-        const content2 = file2Content.querySelector('pre code');
-
-        [content1, content2].forEach((content, fileIndex) => {
-            const text = content.textContent;
-            let match;
-            const regex = new RegExp(escapeRegExp(searchText), 'gi');
-            
-            while ((match = regex.exec(text)) !== null) {
-                searchMatches.push({
-                    fileIndex,
-                    start: match.index,
-                    end: match.index + match[0].length
-                });
-            }
-        });
-
-        // Highlight matches
-        searchMatches.forEach(match => {
-            const content = match.fileIndex === 0 ? content1 : content2;
-            const text = content.textContent;
-            const before = text.substring(0, match.start);
-            const highlight = text.substring(match.start, match.end);
-            const after = text.substring(match.end);
-            
-            content.innerHTML = escapeHtml(before) +
-                `<span class="search-highlight">${escapeHtml(highlight)}</span>` +
-                escapeHtml(after);
-        });
-
-        // Navigate to first match
-        if (searchMatches.length > 0) {
-            currentMatchIndex = 0;
-            navigateToMatch(currentMatchIndex);
+        .line:hover {
+            background-color: #f8f9fa;
         }
-    }
-
-    // Navigate search
-    function navigateSearch(direction) {
-        if (searchMatches.length === 0) return;
-        
-        currentMatchIndex = (currentMatchIndex + direction + searchMatches.length) % searchMatches.length;
-        navigateToMatch(currentMatchIndex);
-    }
-
-    // Navigate to match
-    function navigateToMatch(index) {
-        const match = searchMatches[index];
-        const content = match.fileIndex === 0 ? file1Content : file2Content;
-        const element = content.querySelector('.search-highlight');
-        
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            element.style.backgroundColor = '#ffeb3b';
-            setTimeout(() => {
-                element.style.backgroundColor = '#ffd700';
-            }, 1000);
+        .line:hover .line-actions {
+            opacity: 1;
         }
-    }
-
-    // Clear search
-    function clearSearchInput() {
-        searchInput.value = '';
-        document.querySelectorAll('.search-highlight').forEach(el => {
-            const parent = el.parentNode;
-            parent.replaceChild(document.createTextNode(el.textContent), el);
-            parent.normalize();
-        });
-        searchMatches = [];
-        currentMatchIndex = -1;
-    }
-
-    // Toggle word wrap
-    function toggleWordWrap() {
-        isWordWrapEnabled = wordWrapToggle.checked;
-        localStorage.setItem('wordWrap', isWordWrapEnabled);
-        updateWordWrap();
-    }
-
-    // Update word wrap
-    function updateWordWrap() {
-        const style = isWordWrapEnabled ? 'pre-wrap' : 'pre';
-        document.querySelectorAll('.file-content pre').forEach(pre => {
-            pre.style.whiteSpace = style;
-        });
-    }
-
-    // Toggle sync scroll
-    function toggleSyncScroll() {
-        isSyncScrollEnabled = syncScrollToggle.checked;
-        localStorage.setItem('syncScroll', isSyncScrollEnabled);
-        if (isSyncScrollEnabled) {
-            setupSyncScroll();
-        } else {
-            removeSyncScroll();
+        .line-number {
+            display: inline-block;
+            width: 40px;
+            color: #999;
+            text-align: right;
+            padding-right: 10px;
+            user-select: none;
+            border-right: 1px solid #eee;
+            margin-right: 10px;
         }
-    }
-
-    // Setup sync scroll
-    function setupSyncScroll() {
-        const content1 = file1Content.querySelector('pre');
-        const content2 = file2Content.querySelector('pre');
-        
-        content1.addEventListener('scroll', () => {
-            if (isSyncScrollEnabled) {
-                content2.scrollTop = content1.scrollTop;
-                content2.scrollLeft = content1.scrollLeft;
-            }
-        });
-        
-        content2.addEventListener('scroll', () => {
-            if (isSyncScrollEnabled) {
-                content1.scrollTop = content2.scrollTop;
-                content1.scrollLeft = content2.scrollLeft;
-            }
-        });
-    }
-
-    // Remove sync scroll
-    function removeSyncScroll() {
-        const content1 = file1Content.querySelector('pre');
-        const content2 = file2Content.querySelector('pre');
-        
-        content1.removeEventListener('scroll', () => {});
-        content2.removeEventListener('scroll', () => {});
-    }
-
-    // Helper function to escape HTML
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    // Helper function to escape RegExp
-    function escapeRegExp(string) {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey) {
-            switch(e.key.toLowerCase()) {
-                case 'd':
-                    e.preventDefault();
-                    toggleTheme();
-                    break;
-                case 'c':
-                    e.preventDefault();
-                    clearFiles();
-                    break;
-                case 'f':
-                    e.preventDefault();
-                    searchInput.focus();
-                    break;
-                case 'w':
-                    e.preventDefault();
-                    wordWrapToggle.checked = !wordWrapToggle.checked;
-                    toggleWordWrap();
-                    break;
-                case 's':
-                    e.preventDefault();
-                    syncScrollToggle.checked = !syncScrollToggle.checked;
-                    toggleSyncScroll();
-                    break;
-            }
-        } else if (e.key === 'F3') {
-            e.preventDefault();
-            if (e.shiftKey) {
-                navigateSearch(-1);
-            } else {
-                navigateSearch(1);
-            }
+        .line-added {
+            background-color: #e6ffe6;
         }
-    });
-
-    // Show keyboard shortcuts on Ctrl + K
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.key.toLowerCase() === 'k') {
-            e.preventDefault();
-            keyboardShortcuts.style.display = 'block';
-            setTimeout(() => {
-                keyboardShortcuts.style.display = 'none';
-            }, 3000);
+        .line-removed {
+            background-color: #ffe6e6;
         }
-    });
-});
+        .line-modified {
+            background-color: #fff3e6;
+        }
+        .line-actions {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2px 5px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .line-actions button {
+            padding: 0 5px;
+            font-size: 12px;
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .line-actions button:hover {
+            color: #0d6efd;
+        }
+        .file-input-container {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .file-drop-zone {
+            border: 2px dashed #dee2e6;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .file-drop-zone:hover, .file-drop-zone.dragover {
+            border-color: #0d6efd;
+            background-color: #f8f9fa;
+        }
+        .file-drop-zone i {
+            font-size: 24px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .toolbar {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .search-container {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        .search-container input {
+            width: 200px;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .file-info .badge {
+            font-size: 0.9em;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #0d6efd;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .keyboard-shortcuts {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+        .keyboard-shortcuts.show {
+            display: block;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        .diff-chunk {
+            margin: 10px 0;
+            padding: 5px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+        .diff-chunk-header {
+            font-size: 12px;
+            color: #666;
+            padding: 5px;
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 5px;
+        }
+        .diff-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .diff-stat {
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .diff-stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .diff-stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        .progress {
+            height: 5px;
+            margin-top: 5px;
+        }
+        [data-theme="dark"] {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        [data-theme="dark"] .file-content {
+            background-color: #2d2d2d;
+            color: #fff;
+            border-color: #404040;
+        }
+        [data-theme="dark"] .line {
+            border-bottom-color: #404040;
+        }
+        [data-theme="dark"] .line:hover {
+            background-color: #363636;
+        }
+        [data-theme="dark"] .line-number {
+            color: #888;
+            border-right-color: #404040;
+        }
+        [data-theme="dark"] .line-added {
+            background-color: #1a472a;
+        }
+        [data-theme="dark"] .line-removed {
+            background-color: #472a2a;
+        }
+        [data-theme="dark"] .line-modified {
+            background-color: #473a1a;
+        }
+        [data-theme="dark"] .toolbar {
+            background-color: #2d2d2d;
+            border-color: #404040;
+        }
+        [data-theme="dark"] .file-drop-zone {
+            background-color: #2d2d2d;
+            border-color: #404040;
+        }
+        [data-theme="dark"] .file-drop-zone:hover {
+            background-color: #363636;
+        }
+        [data-theme="dark"] .diff-chunk {
+            background-color: #363636;
+        }
+        [data-theme="dark"] .diff-stat {
+            background-color: #2d2d2d;
+        }
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>File Comparison Tool</h1>
+            <button class="btn btn-outline-secondary theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 file-input-container">
+                <div class="file-drop-zone" id="dropZone1">
+                    <i class="fas fa-file-upload"></i>
+                    <p>Drag & Drop File 1 here or click to select</p>
+                    <input type="file" class="d-none" id="file1">
+                </div>
+                <div class="file-info" id="file1Info"></div>
+            </div>
+            <div class="col-md-6 file-input-container">
+                <div class="file-drop-zone" id="dropZone2">
+                    <i class="fas fa-file-upload"></i>
+                    <p>Drag & Drop File 2 here or click to select</p>
+                    <input type="file" class="d-none" id="file2">
+                </div>
+                <div class="file-info" id="file2Info"></div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button id="compareBtn" class="btn btn-primary">
+                    <i class="fas fa-code-compare"></i> Compare Files
+                </button>
+                <button id="clearBtn" class="btn btn-secondary">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+            <div class="btn-group">
+                <button id="exportBtn" class="btn btn-outline-primary" disabled>
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button id="helpBtn" class="btn btn-outline-secondary">
+                    <i class="fas fa-question-circle"></i> Help
+                </button>
+            </div>
+            <div class="search-container">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                <button class="btn btn-outline-secondary" id="prevMatch">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+                <button class="btn btn-outline-secondary" id="nextMatch">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="wordWrapToggle">
+                <label class="form-check-label" for="wordWrapToggle">Word Wrap</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="syncScrollToggle" checked>
+                <label class="form-check-label" for="syncScrollToggle">Sync Scroll</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="highlightToggle" checked>
+                <label class="form-check-label" for="highlightToggle">Syntax Highlight</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>File 1</h3>
+                <div id="file1Content" class="file-content"></div>
+            </div>
+            <div class="col-md-6">
+                <h3>File 2</h3>
+                <div id="file2Content" class="file-content"></div>
+            </div>
+        </div>
+
+        <div id="diffStats" class="mt-4"></div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="keyboard-shortcuts" id="keyboardShortcuts">
+        <h5>Keyboard Shortcuts</h5>
+        <ul class="list-unstyled">
+            <li><kbd>Ctrl</kbd> + <kbd>F</kbd> - Search</li>
+            <li><kbd>Ctrl</kbd> + <kbd>↑</kbd> - Previous match</li>
+            <li><kbd>Ctrl</kbd> + <kbd>↓</kbd> - Next match</li>
+            <li><kbd>Ctrl</kbd> + <kbd>D</kbd> - Toggle dark mode</li>
+            <li><kbd>Ctrl</kbd> + <kbd>W</kbd> - Toggle word wrap</li>
+            <li><kbd>Ctrl</kbd> + <kbd>S</kbd> - Toggle sync scroll</li>
+            <li><kbd>Ctrl</kbd> + <kbd>H</kbd> - Show/hide shortcuts</li>
+            <li><kbd>Ctrl</kbd> + <kbd>C</kbd> - Copy selected text</li>
+        </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/developer-tools/file-comparison.js"></script>
+</body>
+</html>
