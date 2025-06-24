@@ -867,10 +867,23 @@ window.addEventListener('unhandledrejection', function(event) {
 // Function to load header and footer
 async function loadComponents() {
     try {
+        // Determine the correct path prefix based on current location
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(Boolean);
+        const isInToolsDirectory = pathParts.includes('tools');
+        const toolsIndex = pathParts.indexOf('tools');
+        const depth = pathParts.length - (toolsIndex + 1);
+        
+        // Calculate the correct prefix based on depth
+        let prefix = '';
+        if (isInToolsDirectory) {
+            prefix = '../'.repeat(depth);
+        }
+
         // Load header
         const headerContainer = document.getElementById('header-container');
         if (headerContainer) {
-            const headerResponse = await fetch('/components/header.html');
+            const headerResponse = await fetch(prefix + 'components/header.html');
             if (headerResponse.ok) {
                 const headerContent = await headerResponse.text();
                 headerContainer.innerHTML = headerContent;
@@ -907,7 +920,7 @@ async function loadComponents() {
         // Load footer
         const footerContainer = document.getElementById('footer-container');
         if (footerContainer) {
-            const footerResponse = await fetch('/components/footer.html');
+            const footerResponse = await fetch(prefix + 'components/footer.html');
             if (footerResponse.ok) {
                 const footerContent = await footerResponse.text();
                 footerContainer.innerHTML = footerContent;
