@@ -1,15 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('IP Geolocation Finder starting...');
+    
     // Get DOM elements
     const ipAddress = document.getElementById('ipAddress');
     const myIpBtn = document.getElementById('myIpBtn');
     const lookupBtn = document.getElementById('lookupBtn');
     const clearBtn = document.getElementById('clearBtn');
     const resultsCard = document.getElementById('resultsCard');
-    const map = document.getElementById('map');
 
-    // Initialize map
-    let leafletMap = null;
-    let marker = null;
+    console.log('DOM elements found:', {
+        ipAddress: !!ipAddress,
+        myIpBtn: !!myIpBtn,
+        lookupBtn: !!lookupBtn,
+        clearBtn: !!clearBtn,
+        resultsCard: !!resultsCard
+    });
 
     // Validate IP address
     function isValidIpAddress(ip) {
@@ -28,8 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get current IP address
     async function getCurrentIp() {
         try {
+            console.log('Fetching current IP...');
             const response = await fetch('https://api.ipify.org?format=json');
             const data = await response.json();
+            console.log('Current IP:', data.ip);
             return data.ip;
         } catch (error) {
             console.error('Error getting current IP:', error);
@@ -40,8 +47,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get geolocation data
     async function getGeolocationData(ip) {
         try {
-            const response = await fetch(`http://ip-api.com/json/${ip}`);
+            console.log('Fetching geolocation data for:', ip);
+            const response = await fetch(`https://ip-api.com/json/${ip}`);
             const data = await response.json();
+            console.log('Geolocation response:', data);
             
             if (data.status === 'success') {
                 return {
@@ -65,60 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initialize map
-    function initMap() {
-        if (leafletMap) {
-            leafletMap.remove();
-        }
-
-        // Create map instance
-        leafletMap = L.map('map', {
-            center: [0, 0],
-            zoom: 2,
-            zoomControl: true,
-            attributionControl: true
-        });
-
-        // Add tile layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
-            maxZoom: 19
-        }).addTo(leafletMap);
-
-        // Add zoom control
-        L.control.zoom({
-            position: 'bottomright'
-        }).addTo(leafletMap);
-    }
-
-    // Update map
-    function updateMap(latitude, longitude) {
-        if (!leafletMap) {
-            initMap();
-        }
-
-        // Set view to new coordinates
-        leafletMap.setView([latitude, longitude], 13);
-
-        // Remove existing marker if any
-        if (marker) {
-            leafletMap.removeLayer(marker);
-        }
-
-        // Add new marker
-        marker = L.marker([latitude, longitude]).addTo(leafletMap);
-
-        // Add popup to marker
-        marker.bindPopup(`Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`).openPopup();
-
-        // Trigger resize to ensure proper rendering
-        setTimeout(() => {
-            leafletMap.invalidateSize();
-        }, 100);
-    }
-
-    // Update results
+    // Update results (without map)
     function updateResults(data) {
+        console.log('Updating results with data:', data);
+        
         // Update location details
         document.getElementById('country').textContent = data.country_name || 'N/A';
         document.getElementById('region').textContent = data.region || 'N/A';
@@ -132,17 +91,22 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('asn').textContent = data.asn || 'N/A';
         document.getElementById('hostname').textContent = data.hostname || 'N/A';
 
-        // Update map
-        if (data.latitude && data.longitude) {
-            updateMap(data.latitude, data.longitude);
-        }
-
         // Show results card
         resultsCard.classList.remove('d-none');
+        
+        // Hide map section temporarily
+        const mapSection = document.querySelector('#map').closest('.mt-4');
+        if (mapSection) {
+            mapSection.style.display = 'none';
+        }
+        
+        console.log('Results updated successfully');
     }
 
     // Lookup IP
     async function lookupIp() {
+        console.log('Starting IP lookup...');
+        
         const ip = ipAddress.value.trim();
 
         if (!ip) {
@@ -155,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        console.log('Looking up IP:', ip);
         const data = await getGeolocationData(ip);
         if (data) {
             updateResults(data);
@@ -165,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // My IP button click handler
     myIpBtn.addEventListener('click', async function() {
+        console.log('My IP button clicked');
         const currentIp = await getCurrentIp();
         if (currentIp) {
             ipAddress.value = currentIp;
@@ -179,11 +145,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Clear button click handler
     clearBtn.addEventListener('click', function() {
+        console.log('Clear button clicked');
         ipAddress.value = '';
         resultsCard.classList.add('d-none');
-        if (leafletMap) {
-            leafletMap.remove();
-            leafletMap = null;
+        
+        // Show map section again
+        const mapSection = document.querySelector('#map').closest('.mt-4');
+        if (mapSection) {
+            mapSection.style.display = 'block';
         }
     });
 
@@ -193,6 +162,5 @@ document.addEventListener('DOMContentLoaded', function() {
         lookupIp();
     });
 
-    // Initialize map on page load
-    initMap();
+    console.log('IP Geolocation Finder initialized successfully');
 }); 

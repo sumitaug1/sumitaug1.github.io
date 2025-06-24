@@ -6,8 +6,8 @@
     <title>IP Geolocation Finder - Free IP Location Lookup Tool | Multi-Tools Hub</title>
     <meta name="description" content="Find detailed geolocation information for any IP address. Free, easy to use IP location lookup tool with comprehensive location data.">
     <meta name="keywords" content="ip geolocation, ip location finder, ip lookup, ip address location, ip geolocation tool">
-	
-	<!-- AdSense Script -->
+
+    <!-- AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687"
     crossorigin="anonymous"></script>
     
@@ -30,8 +30,49 @@
     <meta name="twitter:description" content="Find detailed geolocation information for any IP address. Free, easy to use IP location lookup tool with comprehensive location data.">
 </head>
 <body>
-    <!-- Header will be loaded dynamically -->
-    <div id="header-container"></div>
+    <!-- Inline Header -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="fas fa-tools me-2"></i>
+                ITKnowledge4u
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Tools
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
+                            <li><a class="dropdown-item" href="../image-tools.html">Image Tools</a></li>
+                            <li><a class="dropdown-item" href="../pdf-tools.html">PDF Tools</a></li>
+                            <li><a class="dropdown-item" href="../seo-tools.html">SEO Tools</a></li>
+                            <li><a class="dropdown-item" href="../text-tools.html">Text Tools</a></li>
+                            <li><a class="dropdown-item" href="../developer-tools.html">Developer Tools</a></li>
+                            <li><a class="dropdown-item" href="../calculator-tools.html">Calculators</a></li>
+                            <li><a class="dropdown-item" href="../unit-converters.html">Unit Converters</a></li>
+                            <li><a class="dropdown-item" href="../security-tools.html">Security Tools</a></li>
+                            <li><a class="dropdown-item" href="../social-media-tools.html">Social Media Tools</a></li>
+                            <li><a class="dropdown-item" href="../business-tools.html">Business Tools</a></li>
+                            <li><a class="dropdown-item" href="../miscellaneous.html">Miscellaneous</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
     <div class="container mt-4">
         <div class="row">
@@ -70,8 +111,16 @@
 
                 <!-- Results Card -->
                 <div class="card mt-4 shadow-sm d-none" id="resultsCard">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Geolocation Information</h5>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="exportBtn">
+                                <i class="fas fa-download me-1"></i>Export
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="copyBtn">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -96,10 +145,111 @@
                             </div>
                         </div>
 
-                        <!-- Map Container -->
+                        <!-- Coordinates Display -->
                         <div class="mt-4">
-                            <h6 class="mb-3">Location Map</h6>
-                            <div id="map" style="height: 400px; width: 100%; position: relative; z-index: 1;" class="rounded border"></div>
+                            <h6 class="mb-3">Coordinates</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>Latitude:</strong> <span id="latitude"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>Longitude:</strong> <span id="longitude"></span>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <a href="#" class="btn btn-sm btn-outline-info" id="mapLink" target="_blank">
+                                    <i class="fas fa-map-marker-alt me-1"></i>View on Map
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="mt-4" id="additionalInfo" style="display: none;">
+                            <h6 class="mb-3">Additional Information</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><strong>Currency:</strong> <span id="currency"></span></li>
+                                        <li class="mb-2"><strong>Language:</strong> <span id="language"></span></li>
+                                        <li class="mb-2"><strong>Mobile:</strong> <span id="mobile"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><strong>Proxy/VPN:</strong> <span id="proxy"></span></li>
+                                        <li class="mb-2"><strong>Hosting:</strong> <span id="hosting"></span></li>
+                                        <li class="mb-2"><strong>Security:</strong> <span id="security"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk IP Lookup Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Bulk IP Lookup</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="bulkIps" class="form-label">Enter multiple IP addresses (one per line)</label>
+                            <textarea class="form-control" id="bulkIps" rows="4" placeholder="8.8.8.8&#10;1.1.1.1&#10;208.67.222.222"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-success" id="bulkLookupBtn">
+                                <i class="fas fa-search me-2"></i>Bulk Lookup
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary ms-2" id="clearBulkBtn">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Results Card -->
+                <div class="card mt-4 shadow-sm d-none" id="bulkResultsCard">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Bulk Lookup Results</h5>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="exportBulkBtn">
+                                <i class="fas fa-download me-1"></i>Export CSV
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="copyBulkBtn">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="bulkResultsTable">
+                                <thead>
+                                    <tr>
+                                        <th>IP Address</th>
+                                        <th>Country</th>
+                                        <th>City</th>
+                                        <th>ISP</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bulkResultsBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IP History Card -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Recent Lookups</h5>
+                        <button type="button" class="btn btn-sm btn-outline-danger" id="clearHistoryBtn">
+                            <i class="fas fa-trash me-1"></i>Clear History
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="ipHistory">
+                            <p class="text-muted text-center">No recent lookups</p>
                         </div>
                     </div>
                 </div>
@@ -115,7 +265,7 @@
                             <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Country, region, and city</li>
                             <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Postal code and timezone</li>
                             <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>ISP and organization details</li>
-                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Visual location on map</li>
+                            <li class="mb-2"><i class="fas fa-info-circle text-info me-2"></i>Geographic coordinates</li>
                         </ul>
                     </div>
                 </div>
@@ -130,47 +280,644 @@
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enter any valid IP address (IPv4 or IPv6)</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Click "My IP" to look up your own IP address</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>View detailed location and network information</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>See the location on an interactive map</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>See geographic coordinates for the location</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-		<!-- Ad Section -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Advertisement</h5>
-                        <div class="ad-space">
-                            <!-- AdSense Ad Unit -->
-                            <ins class="adsbygoogle"
-                                style="display:block"
-                                data-ad-client="ca-pub-6204232626800687"
-                                data-ad-slot="9572280796"
-                                data-ad-format="auto"
-                                data-full-width-responsive="true"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer will be loaded dynamically -->
-    <div id="footer-container"></div>
+    <!-- Ad Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Advertisement</h5>
+                    <div class="ad-space">
+                        <!-- AdSense Ad Unit -->
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-client="ca-pub-6204232626800687"
+                            data-ad-slot="9572280796"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inline Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About Multi-Tools Hub</h5>
+                    <p>Your one-stop solution for all online tools. We provide 100+ free tools to make your work easier and more efficient.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="../../index.html" class="text-light">Home</a></li>
+                        <li><a href="../about.html" class="text-light">About</a></li>
+                        <li><a href="../contact.html" class="text-light">Contact</a></li>
+                        <li><a href="../privacy.html" class="text-light">Privacy Policy</a></li>
+                        <li><a href="../terms.html" class="text-light">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h5>Tool Categories</h5>
+                    <ul class="list-unstyled tool-links">
+                        <li><a href="../image-tools.html" class="text-light">Image Tools</a></li>
+                        <li><a href="../seo-tools.html" class="text-light">SEO Tools</a></li>
+                        <li><a href="../text-tools.html" class="text-light">Text Tools</a></li>
+                        <li><a href="../developer-tools.html" class="text-light">Developer Tools</a></li>
+                        <li><a href="../calculator-tools.html" class="text-light">Calculators</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h5>More Categories</h5>
+                    <ul class="list-unstyled tool-links">
+                        <li><a href="../unit-converters.html" class="text-light">Unit Converters</a></li>
+                        <li><a href="../security-tools.html" class="text-light">Security Tools</a></li>
+                        <li><a href="../social-media-tools.html" class="text-light">Social Media Tools</a></li>
+                        <li><a href="../business-tools.html" class="text-light">Business Tools</a></li>
+                        <li><a href="../miscellaneous.html" class="text-light">Miscellaneous</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Multi-Tools Hub. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> for developers and creators</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Leaflet Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <!-- Custom JS -->
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/security-tools/ip-geolocation-finder.js"></script>
+    
+    <!-- Inline JavaScript for IP Geolocation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('IP Geolocation Finder starting...');
+            
+            // Get DOM elements
+            const ipAddress = document.getElementById('ipAddress');
+            const myIpBtn = document.getElementById('myIpBtn');
+            const lookupBtn = document.getElementById('lookupBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const resultsCard = document.getElementById('resultsCard');
+            const bulkIps = document.getElementById('bulkIps');
+            const bulkLookupBtn = document.getElementById('bulkLookupBtn');
+            const clearBulkBtn = document.getElementById('clearBulkBtn');
+            const bulkResultsCard = document.getElementById('bulkResultsCard');
+            const bulkResultsBody = document.getElementById('bulkResultsBody');
+            const exportBtn = document.getElementById('exportBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const exportBulkBtn = document.getElementById('exportBulkBtn');
+            const copyBulkBtn = document.getElementById('copyBulkBtn');
+            const mapLink = document.getElementById('mapLink');
+            const ipHistory = document.getElementById('ipHistory');
+            const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+            // Initialize IP history from localStorage
+            let ipHistoryData = JSON.parse(localStorage.getItem('ipHistory') || '[]');
+            updateHistoryDisplay();
+
+            console.log('DOM elements found:', {
+                ipAddress: !!ipAddress,
+                myIpBtn: !!myIpBtn,
+                lookupBtn: !!lookupBtn,
+                clearBtn: !!clearBtn,
+                resultsCard: !!resultsCard,
+                bulkIps: !!bulkIps,
+                bulkLookupBtn: !!bulkLookupBtn
+            });
+
+            // Validate IP address
+            function isValidIpAddress(ip) {
+                // IPv4 validation
+                const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;
+                // IPv6 validation
+                const ipv6Regex = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+                
+                if (ipv4Regex.test(ip)) {
+                    const parts = ip.split('.');
+                    return parts.every(part => parseInt(part) >= 0 && parseInt(part) <= 255);
+                }
+                return ipv6Regex.test(ip);
+            }
+
+            // Get current IP address
+            async function getCurrentIp() {
+                try {
+                    console.log('Fetching current IP...');
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const data = await response.json();
+                    console.log('Current IP:', data.ip);
+                    return data.ip;
+                } catch (error) {
+                    console.error('Error getting current IP:', error);
+                    // Try fallback IP service
+                    try {
+                        const fallbackResponse = await fetch('https://api64.ipify.org?format=json');
+                        const fallbackData = await fallbackResponse.json();
+                        console.log('Fallback IP:', fallbackData.ip);
+                        return fallbackData.ip;
+                    } catch (fallbackError) {
+                        console.error('Fallback IP service error:', fallbackError);
+                        return null;
+                    }
+                }
+            }
+
+            // Get geolocation data with multiple fallbacks
+            async function getGeolocationData(ip) {
+                const apis = [
+                    // Primary API
+                    async () => {
+                        const response = await fetch(`https://ip-api.com/json/${ip}`);
+                        const data = await response.json();
+                        if (data.status === 'success') {
+                            return {
+                                country_name: data.country,
+                                region: data.regionName,
+                                city: data.city,
+                                postal: data.zip,
+                                timezone: data.timezone,
+                                latitude: data.lat,
+                                longitude: data.lon,
+                                org: data.isp,
+                                asn: data.as,
+                                hostname: data.query,
+                                currency: data.currency,
+                                mobile: data.mobile ? 'Yes' : 'No',
+                                proxy: data.proxy ? 'Yes' : 'No',
+                                hosting: data.hosting ? 'Yes' : 'No'
+                            };
+                        }
+                        throw new Error('Primary API failed');
+                    },
+                    // First fallback
+                    async () => {
+                        const response = await fetch(`https://ipapi.co/${ip}/json/`);
+                        const data = await response.json();
+                        if (data.error !== true) {
+                            return {
+                                country_name: data.country_name,
+                                region: data.region,
+                                city: data.city,
+                                postal: data.postal,
+                                timezone: data.timezone,
+                                latitude: data.latitude,
+                                longitude: data.longitude,
+                                org: data.org,
+                                asn: data.asn,
+                                hostname: ip,
+                                currency: data.currency,
+                                mobile: 'Unknown',
+                                proxy: 'Unknown',
+                                hosting: 'Unknown'
+                            };
+                        }
+                        throw new Error('First fallback failed');
+                    },
+                    // Second fallback
+                    async () => {
+                        const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=free&ip=${ip}`);
+                        const data = await response.json();
+                        if (data.ip) {
+                            return {
+                                country_name: data.country_name,
+                                region: data.state_prov,
+                                city: data.city,
+                                postal: data.zipcode,
+                                timezone: data.time_zone?.name || 'N/A',
+                                latitude: data.latitude,
+                                longitude: data.longitude,
+                                org: data.isp,
+                                asn: data.connection?.asn || 'N/A',
+                                hostname: data.hostname || ip,
+                                currency: data.currency?.code || 'N/A',
+                                mobile: data.mobile ? 'Yes' : 'No',
+                                proxy: data.security?.proxy ? 'Yes' : 'No',
+                                hosting: data.security?.hosting ? 'Yes' : 'No'
+                            };
+                        }
+                        throw new Error('Second fallback failed');
+                    }
+                ];
+
+                for (let i = 0; i < apis.length; i++) {
+                    try {
+                        console.log(`Trying API ${i + 1}...`);
+                        const result = await apis[i]();
+                        console.log(`API ${i + 1} successful:`, result);
+                        return result;
+                    } catch (error) {
+                        console.error(`API ${i + 1} failed:`, error);
+                        if (i === apis.length - 1) {
+                            // All APIs failed
+                            throw error;
+                        }
+                    }
+                }
+            }
+
+            // Add to IP history
+            function addToHistory(ip, data) {
+                const historyItem = {
+                    ip: ip,
+                    timestamp: new Date().toISOString(),
+                    country: data.country_name,
+                    city: data.city,
+                    isp: data.org
+                };
+
+                // Remove if already exists
+                ipHistoryData = ipHistoryData.filter(item => item.ip !== ip);
+                
+                // Add to beginning
+                ipHistoryData.unshift(historyItem);
+                
+                // Keep only last 10 items
+                if (ipHistoryData.length > 10) {
+                    ipHistoryData = ipHistoryData.slice(0, 10);
+                }
+                
+                localStorage.setItem('ipHistory', JSON.stringify(ipHistoryData));
+                updateHistoryDisplay();
+            }
+
+            // Update history display
+            function updateHistoryDisplay() {
+                if (ipHistoryData.length === 0) {
+                    ipHistory.innerHTML = '<p class="text-muted text-center">No recent lookups</p>';
+                    return;
+                }
+
+                const historyHtml = ipHistoryData.map(item => `
+                    <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
+                        <div>
+                            <strong>${item.ip}</strong>
+                            <br>
+                            <small class="text-muted">${item.city}, ${item.country} • ${item.isp}</small>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-muted">${new Date(item.timestamp).toLocaleString()}</small>
+                            <br>
+                            <button class="btn btn-sm btn-outline-primary mt-1" onclick="lookupHistoryIp('${item.ip}')">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                ipHistory.innerHTML = historyHtml;
+            }
+
+            // Lookup IP from history
+            window.lookupHistoryIp = function(ip) {
+                ipAddress.value = ip;
+                lookupIp();
+            };
+
+            // Update results
+            function updateResults(data) {
+                console.log('Updating results with data:', data);
+                
+                // Update location details
+                document.getElementById('country').textContent = data.country_name || 'N/A';
+                document.getElementById('region').textContent = data.region || 'N/A';
+                document.getElementById('city').textContent = data.city || 'N/A';
+                document.getElementById('postal').textContent = data.postal || 'N/A';
+                document.getElementById('timezone').textContent = data.timezone || 'N/A';
+
+                // Update network information
+                document.getElementById('isp').textContent = data.org || 'N/A';
+                document.getElementById('org').textContent = data.org || 'N/A';
+                document.getElementById('asn').textContent = data.asn || 'N/A';
+                document.getElementById('hostname').textContent = data.hostname || 'N/A';
+
+                // Update coordinates
+                document.getElementById('latitude').textContent = data.latitude ? data.latitude.toFixed(6) : 'N/A';
+                document.getElementById('longitude').textContent = data.longitude ? data.longitude.toFixed(6) : 'N/A';
+
+                // Update additional information if available
+                if (data.currency || data.mobile || data.proxy || data.hosting) {
+                    document.getElementById('currency').textContent = data.currency || 'N/A';
+                    document.getElementById('mobile').textContent = data.mobile || 'N/A';
+                    document.getElementById('proxy').textContent = data.proxy || 'N/A';
+                    document.getElementById('hosting').textContent = data.hosting || 'N/A';
+                    document.getElementById('additionalInfo').style.display = 'block';
+                } else {
+                    document.getElementById('additionalInfo').style.display = 'none';
+                }
+
+                // Update map link
+                if (data.latitude && data.longitude) {
+                    mapLink.href = `https://www.google.com/maps?q=${data.latitude},${data.longitude}`;
+                    mapLink.style.display = 'inline-block';
+                } else {
+                    mapLink.style.display = 'none';
+                }
+
+                // Show results card
+                resultsCard.classList.remove('d-none');
+                
+                console.log('Results updated successfully');
+            }
+
+            // Export single result
+            function exportResult(data) {
+                const csv = `IP Address,Country,Region,City,Postal Code,Timezone,ISP,Organization,AS Number,Hostname,Latitude,Longitude
+${ipAddress.value},${data.country_name || ''},${data.region || ''},${data.city || ''},${data.postal || ''},${data.timezone || ''},${data.org || ''},${data.org || ''},${data.asn || ''},${data.hostname || ''},${data.latitude || ''},${data.longitude || ''}`;
+                
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ip-lookup-${ipAddress.value}-${new Date().toISOString().split('T')[0]}.csv`;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }
+
+            // Copy result to clipboard
+            function copyResult(data) {
+                const text = `IP: ${ipAddress.value}
+Country: ${data.country_name || 'N/A'}
+Region: ${data.region || 'N/A'}
+City: ${data.city || 'N/A'}
+ISP: ${data.org || 'N/A'}
+Coordinates: ${data.latitude || 'N/A'}, ${data.longitude || 'N/A'}`;
+                
+                navigator.clipboard.writeText(text).then(() => {
+                    // Show success message
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 2000);
+                });
+            }
+
+            // Bulk lookup
+            async function bulkLookup() {
+                const ips = bulkIps.value.trim().split('\n').filter(ip => ip.trim() && isValidIpAddress(ip.trim()));
+                
+                if (ips.length === 0) {
+                    alert('Please enter valid IP addresses');
+                    return;
+                }
+
+                if (ips.length > 20) {
+                    alert('Maximum 20 IP addresses allowed for bulk lookup');
+                    return;
+                }
+
+                // Show loading state
+                bulkLookupBtn.disabled = true;
+                bulkLookupBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+
+                // Clear previous results
+                bulkResultsBody.innerHTML = '';
+                bulkResultsCard.classList.remove('d-none');
+
+                const results = [];
+
+                for (let i = 0; i < ips.length; i++) {
+                    const ip = ips[i].trim();
+                    
+                    // Add loading row
+                    const loadingRow = document.createElement('tr');
+                    loadingRow.innerHTML = `
+                        <td>${ip}</td>
+                        <td colspan="3"><i class="fas fa-spinner fa-spin"></i> Looking up...</td>
+                        <td><span class="badge bg-warning">Processing</span></td>
+                    `;
+                    bulkResultsBody.appendChild(loadingRow);
+
+                    try {
+                        const data = await getGeolocationData(ip);
+                        results.push({ ip, data, success: true });
+                        
+                        // Update row with results
+                        loadingRow.innerHTML = `
+                            <td>${ip}</td>
+                            <td>${data.country_name || 'N/A'}</td>
+                            <td>${data.city || 'N/A'}</td>
+                            <td>${data.org || 'N/A'}</td>
+                            <td><span class="badge bg-success">Success</span></td>
+                        `;
+                    } catch (error) {
+                        results.push({ ip, error: error.message, success: false });
+                        
+                        // Update row with error
+                        loadingRow.innerHTML = `
+                            <td>${ip}</td>
+                            <td colspan="3">Error: ${error.message}</td>
+                            <td><span class="badge bg-danger">Failed</span></td>
+                        `;
+                    }
+                }
+
+                // Reset button state
+                bulkLookupBtn.disabled = false;
+                bulkLookupBtn.innerHTML = '<i class="fas fa-search me-2"></i>Bulk Lookup';
+            }
+
+            // Export bulk results
+            function exportBulkResults() {
+                const rows = Array.from(bulkResultsBody.querySelectorAll('tr'));
+                const csv = ['IP Address,Country,City,ISP,Status'];
+                
+                rows.forEach(row => {
+                    const cells = Array.from(row.querySelectorAll('td'));
+                    if (cells.length >= 5) {
+                        const ip = cells[0].textContent;
+                        const country = cells[1].textContent;
+                        const city = cells[2].textContent;
+                        const isp = cells[3].textContent;
+                        const status = cells[4].textContent;
+                        csv.push(`${ip},${country},${city},${isp},${status}`);
+                    }
+                });
+                
+                const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `bulk-ip-lookup-${new Date().toISOString().split('T')[0]}.csv`;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }
+
+            // Lookup IP
+            async function lookupIp() {
+                console.log('Starting IP lookup...');
+                
+                const ip = ipAddress.value.trim();
+
+                if (!ip) {
+                    alert('Please enter an IP address');
+                    return;
+                }
+
+                if (!isValidIpAddress(ip)) {
+                    alert('Please enter a valid IP address');
+                    return;
+                }
+
+                // Show loading state
+                lookupBtn.disabled = true;
+                lookupBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Looking up...';
+
+                try {
+                    console.log('Looking up IP:', ip);
+                    const data = await getGeolocationData(ip);
+                    if (data) {
+                        updateResults(data);
+                        addToHistory(ip, data);
+                    } else {
+                        alert('Error getting geolocation data. Please try again later.');
+                    }
+                } catch (error) {
+                    console.error('Lookup error:', error);
+                    alert('Error getting geolocation data. Please try again later.');
+                } finally {
+                    // Reset button state
+                    lookupBtn.disabled = false;
+                    lookupBtn.innerHTML = '<i class="fas fa-search me-2"></i>Lookup IP';
+                }
+            }
+
+            // Event listeners
+            myIpBtn.addEventListener('click', async function() {
+                console.log('My IP button clicked');
+                
+                // Show loading state
+                myIpBtn.disabled = true;
+                myIpBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Getting IP...';
+                
+                try {
+                    const currentIp = await getCurrentIp();
+                    if (currentIp) {
+                        ipAddress.value = currentIp;
+                        await lookupIp();
+                    } else {
+                        alert('Error getting current IP address. Please enter an IP manually.');
+                    }
+                } catch (error) {
+                    console.error('My IP error:', error);
+                    alert('Error getting current IP address. Please enter an IP manually.');
+                } finally {
+                    // Reset button state
+                    myIpBtn.disabled = false;
+                    myIpBtn.innerHTML = '<i class="fas fa-location-arrow me-2"></i>My IP';
+                }
+            });
+
+            lookupBtn.addEventListener('click', lookupIp);
+
+            clearBtn.addEventListener('click', function() {
+                console.log('Clear button clicked');
+                ipAddress.value = '';
+                resultsCard.classList.add('d-none');
+            });
+
+            // Bulk lookup event listeners
+            bulkLookupBtn.addEventListener('click', bulkLookup);
+
+            clearBulkBtn.addEventListener('click', function() {
+                bulkIps.value = '';
+                bulkResultsCard.classList.add('d-none');
+            });
+
+            // Export and copy event listeners
+            exportBtn.addEventListener('click', function() {
+                const data = {
+                    country_name: document.getElementById('country').textContent,
+                    region: document.getElementById('region').textContent,
+                    city: document.getElementById('city').textContent,
+                    postal: document.getElementById('postal').textContent,
+                    timezone: document.getElementById('timezone').textContent,
+                    org: document.getElementById('isp').textContent,
+                    asn: document.getElementById('asn').textContent,
+                    hostname: document.getElementById('hostname').textContent,
+                    latitude: document.getElementById('latitude').textContent,
+                    longitude: document.getElementById('longitude').textContent
+                };
+                exportResult(data);
+            });
+
+            copyBtn.addEventListener('click', function() {
+                const data = {
+                    country_name: document.getElementById('country').textContent,
+                    region: document.getElementById('region').textContent,
+                    city: document.getElementById('city').textContent,
+                    org: document.getElementById('isp').textContent,
+                    latitude: document.getElementById('latitude').textContent,
+                    longitude: document.getElementById('longitude').textContent
+                };
+                copyResult(data);
+            });
+
+            exportBulkBtn.addEventListener('click', exportBulkResults);
+
+            copyBulkBtn.addEventListener('click', function() {
+                const table = document.getElementById('bulkResultsTable');
+                const range = document.createRange();
+                range.selectNode(table);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                
+                // Show success message
+                const originalText = copyBulkBtn.innerHTML;
+                copyBulkBtn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+                setTimeout(() => {
+                    copyBulkBtn.innerHTML = originalText;
+                }, 2000);
+            });
+
+            // History event listeners
+            clearHistoryBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear the lookup history?')) {
+                    ipHistoryData = [];
+                    localStorage.removeItem('ipHistory');
+                    updateHistoryDisplay();
+                }
+            });
+
+            // Form submission handler
+            document.getElementById('ipGeolocationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                lookupIp();
+            });
+
+            console.log('IP Geolocation Finder initialized successfully');
+        });
+    </script>
 </body>
 </html> 
