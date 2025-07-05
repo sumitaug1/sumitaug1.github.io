@@ -272,6 +272,59 @@
             right: 10px;
             z-index: 100;
         }
+        
+        /* Text input styling */
+        .text-input-container {
+            margin-top: 15px;
+        }
+        
+        .text-input-container .form-label {
+            font-weight: 500;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .text-input-container .form-control {
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            resize: vertical;
+            min-height: 300px;
+            max-height: 500px;
+            padding: 12px;
+        }
+        
+        .text-input-container .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .text-input-container .form-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        [data-theme="dark"] .text-input-container .form-label {
+            color: #e9ecef;
+        }
+        
+        [data-theme="dark"] .text-input-container .form-control {
+            background-color: #2d2d2d;
+            border-color: #404040;
+            color: #fff;
+        }
+        
+        [data-theme="dark"] .text-input-container .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+        
+        [data-theme="dark"] .text-input-container .form-text {
+            color: #adb5bd;
+        }
     </style>
 </head>
 <body>
@@ -292,6 +345,11 @@
                     <input type="file" class="d-none" id="file1">
                 </div>
                 <div class="file-info" id="file1Info"></div>
+                <div class="text-input-container">
+                    <label for="textInput1" class="form-label">Or paste text directly:</label>
+                    <textarea class="form-control" id="textInput1" rows="12" placeholder="Paste your text here..."></textarea>
+                    <div class="form-text">You can paste text directly or upload a file</div>
+                </div>
             </div>
             <div class="col-md-6 file-input-container">
                 <div class="file-drop-zone" id="dropZone2">
@@ -300,6 +358,11 @@
                     <input type="file" class="d-none" id="file2">
                 </div>
                 <div class="file-info" id="file2Info"></div>
+                <div class="text-input-container">
+                    <label for="textInput2" class="form-label">Or paste text directly:</label>
+                    <textarea class="form-control" id="textInput2" rows="12" placeholder="Paste your text here..."></textarea>
+                    <div class="form-text">You can paste text directly or upload a file</div>
+                </div>
             </div>
         </div>
 
