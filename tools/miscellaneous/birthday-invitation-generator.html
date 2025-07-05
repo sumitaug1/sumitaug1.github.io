@@ -62,6 +62,15 @@
             <div class="col-12">
                 <h1 class="text-center mb-4">Birthday Invitation Generator</h1>
                 <p class="lead text-center mb-4">Create beautiful and personalized birthday invitations</p>
+                
+                <!-- Trending Features Banner -->
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-fire me-2"></i>
+                        <strong>New Trending Features:</strong> AI Suggestions, Voice Input, QR Codes, Social Media Integration, and Animated Effects!
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
             </div>
         </div>
 
@@ -70,6 +79,33 @@
                 <!-- Main Tool Card -->
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
+                        <!-- AI Assistant Section -->
+                        <div class="ai-assistant-section mb-4">
+                            <div class="card bg-gradient-primary text-white">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-robot fa-2x me-3"></i>
+                                        <div>
+                                            <h5 class="mb-1">AI Party Assistant</h5>
+                                            <p class="mb-0">Get personalized suggestions for your birthday party!</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-light btn-sm w-100 mb-2" id="aiThemeBtn">
+                                                <i class="fas fa-magic me-2"></i>AI Theme Suggestion
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-light btn-sm w-100 mb-2" id="aiMessageBtn">
+                                                <i class="fas fa-comment me-2"></i>AI Message Generator
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Invitation Form -->
                         <div class="invitation-form mb-4">
                             <div class="row g-3">
@@ -160,12 +196,22 @@
                                 <!-- Event Details -->
                                 <div class="col-md-6">
                                     <label for="eventName" class="form-label">Event Name</label>
-                                    <input type="text" class="form-control" id="eventName" placeholder="e.g., John's 30th Birthday">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="eventName" placeholder="e.g., John's 30th Birthday">
+                                        <button class="btn btn-outline-secondary" type="button" id="voiceEventBtn">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="hostName" class="form-label">Host Name</label>
-                                    <input type="text" class="form-control" id="hostName" placeholder="e.g., Sarah Smith">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="hostName" placeholder="e.g., Sarah Smith">
+                                        <button class="btn btn-outline-secondary" type="button" id="voiceHostBtn">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
@@ -180,12 +226,22 @@
 
                                 <div class="col-12">
                                     <label for="venue" class="form-label">Venue</label>
-                                    <input type="text" class="form-control" id="venue" placeholder="e.g., 123 Party Street, City">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="venue" placeholder="e.g., 123 Party Street, City">
+                                        <button class="btn btn-outline-secondary" type="button" id="voiceVenueBtn">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="col-12">
                                     <label for="message" class="form-label">Personal Message</label>
-                                    <textarea class="form-control" id="message" rows="3" placeholder="Add a personal message to your invitation"></textarea>
+                                    <div class="input-group">
+                                        <textarea class="form-control" id="message" rows="3" placeholder="Add a personal message to your invitation"></textarea>
+                                        <button class="btn btn-outline-secondary" type="button" id="voiceMessageBtn">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <!-- Additional Details -->
@@ -197,6 +253,35 @@
                                 <div class="col-md-6">
                                     <label for="rsvpDate" class="form-label">RSVP By</label>
                                     <input type="date" class="form-control" id="rsvpDate">
+                                </div>
+
+                                <!-- QR Code Section -->
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6 class="mb-0"><i class="fas fa-qrcode me-2"></i>QR Code Settings</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="includeQR" checked>
+                                                        <label class="form-check-label" for="includeQR">
+                                                            Include QR Code for RSVP
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="includeMapQR">
+                                                        <label class="form-check-label" for="includeMapQR">
+                                                            Include QR Code for Venue Map
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
@@ -223,7 +308,7 @@
                             </div>
 
                             <!-- Action Buttons -->
-                            <div class="d-flex justify-content-center gap-2">
+                            <div class="d-flex justify-content-center gap-2 flex-wrap">
                                 <div class="dropdown">
                                     <button class="btn btn-outline-primary dropdown-toggle" type="button" id="downloadDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-download me-2"></i>Download
@@ -242,6 +327,42 @@
                                 <button class="btn btn-outline-secondary" id="editBtn">
                                     <i class="fas fa-edit me-2"></i>Edit
                                 </button>
+                                <button class="btn btn-outline-info" id="qrCodeBtn">
+                                    <i class="fas fa-qrcode me-2"></i>QR Code
+                                </button>
+                            </div>
+
+                            <!-- Social Media Integration -->
+                            <div class="social-media-section mt-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="mb-0"><i class="fas fa-share-alt me-2"></i>Share on Social Media</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-6 mb-2">
+                                                <button class="btn btn-outline-primary w-100" id="shareFacebook">
+                                                    <i class="fab fa-facebook me-2"></i>Facebook
+                                                </button>
+                                            </div>
+                                            <div class="col-md-3 col-6 mb-2">
+                                                <button class="btn btn-outline-info w-100" id="shareTwitter">
+                                                    <i class="fab fa-twitter me-2"></i>Twitter
+                                                </button>
+                                            </div>
+                                            <div class="col-md-3 col-6 mb-2">
+                                                <button class="btn btn-outline-danger w-100" id="shareInstagram">
+                                                    <i class="fab fa-instagram me-2"></i>Instagram
+                                                </button>
+                                            </div>
+                                            <div class="col-md-3 col-6 mb-2">
+                                                <button class="btn btn-outline-success w-100" id="shareWhatsApp">
+                                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Interactive Elements -->
@@ -314,6 +435,10 @@
                             <li class="mb-2"><i class="fas fa-font text-info me-2"></i>Customizable text and messages</li>
                             <li class="mb-2"><i class="fas fa-image text-info me-2"></i>Professional design templates</li>
                             <li class="mb-2"><i class="fas fa-share-alt text-info me-2"></i>Easy sharing and downloading</li>
+                            <li class="mb-2"><i class="fas fa-robot text-info me-2"></i>AI-powered suggestions</li>
+                            <li class="mb-2"><i class="fas fa-microphone text-info me-2"></i>Voice input support</li>
+                            <li class="mb-2"><i class="fas fa-qrcode text-info me-2"></i>QR code integration</li>
+                            <li class="mb-2"><i class="fas fa-mobile-alt text-info me-2"></i>Social media optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -329,6 +454,9 @@
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add all necessary event details</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Include RSVP information</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Preview before finalizing</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use voice input for faster data entry</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enable QR codes for easy RSVP tracking</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Share directly to social media platforms</li>
                         </ul>
                     </div>
                 </div>
@@ -409,6 +537,8 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <!-- Custom JS -->
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/miscellaneous/birthday-invitation-generator.js"></script>
@@ -507,6 +637,77 @@
             color: #dc3545;
             background: #f8d7da;
             border-radius: 8px;
+        }
+
+        /* AI Assistant Styles */
+        .ai-assistant-section .card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+
+        /* Voice Input Styles */
+        .voice-active {
+            background-color: #ff6b6b !important;
+            color: white !important;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Social Media Buttons */
+        .social-media-section .btn {
+            transition: all 0.3s ease;
+        }
+
+        .social-media-section .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* QR Code Styles */
+        .qr-code-container {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Trending Banner */
+        .alert-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+        }
+
+        /* Animated Effects */
+        @keyframes borderDots {
+            0% { border-style: dotted; }
+            50% { border-style: dashed; }
+            100% { border-style: dotted; }
+        }
+
+        @keyframes borderDashed {
+            0% { border-style: dashed; }
+            50% { border-style: solid; }
+            100% { border-style: dashed; }
+        }
+
+        @keyframes borderGradient {
+            0% { border-image: linear-gradient(45deg, #ff0000, #00ff00) 1; }
+            25% { border-image: linear-gradient(45deg, #00ff00, #0000ff) 1; }
+            50% { border-image: linear-gradient(45deg, #0000ff, #ff0000) 1; }
+            75% { border-image: linear-gradient(45deg, #ffff00, #ff00ff) 1; }
+            100% { border-image: linear-gradient(45deg, #ff0000, #00ff00) 1; }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
     </style>
 </body>
