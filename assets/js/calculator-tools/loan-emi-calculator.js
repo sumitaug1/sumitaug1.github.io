@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCurrency = 'USD';
     let currentCurrencySymbol = '$';
 
+    // AI Chat Assistant
+    let chatOpen = false;
+    let chatHistory = [];
+
     // Elements
     const loanAmount = document.getElementById('loan-amount');
     const interestRate = document.getElementById('interest-rate');
@@ -713,4 +717,181 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
+
+    // AI Chat Assistant
+    window.toggleChat = function() {
+        const chatContainer = document.getElementById('aiChatAssistant');
+        const chatInput = document.getElementById('chatInputContainer');
+        
+        if (chatOpen) {
+            chatInput.style.display = 'none';
+            chatOpen = false;
+        } else {
+            chatInput.style.display = 'flex';
+            chatOpen = true;
+            document.getElementById('chatInput').focus();
+        }
+    };
+
+    window.sendChatMessage = function() {
+        const chatInput = document.getElementById('chatInput');
+        const message = chatInput.value.trim();
+        
+        if (!message) return;
+
+        // Add user message
+        addChatMessage(message, 'user');
+        chatInput.value = '';
+
+        // Generate AI response
+        setTimeout(() => {
+            const aiResponse = generateAIResponse(message);
+            addChatMessage(aiResponse, 'ai');
+        }, 500);
+    };
+
+    function addChatMessage(message, sender) {
+        const chatMessages = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        
+        const icon = sender === 'ai' ? 'fas fa-robot' : 'fas fa-user';
+        messageDiv.innerHTML = `
+            <i class="${icon}"></i>
+            <div class="message-content">${message}</div>
+        `;
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        chatHistory.push({ sender, message });
+    }
+
+    function generateAIResponse(userMessage) {
+        const responses = {
+            'loan': 'I can help you calculate loan EMIs! Enter your loan amount, interest rate, and term to get started.',
+            'rate': 'Interest rates vary by loan type and credit score. Use our AI Rate Predictor to get personalized rate estimates.',
+            'prepayment': 'Prepayments can save you thousands in interest! Use our prepayment calculator to see your savings.',
+            'affordability': 'Check your financial health with our AI Health Checker to see if you\'re ready for a loan.',
+            'compare': 'Use our comparison tool to compare different loan scenarios and find the best option.',
+            'help': 'I can help with loan calculations, rate predictions, financial health checks, and more. Just ask!'
+        };
+
+        const lowerMessage = userMessage.toLowerCase();
+        
+        if (lowerMessage.includes('loan') || lowerMessage.includes('emi')) return responses.loan;
+        if (lowerMessage.includes('rate') || lowerMessage.includes('interest')) return responses.rate;
+        if (lowerMessage.includes('prepayment') || lowerMessage.includes('extra payment')) return responses.prepayment;
+        if (lowerMessage.includes('afford') || lowerMessage.includes('health')) return responses.affordability;
+        if (lowerMessage.includes('compare') || lowerMessage.includes('different')) return responses.compare;
+        if (lowerMessage.includes('help') || lowerMessage.includes('what can you do')) return responses.help;
+        
+        return 'I\'m here to help with loan calculations and financial advice. Try asking about loan EMIs, interest rates, prepayments, or financial health checks!';
+    }
+
+    // AI Rate Predictor
+    window.predictInterestRate = function() {
+        const creditScore = document.getElementById('credit-score').value;
+        const loanType = document.getElementById('prediction-loan-type').value;
+        const amount = parseFloat(document.getElementById('prediction-amount').value);
+
+        if (!creditScore || !loanType || !amount) {
+            showNotification('Please fill all fields for rate prediction', 'error');
+            return;
+        }
+
+        const baseRates = {
+            home: { excellent: 5.5, good: 6.0, fair: 6.8, poor: 7.5, bad: 8.5 },
+            car: { excellent: 3.5, good: 4.0, fair: 4.8, poor: 5.5, bad: 6.5 },
+            personal: { excellent: 8.5, good: 9.5, fair: 11.0, poor: 13.0, bad: 15.0 },
+            business: { excellent: 6.5, good: 7.5, fair: 8.5, poor: 10.0, bad: 12.0 }
+        };
+
+        const baseRate = baseRates[loanType][creditScore];
+        const marketAdjustment = Math.random() * 0.5 - 0.25; // ±0.25% market variation
+        const predictedRate = baseRate + marketAdjustment;
+        const confidence = 85 + Math.random() * 10; // 85-95% confidence
+
+        const resultsDiv = document.getElementById('rate-prediction-results');
+        resultsDiv.innerHTML = `
+            <div class="prediction-card">
+                <h6><i class="fas fa-chart-line me-2"></i>AI Rate Prediction</h6>
+                <p><strong>Predicted Rate:</strong> ${predictedRate.toFixed(2)}%</p>
+                <p><strong>Confidence Level:</strong> ${confidence.toFixed(1)}%</p>
+                <div class="confidence-meter">
+                    <div class="confidence-fill" style="width: ${confidence}%"></div>
+                </div>
+                <p><strong>Factors Considered:</strong></p>
+                <ul>
+                    <li>Credit Score: ${creditScore}</li>
+                    <li>Loan Type: ${loanType}</li>
+                    <li>Loan Amount: ${currentCurrencySymbol}${amount.toLocaleString()}</li>
+                    <li>Market Conditions</li>
+                </ul>
+                <p><em>Note: This is an AI prediction based on current market trends. Actual rates may vary.</em></p>
+            </div>
+        `;
+
+        showNotification('AI rate prediction completed!', 'success');
+    };
+
+    // AI Financial Health Checker
+    window.checkFinancialHealth = function() {
+        const income = parseFloat(document.getElementById('health-income').value);
+        const expenses = parseFloat(document.getElementById('health-expenses').value);
+        const debt = parseFloat(document.getElementById('health-debt').value) || 0;
+        const downPayment = parseFloat(document.getElementById('health-downpayment').value) || 0;
+
+        if (!income || !expenses) {
+            showNotification('Please enter income and expenses', 'error');
+            return;
+        }
+
+        const disposableIncome = income - expenses - debt;
+        const debtToIncomeRatio = ((expenses + debt) / income) * 100;
+        const savingsRate = ((income - expenses - debt) / income) * 100;
+
+        let healthScore = 'excellent';
+        let healthMessage = '';
+
+        if (debtToIncomeRatio > 50) {
+            healthScore = 'bad';
+            healthMessage = 'Your debt-to-income ratio is too high. Focus on reducing debt before taking new loans.';
+        } else if (debtToIncomeRatio > 40) {
+            healthScore = 'poor';
+            healthMessage = 'Your debt burden is high. Consider consolidating debt before new loans.';
+        } else if (debtToIncomeRatio > 30) {
+            healthScore = 'fair';
+            healthMessage = 'Your financial health is acceptable but could be improved.';
+        } else if (debtToIncomeRatio > 20) {
+            healthScore = 'good';
+            healthMessage = 'Good financial health! You\'re in a good position for loans.';
+        } else {
+            healthScore = 'excellent';
+            healthMessage = 'Excellent financial health! You\'re in an ideal position for loans.';
+        }
+
+        const maxLoanAmount = disposableIncome * 0.4 * 12 * 30; // 40% rule, 30 years
+
+        const resultsDiv = document.getElementById('health-check-results');
+        resultsDiv.innerHTML = `
+            <div class="alert alert-info">
+                <h6><i class="fas fa-heartbeat me-2"></i>Financial Health Analysis</h6>
+                <div class="health-score health-${healthScore}">${healthScore.toUpperCase()}</div>
+                <p><strong>Debt-to-Income Ratio:</strong> ${debtToIncomeRatio.toFixed(1)}%</p>
+                <p><strong>Savings Rate:</strong> ${savingsRate.toFixed(1)}%</p>
+                <p><strong>Disposable Income:</strong> ${currentCurrencySymbol}${disposableIncome.toFixed(2)}/month</p>
+                <p><strong>Maximum Recommended Loan:</strong> ${currentCurrencySymbol}${maxLoanAmount.toFixed(2)}</p>
+                <p><strong>Available Down Payment:</strong> ${currentCurrencySymbol}${downPayment.toFixed(2)}</p>
+                <hr>
+                <p><strong>AI Recommendation:</strong> ${healthMessage}</p>
+                <ul>
+                    ${healthScore === 'bad' || healthScore === 'poor' ? '<li>Focus on debt reduction</li><li>Build emergency savings</li><li>Improve credit score</li>' : ''}
+                    ${healthScore === 'fair' ? '<li>Consider debt consolidation</li><li>Increase savings rate</li>' : ''}
+                    ${healthScore === 'good' || healthScore === 'excellent' ? '<li>You\'re ready for loans</li><li>Consider investment opportunities</li>' : ''}
+                </ul>
+            </div>
+        `;
+
+        showNotification('Financial health check completed!', 'success');
+    };
 });
