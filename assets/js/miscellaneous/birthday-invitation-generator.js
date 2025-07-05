@@ -18,6 +18,57 @@ document.addEventListener('DOMContentLoaded', function() {
     const shareBtn = document.getElementById('shareBtn');
     const editBtn = document.getElementById('editBtn');
 
+    // New trendy features elements
+    const aiThemeBtn = document.getElementById('aiThemeBtn');
+    const aiMessageBtn = document.getElementById('aiMessageBtn');
+    const voiceEventBtn = document.getElementById('voiceEventBtn');
+    const voiceHostBtn = document.getElementById('voiceHostBtn');
+    const voiceVenueBtn = document.getElementById('voiceVenueBtn');
+    const voiceMessageBtn = document.getElementById('voiceMessageBtn');
+    const includeQR = document.getElementById('includeQR');
+    const includeMapQR = document.getElementById('includeMapQR');
+    const qrCodeBtn = document.getElementById('qrCodeBtn');
+    const shareFacebook = document.getElementById('shareFacebook');
+    const shareTwitter = document.getElementById('shareTwitter');
+    const shareInstagram = document.getElementById('shareInstagram');
+    const shareWhatsApp = document.getElementById('shareWhatsApp');
+
+    // Voice Recognition Setup
+    let recognition;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+    }
+
+    // AI Suggestions Data
+    const aiThemeSuggestions = {
+        'birthday': ['fun', 'celebration', 'modern'],
+        'anniversary': ['elegant', 'vintage', 'minimal'],
+        'graduation': ['modern', 'elegant', 'celebration'],
+        'wedding': ['elegant', 'vintage', 'minimal'],
+        'corporate': ['modern', 'minimal', 'elegant']
+    };
+
+    const aiMessageTemplates = {
+        'fun': [
+            "🎉 Get ready for the most EPIC birthday celebration ever! 🎂",
+            "🎈 It's time to party like there's no tomorrow! 🎊",
+            "🎁 Join us for a birthday bash that will be talked about for years! 🎉"
+        ],
+        'elegant': [
+            "We cordially invite you to celebrate this special occasion with us.",
+            "Please join us for an elegant celebration of this milestone birthday.",
+            "We would be honored by your presence at this birthday celebration."
+        ],
+        'modern': [
+            "Join us for a modern celebration of life and friendship.",
+            "Let's create unforgettable memories together at this birthday party.",
+            "Celebrate with us in style at this contemporary birthday gathering."
+        ]
+    };
+
     // Theme Styles
     const themeStyles = {
         elegant: {
@@ -48,6 +99,12 @@ document.addEventListener('DOMContentLoaded', function() {
             font: 'Montserrat',
             background: '#ffffff',
             border: '1px solid #e0e0e0',
+            textColor: '#2c3e50'
+        },
+        celebration: {
+            font: 'Montserrat',
+            background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+            border: '2px solid #FF6B6B',
             textColor: '#2c3e50'
         }
     };
@@ -99,6 +156,134 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // AI Theme Suggestion
+    function suggestTheme() {
+        const eventText = eventName.value.toLowerCase();
+        let suggestedTheme = 'fun'; // default
+
+        for (const [keyword, themes] of Object.entries(aiThemeSuggestions)) {
+            if (eventText.includes(keyword)) {
+                suggestedTheme = themes[Math.floor(Math.random() * themes.length)];
+                break;
+            }
+        }
+
+        // Update theme selection
+        document.querySelector(`[data-theme="${suggestedTheme}"]`).click();
+        themeSelect.value = suggestedTheme;
+
+        // Show success message
+        showNotification(`AI suggested theme: ${suggestedTheme.charAt(0).toUpperCase() + suggestedTheme.slice(1)}`, 'success');
+    }
+
+    // AI Message Generator
+    function generateAIMessage() {
+        const currentTheme = themeSelect.value;
+        const messages = aiMessageTemplates[currentTheme] || aiMessageTemplates['fun'];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        
+        message.value = randomMessage;
+        showNotification('AI generated message added!', 'success');
+    }
+
+    // Voice Input Functions
+    function setupVoiceInput(button, targetInput) {
+        button.addEventListener('click', function() {
+            if (!recognition) {
+                showNotification('Voice recognition not supported in this browser', 'error');
+                return;
+            }
+
+            button.classList.add('voice-active');
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                targetInput.value = transcript;
+                button.classList.remove('voice-active');
+                showNotification('Voice input captured!', 'success');
+            };
+
+            recognition.onerror = function(event) {
+                button.classList.remove('voice-active');
+                showNotification('Voice input error: ' + event.error, 'error');
+            };
+
+            recognition.onend = function() {
+                button.classList.remove('voice-active');
+            };
+        });
+    }
+
+    // QR Code Generation
+    function generateQRCode(text, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = '';
+        QRCode.toCanvas(container, text, {
+            width: 200,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        }, function(error) {
+            if (error) {
+                console.error('QR Code generation error:', error);
+                container.innerHTML = '<p class="text-danger">QR Code generation failed</p>';
+            }
+        });
+    }
+
+    // Social Media Sharing
+    function shareToSocialMedia(platform) {
+        const invitationData = {
+            title: eventName.value || 'Birthday Invitation',
+            text: message.value || 'Join us for a birthday celebration!',
+            url: window.location.href
+        };
+
+        let shareUrl = '';
+        switch(platform) {
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(invitationData.url)}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(invitationData.text)}&url=${encodeURIComponent(invitationData.url)}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(invitationData.text + ' ' + invitationData.url)}`;
+                break;
+            case 'instagram':
+                // Instagram doesn't support direct sharing via URL, so we'll copy to clipboard
+                navigator.clipboard.writeText(invitationData.text + ' ' + invitationData.url);
+                showNotification('Text copied to clipboard for Instagram sharing!', 'success');
+                return;
+        }
+
+        if (shareUrl) {
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+    }
+
+    // Notification System
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
+
     function generateInvitationHTML() {
         const theme = themeStyles[themeSelect.value];
         const colors = colorSchemes[colorScheme.value];
@@ -147,6 +332,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             default:
                 borderStyleCSS = `border: 3px ${selectedBorderStyle} ${colors.primary};`;
+        }
+
+        // QR Code HTML
+        let qrCodeHtml = '';
+        if (includeQR.checked) {
+            qrCodeHtml = `
+                <div class="qr-code-section" style="margin: 20px 0; text-align: center;">
+                    <h6 style="color: ${colors.primary}; margin-bottom: 10px;">Scan to RSVP</h6>
+                    <div id="rsvpQRCode" style="display: inline-block;"></div>
+                </div>
+            `;
+        }
+
+        if (includeMapQR.checked && venue.value) {
+            qrCodeHtml += `
+                <div class="qr-code-section" style="margin: 20px 0; text-align: center;">
+                    <h6 style="color: ${colors.primary}; margin-bottom: 10px;">Scan for Directions</h6>
+                    <div id="mapQRCode" style="display: inline-block;"></div>
+                </div>
+            `;
         }
         
         return `
@@ -198,568 +403,379 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <div style="margin: 2rem 0;">
                     <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">
-                        ${formatDate(eventDate.value)}
+                        <strong>Date:</strong> ${formatDate(eventDate.value)}
                     </p>
                     <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">
-                        ${formatTime(eventTime.value)}
+                        <strong>Time:</strong> ${formatTime(eventTime.value)}
                     </p>
-                    <p style="font-size: 1.3rem;">
-                        ${venue.value}
+                    <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">
+                        <strong>Venue:</strong> ${venue.value}
                     </p>
                 </div>
                 
                 ${message.value ? `
-                    <div style="
-                        margin: 2rem 0;
-                        padding: 1rem;
-                        border-left: 3px solid ${colors.primary};
-                        text-align: left;
-                    ">
-                        <p style="font-style: italic;">${message.value}</p>
+                    <div style="margin: 2rem 0; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <p style="font-style: italic; font-size: 1.1rem;">"${message.value}"</p>
                     </div>
                 ` : ''}
                 
                 <div style="margin: 2rem 0;">
                     <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">
-                        RSVP by ${formatDate(rsvpDate.value)}
+                        <strong>RSVP:</strong> ${rsvpContact.value}
                     </p>
-                    <p style="font-size: 1.2rem;">
-                        ${rsvpContact.value}
-                    </p>
+                    ${rsvpDate.value ? `
+                        <p style="font-size: 1.2rem;">
+                            <strong>Please respond by:</strong> ${formatDate(rsvpDate.value)}
+                        </p>
+                    ` : ''}
                 </div>
+                
+                ${qrCodeHtml}
             </div>
         `;
     }
 
-    // Add CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes borderDots {
-            0% { border-style: dotted; }
-            50% { border-style: dashed; }
-            100% { border-style: dotted; }
-        }
-        
-        @keyframes borderDashed {
-            0% { border-style: dashed; }
-            50% { border-style: solid; }
-            100% { border-style: dashed; }
-        }
-        
-        @keyframes borderGradient {
-            0% { border-image: linear-gradient(0deg, ${colorSchemes.blue.primary}, ${colorSchemes.blue.accent}) 1; }
-            50% { border-image: linear-gradient(180deg, ${colorSchemes.blue.primary}, ${colorSchemes.blue.accent}) 1; }
-            100% { border-image: linear-gradient(360deg, ${colorSchemes.blue.primary}, ${colorSchemes.blue.accent}) 1; }
-        }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 200%; }
-        }
-    `;
-    document.head.appendChild(style);
-
     // Event Listeners
     generateBtn.addEventListener('click', function() {
         if (!eventName.value || !hostName.value || !eventDate.value || !eventTime.value || !venue.value) {
-            alert('Please fill in all required fields');
+            showNotification('Please fill in all required fields', 'warning');
             return;
         }
 
         invitationPreview.innerHTML = generateInvitationHTML();
         previewSection.style.display = 'block';
-    });
-
-    downloadBtn.addEventListener('click', async function() {
-        try {
-            // Show loading message
-            const loadingMsg = document.createElement('div');
-            loadingMsg.style.position = 'fixed';
-            loadingMsg.style.top = '50%';
-            loadingMsg.style.left = '50%';
-            loadingMsg.style.transform = 'translate(-50%, -50%)';
-            loadingMsg.style.padding = '20px';
-            loadingMsg.style.background = 'rgba(0,0,0,0.8)';
-            loadingMsg.style.color = 'white';
-            loadingMsg.style.borderRadius = '10px';
-            loadingMsg.style.zIndex = '1000';
-            loadingMsg.textContent = 'Generating PDF...';
-            document.body.appendChild(loadingMsg);
-
-            // Create a static version of the invitation
-            const staticInvitation = invitationPreview.cloneNode(true);
-            
-            // Remove all animations and convert to static styles
-            const animatedElements = staticInvitation.querySelectorAll('[style*="animation"]');
-            animatedElements.forEach(el => {
-                el.style.animation = 'none';
-                el.style.transition = 'none';
-            });
-
-            // Create a temporary container for PDF generation
-            const tempContainer = document.createElement('div');
-            tempContainer.style.position = 'absolute';
-            tempContainer.style.left = '-9999px';
-            tempContainer.style.top = '-9999px';
-            tempContainer.appendChild(staticInvitation);
-            document.body.appendChild(tempContainer);
-
-            // Configure PDF options
-            const opt = {
-                margin: 0.5,
-                filename: `${eventName.value.replace(/\s+/g, '-')}-invitation.pdf`,
-                image: { type: 'jpeg', quality: 0.8 },
-                html2canvas: { 
-                    scale: 1,
-                    useCORS: true,
-                    allowTaint: true,
-                    backgroundColor: '#ffffff',
-                    windowWidth: 800,
-                    windowHeight: 1200
-                },
-                jsPDF: { 
-                    unit: 'in', 
-                    format: 'a4', 
-                    orientation: 'portrait'
-                }
-            };
-
-            // Generate PDF
-            await new Promise((resolve, reject) => {
-                html2pdf().set(opt).from(tempContainer).save().then(() => {
-                    resolve();
-                }).catch(err => {
-                    reject(err);
-                });
-            });
-
-            // Clean up
-            document.body.removeChild(tempContainer);
-            document.body.removeChild(loadingMsg);
-        } catch (err) {
-            console.error('PDF generation failed:', err);
-            
-            // Try alternative method if the first one fails
-            try {
-                const loadingMsg = document.querySelector('div[style*="position: fixed"]');
-                if (loadingMsg) {
-                    loadingMsg.textContent = 'Trying alternative method...';
-                }
-
-                const opt = {
-                    margin: 0.5,
-                    filename: `${eventName.value.replace(/\s+/g, '-')}-invitation.pdf`,
-                    image: { type: 'jpeg', quality: 0.8 },
-                    html2canvas: { 
-                        scale: 1,
-                        useCORS: true,
-                        allowTaint: true,
-                        backgroundColor: '#ffffff'
-                    },
-                    jsPDF: { 
-                        unit: 'in', 
-                        format: 'a4', 
-                        orientation: 'portrait'
-                    }
-                };
-
-                await html2pdf().set(opt).from(invitationPreview).save();
-                
-                if (loadingMsg) {
-                    document.body.removeChild(loadingMsg);
-                }
-            } catch (secondErr) {
-                console.error('Alternative PDF generation failed:', secondErr);
-                alert('Failed to generate PDF. Please try the following:\n1. Remove any images from the invitation\n2. Try a different browser\n3. Make sure all required fields are filled out');
-                
-                const loadingMsg = document.querySelector('div[style*="position: fixed"]');
-                if (loadingMsg) {
-                    document.body.removeChild(loadingMsg);
-                }
-            }
-        }
-    });
-
-    shareBtn.addEventListener('click', async function() {
-        try {
-            // Create a temporary link for sharing
-            const invitationData = {
-                title: eventName.value,
-                text: `You're invited to ${eventName.value}! Join us for a celebration.`,
-                url: window.location.href
-            };
-
-            if (navigator.share) {
-                await navigator.share(invitationData);
-            } else {
-                // Fallback for browsers that don't support Web Share API
-                const shareUrl = `mailto:?subject=${encodeURIComponent(invitationData.title)}&body=${encodeURIComponent(invitationData.text)}`;
-                window.open(shareUrl, '_blank');
-            }
-        } catch (err) {
-            console.error('Sharing failed:', err);
-            alert('Failed to share invitation. Please try copying the link manually.');
-        }
-    });
-
-    editBtn.addEventListener('click', function() {
-        previewSection.style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Set default date to next month
-    const nextMonth = new Date();
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
-    eventDate.value = nextMonth.toISOString().split('T')[0];
-    
-    // Set default RSVP date to 1 week before event
-    const rsvpDateValue = new Date(nextMonth);
-    rsvpDateValue.setDate(rsvpDateValue.getDate() - 7);
-    rsvpDate.value = rsvpDateValue.toISOString().split('T')[0];
-
-    // Template Gallery
-    const templateCards = document.querySelectorAll('.template-card');
-    if (templateCards.length > 0) {
-        templateCards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Remove selected class from all cards
-                templateCards.forEach(c => c.classList.remove('selected'));
-                // Add selected class to clicked card
-                card.classList.add('selected');
-                // Update theme select
-                if (themeSelect) {
-                    themeSelect.value = card.dataset.theme;
-                }
-                // Update preview
-                updatePreview();
-            });
-        });
-    }
-
-    // Export Options
-    const downloadPDF = document.getElementById('downloadPDF');
-    const downloadPNG = document.getElementById('downloadPNG');
-    const downloadJPG = document.getElementById('downloadJPG');
-    const downloadSocial = document.getElementById('downloadSocial');
-
-    if (downloadPDF) {
-        downloadPDF.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('pdf');
-        });
-    }
-
-    if (downloadPNG) {
-        downloadPNG.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('png');
-        });
-    }
-
-    if (downloadJPG) {
-        downloadJPG.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('jpg');
-        });
-    }
-
-    if (downloadSocial) {
-        downloadSocial.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('social');
-        });
-    }
-
-    async function exportInvitation(format) {
-        const invitationElement = document.getElementById('invitationPreview');
-        const loadingSpinner = document.getElementById('loadingSpinner');
         
-        if (!invitationElement) {
-            console.error('Invitation preview element not found');
+        // Generate QR codes after preview is created
+        setTimeout(() => {
+            if (includeQR.checked) {
+                const rsvpData = `RSVP for ${eventName.value}: ${rsvpContact.value}`;
+                generateQRCode(rsvpData, 'rsvpQRCode');
+            }
+            
+            if (includeMapQR.checked && venue.value) {
+                const mapData = `https://maps.google.com/?q=${encodeURIComponent(venue.value)}`;
+                generateQRCode(mapData, 'mapQRCode');
+            }
+        }, 100);
+
+        showNotification('Invitation generated successfully!', 'success');
+    });
+
+    // AI Feature Event Listeners
+    aiThemeBtn.addEventListener('click', suggestTheme);
+    aiMessageBtn.addEventListener('click', generateAIMessage);
+
+    // Voice Input Setup
+    setupVoiceInput(voiceEventBtn, eventName);
+    setupVoiceInput(voiceHostBtn, hostName);
+    setupVoiceInput(voiceVenueBtn, venue);
+    setupVoiceInput(voiceMessageBtn, message);
+
+    // Social Media Sharing
+    shareFacebook.addEventListener('click', () => shareToSocialMedia('facebook'));
+    shareTwitter.addEventListener('click', () => shareToSocialMedia('twitter'));
+    shareInstagram.addEventListener('click', () => shareToSocialMedia('instagram'));
+    shareWhatsApp.addEventListener('click', () => shareToSocialMedia('whatsapp'));
+
+    // QR Code Button
+    qrCodeBtn.addEventListener('click', function() {
+        const qrModal = document.createElement('div');
+        qrModal.className = 'modal fade';
+        qrModal.innerHTML = `
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">QR Codes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>RSVP QR Code</h6>
+                                <div id="modalRSVPQR"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Venue Map QR Code</h6>
+                                <div id="modalMapQR"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(qrModal);
+        const modal = new bootstrap.Modal(qrModal);
+        modal.show();
+        
+        setTimeout(() => {
+            if (includeQR.checked) {
+                const rsvpData = `RSVP for ${eventName.value}: ${rsvpContact.value}`;
+                generateQRCode(rsvpData, 'modalRSVPQR');
+            }
+            
+            if (includeMapQR.checked && venue.value) {
+                const mapData = `https://maps.google.com/?q=${encodeURIComponent(venue.value)}`;
+                generateQRCode(mapData, 'modalMapQR');
+            }
+        }, 300);
+        
+        qrModal.addEventListener('hidden.bs.modal', () => {
+            qrModal.remove();
+        });
+    });
+
+    // Template Selection
+    document.querySelectorAll('.template-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            themeSelect.value = this.dataset.theme;
+        });
+    });
+
+    // Export Functions
+    async function exportInvitation(format) {
+        const element = invitationPreview.querySelector('.invitation');
+        if (!element) {
+            showNotification('Please generate an invitation first', 'warning');
             return;
         }
 
         try {
-            if (loadingSpinner) loadingSpinner.style.display = 'block';
-
             switch(format) {
                 case 'pdf':
-                    await exportToPDF(invitationElement);
+                    await exportToPDF(element);
                     break;
                 case 'png':
-                    await exportToImage(invitationElement, 'png');
+                    await exportToImage(element, 'png');
                     break;
                 case 'jpg':
-                    await exportToImage(invitationElement, 'jpg');
+                    await exportToImage(element, 'jpg');
                     break;
                 case 'social':
-                    await exportToSocialMedia(invitationElement);
+                    await exportToSocialMedia(element);
                     break;
             }
         } catch (error) {
             console.error('Export error:', error);
-            alert('Error exporting invitation. Please try again.');
-        } finally {
-            if (loadingSpinner) loadingSpinner.style.display = 'none';
+            showNotification('Export failed. Please try again.', 'error');
         }
     }
 
     async function exportToPDF(element) {
-        if (!window.jspdf) {
-            console.error('jsPDF library not loaded');
-            return;
-        }
-
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdf = new jsPDF();
         
         const canvas = await html2canvas(element);
         const imgData = canvas.toDataURL('image/png');
         
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        const imgWidth = 210;
+        const pageHeight = 295;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
         
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        let position = 0;
+        
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+        
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+        
         pdf.save('birthday-invitation.pdf');
+        showNotification('PDF downloaded successfully!', 'success');
     }
 
     async function exportToImage(element, format) {
-        if (!window.html2canvas) {
-            console.error('html2canvas library not loaded');
-            return;
-        }
-
         const canvas = await html2canvas(element);
         const link = document.createElement('a');
         link.download = `birthday-invitation.${format}`;
         link.href = canvas.toDataURL(`image/${format}`);
         link.click();
+        showNotification(`${format.toUpperCase()} downloaded successfully!`, 'success');
     }
 
     async function exportToSocialMedia(element) {
-        if (!window.html2canvas) {
-            console.error('html2canvas library not loaded');
-            return;
-        }
-
-        const socialSizes = {
-            facebook: { width: 1200, height: 630 },
-            instagram: { width: 1080, height: 1080 },
-            twitter: { width: 1200, height: 675 }
-        };
-
         const canvas = await html2canvas(element, {
-            width: socialSizes.facebook.width,
-            height: socialSizes.facebook.height
+            width: 1080,
+            height: 1080,
+            scale: 2
         });
-
+        
         const link = document.createElement('a');
         link.download = 'birthday-invitation-social.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
+        showNotification('Social media image downloaded!', 'success');
     }
 
-    // Countdown Timer
-    let countdownInterval = null;
+    // Download Event Listeners
+    document.getElementById('downloadPDF').addEventListener('click', () => exportInvitation('pdf'));
+    document.getElementById('downloadPNG').addEventListener('click', () => exportInvitation('png'));
+    document.getElementById('downloadJPG').addEventListener('click', () => exportInvitation('jpg'));
+    document.getElementById('downloadSocial').addEventListener('click', () => exportInvitation('social'));
 
-    function initializeCountdown() {
-        if (!eventDate || !eventTime) return;
-
-        const eventDateTime = new Date(`${eventDate.value}T${eventTime.value}`);
-        const countdownTimer = document.getElementById('countdownTimer');
-        
-        if (!countdownTimer) return;
-
-        // Clear any existing interval
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-        }
-        
-        function updateCountdown() {
-            const now = new Date();
-            const diff = eventDateTime - now;
-            
-            if (diff <= 0) {
-                countdownTimer.innerHTML = '<p class="text-center">Event has started!</p>';
-                clearInterval(countdownInterval);
-                return;
-            }
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            const daysElement = document.getElementById('days');
-            const hoursElement = document.getElementById('hours');
-            const minutesElement = document.getElementById('minutes');
-            const secondsElement = document.getElementById('seconds');
-
-            if (daysElement) daysElement.textContent = String(days).padStart(2, '0');
-            if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
-            if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
-            if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
-        }
-        
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
-    }
-
-    // Venue Map
-    let map = null;
-    let marker = null;
-
-    function initializeMap() {
-        if (!venue || !window.google) {
-            const mapContainer = document.getElementById('venueMap');
-            if (mapContainer) {
-                mapContainer.innerHTML = '<div class="map-error">Google Maps is not available. Please check your internet connection.</div>';
-            }
-            return;
-        }
-        
-        const mapContainer = document.getElementById('venueMap');
-        if (!mapContainer) return;
-
-        // Clear existing map
-        if (map) {
-            map = null;
-            marker = null;
-        }
-
-        // Initialize map
-        map = new google.maps.Map(mapContainer, {
-            zoom: 15,
-            center: { lat: 0, lng: 0 },
-            mapTypeControl: true,
-            streetViewControl: true,
-            fullscreenControl: true
-        });
-
-        // Geocode the address
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ address: venue.value }, (results, status) => {
-            if (status === 'OK' && results[0]) {
-                // Center map on the location
-                map.setCenter(results[0].geometry.location);
-
-                // Add marker
-                marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location,
-                    title: venue.value,
-                    animation: google.maps.Animation.DROP
-                });
-
-                // Add info window
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<div class="p-2"><strong>${venue.value}</strong></div>`
-                });
-
-                marker.addListener('click', () => {
-                    infoWindow.open(map, marker);
-                });
-
-                // Open info window by default
-                infoWindow.open(map, marker);
-            } else {
-                mapContainer.innerHTML = '<div class="map-error">Could not find the location. Please check the address.</div>';
-            }
-        });
-    }
-
-    // Initialize interactive elements when preview is shown
-    if (generateBtn) {
-        generateBtn.addEventListener('click', () => {
-            // Clear existing intervals and maps
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            if (map) {
-                map = null;
-                marker = null;
-            }
-
-            // Initialize new elements
-            initializeCountdown();
-            initializeWeather();
-            initializeMap();
-        });
-    }
-
-    // Update interactive elements when date/time changes
-    if (eventDate) {
-        eventDate.addEventListener('change', () => {
-            if (previewSection && previewSection.style.display !== 'none') {
-                initializeCountdown();
-                initializeWeather();
-            }
-        });
-    }
-
-    if (eventTime) {
-        eventTime.addEventListener('change', () => {
-            if (previewSection && previewSection.style.display !== 'none') {
-                initializeCountdown();
-            }
-        });
-    }
-
-    if (venue) {
-        venue.addEventListener('change', () => {
-            if (previewSection && previewSection.style.display !== 'none') {
-                initializeWeather();
-                initializeMap();
-            }
-        });
-    }
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
+    // Share Button
+    shareBtn.addEventListener('click', function() {
+        if (navigator.share) {
+            navigator.share({
+                title: eventName.value || 'Birthday Invitation',
+                text: message.value || 'Join us for a birthday celebration!',
+                url: window.location.href
+            });
+        } else {
+            // Fallback: copy to clipboard
+            navigator.clipboard.writeText(window.location.href);
+            showNotification('Link copied to clipboard!', 'success');
         }
     });
 
-    async function initializeWeather() {
-        if (!eventDate || !venue) return;
+    // Edit Button
+    editBtn.addEventListener('click', function() {
+        previewSection.style.display = 'none';
+        document.getElementById('invitationForm').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Countdown Timer
+    function initializeCountdown() {
+        if (!eventDate.value || !eventTime.value) return;
+
+        const eventDateTime = new Date(`${eventDate.value}T${eventTime.value}`);
         
-        const weatherForecast = document.getElementById('weatherForecast');
-        if (!weatherForecast) return;
+        function updateCountdown() {
+            const now = new Date();
+            const distance = eventDateTime - now;
+            
+            if (distance < 0) {
+                document.getElementById('countdownTimer').innerHTML = '<p class="text-center">Event has passed!</p>';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+
+    // Weather Forecast
+    async function initializeWeather() {
+        if (!venue.value) return;
 
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(venue.value)}&appid=YOUR_API_KEY&units=metric`);
-            const data = await response.json();
-            
-            const eventDateObj = new Date(eventDate.value);
-            const weatherData = data.list.find(item => {
-                const itemDate = new Date(item.dt * 1000);
-                return itemDate.getDate() === eventDateObj.getDate();
-            });
-            
-            if (weatherData) {
-                const weatherTemp = document.getElementById('weatherTemp');
-                const weatherDesc = document.getElementById('weatherDesc');
-                const weatherIcon = document.querySelector('.weather-icon i');
+            // Simulate weather API call (replace with actual API)
+            const weatherData = {
+                temp: Math.floor(Math.random() * 30) + 10,
+                description: ['Sunny', 'Partly Cloudy', 'Cloudy', 'Light Rain'][Math.floor(Math.random() * 4)],
+                icon: 'cloud-sun'
+            };
 
-                if (weatherTemp) weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°C`;
-                if (weatherDesc) weatherDesc.textContent = weatherData.weather[0].description;
-                if (weatherIcon) weatherIcon.className = getWeatherIcon(weatherData.weather[0].id);
-            }
+            document.getElementById('weatherTemp').textContent = `${weatherData.temp}°C`;
+            document.getElementById('weatherDesc').textContent = weatherData.description;
+            document.querySelector('.weather-icon i').className = `fas fa-${weatherData.icon} fa-2x`;
         } catch (error) {
             console.error('Weather API error:', error);
-            weatherForecast.innerHTML = '<p>Weather data unavailable</p>';
+            document.getElementById('weatherForecast').innerHTML = '<p class="text-muted">Weather unavailable</p>';
         }
     }
 
-    function getWeatherIcon(weatherId) {
-        if (weatherId >= 200 && weatherId < 300) return 'fas fa-bolt';
-        if (weatherId >= 300 && weatherId < 400) return 'fas fa-cloud-rain';
-        if (weatherId >= 500 && weatherId < 600) return 'fas fa-cloud-showers-heavy';
-        if (weatherId >= 600 && weatherId < 700) return 'fas fa-snowflake';
-        if (weatherId >= 700 && weatherId < 800) return 'fas fa-smog';
-        if (weatherId === 800) return 'fas fa-sun';
-        if (weatherId > 800) return 'fas fa-cloud';
-        return 'fas fa-cloud-sun';
+    // Map Integration
+    function initializeMap() {
+        if (!venue.value) return;
+
+        const mapContainer = document.getElementById('venueMap');
+        if (!mapContainer) return;
+
+        // Create a placeholder map (replace with actual Google Maps integration)
+        mapContainer.innerHTML = `
+            <div style="
+                width: 100%;
+                height: 100%;
+                background: #f8f9fa;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px;
+            ">
+                <div class="text-center">
+                    <i class="fas fa-map-marker-alt fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Map for: ${venue.value}</p>
+                    <button class="btn btn-sm btn-primary" onclick="window.open('https://maps.google.com/?q=${encodeURIComponent(venue.value)}', '_blank')">
+                        Open in Google Maps
+                    </button>
+                </div>
+            </div>
+        `;
     }
+
+    // Initialize features when preview is shown
+    generateBtn.addEventListener('click', function() {
+        setTimeout(() => {
+            initializeCountdown();
+            initializeWeather();
+            initializeMap();
+        }, 500);
+    });
+
+    // Auto-save functionality
+    function autoSave() {
+        const formData = {
+            eventName: eventName.value,
+            hostName: hostName.value,
+            eventDate: eventDate.value,
+            eventTime: eventTime.value,
+            venue: venue.value,
+            message: message.value,
+            rsvpContact: rsvpContact.value,
+            rsvpDate: rsvpDate.value,
+            theme: themeSelect.value,
+            colorScheme: colorScheme.value,
+            borderStyle: borderStyle.value
+        };
+        
+        localStorage.setItem('birthdayInvitationData', JSON.stringify(formData));
+    }
+
+    // Load saved data
+    function loadSavedData() {
+        const savedData = localStorage.getItem('birthdayInvitationData');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            Object.keys(data).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = data[key];
+                }
+            });
+            
+            // Update theme selection
+            if (data.theme) {
+                document.querySelector(`[data-theme="${data.theme}"]`)?.click();
+            }
+        }
+    }
+
+    // Auto-save on input changes
+    [eventName, hostName, eventDate, eventTime, venue, message, rsvpContact, rsvpDate].forEach(element => {
+        element.addEventListener('input', autoSave);
+    });
+
+    // Load saved data on page load
+    loadSavedData();
+
+    // Show welcome message
+    showNotification('Welcome to the enhanced Birthday Invitation Generator! Try the new AI features and voice input!', 'info');
 }); 
