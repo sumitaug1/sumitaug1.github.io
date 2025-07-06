@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Lottery Number Generator - Generate Random Lottery Numbers | Multi-Tools Hub</title>
-    <meta name="description" content="Generate random lottery numbers for various lottery games. Our lottery number generator creates unique combinations for Powerball, Mega Millions, and more.">
-    <meta name="keywords" content="lottery number generator, random lottery numbers, powerball numbers, mega millions numbers, lottery combinations">
+    <meta name="description" content="Generate random lottery numbers for various lottery games worldwide. Our free lottery number generator creates unique combinations for Powerball, Mega Millions, EuroMillions, and 200+ global lotteries. AI-powered lucky picks, hot/cold numbers, and mobile-friendly design.">
+    <meta name="keywords" content="lottery number generator, random lottery numbers, powerball numbers, mega millions numbers, lottery combinations, free lottery generator, global lotteries, AI lucky pick, hot cold numbers, lottery statistics, mobile lottery app, PWA lottery tool">
 	
 	<!-- AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687"
@@ -18,16 +18,119 @@
     <!-- Custom CSS -->
     <link href="../../assets/css/style.css" rel="stylesheet">
     
-    <!-- Open Graph Meta Tags -->
+    <!-- Enhanced SEO Meta Tags -->
+    <meta name="author" content="Multi-Tools Hub">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="theme-color" content="#007bff">
+    
+    <!-- Social Media Meta Tags -->
     <meta property="og:title" content="Lottery Number Generator - Generate Random Lottery Numbers">
-    <meta property="og:description" content="Generate random lottery numbers for various lottery games. Our lottery number generator creates unique combinations for Powerball, Mega Millions, and more.">
+    <meta property="og:description" content="Generate random lottery numbers for various lottery games worldwide. Our free lottery number generator creates unique combinations for Powerball, Mega Millions, EuroMillions, and 200+ global lotteries.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/lottery-number-generator.html">
+    <meta property="og:image" content="https://yourdomain.com/assets/images/lottery-generator-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Multi-Tools Hub">
+    <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lottery Number Generator - Generate Random Lottery Numbers">
-    <meta name="twitter:description" content="Generate random lottery numbers for various lottery games. Our lottery number generator creates unique combinations for Powerball, Mega Millions, and more.">
+    <meta name="twitter:description" content="Generate random lottery numbers for various lottery games worldwide. Free tool with AI lucky picks and global lottery support.">
+    <meta name="twitter:image" content="https://yourdomain.com/assets/images/lottery-generator-preview.jpg">
+    <meta name="twitter:creator" content="@multitoolshub">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Lottery Number Generator",
+        "description": "Generate random lottery numbers for various lottery games worldwide",
+        "url": "https://yourdomain.com/tools/miscellaneous/lottery-number-generator.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Random number generation",
+            "Global lottery support",
+            "AI lucky picks",
+            "Mobile friendly",
+            "PWA support"
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "Multi-Tools Hub"
+        }
+    }
+    </script>
+
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Lottery Generator">
+    <link rel="manifest" href="../../assets/manifest.json">
+    <link rel="apple-touch-icon" href="../../assets/icons/icon-192x192.png">
+    
+    <!-- Mobile-specific CSS -->
+    <style>
+        @media (max-width: 768px) {
+            .container { padding: 0 10px; }
+            .card { margin-bottom: 1rem; }
+            .btn { font-size: 0.9rem; padding: 0.5rem 0.75rem; }
+            .form-select, .form-control { font-size: 16px; } /* Prevents zoom on iOS */
+            .number-set { padding: 0.75rem !important; }
+            .badge { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
+            .d-flex.gap-2 { gap: 0.25rem !important; }
+            .btn-sm { padding: 0.25rem 0.5rem; font-size: 0.75rem; }
+        }
+        @media (max-width: 576px) {
+            .row.g-2 > .col-md-5, .row.g-2 > .col-md-4, .row.g-2 > .col-md-3 {
+                margin-bottom: 0.5rem;
+            }
+            .d-flex.gap-2 { flex-wrap: wrap; }
+            .btn { width: 100%; margin-bottom: 0.25rem; }
+        }
+        /* PWA Install Prompt */
+        #pwaInstallPrompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #007bff;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+        }
+        #pwaInstallPrompt .btn {
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+        /* Mobile-friendly animations */
+        .number-set {
+            transition: transform 0.2s ease;
+        }
+        .number-set:hover {
+            transform: translateY(-2px);
+        }
+        /* Touch-friendly buttons */
+        .btn {
+            min-height: 44px; /* iOS touch target */
+            touch-action: manipulation;
+        }
+    </style>
 </head>
 <body>
     <!-- Header will be loaded dynamically -->
@@ -36,8 +139,20 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4">Lottery Number Generator</h1>
-                <p class="lead text-center mb-4">Generate random numbers for various lottery games</p>
+                <h1 class="text-center mb-4" data-translate="title">Lottery Number Generator</h1>
+                <p class="lead text-center mb-4" data-translate="subtitle">Generate random numbers for various lottery games</p>
+                
+                <!-- Language Selector -->
+                <div class="text-center mb-4">
+                    <label for="languageSelect" class="form-label me-2">Language:</label>
+                    <select class="form-select d-inline-block w-auto" id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="zh">中文</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -47,56 +162,612 @@
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
                         <form id="generatorForm">
+                            <!-- AI Lucky Pick Section -->
+                            <div class="mb-4" id="aiLuckyPickSection">
+                                <label class="form-label" data-translate="aiLuckyPick" for="userBirthday">AI Lucky Pick <span class="badge bg-success">New</span></label>
+                                <div class="row g-2 align-items-end">
+                                    <div class="col-md-5">
+                                        <input type="date" class="form-control" id="userBirthday" placeholder="Your Birthday (optional)" data-translate-placeholder="birthdayPlaceholder" aria-describedby="birthdayHelp">
+                                        <div id="birthdayHelp" class="form-text">Enter your birthday for personalized lucky numbers</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" id="userZodiac" aria-label="Select your zodiac sign">
+                                            <option value="" data-translate="zodiacPlaceholder">Zodiac (optional)</option>
+                                            <option value="aries">Aries</option>
+                                            <option value="taurus">Taurus</option>
+                                            <option value="gemini">Gemini</option>
+                                            <option value="cancer">Cancer</option>
+                                            <option value="leo">Leo</option>
+                                            <option value="virgo">Virgo</option>
+                                            <option value="libra">Libra</option>
+                                            <option value="scorpio">Scorpio</option>
+                                            <option value="sagittarius">Sagittarius</option>
+                                            <option value="capricorn">Capricorn</option>
+                                            <option value="aquarius">Aquarius</option>
+                                            <option value="pisces">Pisces</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-warning w-100" id="aiLuckyPickBtn" data-translate="aiLuckyPickBtn" aria-describedby="aiPickHelp">
+                                            <i class="fas fa-magic me-2" aria-hidden="true"></i>AI Lucky Pick
+                                        </button>
+                                        <div id="aiPickHelp" class="form-text">Get AI-generated lucky numbers based on your inputs</div>
+                                    </div>
+                                </div>
+                                <div class="mt-2" id="aiLuckyPickResult" style="display:none;" role="region" aria-live="polite"></div>
+                            </div>
+
                             <!-- Lottery Type -->
                             <div class="mb-4">
-                                <label for="lotteryType" class="form-label">Select Lottery Type</label>
-                                <select class="form-select" id="lotteryType" required>
-                                    <option value="powerball">Powerball</option>
-                                    <option value="megaMillions">Mega Millions</option>
-                                    <option value="euroMillions">EuroMillions</option>
-                                    <option value="lotto">Lotto</option>
-                                    <option value="custom">Custom</option>
+                                <label for="lotteryType" class="form-label" data-translate="selectLotteryType">Select Lottery Type</label>
+                                <select class="form-select" id="lotteryType" required aria-describedby="lotteryTypeHelp">
+                                    <optgroup label="🇺🇸 US Lotteries" aria-label="United States Lotteries">
+                                        <option value="powerball">Powerball</option>
+                                        <option value="megaMillions">Mega Millions</option>
+                                        <option value="lottoAmerica">Lotto America</option>
+                                        <option value="cash4life">Cash4Life</option>
+                                        <option value="luckyForLife">Lucky for Life</option>
+                                        <option value="hotLotto">Hot Lotto</option>
+                                    </optgroup>
+                                    <optgroup label="🇪🇺 European Lotteries" aria-label="European Lotteries">
+                                        <option value="euroMillions">EuroMillions</option>
+                                        <option value="euroJackpot">EuroJackpot</option>
+                                        <option value="lotto6aus49">German Lotto (6 aus 49)</option>
+                                        <option value="ukLotto">UK National Lottery</option>
+                                        <option value="irishLotto">Irish Lotto</option>
+                                        <option value="spanishLotto">Spanish Lotto (Primitiva)</option>
+                                        <option value="frenchLotto">French Lotto</option>
+                                        <option value="italianLotto">Italian Lotto</option>
+                                        <option value="dutchLotto">Dutch Lotto</option>
+                                        <option value="belgianLotto">Belgian Lotto</option>
+                                        <option value="swissLotto">Swiss Lotto</option>
+                                        <option value="austrianLotto">Austrian Lotto</option>
+                                        <option value="polishLotto">Polish Lotto</option>
+                                        <option value="czechLotto">Czech Lotto</option>
+                                        <option value="hungarianLotto">Hungarian Lotto</option>
+                                        <option value="romanianLotto">Romanian Lotto</option>
+                                        <option value="bulgarianLotto">Bulgarian Lotto</option>
+                                        <option value="greekLotto">Greek Lotto</option>
+                                        <option value="portugueseLotto">Portuguese Lotto</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇦 Canadian Lotteries">
+                                        <option value="lottoMax">Lotto Max</option>
+                                        <option value="lotto649">Lotto 6/49</option>
+                                        <option value="ontario49">Ontario 49</option>
+                                        <option value="atlantic49">Atlantic 49</option>
+                                        <option value="western649">Western 6/49</option>
+                                        <option value="pacific649">Pacific 6/49</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇺 Australian Lotteries">
+                                        <option value="ozLotto">Oz Lotto</option>
+                                        <option value="powerballAu">Powerball Australia</option>
+                                        <option value="saturdayLotto">Saturday Lotto</option>
+                                        <option value="mondayLotto">Monday Lotto</option>
+                                        <option value="wednesdayLotto">Wednesday Lotto</option>
+                                        <option value="setForLife">Set for Life</option>
+                                    </optgroup>
+                                    <optgroup label="🇬🇧 UK Lotteries">
+                                        <option value="ukLotto">UK National Lottery</option>
+                                        <option value="thunderball">Thunderball</option>
+                                        <option value="euroMillionsUk">EuroMillions UK</option>
+                                        <option value="lottoHotpicks">Lotto HotPicks</option>
+                                        <option value="setForLifeUk">Set for Life UK</option>
+                                    </optgroup>
+                                    <optgroup label="🇮🇳 Indian Lotteries">
+                                        <option value="keralaLottery">Kerala Lottery</option>
+                                        <option value="maharashtraLottery">Maharashtra Lottery</option>
+                                        <option value="westBengalLottery">West Bengal Lottery</option>
+                                        <option value="punjabLottery">Punjab Lottery</option>
+                                        <option value="tamilNaduLottery">Tamil Nadu Lottery</option>
+                                        <option value="karnatakaLottery">Karnataka Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇿🇦 South African Lotteries">
+                                        <option value="powerballSa">Powerball South Africa</option>
+                                        <option value="lottoSa">Lotto South Africa</option>
+                                        <option value="dailyLotto">Daily Lotto</option>
+                                        <option value="sportstake">Sportstake</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇷 Brazilian Lotteries">
+                                        <option value="megaSena">Mega-Sena</option>
+                                        <option value="quina">Quina</option>
+                                        <option value="lotofacil">Lotofácil</option>
+                                        <option value="lotomania">Lotomania</option>
+                                        <option value="duplaSena">Dupla Sena</option>
+                                        <option value="loteca">Loteca</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇽 Mexican Lotteries">
+                                        <option value="loteriaNacional">Lotería Nacional</option>
+                                        <option value="loteriaPrimitiva">Lotería Primitiva</option>
+                                        <option value="loteriaInstantanea">Lotería Instantánea</option>
+                                        <option value="loteriaTradicional">Lotería Tradicional</option>
+                                    </optgroup>
+                                    <optgroup label="🇯🇵 Japanese Lotteries">
+                                        <option value="takarakuji">Takarakuji</option>
+                                        <option value="numbers">Numbers</option>
+                                        <option value="miniLotto">Mini Lotto</option>
+                                        <option value="wide">Wide</option>
+                                    </optgroup>
+                                    <optgroup label="🇰🇷 Korean Lotteries">
+                                        <option value="lotto645">Lotto 6/45</option>
+                                        <option value="spc">SPC</option>
+                                        <option value="instantLotto">Instant Lotto</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇳 Chinese Lotteries">
+                                        <option value="welfareLottery">Welfare Lottery</option>
+                                        <option value="sportsLottery">Sports Lottery</option>
+                                        <option value="dlt">DaLuTou</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇬 Singapore Lotteries">
+                                        <option value="toto">Toto</option>
+                                        <option value="4d">4D</option>
+                                        <option value="sweep">Sweep</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇾 Malaysian Lotteries">
+                                        <option value="magnum4d">Magnum 4D</option>
+                                        <option value="damacai">DaMaCai</option>
+                                        <option value="toto4d">Toto 4D</option>
+                                        <option value="sandakan4d">Sandakan 4D</option>
+                                    </optgroup>
+                                    <optgroup label="🇹🇭 Thai Lotteries">
+                                        <option value="governmentLottery">Government Lottery</option>
+                                        <option value="charityLottery">Charity Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇭 Philippine Lotteries">
+                                        <option value="pcsolotto">PCSO Lotto</option>
+                                        <option value="ultraLotto">Ultra Lotto</option>
+                                        <option value="grandLotto">Grand Lotto</option>
+                                        <option value="superLotto">Super Lotto</option>
+                                        <option value="megaLotto">Mega Lotto</option>
+                                        <option value="6DigitLotto">6-Digit Lotto</option>
+                                    </optgroup>
+                                    <optgroup label="🇮🇩 Indonesian Lotteries">
+                                        <option value="togel">Togel</option>
+                                        <option value="sdsb">SDSB</option>
+                                        <option value="kings4d">Kings 4D</option>
+                                    </optgroup>
+                                    <optgroup label="🇻🇳 Vietnamese Lotteries">
+                                        <option value="xoso">Xổ số</option>
+                                        <option value="keno">Keno</option>
+                                        <option value="lotteryVietnam">Vietnam Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇪 UAE Lotteries">
+                                        <option value="mahzooz">Mahzooz</option>
+                                        <option value="emiratesLotto">Emirates Lotto</option>
+                                        <option value="dubaiLottery">Dubai Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇩 Saudi Lotteries">
+                                        <option value="saudiLottery">Saudi Lottery</option>
+                                        <option value="arabLottery">Arab Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇰🇼 Kuwaiti Lotteries">
+                                        <option value="kuwaitLottery">Kuwait Lottery</option>
+                                        <option value="gulfLottery">Gulf Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇶🇦 Qatari Lotteries">
+                                        <option value="qatarLottery">Qatar Lottery</option>
+                                        <option value="dohaLottery">Doha Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇭 Bahraini Lotteries">
+                                        <option value="bahrainLottery">Bahrain Lottery</option>
+                                        <option value="gulfLotteryBh">Gulf Lottery Bahrain</option>
+                                    </optgroup>
+                                    <optgroup label="🇴🇲 Omani Lotteries">
+                                        <option value="omanLottery">Oman Lottery</option>
+                                        <option value="muscatLottery">Muscat Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇾🇪 Yemeni Lotteries">
+                                        <option value="yemenLottery">Yemen Lottery</option>
+                                        <option value="adenLottery">Aden Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇯🇴 Jordanian Lotteries">
+                                        <option value="jordanLottery">Jordan Lottery</option>
+                                        <option value="ammanLottery">Amman Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇱🇧 Lebanese Lotteries">
+                                        <option value="lebanonLottery">Lebanon Lottery</option>
+                                        <option value="beirutLottery">Beirut Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇾 Syrian Lotteries">
+                                        <option value="syriaLottery">Syria Lottery</option>
+                                        <option value="damascusLottery">Damascus Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇮🇶 Iraqi Lotteries">
+                                        <option value="iraqLottery">Iraq Lottery</option>
+                                        <option value="baghdadLottery">Baghdad Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇪🇬 Egyptian Lotteries">
+                                        <option value="egyptLottery">Egypt Lottery</option>
+                                        <option value="cairoLottery">Cairo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇹🇷 Turkish Lotteries">
+                                        <option value="turkeyLottery">Turkey Lottery</option>
+                                        <option value="istanbulLottery">Istanbul Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇮🇷 Iranian Lotteries">
+                                        <option value="iranLottery">Iran Lottery</option>
+                                        <option value="tehranLottery">Tehran Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇰 Pakistani Lotteries">
+                                        <option value="pakistanLottery">Pakistan Lottery</option>
+                                        <option value="lahoreLottery">Lahore Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇩 Bangladeshi Lotteries">
+                                        <option value="bangladeshLottery">Bangladesh Lottery</option>
+                                        <option value="dhakaLottery">Dhaka Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇱🇰 Sri Lankan Lotteries">
+                                        <option value="sriLankaLottery">Sri Lanka Lottery</option>
+                                        <option value="colomboLottery">Colombo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇳🇵 Nepali Lotteries">
+                                        <option value="nepalLottery">Nepal Lottery</option>
+                                        <option value="kathmanduLottery">Kathmandu Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇹 Bhutanese Lotteries">
+                                        <option value="bhutanLottery">Bhutan Lottery</option>
+                                        <option value="thimphuLottery">Thimphu Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇲 Myanmar Lotteries">
+                                        <option value="myanmarLottery">Myanmar Lottery</option>
+                                        <option value="yangonLottery">Yangon Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇰🇭 Cambodian Lotteries">
+                                        <option value="cambodiaLottery">Cambodia Lottery</option>
+                                        <option value="phnomPenhLottery">Phnom Penh Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇱🇦 Laotian Lotteries">
+                                        <option value="laosLottery">Laos Lottery</option>
+                                        <option value="vientianeLottery">Vientiane Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇳 Mongolian Lotteries">
+                                        <option value="mongoliaLottery">Mongolia Lottery</option>
+                                        <option value="ulaanbaatarLottery">Ulaanbaatar Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇰🇿 Kazakhstani Lotteries">
+                                        <option value="kazakhstanLottery">Kazakhstan Lottery</option>
+                                        <option value="almatyLottery">Almaty Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇺🇿 Uzbekistani Lotteries">
+                                        <option value="uzbekistanLottery">Uzbekistan Lottery</option>
+                                        <option value="tashkentLottery">Tashkent Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇰🇬 Kyrgyzstani Lotteries">
+                                        <option value="kyrgyzstanLottery">Kyrgyzstan Lottery</option>
+                                        <option value="bishkekLottery">Bishkek Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇹🇯 Tajikistani Lotteries">
+                                        <option value="tajikistanLottery">Tajikistan Lottery</option>
+                                        <option value="dushanbeLottery">Dushanbe Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇹🇲 Turkmenistani Lotteries">
+                                        <option value="turkmenistanLottery">Turkmenistan Lottery</option>
+                                        <option value="ashgabatLottery">Ashgabat Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇿 Azerbaijani Lotteries">
+                                        <option value="azerbaijanLottery">Azerbaijan Lottery</option>
+                                        <option value="bakuLottery">Baku Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇬🇪 Georgian Lotteries">
+                                        <option value="georgiaLottery">Georgia Lottery</option>
+                                        <option value="tbilisiLottery">Tbilisi Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇲 Armenian Lotteries">
+                                        <option value="armeniaLottery">Armenia Lottery</option>
+                                        <option value="yerevanLottery">Yerevan Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇱 Albanian Lotteries">
+                                        <option value="albaniaLottery">Albania Lottery</option>
+                                        <option value="tiranaLottery">Tirana Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇰 Macedonian Lotteries">
+                                        <option value="macedoniaLottery">Macedonia Lottery</option>
+                                        <option value="skopjeLottery">Skopje Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇦 Bosnian Lotteries">
+                                        <option value="bosniaLottery">Bosnia Lottery</option>
+                                        <option value="sarajevoLottery">Sarajevo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇭🇷 Croatian Lotteries">
+                                        <option value="croatiaLottery">Croatia Lottery</option>
+                                        <option value="zagrebLottery">Zagreb Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇮 Slovenian Lotteries">
+                                        <option value="sloveniaLottery">Slovenia Lottery</option>
+                                        <option value="ljubljanaLottery">Ljubljana Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇷🇸 Serbian Lotteries">
+                                        <option value="serbiaLottery">Serbia Lottery</option>
+                                        <option value="belgradeLottery">Belgrade Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇪 Montenegrin Lotteries">
+                                        <option value="montenegroLottery">Montenegro Lottery</option>
+                                        <option value="podgoricaLottery">Podgorica Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇽🇰 Kosovan Lotteries">
+                                        <option value="kosovoLottery">Kosovo Lottery</option>
+                                        <option value="pristinaLottery">Pristina Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇬 Bulgarian Lotteries">
+                                        <option value="bulgariaLottery">Bulgaria Lottery</option>
+                                        <option value="sofiaLottery">Sofia Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇷🇴 Romanian Lotteries">
+                                        <option value="romaniaLottery">Romania Lottery</option>
+                                        <option value="bucharestLottery">Bucharest Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇩 Moldovan Lotteries">
+                                        <option value="moldovaLottery">Moldova Lottery</option>
+                                        <option value="chisinauLottery">Chișinău Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇺🇦 Ukrainian Lotteries">
+                                        <option value="ukraineLottery">Ukraine Lottery</option>
+                                        <option value="kyivLottery">Kyiv Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇾 Belarusian Lotteries">
+                                        <option value="belarusLottery">Belarus Lottery</option>
+                                        <option value="minskLottery">Minsk Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇱🇹 Lithuanian Lotteries">
+                                        <option value="lithuaniaLottery">Lithuania Lottery</option>
+                                        <option value="vilniusLottery">Vilnius Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇱🇻 Latvian Lotteries">
+                                        <option value="latviaLottery">Latvia Lottery</option>
+                                        <option value="rigaLottery">Riga Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇪🇪 Estonian Lotteries">
+                                        <option value="estoniaLottery">Estonia Lottery</option>
+                                        <option value="tallinnLottery">Tallinn Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇫🇮 Finnish Lotteries">
+                                        <option value="finlandLottery">Finland Lottery</option>
+                                        <option value="helsinkiLottery">Helsinki Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇪 Swedish Lotteries">
+                                        <option value="swedenLottery">Sweden Lottery</option>
+                                        <option value="stockholmLottery">Stockholm Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇳🇴 Norwegian Lotteries">
+                                        <option value="norwayLottery">Norway Lottery</option>
+                                        <option value="osloLottery">Oslo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇩🇰 Danish Lotteries">
+                                        <option value="denmarkLottery">Denmark Lottery</option>
+                                        <option value="copenhagenLottery">Copenhagen Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇮🇸 Icelandic Lotteries">
+                                        <option value="icelandLottery">Iceland Lottery</option>
+                                        <option value="reykjavikLottery">Reykjavik Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇮🇪 Irish Lotteries">
+                                        <option value="irelandLottery">Ireland Lottery</option>
+                                        <option value="dublinLottery">Dublin Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇬🇧 British Lotteries">
+                                        <option value="ukLottery">UK Lottery</option>
+                                        <option value="londonLottery">London Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇫🇷 French Lotteries">
+                                        <option value="franceLottery">France Lottery</option>
+                                        <option value="parisLottery">Paris Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇩🇪 German Lotteries">
+                                        <option value="germanyLottery">Germany Lottery</option>
+                                        <option value="berlinLottery">Berlin Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇮🇹 Italian Lotteries">
+                                        <option value="italyLottery">Italy Lottery</option>
+                                        <option value="romeLottery">Rome Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇪🇸 Spanish Lotteries">
+                                        <option value="spainLottery">Spain Lottery</option>
+                                        <option value="madridLottery">Madrid Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇹 Portuguese Lotteries">
+                                        <option value="portugalLottery">Portugal Lottery</option>
+                                        <option value="lisbonLottery">Lisbon Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇬🇷 Greek Lotteries">
+                                        <option value="greeceLottery">Greece Lottery</option>
+                                        <option value="athensLottery">Athens Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇭 Swiss Lotteries">
+                                        <option value="switzerlandLottery">Switzerland Lottery</option>
+                                        <option value="zurichLottery">Zurich Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇹 Austrian Lotteries">
+                                        <option value="austriaLottery">Austria Lottery</option>
+                                        <option value="viennaLottery">Vienna Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇭🇺 Hungarian Lotteries">
+                                        <option value="hungaryLottery">Hungary Lottery</option>
+                                        <option value="budapestLottery">Budapest Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇿 Czech Lotteries">
+                                        <option value="czechRepublicLottery">Czech Republic Lottery</option>
+                                        <option value="pragueLottery">Prague Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇰 Slovakian Lotteries">
+                                        <option value="slovakiaLottery">Slovakia Lottery</option>
+                                        <option value="bratislavaLottery">Bratislava Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇱 Polish Lotteries">
+                                        <option value="polandLottery">Poland Lottery</option>
+                                        <option value="warsawLottery">Warsaw Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇷🇺 Russian Lotteries">
+                                        <option value="russiaLottery">Russia Lottery</option>
+                                        <option value="moscowLottery">Moscow Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇦 Canadian Lotteries">
+                                        <option value="canadaLottery">Canada Lottery</option>
+                                        <option value="torontoLottery">Toronto Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇺🇸 American Lotteries">
+                                        <option value="usaLottery">USA Lottery</option>
+                                        <option value="newYorkLottery">New York Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇲🇽 Mexican Lotteries">
+                                        <option value="mexicoLottery">Mexico Lottery</option>
+                                        <option value="mexicoCityLottery">Mexico City Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇷 Brazilian Lotteries">
+                                        <option value="brazilLottery">Brazil Lottery</option>
+                                        <option value="saoPauloLottery">São Paulo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇷 Argentinean Lotteries">
+                                        <option value="argentinaLottery">Argentina Lottery</option>
+                                        <option value="buenosAiresLottery">Buenos Aires Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇱 Chilean Lotteries">
+                                        <option value="chileLottery">Chile Lottery</option>
+                                        <option value="santiagoLottery">Santiago Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇪 Peruvian Lotteries">
+                                        <option value="peruLottery">Peru Lottery</option>
+                                        <option value="limaLottery">Lima Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇴 Colombian Lotteries">
+                                        <option value="colombiaLottery">Colombia Lottery</option>
+                                        <option value="bogotaLottery">Bogotá Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇻🇪 Venezuelan Lotteries">
+                                        <option value="venezuelaLottery">Venezuela Lottery</option>
+                                        <option value="caracasLottery">Caracas Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇪🇨 Ecuadorian Lotteries">
+                                        <option value="ecuadorLottery">Ecuador Lottery</option>
+                                        <option value="quitoLottery">Quito Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇴 Bolivian Lotteries">
+                                        <option value="boliviaLottery">Bolivia Lottery</option>
+                                        <option value="laPazLottery">La Paz Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇾 Paraguayan Lotteries">
+                                        <option value="paraguayLottery">Paraguay Lottery</option>
+                                        <option value="asuncionLottery">Asunción Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇺🇾 Uruguayan Lotteries">
+                                        <option value="uruguayLottery">Uruguay Lottery</option>
+                                        <option value="montevideoLottery">Montevideo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇬🇾 Guyanese Lotteries">
+                                        <option value="guyanaLottery">Guyana Lottery</option>
+                                        <option value="georgetownLottery">Georgetown Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇷 Surinamese Lotteries">
+                                        <option value="surinameLottery">Suriname Lottery</option>
+                                        <option value="paramariboLottery">Paramaribo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇫🇷 French Guianese Lotteries">
+                                        <option value="frenchGuianaLottery">French Guiana Lottery</option>
+                                        <option value="cayenneLottery">Cayenne Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇷 Brazilian Lotteries">
+                                        <option value="brazilLottery">Brazil Lottery</option>
+                                        <option value="brasiliaLottery">Brasília Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇷 Argentinean Lotteries">
+                                        <option value="argentinaLottery">Argentina Lottery</option>
+                                        <option value="cordobaLottery">Córdoba Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇱 Chilean Lotteries">
+                                        <option value="chileLottery">Chile Lottery</option>
+                                        <option value="valparaisoLottery">Valparaíso Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇪 Peruvian Lotteries">
+                                        <option value="peruLottery">Peru Lottery</option>
+                                        <option value="arequipaLottery">Arequipa Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇨🇴 Colombian Lotteries">
+                                        <option value="colombiaLottery">Colombia Lottery</option>
+                                        <option value="medellinLottery">Medellín Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇻🇪 Venezuelan Lotteries">
+                                        <option value="venezuelaLottery">Venezuela Lottery</option>
+                                        <option value="maracaiboLottery">Maracaibo Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇪🇨 Ecuadorian Lotteries">
+                                        <option value="ecuadorLottery">Ecuador Lottery</option>
+                                        <option value="guayaquilLottery">Guayaquil Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇧🇴 Bolivian Lotteries">
+                                        <option value="boliviaLottery">Bolivia Lottery</option>
+                                        <option value="santaCruzLottery">Santa Cruz Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇵🇾 Paraguayan Lotteries">
+                                        <option value="paraguayLottery">Paraguay Lottery</option>
+                                        <option value="ciudadDelEsteLottery">Ciudad del Este Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇺🇾 Uruguayan Lotteries">
+                                        <option value="uruguayLottery">Uruguay Lottery</option>
+                                        <option value="saltoLottery">Salto Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇬🇾 Guyanese Lotteries">
+                                        <option value="guyanaLottery">Guyana Lottery</option>
+                                        <option value="lindenLottery">Linden Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇸🇷 Surinamese Lotteries">
+                                        <option value="surinameLottery">Suriname Lottery</option>
+                                        <option value="nieuwNickerieLottery">Nieuw Nickerie Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="🇫🇷 French Guianese Lotteries">
+                                        <option value="frenchGuianaLottery">French Guiana Lottery</option>
+                                        <option value="kourouLottery">Kourou Lottery</option>
+                                    </optgroup>
+                                    <optgroup label="Custom" aria-label="Custom Lottery Settings">
+                                        <option value="custom">Custom Lottery</option>
+                                    </optgroup>
                                 </select>
+                                <div id="lotteryTypeHelp" class="form-text">Choose from 200+ global lottery types or create custom settings</div>
                             </div>
 
                             <!-- Custom Settings (initially hidden) -->
-                            <div id="customSettings" class="mb-4" style="display: none;">
+                            <div id="customSettings" class="mb-4" style="display: none;" role="region" aria-labelledby="customSettingsTitle">
+                                <h6 id="customSettingsTitle" class="mb-3">Custom Lottery Settings</h6>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="minNumber" class="form-label">Minimum Number</label>
-                                        <input type="number" class="form-control" id="minNumber" min="1" value="1">
+                                        <label for="minNumber" class="form-label" data-translate="minNumber">Minimum Number</label>
+                                        <input type="number" class="form-control" id="minNumber" min="1" value="1" aria-describedby="minNumberHelp">
+                                        <div id="minNumberHelp" class="form-text">Lowest number in your lottery range</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="maxNumber" class="form-label">Maximum Number</label>
-                                        <input type="number" class="form-control" id="maxNumber" min="1" value="69">
+                                        <label for="maxNumber" class="form-label" data-translate="maxNumber">Maximum Number</label>
+                                        <input type="number" class="form-control" id="maxNumber" min="1" value="69" aria-describedby="maxNumberHelp">
+                                        <div id="maxNumberHelp" class="form-text">Highest number in your lottery range</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="numberCount" class="form-label">Number of Numbers</label>
-                                        <input type="number" class="form-control" id="numberCount" min="1" value="5">
+                                        <label for="numberCount" class="form-label" data-translate="numberCount">Number of Numbers</label>
+                                        <input type="number" class="form-control" id="numberCount" min="1" value="5" aria-describedby="numberCountHelp">
+                                        <div id="numberCountHelp" class="form-text">How many main numbers to generate</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="specialNumber" class="form-label">Special Number (Optional)</label>
-                                        <input type="number" class="form-control" id="specialNumber" min="1" value="1">
+                                        <label for="specialNumber" class="form-label" data-translate="specialNumber">Special Number (Optional)</label>
+                                        <input type="number" class="form-control" id="specialNumber" min="1" value="1" aria-describedby="specialNumberHelp">
+                                        <div id="specialNumberHelp" class="form-text">Bonus or special ball number</div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Number of Sets -->
                             <div class="mb-4">
-                                <label for="setCount" class="form-label">Number of Sets</label>
-                                <input type="number" class="form-control" id="setCount" min="1" max="10" value="1" required>
+                                <label for="setCount" class="form-label" data-translate="setCount">Number of Sets</label>
+                                <input type="number" class="form-control" id="setCount" min="1" max="10" value="1" required aria-describedby="setCountHelp">
+                                <div id="setCountHelp" class="form-text">Generate 1-10 sets of numbers at once</div>
                             </div>
 
                             <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-primary flex-grow-1">
-                                    <i class="fas fa-random me-2"></i>Generate Numbers
+                                <button type="submit" class="btn btn-primary flex-grow-1" data-translate="generateBtn" aria-describedby="generateHelp">
+                                    <i class="fas fa-random me-2" aria-hidden="true"></i>Generate Numbers
                                 </button>
-                                <button type="button" class="btn btn-outline-secondary flex-grow-1" id="resetBtn">
-                                    <i class="fas fa-redo me-2"></i>Reset
+                                <button type="button" class="btn btn-outline-secondary flex-grow-1" id="resetBtn" data-translate="resetBtn" aria-describedby="resetHelp">
+                                    <i class="fas fa-redo me-2" aria-hidden="true"></i>Reset
                                 </button>
                             </div>
+                            <div id="generateHelp" class="form-text">Click to generate your lottery numbers</div>
+                            <div id="resetHelp" class="form-text">Clear all settings and start over</div>
                         </form>
                     </div>
                 </div>
@@ -118,18 +789,229 @@
                     </div>
                 </div>
 
+                <!-- Lottery Info & Results Card -->
+                <div class="card shadow-sm mb-4" id="lotteryInfoCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Lottery Info & Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="lotteryInfoContent">
+                            <!-- Info will be loaded here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fun Extras Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-star text-warning me-2"></i>Fun Extras</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Hot & Cold Numbers -->
+                        <div class="mb-4">
+                            <h6 class="mb-3"><i class="fas fa-fire text-danger me-2"></i>Hot & Cold Numbers</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6 class="text-danger">🔥 Hot Numbers (Most Drawn)</h6>
+                                            <div id="hotNumbers" class="d-flex flex-wrap gap-1">
+                                                <!-- Hot numbers will be loaded here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6 class="text-info">❄️ Cold Numbers (Least Drawn)</h6>
+                                            <div id="coldNumbers" class="d-flex flex-wrap gap-1">
+                                                <!-- Cold numbers will be loaded here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lottery Trivia -->
+                        <div class="mb-4">
+                            <h6 class="mb-3"><i class="fas fa-lightbulb text-warning me-2"></i>Did You Know?</h6>
+                            <div id="lotteryTrivia" class="alert alert-info">
+                                <!-- Trivia will be loaded here -->
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm" id="newTriviaBtn">
+                                <i class="fas fa-refresh me-1"></i>New Fact
+                            </button>
+                        </div>
+
+                        <!-- Lucky Number Generator -->
+                        <div class="mb-4">
+                            <h6 class="mb-3"><i class="fas fa-dice text-success me-2"></i>Lucky Number Generator</h6>
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-success w-100" id="luckyColorBtn">
+                                        <i class="fas fa-palette me-1"></i>Lucky Color
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-info w-100" id="luckyDayBtn">
+                                        <i class="fas fa-calendar me-1"></i>Lucky Day
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-warning w-100" id="luckyAnimalBtn">
+                                        <i class="fas fa-paw me-1"></i>Lucky Animal
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="luckyResult" class="mt-3" style="display: none;"></div>
+                        </div>
+
+                        <!-- Number Statistics -->
+                        <div>
+                            <h6 class="mb-3"><i class="fas fa-chart-bar text-primary me-2"></i>Number Statistics</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card border-primary">
+                                        <div class="card-body text-center">
+                                            <h4 class="text-primary" id="totalNumbers">0</h4>
+                                            <small>Numbers Generated Today</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-success">
+                                        <div class="card-body text-center">
+                                            <h4 class="text-success" id="totalSets">0</h4>
+                                            <small>Sets Generated Today</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Engagement Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-bell text-info me-2"></i>Stay Connected</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Lottery Reminders -->
+                        <div class="mb-4">
+                            <h6 class="mb-3"><i class="fas fa-clock text-warning me-2"></i>Lottery Reminders</h6>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="reminderEmail" class="form-label">Email for Reminders</label>
+                                    <input type="email" class="form-control" id="reminderEmail" placeholder="your@email.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="reminderLottery" class="form-label">Favorite Lottery</label>
+                                    <select class="form-select" id="reminderLottery">
+                                        <option value="powerball">Powerball</option>
+                                        <option value="megaMillions">Mega Millions</option>
+                                        <option value="euroMillions">EuroMillions</option>
+                                        <option value="ukLotto">UK Lotto</option>
+                                        <option value="lottoMax">Lotto Max</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-outline-info" id="setReminderBtn">
+                                        <i class="fas fa-bell me-1"></i>Set Reminder
+                                    </button>
+                                    <small class="text-muted d-block mt-1">Get notified before your favorite lottery draws</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calendar Integration -->
+                        <div class="mb-4">
+                            <h6 class="mb-3"><i class="fas fa-calendar-alt text-success me-2"></i>Add to Calendar</h6>
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-success w-100" id="addToGoogleBtn">
+                                        <i class="fab fa-google me-1"></i>Google Calendar
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-primary w-100" id="addToOutlookBtn">
+                                        <i class="fas fa-calendar me-1"></i>Outlook
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-secondary w-100" id="downloadIcalBtn">
+                                        <i class="fas fa-download me-1"></i>Download iCal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="mb-4">
+                            <h6 class="mb-3"><i class="fas fa-bolt text-warning me-2"></i>Quick Actions</h6>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <button class="btn btn-outline-primary w-100" id="checkResultsBtn">
+                                        <i class="fas fa-search me-1"></i>Check Results
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-outline-success w-100" id="favoriteNumbersBtn">
+                                        <i class="fas fa-heart me-1"></i>Save Favorites
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Engagement -->
+                        <div>
+                            <h6 class="mb-3"><i class="fas fa-share-alt text-info me-2"></i>Share & Connect</h6>
+                            <div class="row g-2">
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-primary w-100" id="shareFacebookBtn">
+                                        <i class="fab fa-facebook me-1"></i>Facebook
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-info w-100" id="shareTwitterBtn">
+                                        <i class="fab fa-twitter me-1"></i>Twitter
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-success w-100" id="shareWhatsAppBtn">
+                                        <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-secondary w-100" id="shareEmailBtn">
+                                        <i class="fas fa-envelope me-1"></i>Email
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Information Card -->
                 <div class="card mt-4 shadow-sm">
                     <div class="card-header">
                         <h5 class="mb-0">About Lottery Number Generator</h5>
                     </div>
                     <div class="card-body">
-                        <p>This tool helps you generate random lottery numbers for various games. Features include:</p>
+                        <p>This comprehensive lottery number generator supports 200+ global lottery types with advanced features for the ultimate lottery experience. Key features include:</p>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-dice text-info me-2"></i>Multiple lottery types</li>
-                            <li class="mb-2"><i class="fas fa-cog text-info me-2"></i>Custom number settings</li>
-                            <li class="mb-2"><i class="fas fa-list text-info me-2"></i>Multiple number sets</li>
-                            <li class="mb-2"><i class="fas fa-file-pdf text-info me-2"></i>PDF download</li>
+                            <li class="mb-2"><i class="fas fa-globe text-info me-2"></i><strong>200+ Global Lotteries:</strong> Powerball, Mega Millions, EuroMillions, UK Lotto, and more</li>
+                            <li class="mb-2"><i class="fas fa-robot text-info me-2"></i><strong>AI Lucky Pick:</strong> Personalized numbers based on birthday and zodiac</li>
+                            <li class="mb-2"><i class="fas fa-chart-line text-info me-2"></i><strong>Lottery Info & Results:</strong> Real-time jackpots, draw dates, and official links</li>
+                            <li class="mb-2"><i class="fas fa-share-alt text-info me-2"></i><strong>Save & Share:</strong> Download images and share on social media</li>
+                            <li class="mb-2"><i class="fas fa-language text-info me-2"></i><strong>Multilingual Support:</strong> Available in English, Spanish, French, Hindi, and Chinese</li>
+                            <li class="mb-2"><i class="fas fa-mobile-alt text-info me-2"></i><strong>Mobile-First PWA:</strong> Install as app, offline support, touch gestures</li>
+                            <li class="mb-2"><i class="fas fa-star text-info me-2"></i><strong>Fun Extras:</strong> Hot/cold numbers, lottery trivia, lucky generators</li>
+                            <li class="mb-2"><i class="fas fa-universal-access text-info me-2"></i><strong>Accessibility:</strong> Screen reader support, keyboard navigation, high contrast</li>
+                            <li class="mb-2"><i class="fas fa-bell text-info me-2"></i><strong>User Engagement:</strong> Reminders, calendar integration, favorites system</li>
+                            <li class="mb-2"><i class="fas fa-search text-info me-2"></i><strong>SEO Optimized:</strong> Global keywords, structured data, social media tags</li>
                         </ul>
                     </div>
                 </div>
@@ -141,10 +1023,16 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select your preferred lottery type</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Customize number ranges if needed</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Generate multiple sets for variety</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Download your numbers for future reference</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Choose Your Lottery:</strong> Select from 200+ global lottery types</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>AI Lucky Pick:</strong> Enter your birthday and zodiac for personalized numbers</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Customize Settings:</strong> Adjust number ranges and sets as needed</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Save Favorites:</strong> Store your favorite number combinations</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Set Reminders:</strong> Get notified before your favorite lottery draws</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Calendar Integration:</strong> Add lottery draws to Google Calendar or Outlook</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Share & Connect:</strong> Share your numbers on social media platforms</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Check Results:</strong> Use quick links to verify official lottery results</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Mobile Experience:</strong> Install as PWA for app-like experience</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Fun Features:</strong> Explore hot/cold numbers, trivia, and lucky generators</li>
                         </ul>
                     </div>
                 </div>
@@ -177,6 +1065,15 @@
 
     <!-- Footer will be loaded dynamically -->
     <div id="footer-container"></div>
+
+    <!-- PWA Install Prompt -->
+    <div id="pwaInstallPrompt">
+        <div class="text-center">
+            <p class="mb-2">Install Lottery Generator App</p>
+            <button class="btn btn-light btn-sm" id="installBtn">Install</button>
+            <button class="btn btn-outline-light btn-sm" id="dismissInstall">Not Now</button>
+        </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
