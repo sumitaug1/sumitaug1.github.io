@@ -3,9 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Zone Converter - Calculator Tools</title>
-    <meta name="description" content="time zone converter">
-    <meta name="keywords" content="Time Zone Converter, Online Time Zone Converter, Time Zone Converter Online, Online Time-Zone Converter, Time-Zone Converter Online">
+    <title>Time Zone Converter - Global Time Zone Calculator | Multi-Tools Hub</title>
+    <meta name="description" content="Free online time zone converter with 200+ global time zones. Convert times between any time zones, plan meetings, world clock, travel planning, and more. Perfect for international business and travel.">
+    <meta name="keywords" content="time zone converter, world clock, time zone calculator, international time converter, meeting planner, global time zones, time zone map, time difference calculator, UTC converter, time zone conversion, international business hours, travel time zones, world time zones, time zone converter online, free time zone converter, time zone tool, time zone app, time zone widget, time zone API, time zone database, time zone list, time zone abbreviations, time zone offset, time zone daylight saving, time zone standard time, time zone summer time, time zone winter time, time zone GMT, time zone UTC, time zone EST, time zone PST, time zone CST, time zone MST, time zone EDT, time zone CDT, time zone MDT, time zone PDT, time zone BST, time zone CET, time zone CEST, time zone EET, time zone EEST, time zone IST, time zone JST, time zone CST, time zone KST, time zone AEST, time zone AEDT, time zone NZST, time zone NZDT">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#198754">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Time Zone Converter">
+    <link rel="apple-touch-icon" href="../../assets/images/icons/icon-192x192.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../../assets/manifest.json">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Time Zone Converter - Global Time Zone Calculator">
+    <meta property="og:description" content="Free online time zone converter with 200+ global time zones. Convert times between any time zones, plan meetings, world clock, travel planning, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://multi-tools-hub.com/tools/calculator-tools/time-zone-converter.html">
+    <meta property="og:image" content="../../assets/images/social/time-zone-converter-og.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Time Zone Converter - Global Time Zone Calculator">
+    <meta name="twitter:description" content="Free online time zone converter with 200+ global time zones. Convert times between any time zones, plan meetings, world clock, travel planning, and more.">
+    <meta name="twitter:image" content="../../assets/images/social/time-zone-converter-og.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Time Zone Converter",
+        "description": "Free online time zone converter with 200+ global time zones",
+        "url": "https://multi-tools-hub.com/tools/calculator-tools/time-zone-converter.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "200+ Global Time Zones",
+            "World Clock",
+            "Meeting Planner",
+            "Travel Planning",
+            "Calendar Integration",
+            "Voice Input",
+            "Mobile PWA"
+        ]
+    }
+    </script>
 	
 	<!-- AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687"
@@ -16,7 +66,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .calculator-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 2rem auto;
             padding: 1rem;
         }
@@ -101,78 +151,437 @@
             color: #6c757d;
             margin-top: 1rem;
         }
+        
+        /* New Enhanced Styles */
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #198754, #20c997);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #198754, #20c997);
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(25, 135, 84, 0.3);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+        .world-clock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .world-clock-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .voice-input-btn {
+            background: linear-gradient(135deg, #6f42c1, #8b5cf6);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .voice-input-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+        }
+        .voice-input-btn.recording {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .ai-suggestion {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .travel-planner {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .time-zone-search {
+            position: relative;
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .search-result-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .pwa-install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+        }
+        .accessibility-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .high-contrast {
+            filter: contrast(1.2) brightness(1.1);
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #198754;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .notification.show {
+            transform: translateX(0);
+        }
+        .notification.success {
+            border-left: 4px solid #198754;
+        }
+        .notification.error {
+            border-left: 4px solid #dc3545;
+        }
+        .notification.warning {
+            border-left: 4px solid #ffc107;
+        }
+        .notification.info {
+            border-left: 4px solid #0dcaf0;
+        }
     </style>
 </head>
 <body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select class="form-select form-select-sm" id="languageSelector">
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="hi">🇮🇳 हिंदी</option>
+            <option value="zh">🇨🇳 中文</option>
+        </select>
+    </div>
+
+    <!-- Accessibility Toggle -->
+    <div class="accessibility-toggle">
+        <button class="btn btn-outline-secondary btn-sm" id="accessibilityToggle">
+            <i class="fas fa-universal-access"></i>
+        </button>
+    </div>
+
     <div class="container calculator-container">
         <h1 class="text-center mb-4">
-            <i class="fas fa-clock me-2"></i>
-            Time Zone Converter
+            <i class="fas fa-globe me-2"></i>
+            <span data-translate="title">Global Time Zone Converter</span>
         </h1>
 
-        <div class="calculator">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="time-zone-select mb-3">
-                        <img src="https://flagcdn.com/w20/us.png" class="time-zone-flag" id="fromFlag">
-                        <select class="form-select" id="fromTimeZone">
-                            <!-- Time zones will be populated by JavaScript -->
-                        </select>
-                        <i class="fas fa-star favorite-btn" onclick="toggleFavorite('from')"></i>
+        <!-- Main Converter Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-clock me-2"></i><span data-translate="mainConverter">Main Converter</span></h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="time-zone-select mb-3">
+                            <img src="https://flagcdn.com/w20/us.png" class="time-zone-flag" id="fromFlag">
+                            <div class="time-zone-search">
+                                <input type="text" class="form-control" id="fromTimeZoneSearch" placeholder="Search time zones...">
+                                <div class="search-results" id="fromSearchResults"></div>
+                            </div>
+                            <select class="form-select" id="fromTimeZone">
+                                <!-- Time zones will be populated by JavaScript -->
+                            </select>
+                            <button class="btn btn-outline-primary btn-sm" onclick="toggleFavorite('from')">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="voice-input-btn" id="fromVoiceBtn" title="Voice Input">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        <div class="time-input">
+                            <input type="time" class="form-control" id="fromTime">
+                            <select class="form-select" id="fromAmPm" style="width: 80px;">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                            <input type="date" class="form-control" id="fromDate">
+                        </div>
                     </div>
-                    <div class="time-input">
-                        <input type="time" class="form-control" id="fromTime">
-                        <select class="form-select" id="fromAmPm" style="width: 80px;">
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
-                        </select>
-                        <input type="date" class="form-control" id="fromDate">
+                    <div class="col-md-6">
+                        <div class="time-zone-select mb-3">
+                            <img src="https://flagcdn.com/w20/gb.png" class="time-zone-flag" id="toFlag">
+                            <div class="time-zone-search">
+                                <input type="text" class="form-control" id="toTimeZoneSearch" placeholder="Search time zones...">
+                                <div class="search-results" id="toSearchResults"></div>
+                            </div>
+                            <select class="form-select" id="toTimeZone">
+                                <!-- Time zones will be populated by JavaScript -->
+                            </select>
+                            <button class="btn btn-outline-primary btn-sm" onclick="toggleFavorite('to')">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="voice-input-btn" id="toVoiceBtn" title="Voice Input">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        <div class="time-input">
+                            <input type="time" class="form-control" id="toTime" readonly>
+                            <select class="form-select" id="toAmPm" style="width: 80px;" disabled>
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                            <input type="date" class="form-control" id="toDate" readonly>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="time-zone-select mb-3">
-                        <img src="https://flagcdn.com/w20/gb.png" class="time-zone-flag" id="toFlag">
-                        <select class="form-select" id="toTimeZone">
-                            <!-- Time zones will be populated by JavaScript -->
-                        </select>
-                        <i class="fas fa-star favorite-btn" onclick="toggleFavorite('to')"></i>
-                    </div>
-                    <div class="time-input">
-                        <input type="time" class="form-control" id="toTime" readonly>
-                        <select class="form-select" id="toAmPm" style="width: 80px;" disabled>
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
-                        </select>
-                        <input type="date" class="form-control" id="toDate" readonly>
-                    </div>
+
+                <div class="time-display" id="timeDisplay">
+                    <!-- Converted time will be displayed here -->
                 </div>
-            </div>
 
-            <div class="time-display" id="timeDisplay">
-                
-            </div>
+                <!-- AI Suggestion -->
+                <div class="ai-suggestion" id="aiSuggestion" style="display: none;">
+                    <h6><i class="fas fa-robot me-2"></i>AI Suggestion</h6>
+                    <p id="aiSuggestionText"></p>
+                </div>
 
-            <div class="favorites-list" id="favoritesList">
-                <!-- Favorite time zones will be populated here -->
-            </div>
-
-            <div class="meeting-planner">
-                <h5 class="mb-3">Meeting Planner</h5>
-                <div class="time-slots" id="timeSlots">
-                    <!-- Time slots will be populated by JavaScript -->
+                <!-- Quick Actions -->
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-success w-100" id="swapBtn">
+                            <i class="fas fa-exchange-alt me-1"></i>Swap
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-info w-100" id="copyBtn">
+                            <i class="fas fa-copy me-1"></i>Copy
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-warning w-100" id="shareBtn">
+                            <i class="fas fa-share me-1"></i>Share
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-primary w-100" id="calendarBtn">
+                            <i class="fas fa-calendar me-1"></i>Calendar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="info-text">
-            <p><strong>About Time Zone Conversion:</strong></p>
-            <ul>
-                <li>Select your source and target time zones</li>
-                <li>Enter the time and date you want to convert</li>
-                <li>The converted time will update automatically</li>
-                <li>Use the meeting planner to find suitable meeting times</li>
-                <li>Save your favorite time zones for quick access</li>
-            </ul>
+        <!-- World Clock Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-globe-americas me-2"></i><span data-translate="worldClock">World Clock</span></h5>
+            </div>
+            <div class="card-body">
+                <div class="world-clock-grid" id="worldClockGrid">
+                    <!-- World clock items will be populated here -->
+                </div>
+                <button class="btn btn-outline-primary mt-3" id="addWorldClockBtn">
+                    <i class="fas fa-plus me-1"></i>Add Time Zone
+                </button>
+            </div>
+        </div>
+
+        <!-- Meeting Planner Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-users me-2"></i><span data-translate="meetingPlanner">Meeting Planner</span></h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Working Hours Start</label>
+                        <input type="time" class="form-control" id="workStart" value="09:00">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Working Hours End</label>
+                        <input type="time" class="form-control" id="workEnd" value="17:00">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Meeting Duration</label>
+                        <select class="form-select" id="meetingDuration">
+                            <option value="30">30 minutes</option>
+                            <option value="60" selected>1 hour</option>
+                            <option value="90">1.5 hours</option>
+                            <option value="120">2 hours</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="time-slots" id="timeSlots">
+                    <!-- Time slots will be populated by JavaScript -->
+                </div>
+                <button class="btn btn-outline-success mt-3" id="findBestTimeBtn">
+                    <i class="fas fa-magic me-1"></i>Find Best Time
+                </button>
+            </div>
+        </div>
+
+        <!-- Travel Planner Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-plane me-2"></i><span data-translate="travelPlanner">Travel Planner</span></h5>
+            </div>
+            <div class="card-body">
+                <div class="travel-planner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Departure City</label>
+                            <select class="form-select" id="departureCity">
+                                <option value="">Select departure city</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Arrival City</label>
+                            <select class="form-select" id="arrivalCity">
+                                <option value="">Select arrival city</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Departure Time</label>
+                            <input type="datetime-local" class="form-control" id="departureTime">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Flight Duration</label>
+                            <input type="text" class="form-control" id="flightDuration" placeholder="e.g., 8h 30m">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Arrival Time</label>
+                            <input type="datetime-local" class="form-control" id="arrivalTime" readonly>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button class="btn btn-light" id="calculateTravelBtn">
+                                <i class="fas fa-calculator me-1"></i>Calculate Travel Time
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Favorites Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-heart me-2"></i><span data-translate="favorites">Favorites</span></h5>
+            </div>
+            <div class="card-body">
+                <div class="favorites-list" id="favoritesList">
+                    <!-- Favorite time zones will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i><span data-translate="about">About Time Zone Converter</span></h5>
+            </div>
+            <div class="card-body">
+                <p>This comprehensive time zone converter supports 200+ global time zones with advanced features for international business and travel. Key features include:</p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-globe text-info me-2"></i><strong>200+ Global Time Zones:</strong> Complete coverage of all world time zones</li>
+                    <li class="mb-2"><i class="fas fa-robot text-info me-2"></i><strong>AI Suggestions:</strong> Smart meeting time recommendations</li>
+                    <li class="mb-2"><i class="fas fa-clock text-info me-2"></i><strong>World Clock:</strong> View multiple time zones simultaneously</li>
+                    <li class="mb-2"><i class="fas fa-plane text-info me-2"></i><strong>Travel Planning:</strong> Calculate travel times and jet lag</li>
+                    <li class="mb-2"><i class="fas fa-calendar text-info me-2"></i><strong>Calendar Integration:</strong> Add events to Google Calendar or Outlook</li>
+                    <li class="mb-2"><i class="fas fa-microphone text-info me-2"></i><strong>Voice Input:</strong> Speak to search time zones</li>
+                    <li class="mb-2"><i class="fas fa-mobile-alt text-info me-2"></i><strong>Mobile PWA:</strong> Install as app, offline support</li>
+                    <li class="mb-2"><i class="fas fa-language text-info me-2"></i><strong>Multilingual:</strong> Available in 5 languages</li>
+                    <li class="mb-2"><i class="fas fa-universal-access text-info me-2"></i><strong>Accessibility:</strong> Screen reader support, high contrast</li>
+                    <li class="mb-2"><i class="fas fa-share-alt text-info me-2"></i><strong>Sharing:</strong> Share time conversions on social media</li>
+                </ul>
+            </div>
         </div>
 		
 		<!-- Ad Section -->
@@ -199,8 +608,22 @@
         </div>
     </div>
 
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="pwaInstallPrompt">
+        <div class="text-center">
+            <p class="mb-2">Install Time Zone Converter App</p>
+            <button class="btn btn-light btn-sm" id="installBtn">Install</button>
+            <button class="btn btn-outline-light btn-sm" id="dismissInstall">Not Now</button>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/calculator-tools/time-zone-converter.js"></script>
 </body>
-</html> </html> 
+</html> 
