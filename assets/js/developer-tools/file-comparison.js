@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cache DOM elements
     const file1Input = document.getElementById('file1');
     const file2Input = document.getElementById('file2');
+    const textInput1 = document.getElementById('textInput1');
+    const textInput2 = document.getElementById('textInput2');
     const compareBtn = document.getElementById('compareBtn');
     const clearBtn = document.getElementById('clearBtn');
     const exportBtn = document.getElementById('exportBtn');
@@ -109,19 +111,55 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Set up text input feedback
+    [textInput1, textInput2].forEach((textInput, index) => {
+        const fileInfo = index === 0 ? file1Info : file2Info;
+        const dropZone = index === 0 ? dropZone1 : dropZone2;
+        
+        textInput.addEventListener('input', () => {
+            const hasText = textInput.value.trim().length > 0;
+            if (hasText) {
+                fileInfo.innerHTML = `
+                    <span class="badge bg-success">TEXT</span>
+                    <span class="text-muted">Text input (${textInput.value.length} characters)</span>
+                `;
+                dropZone.classList.add('border-success');
+            } else {
+                fileInfo.innerHTML = '';
+                dropZone.classList.remove('border-success');
+            }
+        });
+    });
+
     // Compare button click handler
     compareBtn.addEventListener('click', async () => {
-        if (!file1Input.files[0] || !file2Input.files[0]) {
-            alert('Please select both files to compare');
+        // Check if we have content from either files or text inputs
+        const hasFile1 = file1Input.files[0];
+        const hasFile2 = file2Input.files[0];
+        const hasText1 = textInput1.value.trim();
+        const hasText2 = textInput2.value.trim();
+
+        if ((!hasFile1 && !hasText1) || (!hasFile2 && !hasText2)) {
+            alert('Please provide content for both files. You can upload files or paste text directly.');
             return;
         }
 
         loadingOverlay.style.display = 'flex';
         try {
-            const [text1, text2] = await Promise.all([
-                file1Input.files[0].text(),
-                file2Input.files[0].text()
-            ]);
+            let text1, text2;
+            
+            // Get text from files or text inputs
+            if (hasFile1) {
+                text1 = await file1Input.files[0].text();
+            } else {
+                text1 = textInput1.value;
+            }
+            
+            if (hasFile2) {
+                text2 = await file2Input.files[0].text();
+            } else {
+                text2 = textInput2.value;
+            }
 
             const lines1 = text1.split('\n');
             const lines2 = text2.split('\n');
@@ -286,7 +324,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Apply syntax highlighting
     function applySyntaxHighlighting() {
-        const fileType = file1Input.files[0].name.split('.').pop().toLowerCase();
+        let fileType = '';
+        
+        // Try to get file type from uploaded file first
+        if (file1Input.files[0]) {
+            fileType = file1Input.files[0].name.split('.').pop().toLowerCase();
+        }
+        
         const language = getLanguageFromExtension(fileType);
         
         if (language) {
@@ -570,6 +614,8 @@ document.addEventListener('DOMContentLoaded', () => {
     clearBtn.addEventListener('click', () => {
         file1Input.value = '';
         file2Input.value = '';
+        textInput1.value = '';
+        textInput2.value = '';
         file1Content.innerHTML = '';
         file2Content.innerHTML = '';
         diffStats.innerHTML = '';

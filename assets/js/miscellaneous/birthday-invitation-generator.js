@@ -18,6 +18,128 @@ document.addEventListener('DOMContentLoaded', function() {
     const shareBtn = document.getElementById('shareBtn');
     const editBtn = document.getElementById('editBtn');
 
+    // New trendy features elements
+    const aiThemeBtn = document.getElementById('aiThemeBtn');
+    const aiMessageBtn = document.getElementById('aiMessageBtn');
+    const aiDesignBtn = document.getElementById('aiDesignBtn');
+    const aiPartyBtn = document.getElementById('aiPartyBtn');
+    const voiceEventBtn = document.getElementById('voiceEventBtn');
+    const voiceHostBtn = document.getElementById('voiceHostBtn');
+    const voiceVenueBtn = document.getElementById('voiceVenueBtn');
+    const voiceMessageBtn = document.getElementById('voiceMessageBtn');
+    const includeQR = document.getElementById('includeQR');
+    const includeMapQR = document.getElementById('includeMapQR');
+    const qrCodeBtn = document.getElementById('qrCodeBtn');
+    const shareFacebook = document.getElementById('shareFacebook');
+    const shareTwitter = document.getElementById('shareTwitter');
+    const shareInstagram = document.getElementById('shareInstagram');
+    const shareWhatsApp = document.getElementById('shareWhatsApp');
+
+    // Advanced features elements
+    const enable3D = document.getElementById('enable3D');
+    const enableMusic = document.getElementById('enableMusic');
+    const enableParticles = document.getElementById('enableParticles');
+    const enableAR = document.getElementById('enableAR');
+    const enableLive = document.getElementById('enableLive');
+    const enableAnalytics = document.getElementById('enableAnalytics');
+    const previewControls = document.getElementById('previewControls');
+    const rotationSlider = document.getElementById('rotationSlider');
+    const scaleSlider = document.getElementById('scaleSlider');
+    const brightnessSlider = document.getElementById('brightnessSlider');
+    const resetPreview = document.getElementById('resetPreview');
+    const savePreset = document.getElementById('savePreset');
+    const playMusic = document.getElementById('playMusic');
+    const pauseMusic = document.getElementById('pauseMusic');
+    const nextTrack = document.getElementById('nextTrack');
+    const rotate3D = document.getElementById('rotate3D');
+    const flip3D = document.getElementById('flip3D');
+    const startAR = document.getElementById('startAR');
+
+    // Music and Analytics Data
+    const partyMusic = [
+        { 
+            title: "Happy Birthday (Choir)", 
+            artist: "Public Domain", 
+            url: "https://vole.wtf/audio/happy-birthday-choir.mp3",
+            audio: null
+        },
+        { 
+            title: "Celebration", 
+            artist: "Kool & The Gang", 
+            url: null,
+            audio: null
+        },
+        { 
+            title: "Party Rock Anthem", 
+            artist: "LMFAO", 
+            url: null,
+            audio: null
+        }
+    ];
+
+    let currentMusicIndex = 0;
+    let isPlaying = false;
+    let currentAudio = null;
+    let progressInterval = null;
+
+    // RSVP Analytics Data
+    let rsvpData = {
+        totalInvites: 0,
+        confirmed: 0,
+        pending: 0,
+        declined: 0
+    };
+
+    // WhatsApp Integration Data
+    let whatsappInvites = [];
+    let whatsappResponses = {};
+    let webhookEndpoint = null;
+    let currentInvitationImageBlob = null; // Store the generated image blob
+
+    // 3D State
+    let currentRotation = { x: 0, y: 0 };
+    let is3DEnabled = false;
+
+    // Particle System
+    let particles = [];
+    let particleSystem = null;
+
+    // Voice Recognition Setup
+    let recognition;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+    }
+
+    // AI Suggestions Data
+    const aiThemeSuggestions = {
+        'birthday': ['fun', 'celebration', 'modern'],
+        'anniversary': ['elegant', 'vintage', 'minimal'],
+        'graduation': ['modern', 'elegant', 'celebration'],
+        'wedding': ['elegant', 'vintage', 'minimal'],
+        'corporate': ['modern', 'minimal', 'elegant']
+    };
+
+    const aiMessageTemplates = {
+        'fun': [
+            "🎉 Get ready for the most EPIC birthday celebration ever! 🎂",
+            "🎈 It's time to party like there's no tomorrow! 🎊",
+            "🎁 Join us for a birthday bash that will be talked about for years! 🎉"
+        ],
+        'elegant': [
+            "We cordially invite you to celebrate this special occasion with us.",
+            "Please join us for an elegant celebration of this milestone birthday.",
+            "We would be honored by your presence at this birthday celebration."
+        ],
+        'modern': [
+            "Join us for a modern celebration of life and friendship.",
+            "Let's create unforgettable memories together at this birthday party.",
+            "Celebrate with us in style at this contemporary birthday gathering."
+        ]
+    };
+
     // Theme Styles
     const themeStyles = {
         elegant: {
@@ -48,6 +170,12 @@ document.addEventListener('DOMContentLoaded', function() {
             font: 'Montserrat',
             background: '#ffffff',
             border: '1px solid #e0e0e0',
+            textColor: '#2c3e50'
+        },
+        celebration: {
+            font: 'Montserrat',
+            background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+            border: '2px solid #FF6B6B',
             textColor: '#2c3e50'
         }
     };
@@ -99,6 +227,134 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // AI Theme Suggestion
+    function suggestTheme() {
+        const eventText = eventName.value.toLowerCase();
+        let suggestedTheme = 'fun'; // default
+
+        for (const [keyword, themes] of Object.entries(aiThemeSuggestions)) {
+            if (eventText.includes(keyword)) {
+                suggestedTheme = themes[Math.floor(Math.random() * themes.length)];
+                break;
+            }
+        }
+
+        // Update theme selection
+        document.querySelector(`[data-theme="${suggestedTheme}"]`).click();
+        themeSelect.value = suggestedTheme;
+
+        // Show success message
+        showNotification(`AI suggested theme: ${suggestedTheme.charAt(0).toUpperCase() + suggestedTheme.slice(1)}`, 'success');
+    }
+
+    // AI Message Generator
+    function generateAIMessage() {
+        const currentTheme = themeSelect.value;
+        const messages = aiMessageTemplates[currentTheme] || aiMessageTemplates['fun'];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        
+        message.value = randomMessage;
+        showNotification('AI generated message added!', 'success');
+    }
+
+    // Voice Input Functions
+    function setupVoiceInput(button, targetInput) {
+        button.addEventListener('click', function() {
+            if (!recognition) {
+                showNotification('Voice recognition not supported in this browser', 'error');
+                return;
+            }
+
+            button.classList.add('voice-active');
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                targetInput.value = transcript;
+                button.classList.remove('voice-active');
+                showNotification('Voice input captured!', 'success');
+            };
+
+            recognition.onerror = function(event) {
+                button.classList.remove('voice-active');
+                showNotification('Voice input error: ' + event.error, 'error');
+            };
+
+            recognition.onend = function() {
+                button.classList.remove('voice-active');
+            };
+        });
+    }
+
+    // QR Code Generation
+    function generateQRCode(text, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = '';
+        QRCode.toCanvas(container, text, {
+            width: 200,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        }, function(error) {
+            if (error) {
+                console.error('QR Code generation error:', error);
+                container.innerHTML = '<p class="text-danger">QR Code generation failed</p>';
+            }
+        });
+    }
+
+    // Social Media Sharing
+    function shareToSocialMedia(platform) {
+        const invitationData = {
+            title: eventName.value || 'Birthday Invitation',
+            text: message.value || 'Join us for a birthday celebration!',
+            url: window.location.href
+        };
+
+        let shareUrl = '';
+        switch(platform) {
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(invitationData.url)}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(invitationData.text)}&url=${encodeURIComponent(invitationData.url)}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(invitationData.text + ' ' + invitationData.url)}`;
+                break;
+            case 'instagram':
+                // Instagram doesn't support direct sharing via URL, so we'll copy to clipboard
+                navigator.clipboard.writeText(invitationData.text + ' ' + invitationData.url);
+                showNotification('Text copied to clipboard for Instagram sharing!', 'success');
+                return;
+        }
+
+        if (shareUrl) {
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+    }
+
+    // Notification System
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
+
     function generateInvitationHTML() {
         const theme = themeStyles[themeSelect.value];
         const colors = colorSchemes[colorScheme.value];
@@ -147,6 +403,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             default:
                 borderStyleCSS = `border: 3px ${selectedBorderStyle} ${colors.primary};`;
+        }
+
+        // QR Code HTML
+        let qrCodeHtml = '';
+        if (includeQR.checked) {
+            qrCodeHtml = `
+                <div class="qr-code-section" style="margin: 20px 0; text-align: center;">
+                    <h6 style="color: ${colors.primary}; margin-bottom: 10px;">Scan to RSVP</h6>
+                    <div id="rsvpQRCode" style="display: inline-block;"></div>
+                </div>
+            `;
+        }
+
+        if (includeMapQR.checked && venue.value) {
+            qrCodeHtml += `
+                <div class="qr-code-section" style="margin: 20px 0; text-align: center;">
+                    <h6 style="color: ${colors.primary}; margin-bottom: 10px;">Scan for Directions</h6>
+                    <div id="mapQRCode" style="display: inline-block;"></div>
+                </div>
+            `;
         }
         
         return `
@@ -198,568 +474,1632 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <div style="margin: 2rem 0;">
                     <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">
-                        ${formatDate(eventDate.value)}
+                        <strong>Date:</strong> ${formatDate(eventDate.value)}
                     </p>
                     <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">
-                        ${formatTime(eventTime.value)}
+                        <strong>Time:</strong> ${formatTime(eventTime.value)}
                     </p>
-                    <p style="font-size: 1.3rem;">
-                        ${venue.value}
+                    <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">
+                        <strong>Venue:</strong> ${venue.value}
                     </p>
                 </div>
                 
                 ${message.value ? `
-                    <div style="
-                        margin: 2rem 0;
-                        padding: 1rem;
-                        border-left: 3px solid ${colors.primary};
-                        text-align: left;
-                    ">
-                        <p style="font-style: italic;">${message.value}</p>
+                    <div style="margin: 2rem 0; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <p style="font-style: italic; font-size: 1.1rem;">"${message.value}"</p>
                     </div>
                 ` : ''}
                 
                 <div style="margin: 2rem 0;">
                     <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">
-                        RSVP by ${formatDate(rsvpDate.value)}
+                        <strong>RSVP:</strong> ${rsvpContact.value}
                     </p>
-                    <p style="font-size: 1.2rem;">
-                        ${rsvpContact.value}
-                    </p>
+                    ${rsvpDate.value ? `
+                        <p style="font-size: 1.2rem;">
+                            <strong>Please respond by:</strong> ${formatDate(rsvpDate.value)}
+                        </p>
+                    ` : ''}
                 </div>
+                
+                ${qrCodeHtml}
             </div>
         `;
     }
 
-    // Add CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes borderDots {
-            0% { border-style: dotted; }
-            50% { border-style: dashed; }
-            100% { border-style: dotted; }
-        }
-        
-        @keyframes borderDashed {
-            0% { border-style: dashed; }
-            50% { border-style: solid; }
-            100% { border-style: dashed; }
-        }
-        
-        @keyframes borderGradient {
-            0% { border-image: linear-gradient(0deg, ${colorSchemes.blue.primary}, ${colorSchemes.blue.accent}) 1; }
-            50% { border-image: linear-gradient(180deg, ${colorSchemes.blue.primary}, ${colorSchemes.blue.accent}) 1; }
-            100% { border-image: linear-gradient(360deg, ${colorSchemes.blue.primary}, ${colorSchemes.blue.accent}) 1; }
-        }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 200%; }
-        }
-    `;
-    document.head.appendChild(style);
-
     // Event Listeners
     generateBtn.addEventListener('click', function() {
         if (!eventName.value || !hostName.value || !eventDate.value || !eventTime.value || !venue.value) {
-            alert('Please fill in all required fields');
+            showNotification('Please fill in all required fields', 'warning');
             return;
         }
 
         invitationPreview.innerHTML = generateInvitationHTML();
         previewSection.style.display = 'block';
-    });
-
-    downloadBtn.addEventListener('click', async function() {
-        try {
-            // Show loading message
-            const loadingMsg = document.createElement('div');
-            loadingMsg.style.position = 'fixed';
-            loadingMsg.style.top = '50%';
-            loadingMsg.style.left = '50%';
-            loadingMsg.style.transform = 'translate(-50%, -50%)';
-            loadingMsg.style.padding = '20px';
-            loadingMsg.style.background = 'rgba(0,0,0,0.8)';
-            loadingMsg.style.color = 'white';
-            loadingMsg.style.borderRadius = '10px';
-            loadingMsg.style.zIndex = '1000';
-            loadingMsg.textContent = 'Generating PDF...';
-            document.body.appendChild(loadingMsg);
-
-            // Create a static version of the invitation
-            const staticInvitation = invitationPreview.cloneNode(true);
-            
-            // Remove all animations and convert to static styles
-            const animatedElements = staticInvitation.querySelectorAll('[style*="animation"]');
-            animatedElements.forEach(el => {
-                el.style.animation = 'none';
-                el.style.transition = 'none';
-            });
-
-            // Create a temporary container for PDF generation
-            const tempContainer = document.createElement('div');
-            tempContainer.style.position = 'absolute';
-            tempContainer.style.left = '-9999px';
-            tempContainer.style.top = '-9999px';
-            tempContainer.appendChild(staticInvitation);
-            document.body.appendChild(tempContainer);
-
-            // Configure PDF options
-            const opt = {
-                margin: 0.5,
-                filename: `${eventName.value.replace(/\s+/g, '-')}-invitation.pdf`,
-                image: { type: 'jpeg', quality: 0.8 },
-                html2canvas: { 
-                    scale: 1,
-                    useCORS: true,
-                    allowTaint: true,
-                    backgroundColor: '#ffffff',
-                    windowWidth: 800,
-                    windowHeight: 1200
-                },
-                jsPDF: { 
-                    unit: 'in', 
-                    format: 'a4', 
-                    orientation: 'portrait'
-                }
-            };
-
-            // Generate PDF
-            await new Promise((resolve, reject) => {
-                html2pdf().set(opt).from(tempContainer).save().then(() => {
-                    resolve();
-                }).catch(err => {
-                    reject(err);
-                });
-            });
-
-            // Clean up
-            document.body.removeChild(tempContainer);
-            document.body.removeChild(loadingMsg);
-        } catch (err) {
-            console.error('PDF generation failed:', err);
-            
-            // Try alternative method if the first one fails
-            try {
-                const loadingMsg = document.querySelector('div[style*="position: fixed"]');
-                if (loadingMsg) {
-                    loadingMsg.textContent = 'Trying alternative method...';
-                }
-
-                const opt = {
-                    margin: 0.5,
-                    filename: `${eventName.value.replace(/\s+/g, '-')}-invitation.pdf`,
-                    image: { type: 'jpeg', quality: 0.8 },
-                    html2canvas: { 
-                        scale: 1,
-                        useCORS: true,
-                        allowTaint: true,
-                        backgroundColor: '#ffffff'
-                    },
-                    jsPDF: { 
-                        unit: 'in', 
-                        format: 'a4', 
-                        orientation: 'portrait'
-                    }
-                };
-
-                await html2pdf().set(opt).from(invitationPreview).save();
-                
-                if (loadingMsg) {
-                    document.body.removeChild(loadingMsg);
-                }
-            } catch (secondErr) {
-                console.error('Alternative PDF generation failed:', secondErr);
-                alert('Failed to generate PDF. Please try the following:\n1. Remove any images from the invitation\n2. Try a different browser\n3. Make sure all required fields are filled out');
-                
-                const loadingMsg = document.querySelector('div[style*="position: fixed"]');
-                if (loadingMsg) {
-                    document.body.removeChild(loadingMsg);
-                }
-            }
-        }
-    });
-
-    shareBtn.addEventListener('click', async function() {
-        try {
-            // Create a temporary link for sharing
-            const invitationData = {
-                title: eventName.value,
-                text: `You're invited to ${eventName.value}! Join us for a celebration.`,
-                url: window.location.href
-            };
-
-            if (navigator.share) {
-                await navigator.share(invitationData);
-            } else {
-                // Fallback for browsers that don't support Web Share API
-                const shareUrl = `mailto:?subject=${encodeURIComponent(invitationData.title)}&body=${encodeURIComponent(invitationData.text)}`;
-                window.open(shareUrl, '_blank');
-            }
-        } catch (err) {
-            console.error('Sharing failed:', err);
-            alert('Failed to share invitation. Please try copying the link manually.');
-        }
-    });
-
-    editBtn.addEventListener('click', function() {
-        previewSection.style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Set default date to next month
-    const nextMonth = new Date();
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
-    eventDate.value = nextMonth.toISOString().split('T')[0];
-    
-    // Set default RSVP date to 1 week before event
-    const rsvpDateValue = new Date(nextMonth);
-    rsvpDateValue.setDate(rsvpDateValue.getDate() - 7);
-    rsvpDate.value = rsvpDateValue.toISOString().split('T')[0];
-
-    // Template Gallery
-    const templateCards = document.querySelectorAll('.template-card');
-    if (templateCards.length > 0) {
-        templateCards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Remove selected class from all cards
-                templateCards.forEach(c => c.classList.remove('selected'));
-                // Add selected class to clicked card
-                card.classList.add('selected');
-                // Update theme select
-                if (themeSelect) {
-                    themeSelect.value = card.dataset.theme;
-                }
-                // Update preview
-                updatePreview();
-            });
-        });
-    }
-
-    // Export Options
-    const downloadPDF = document.getElementById('downloadPDF');
-    const downloadPNG = document.getElementById('downloadPNG');
-    const downloadJPG = document.getElementById('downloadJPG');
-    const downloadSocial = document.getElementById('downloadSocial');
-
-    if (downloadPDF) {
-        downloadPDF.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('pdf');
-        });
-    }
-
-    if (downloadPNG) {
-        downloadPNG.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('png');
-        });
-    }
-
-    if (downloadJPG) {
-        downloadJPG.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('jpg');
-        });
-    }
-
-    if (downloadSocial) {
-        downloadSocial.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await exportInvitation('social');
-        });
-    }
-
-    async function exportInvitation(format) {
-        const invitationElement = document.getElementById('invitationPreview');
-        const loadingSpinner = document.getElementById('loadingSpinner');
         
-        if (!invitationElement) {
-            console.error('Invitation preview element not found');
+        // Generate QR codes after preview is created
+        setTimeout(() => {
+            if (includeQR.checked) {
+                const rsvpData = `RSVP for ${eventName.value}: ${rsvpContact.value}`;
+                generateQRCode(rsvpData, 'rsvpQRCode');
+            }
+            
+            if (includeMapQR.checked && venue.value) {
+                const mapData = `https://maps.google.com/?q=${encodeURIComponent(venue.value)}`;
+                generateQRCode(mapData, 'mapQRCode');
+            }
+        }, 100);
+
+        showNotification('Invitation generated successfully!', 'success');
+    });
+
+    // AI Feature Event Listeners
+    aiThemeBtn.addEventListener('click', suggestTheme);
+    aiMessageBtn.addEventListener('click', generateAIMessage);
+    aiDesignBtn.addEventListener('click', suggestDesign);
+    aiPartyBtn.addEventListener('click', getPartyTips);
+
+    // Voice Input Setup
+    setupVoiceInput(voiceEventBtn, eventName);
+    setupVoiceInput(voiceHostBtn, hostName);
+    setupVoiceInput(voiceVenueBtn, venue);
+    setupVoiceInput(voiceMessageBtn, message);
+
+    // Social Media Sharing
+    shareFacebook.addEventListener('click', () => shareToSocialMedia('facebook'));
+    shareTwitter.addEventListener('click', () => shareToSocialMedia('twitter'));
+    shareInstagram.addEventListener('click', () => shareToSocialMedia('instagram'));
+    shareWhatsApp.addEventListener('click', () => shareToSocialMedia('whatsapp'));
+
+    // QR Code Button
+    qrCodeBtn.addEventListener('click', function() {
+        const qrModal = document.createElement('div');
+        qrModal.className = 'modal fade';
+        qrModal.innerHTML = `
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">QR Codes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>RSVP QR Code</h6>
+                                <div id="modalRSVPQR"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Venue Map QR Code</h6>
+                                <div id="modalMapQR"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(qrModal);
+        const modal = new bootstrap.Modal(qrModal);
+        modal.show();
+        
+        setTimeout(() => {
+            if (includeQR.checked) {
+                const rsvpData = `RSVP for ${eventName.value}: ${rsvpContact.value}`;
+                generateQRCode(rsvpData, 'modalRSVPQR');
+            }
+            
+            if (includeMapQR.checked && venue.value) {
+                const mapData = `https://maps.google.com/?q=${encodeURIComponent(venue.value)}`;
+                generateQRCode(mapData, 'modalMapQR');
+            }
+        }, 300);
+        
+        qrModal.addEventListener('hidden.bs.modal', () => {
+            qrModal.remove();
+        });
+    });
+
+    // Template Selection
+    document.querySelectorAll('.template-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            themeSelect.value = this.dataset.theme;
+        });
+    });
+
+    // Initialize Advanced Features
+    initialize3D();
+    initializeParticles();
+    initializeMusic();
+    initializeAnalytics();
+    initializeAR();
+    initializeLiveCollaboration();
+
+    // Export Functions
+    async function exportInvitation(format) {
+        const element = invitationPreview.querySelector('.invitation');
+        if (!element) {
+            showNotification('Please generate an invitation first', 'warning');
             return;
         }
 
         try {
-            if (loadingSpinner) loadingSpinner.style.display = 'block';
-
             switch(format) {
                 case 'pdf':
-                    await exportToPDF(invitationElement);
+                    await exportToPDF(element);
                     break;
                 case 'png':
-                    await exportToImage(invitationElement, 'png');
+                    await exportToImage(element, 'png');
                     break;
                 case 'jpg':
-                    await exportToImage(invitationElement, 'jpg');
+                    await exportToImage(element, 'jpg');
                     break;
                 case 'social':
-                    await exportToSocialMedia(invitationElement);
+                    await exportToSocialMedia(element);
                     break;
             }
         } catch (error) {
             console.error('Export error:', error);
-            alert('Error exporting invitation. Please try again.');
-        } finally {
-            if (loadingSpinner) loadingSpinner.style.display = 'none';
+            // Fallback to text-based download
+            fallbackDownload();
         }
+    }
+
+    // Fallback download method
+    function fallbackDownload() {
+        const invitationText = `
+BIRTHDAY INVITATION
+
+Event: ${eventName.value}
+Host: ${hostName.value}
+Date: ${formatDate(eventDate.value)}
+Time: ${formatTime(eventTime.value)}
+Venue: ${venue.value}
+
+${message.value ? `Message: ${message.value}` : ''}
+
+RSVP: ${rsvpContact.value}
+${rsvpDate.value ? `Please respond by: ${formatDate(rsvpDate.value)}` : ''}
+
+---
+Generated by Multi-Tools Hub Birthday Invitation Generator
+        `.trim();
+
+        const blob = new Blob([invitationText], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'birthday-invitation.txt';
+        link.click();
+        URL.revokeObjectURL(url);
+        
+        showNotification('Text invitation downloaded as fallback', 'info');
     }
 
     async function exportToPDF(element) {
-        if (!window.jspdf) {
-            console.error('jsPDF library not loaded');
-            return;
-        }
+        try {
+            // Check if jsPDF is available
+            if (typeof window.jspdf === 'undefined') {
+                showNotification('PDF library not loaded. Please refresh the page.', 'error');
+                return;
+            }
 
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        
-        const canvas = await html2canvas(element);
-        const imgData = canvas.toDataURL('image/png');
-        
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-        
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('birthday-invitation.pdf');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            
+            // Create a temporary container for better rendering
+            const tempContainer = document.createElement('div');
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.top = '0';
+            tempContainer.style.width = '600px';
+            tempContainer.style.backgroundColor = 'white';
+            tempContainer.style.padding = '20px';
+            tempContainer.appendChild(element.cloneNode(true));
+            document.body.appendChild(tempContainer);
+
+            const canvas = await html2canvas(tempContainer, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff'
+            });
+
+            document.body.removeChild(tempContainer);
+            
+            const imgData = canvas.toDataURL('image/png');
+            
+            const imgWidth = 190; // A4 width minus margins
+            const pageHeight = 277; // A4 height minus margins
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            
+            let position = 10; // Top margin
+            
+            pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight + 10;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            
+            pdf.save('birthday-invitation.pdf');
+            showNotification('PDF downloaded successfully!', 'success');
+        } catch (error) {
+            console.error('PDF export error:', error);
+            showNotification('PDF generation failed. Please try again.', 'error');
+        }
     }
 
     async function exportToImage(element, format) {
-        if (!window.html2canvas) {
-            console.error('html2canvas library not loaded');
-            return;
-        }
+        try {
+            // Create a temporary container for better rendering
+            const tempContainer = document.createElement('div');
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.top = '0';
+            tempContainer.style.width = '600px';
+            tempContainer.style.backgroundColor = 'white';
+            tempContainer.style.padding = '20px';
+            tempContainer.appendChild(element.cloneNode(true));
+            document.body.appendChild(tempContainer);
 
-        const canvas = await html2canvas(element);
-        const link = document.createElement('a');
-        link.download = `birthday-invitation.${format}`;
-        link.href = canvas.toDataURL(`image/${format}`);
-        link.click();
+            const canvas = await html2canvas(tempContainer, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff'
+            });
+
+            document.body.removeChild(tempContainer);
+            
+            const link = document.createElement('a');
+            link.download = `birthday-invitation.${format}`;
+            link.href = canvas.toDataURL(`image/${format}`, 0.9);
+            link.click();
+            showNotification(`${format.toUpperCase()} downloaded successfully!`, 'success');
+        } catch (error) {
+            console.error('Image export error:', error);
+            showNotification('Image export failed. Please try again.', 'error');
+        }
     }
 
     async function exportToSocialMedia(element) {
-        if (!window.html2canvas) {
-            console.error('html2canvas library not loaded');
-            return;
-        }
-
-        const socialSizes = {
-            facebook: { width: 1200, height: 630 },
-            instagram: { width: 1080, height: 1080 },
-            twitter: { width: 1200, height: 675 }
-        };
-
-        const canvas = await html2canvas(element, {
-            width: socialSizes.facebook.width,
-            height: socialSizes.facebook.height
-        });
-
-        const link = document.createElement('a');
-        link.download = 'birthday-invitation-social.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-    }
-
-    // Countdown Timer
-    let countdownInterval = null;
-
-    function initializeCountdown() {
-        if (!eventDate || !eventTime) return;
-
-        const eventDateTime = new Date(`${eventDate.value}T${eventTime.value}`);
-        const countdownTimer = document.getElementById('countdownTimer');
-        
-        if (!countdownTimer) return;
-
-        // Clear any existing interval
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-        }
-        
-        function updateCountdown() {
-            const now = new Date();
-            const diff = eventDateTime - now;
+        try {
+            // Create a temporary container for social media size
+            const tempContainer = document.createElement('div');
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.top = '0';
+            tempContainer.style.width = '1080px';
+            tempContainer.style.height = '1080px';
+            tempContainer.style.backgroundColor = 'white';
+            tempContainer.style.padding = '40px';
+            tempContainer.style.display = 'flex';
+            tempContainer.style.alignItems = 'center';
+            tempContainer.style.justifyContent = 'center';
             
-            if (diff <= 0) {
-                countdownTimer.innerHTML = '<p class="text-center">Event has started!</p>';
-                clearInterval(countdownInterval);
-                return;
-            }
+            const clonedElement = element.cloneNode(true);
+            clonedElement.style.maxWidth = '1000px';
+            clonedElement.style.maxHeight = '1000px';
+            tempContainer.appendChild(clonedElement);
+            document.body.appendChild(tempContainer);
+
+            const canvas = await html2canvas(tempContainer, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                width: 1080,
+                height: 1080
+            });
+
+            document.body.removeChild(tempContainer);
             
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            const daysElement = document.getElementById('days');
-            const hoursElement = document.getElementById('hours');
-            const minutesElement = document.getElementById('minutes');
-            const secondsElement = document.getElementById('seconds');
-
-            if (daysElement) daysElement.textContent = String(days).padStart(2, '0');
-            if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
-            if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
-            if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
+            const link = document.createElement('a');
+            link.download = 'birthday-invitation-social.png';
+            link.href = canvas.toDataURL('image/png', 0.9);
+            link.click();
+            showNotification('Social media image downloaded!', 'success');
+        } catch (error) {
+            console.error('Social media export error:', error);
+            showNotification('Social media export failed. Please try again.', 'error');
         }
-        
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    // Venue Map
-    let map = null;
-    let marker = null;
+    // Download Event Listeners
+    document.getElementById('downloadPDF').addEventListener('click', () => exportInvitation('pdf'));
+    document.getElementById('downloadPNG').addEventListener('click', () => exportInvitation('png'));
+    document.getElementById('downloadJPG').addEventListener('click', () => exportInvitation('jpg'));
+    document.getElementById('downloadSocial').addEventListener('click', () => exportInvitation('social'));
 
-    function initializeMap() {
-        if (!venue || !window.google) {
-            const mapContainer = document.getElementById('venueMap');
-            if (mapContainer) {
-                mapContainer.innerHTML = '<div class="map-error">Google Maps is not available. Please check your internet connection.</div>';
-            }
-            return;
-        }
-        
-        const mapContainer = document.getElementById('venueMap');
-        if (!mapContainer) return;
-
-        // Clear existing map
-        if (map) {
-            map = null;
-            marker = null;
-        }
-
-        // Initialize map
-        map = new google.maps.Map(mapContainer, {
-            zoom: 15,
-            center: { lat: 0, lng: 0 },
-            mapTypeControl: true,
-            streetViewControl: true,
-            fullscreenControl: true
-        });
-
-        // Geocode the address
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ address: venue.value }, (results, status) => {
-            if (status === 'OK' && results[0]) {
-                // Center map on the location
-                map.setCenter(results[0].geometry.location);
-
-                // Add marker
-                marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location,
-                    title: venue.value,
-                    animation: google.maps.Animation.DROP
-                });
-
-                // Add info window
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<div class="p-2"><strong>${venue.value}</strong></div>`
-                });
-
-                marker.addListener('click', () => {
-                    infoWindow.open(map, marker);
-                });
-
-                // Open info window by default
-                infoWindow.open(map, marker);
-            } else {
-                mapContainer.innerHTML = '<div class="map-error">Could not find the location. Please check the address.</div>';
-            }
-        });
-    }
-
-    // Initialize interactive elements when preview is shown
-    if (generateBtn) {
-        generateBtn.addEventListener('click', () => {
-            // Clear existing intervals and maps
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            if (map) {
-                map = null;
-                marker = null;
-            }
-
-            // Initialize new elements
-            initializeCountdown();
-            initializeWeather();
-            initializeMap();
-        });
-    }
-
-    // Update interactive elements when date/time changes
-    if (eventDate) {
-        eventDate.addEventListener('change', () => {
-            if (previewSection && previewSection.style.display !== 'none') {
-                initializeCountdown();
-                initializeWeather();
-            }
-        });
-    }
-
-    if (eventTime) {
-        eventTime.addEventListener('change', () => {
-            if (previewSection && previewSection.style.display !== 'none') {
-                initializeCountdown();
-            }
-        });
-    }
-
-    if (venue) {
-        venue.addEventListener('change', () => {
-            if (previewSection && previewSection.style.display !== 'none') {
-                initializeWeather();
-                initializeMap();
-            }
-        });
-    }
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
+    // Share Button
+    shareBtn.addEventListener('click', function() {
+        if (navigator.share) {
+            navigator.share({
+                title: eventName.value || 'Birthday Invitation',
+                text: message.value || 'Join us for a birthday celebration!',
+                url: window.location.href
+            });
+        } else {
+            // Fallback: copy to clipboard
+            navigator.clipboard.writeText(window.location.href);
+            showNotification('Link copied to clipboard!', 'success');
         }
     });
 
-    async function initializeWeather() {
-        if (!eventDate || !venue) return;
+    // Edit Button
+    editBtn.addEventListener('click', function() {
+        previewSection.style.display = 'none';
+        document.getElementById('invitationForm').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Countdown Timer
+    function initializeCountdown() {
+        if (!eventDate.value || !eventTime.value) return;
+
+        const eventDateTime = new Date(`${eventDate.value}T${eventTime.value}`);
         
-        const weatherForecast = document.getElementById('weatherForecast');
-        if (!weatherForecast) return;
+        function updateCountdown() {
+            const now = new Date();
+            const distance = eventDateTime - now;
+            
+            if (distance < 0) {
+                document.getElementById('countdownTimer').innerHTML = '<p class="text-center">Event has passed!</p>';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+
+    // Weather Forecast
+    async function initializeWeather() {
+        if (!venue.value) return;
 
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(venue.value)}&appid=YOUR_API_KEY&units=metric`);
-            const data = await response.json();
-            
-            const eventDateObj = new Date(eventDate.value);
-            const weatherData = data.list.find(item => {
-                const itemDate = new Date(item.dt * 1000);
-                return itemDate.getDate() === eventDateObj.getDate();
-            });
-            
-            if (weatherData) {
-                const weatherTemp = document.getElementById('weatherTemp');
-                const weatherDesc = document.getElementById('weatherDesc');
-                const weatherIcon = document.querySelector('.weather-icon i');
+            // Simulate weather API call (replace with actual API)
+            const weatherData = {
+                temp: Math.floor(Math.random() * 30) + 10,
+                description: ['Sunny', 'Partly Cloudy', 'Cloudy', 'Light Rain'][Math.floor(Math.random() * 4)],
+                icon: 'cloud-sun'
+            };
 
-                if (weatherTemp) weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°C`;
-                if (weatherDesc) weatherDesc.textContent = weatherData.weather[0].description;
-                if (weatherIcon) weatherIcon.className = getWeatherIcon(weatherData.weather[0].id);
-            }
+            document.getElementById('weatherTemp').textContent = `${weatherData.temp}°C`;
+            document.getElementById('weatherDesc').textContent = weatherData.description;
+            document.querySelector('.weather-icon i').className = `fas fa-${weatherData.icon} fa-2x`;
         } catch (error) {
             console.error('Weather API error:', error);
-            weatherForecast.innerHTML = '<p>Weather data unavailable</p>';
+            document.getElementById('weatherForecast').innerHTML = '<p class="text-muted">Weather unavailable</p>';
         }
     }
 
-    function getWeatherIcon(weatherId) {
-        if (weatherId >= 200 && weatherId < 300) return 'fas fa-bolt';
-        if (weatherId >= 300 && weatherId < 400) return 'fas fa-cloud-rain';
-        if (weatherId >= 500 && weatherId < 600) return 'fas fa-cloud-showers-heavy';
-        if (weatherId >= 600 && weatherId < 700) return 'fas fa-snowflake';
-        if (weatherId >= 700 && weatherId < 800) return 'fas fa-smog';
-        if (weatherId === 800) return 'fas fa-sun';
-        if (weatherId > 800) return 'fas fa-cloud';
-        return 'fas fa-cloud-sun';
+    // Map Integration
+    function initializeMap() {
+        if (!venue.value) return;
+
+        const mapContainer = document.getElementById('venueMap');
+        if (!mapContainer) return;
+
+        // Create a placeholder map (replace with actual Google Maps integration)
+        mapContainer.innerHTML = `
+            <div style="
+                width: 100%;
+                height: 100%;
+                background: #f8f9fa;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px;
+            ">
+                <div class="text-center">
+                    <i class="fas fa-map-marker-alt fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Map for: ${venue.value}</p>
+                    <button class="btn btn-sm btn-primary" onclick="window.open('https://maps.google.com/?q=${encodeURIComponent(venue.value)}', '_blank')">
+                        Open in Google Maps
+                    </button>
+                </div>
+            </div>
+        `;
     }
+
+    // Initialize features when preview is shown
+    generateBtn.addEventListener('click', function() {
+        setTimeout(() => {
+            initializeCountdown();
+            initializeWeather();
+            initializeMap();
+            initializePreviewControls();
+            previewControls.style.display = 'block';
+        }, 500);
+    });
+
+    // Auto-save functionality
+    function autoSave() {
+        const formData = {
+            eventName: eventName.value,
+            hostName: hostName.value,
+            eventDate: eventDate.value,
+            eventTime: eventTime.value,
+            venue: venue.value,
+            message: message.value,
+            rsvpContact: rsvpContact.value,
+            rsvpDate: rsvpDate.value,
+            theme: themeSelect.value,
+            colorScheme: colorScheme.value,
+            borderStyle: borderStyle.value
+        };
+        
+        localStorage.setItem('birthdayInvitationData', JSON.stringify(formData));
+    }
+
+    // Load saved data
+    function loadSavedData() {
+        const savedData = localStorage.getItem('birthdayInvitationData');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            Object.keys(data).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = data[key];
+                }
+            });
+            
+            // Update theme selection
+            if (data.theme) {
+                document.querySelector(`[data-theme="${data.theme}"]`)?.click();
+            }
+        }
+    }
+
+    // Auto-save on input changes
+    [eventName, hostName, eventDate, eventTime, venue, message, rsvpContact, rsvpDate].forEach(element => {
+        element.addEventListener('input', autoSave);
+    });
+
+    // Load saved data on page load
+    loadSavedData();
+
+    // Show welcome message
+    showNotification('Welcome to the enhanced Birthday Invitation Generator! Try the new AI features and voice input!', 'info');
+
+    // AI Design Suggestions
+    function suggestDesign() {
+        const eventText = eventName.value.toLowerCase();
+        const suggestions = [];
+
+        if (eventText.includes('birthday')) {
+            suggestions.push({
+                theme: 'fun',
+                colorScheme: 'rainbow',
+                borderStyle: 'animated-gradient',
+                message: '🎉 Time to celebrate! 🎂'
+            });
+        } else if (eventText.includes('anniversary')) {
+            suggestions.push({
+                theme: 'elegant',
+                colorScheme: 'purple',
+                borderStyle: 'double',
+                message: 'Celebrating love and commitment 💕'
+            });
+        } else if (eventText.includes('graduation')) {
+            suggestions.push({
+                theme: 'modern',
+                colorScheme: 'blue',
+                borderStyle: 'solid',
+                message: 'Congratulations on your achievement! 🎓'
+            });
+        }
+
+        if (suggestions.length > 0) {
+            const suggestion = suggestions[0];
+            
+            // Apply suggestions
+            document.querySelector(`[data-theme="${suggestion.theme}"]`).click();
+            colorScheme.value = suggestion.colorScheme;
+            borderStyle.value = suggestion.borderStyle;
+            message.value = suggestion.message;
+
+            showNotification('AI design suggestions applied!', 'success');
+        } else {
+            showNotification('No specific design suggestions for this event type', 'info');
+        }
+    }
+
+    // AI Party Planning Tips
+    function getPartyTips() {
+        const eventText = eventName.value.toLowerCase();
+        const tips = [];
+
+        if (eventText.includes('birthday')) {
+            tips.push(
+                '🎂 Consider a themed birthday party',
+                '🎈 Plan activities for different age groups',
+                '🎁 Set up a gift table with cards',
+                '📸 Hire a photographer for memories',
+                '🎵 Create a party playlist'
+            );
+        } else if (eventText.includes('anniversary')) {
+            tips.push(
+                '💕 Plan a romantic dinner setup',
+                '🍷 Include champagne toast',
+                '📸 Display wedding photos',
+                '🎵 Choose romantic background music',
+                '💐 Decorate with fresh flowers'
+            );
+        }
+
+        if (tips.length > 0) {
+            const tipsModal = document.createElement('div');
+            tipsModal.className = 'modal fade';
+            tipsModal.innerHTML = `
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">🎉 AI Party Planning Tips</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group list-group-flush">
+                                ${tips.map(tip => `<li class="list-group-item">${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(tipsModal);
+            const modal = new bootstrap.Modal(tipsModal);
+            modal.show();
+            
+            tipsModal.addEventListener('hidden.bs.modal', () => {
+                tipsModal.remove();
+            });
+        }
+    }
+
+    // 3D Effects
+    function initialize3D() {
+        const invitation3D = document.getElementById('3dInvitation');
+        if (!invitation3D) return;
+
+        rotate3D.addEventListener('click', () => {
+            currentRotation.y += 90;
+            invitation3D.style.transform = `rotateY(${currentRotation.y}deg) rotateX(${currentRotation.x}deg)`;
+        });
+
+        flip3D.addEventListener('click', () => {
+            currentRotation.x += 180;
+            invitation3D.style.transform = `rotateY(${currentRotation.y}deg) rotateX(${currentRotation.x}deg)`;
+        });
+
+        enable3D.addEventListener('change', () => {
+            is3DEnabled = enable3D.checked;
+            if (is3DEnabled) {
+                invitation3D.style.transform = 'rotateY(15deg) rotateX(5deg)';
+                showNotification('3D effects enabled!', 'success');
+            } else {
+                invitation3D.style.transform = 'rotateY(0deg) rotateX(0deg)';
+                currentRotation = { x: 0, y: 0 };
+            }
+        });
+    }
+
+    // Particle System
+    function initializeParticles() {
+        const previewContainer = invitationPreview;
+        if (!previewContainer) return;
+
+        enableParticles.addEventListener('change', () => {
+            if (enableParticles.checked) {
+                createParticleSystem(previewContainer);
+                showNotification('Particle effects enabled!', 'success');
+            } else {
+                removeParticleSystem();
+            }
+        });
+    }
+
+    function createParticleSystem(container) {
+        const particleContainer = document.createElement('div');
+        particleContainer.className = 'particles';
+        container.appendChild(particleContainer);
+
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            particleContainer.appendChild(particle);
+        }
+
+        particleSystem = particleContainer;
+    }
+
+    function removeParticleSystem() {
+        if (particleSystem) {
+            particleSystem.remove();
+            particleSystem = null;
+        }
+    }
+
+    // Music Integration
+    function initializeMusic() {
+        // Preload audio files
+        preloadAudioFiles();
+        
+        enableMusic.addEventListener('change', () => {
+            if (enableMusic.checked) {
+                showNotification('Music feature enabled!', 'success');
+                updateMusicInfo();
+            } else {
+                stopCurrentTrack();
+            }
+        });
+
+        playMusic.addEventListener('click', () => {
+            if (!isPlaying) {
+                playCurrentTrack();
+            } else {
+                pauseCurrentTrack();
+            }
+        });
+
+        pauseMusic.addEventListener('click', () => {
+            if (isPlaying) {
+                pauseCurrentTrack();
+            }
+        });
+
+        nextTrack.addEventListener('click', () => {
+            nextMusicTrack();
+        });
+    }
+
+    function preloadAudioFiles() {
+        partyMusic.forEach((track, index) => {
+            if (index === 0) {
+                // Create synthesized Happy Birthday song for the first track
+                track.audio = createFallbackAudio();
+                console.log(`Loaded: ${track.title}`);
+            } else {
+                // For other tracks, try to load external audio files
+                const audio = new Audio();
+                audio.src = track.url;
+                audio.preload = 'metadata';
+                
+                audio.addEventListener('canplaythrough', () => {
+                    track.audio = audio;
+                    console.log(`Loaded: ${track.title}`);
+                });
+                
+                audio.addEventListener('error', (e) => {
+                    console.error(`Error loading ${track.title}:`, e);
+                    // Fallback to synthesized version
+                    if (index === 1) {
+                        track.audio = createCelebrationAudio();
+                    } else if (index === 2) {
+                        track.audio = createPartyRockAudio();
+                    } else {
+                        track.audio = createFallbackAudio();
+                    }
+                });
+            }
+        });
+    }
+
+    function createFallbackAudio() {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        return {
+            play: () => {
+                playHappyBirthdaySong(audioContext);
+            },
+            pause: () => {
+                if (audioContext.state === 'running') {
+                    audioContext.suspend();
+                }
+            },
+            currentTime: 0,
+            duration: 15
+        };
+    }
+
+    function playHappyBirthdaySong(audioContext) {
+        // Happy Birthday song melody with proper timing
+        const melody = [
+            // "Happy Birthday to you"
+            { note: 'C4', duration: 0.5 },
+            { note: 'C4', duration: 0.5 },
+            { note: 'D4', duration: 1.0 },
+            { note: 'C4', duration: 1.0 },
+            { note: 'F4', duration: 1.0 },
+            { note: 'E4', duration: 2.0 },
+            
+            // "Happy Birthday to you"
+            { note: 'C4', duration: 0.5 },
+            { note: 'C4', duration: 0.5 },
+            { note: 'D4', duration: 1.0 },
+            { note: 'C4', duration: 1.0 },
+            { note: 'G4', duration: 1.0 },
+            { note: 'F4', duration: 2.0 },
+            
+            // "Happy Birthday dear [Name]"
+            { note: 'C4', duration: 0.5 },
+            { note: 'C4', duration: 0.5 },
+            { note: 'C5', duration: 1.0 },
+            { note: 'A4', duration: 1.0 },
+            { note: 'F4', duration: 1.0 },
+            { note: 'E4', duration: 2.0 },
+            
+            // "Happy Birthday to you"
+            { note: 'A4', duration: 0.5 },
+            { note: 'A4', duration: 0.5 },
+            { note: 'G4', duration: 1.0 },
+            { note: 'F4', duration: 1.0 },
+            { note: 'E4', duration: 1.0 },
+            { note: 'C5', duration: 2.0 }
+        ];
+
+        const noteFrequencies = {
+            'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00, 'C5': 523.25
+        };
+
+        let currentTime = audioContext.currentTime;
+        
+        melody.forEach((noteData, index) => {
+            const frequency = noteFrequencies[noteData.note];
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, currentTime);
+            oscillator.type = 'sine';
+            
+            // Create a more musical envelope
+            gainNode.gain.setValueAtTime(0, currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.3, currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + noteData.duration);
+            
+            oscillator.start(currentTime);
+            oscillator.stop(currentTime + noteData.duration);
+            
+            currentTime += noteData.duration;
+        });
+    }
+
+    function createCelebrationAudio() {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        return {
+            play: () => {
+                playCelebrationMelody(audioContext);
+            },
+            pause: () => {
+                if (audioContext.state === 'running') {
+                    audioContext.suspend();
+                }
+            },
+            currentTime: 0,
+            duration: 6
+        };
+    }
+
+    function playCelebrationMelody(audioContext) {
+        // Celebration melody (upbeat)
+        const notes = [
+            { freq: 523.25, duration: 0.3 }, // C5
+            { freq: 659.25, duration: 0.3 }, // E5
+            { freq: 783.99, duration: 0.3 }, // G5
+            { freq: 1046.50, duration: 0.6 }, // C6
+            { freq: 783.99, duration: 0.3 }, // G5
+            { freq: 659.25, duration: 0.3 }, // E5
+            { freq: 523.25, duration: 0.3 }, // C5
+            { freq: 659.25, duration: 0.3 }, // E5
+            { freq: 783.99, duration: 0.3 }, // G5
+            { freq: 1046.50, duration: 0.6 }, // C6
+        ];
+
+        let currentTime = audioContext.currentTime;
+        
+        notes.forEach((note, index) => {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(note.freq, currentTime);
+            oscillator.type = 'square';
+            
+            gainNode.gain.setValueAtTime(0, currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.05, currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+            
+            oscillator.start(currentTime);
+            oscillator.stop(currentTime + note.duration);
+            
+            currentTime += note.duration;
+        });
+    }
+
+    function createPartyRockAudio() {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        return {
+            play: () => {
+                playPartyRockMelody(audioContext);
+            },
+            pause: () => {
+                if (audioContext.state === 'running') {
+                    audioContext.suspend();
+                }
+            },
+            currentTime: 0,
+            duration: 4
+        };
+    }
+
+    function playPartyRockMelody(audioContext) {
+        // Party Rock Anthem style (electronic)
+        const notes = [
+            { freq: 220, duration: 0.2 }, // A3
+            { freq: 220, duration: 0.2 }, // A3
+            { freq: 220, duration: 0.2 }, // A3
+            { freq: 220, duration: 0.2 }, // A3
+            { freq: 440, duration: 0.4 }, // A4
+            { freq: 330, duration: 0.2 }, // E4
+            { freq: 330, duration: 0.2 }, // E4
+            { freq: 330, duration: 0.2 }, // E4
+            { freq: 330, duration: 0.2 }, // E4
+            { freq: 660, duration: 0.4 }, // E5
+        ];
+
+        let currentTime = audioContext.currentTime;
+        
+        notes.forEach((note, index) => {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(note.freq, currentTime);
+            oscillator.type = 'sawtooth';
+            
+            gainNode.gain.setValueAtTime(0, currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.03, currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+            
+            oscillator.start(currentTime);
+            oscillator.stop(currentTime + note.duration);
+            
+            currentTime += note.duration;
+        });
+    }
+
+    function playCurrentTrack() {
+        const currentTrack = partyMusic[currentMusicIndex];
+        
+        if (currentTrack.generateAudio) {
+            // Use the new generateAudio method
+            try {
+                // Stop any currently playing audio
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+
+                // Generate and play the audio
+                currentTrack.generateAudio(document.getElementById('hostName').value || 'Friend');
+                isPlaying = true;
+                
+                // Update UI
+                playMusic.innerHTML = '<i class="fas fa-pause"></i>';
+                showNotification(`Now playing: ${currentTrack.title}`, 'success');
+                
+                // Show progress bar
+                document.getElementById('musicProgress').style.display = 'block';
+                
+                // Start progress tracking for generated audio
+                startProgressTracking();
+                
+                // Set a timeout to simulate track ending
+                setTimeout(() => {
+                    isPlaying = false;
+                    playMusic.innerHTML = '<i class="fas fa-play"></i>';
+                    showNotification('Track finished', 'info');
+                    stopProgressTracking();
+                    document.getElementById('musicProgress').style.display = 'none';
+                }, 8000); // 8 seconds for the generated melody
+                
+            } catch (error) {
+                console.error('Error generating audio:', error);
+                showNotification('Could not generate audio. Please try again.', 'error');
+            }
+        } else if (currentTrack.audio) {
+            // Use the existing audio method
+            try {
+                // Stop any currently playing audio
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+
+                currentAudio = currentTrack.audio;
+                currentAudio.play();
+                isPlaying = true;
+                
+                // Update UI
+                playMusic.innerHTML = '<i class="fas fa-pause"></i>';
+                showNotification(`Now playing: ${currentTrack.title}`, 'success');
+                
+                // Show progress bar
+                document.getElementById('musicProgress').style.display = 'block';
+                
+                // Start progress tracking
+                startProgressTracking();
+                
+                // Add event listeners for audio controls
+                currentAudio.addEventListener('ended', () => {
+                    isPlaying = false;
+                    playMusic.innerHTML = '<i class="fas fa-play"></i>';
+                    showNotification('Track finished', 'info');
+                    stopProgressTracking();
+                    document.getElementById('musicProgress').style.display = 'none';
+                });
+                
+                currentAudio.addEventListener('error', (e) => {
+                    console.error('Audio playback error:', e);
+                    isPlaying = false;
+                    playMusic.innerHTML = '<i class="fas fa-play"></i>';
+                    showNotification('Audio playback error', 'error');
+                    stopProgressTracking();
+                });
+                
+            } catch (error) {
+                console.error('Error playing audio:', error);
+                showNotification('Could not play audio. Please try again.', 'error');
+            }
+        } else {
+            showNotification('Audio not loaded yet. Please wait...', 'warning');
+        }
+    }
+
+    function pauseCurrentTrack() {
+        if (currentAudio) {
+            currentAudio.pause();
+        }
+        isPlaying = false;
+        playMusic.innerHTML = '<i class="fas fa-play"></i>';
+        showNotification('Music paused', 'info');
+        stopProgressTracking();
+    }
+
+    function stopCurrentTrack() {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        isPlaying = false;
+        playMusic.innerHTML = '<i class="fas fa-play"></i>';
+        stopProgressTracking();
+        document.getElementById('musicProgress').style.display = 'none';
+    }
+
+    function startProgressTracking() {
+        if (progressInterval) {
+            clearInterval(progressInterval);
+        }
+        
+        progressInterval = setInterval(() => {
+            if (currentAudio && !currentAudio.paused) {
+                const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+                document.getElementById('musicProgressBar').style.width = progress + '%';
+                
+                const currentTime = formatTime(currentAudio.currentTime);
+                const duration = formatTime(currentAudio.duration);
+                document.getElementById('musicTime').textContent = `${currentTime} / ${duration}`;
+            }
+        }, 100);
+    }
+
+    function stopProgressTracking() {
+        if (progressInterval) {
+            clearInterval(progressInterval);
+            progressInterval = null;
+        }
+    }
+
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function nextMusicTrack() {
+        // Stop current track
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        
+        // Move to next track
+        currentMusicIndex = (currentMusicIndex + 1) % partyMusic.length;
+        updateMusicInfo();
+        
+        // Auto-play if music was playing
+        if (isPlaying) {
+            setTimeout(() => {
+                playCurrentTrack();
+            }, 100);
+        } else {
+            showNotification(`Now ready: ${partyMusic[currentMusicIndex].title}`, 'info');
+        }
+    }
+
+    function updateMusicInfo() {
+        const currentTrack = document.getElementById('currentTrack');
+        if (currentTrack) {
+            const track = partyMusic[currentMusicIndex];
+            currentTrack.textContent = `${track.title} - ${track.artist}`;
+        }
+    }
+
+    // RSVP Analytics
+    function initializeAnalytics() {
+        enableAnalytics.addEventListener('change', () => {
+            if (enableAnalytics.checked) {
+                simulateRSVPData();
+                initializeWhatsAppIntegration();
+                showNotification('Analytics enabled!', 'success');
+            }
+        });
+    }
+
+    function simulateRSVPData() {
+        // Simulate RSVP data
+        rsvpData.totalInvites = Math.floor(Math.random() * 50) + 20;
+        rsvpData.confirmed = Math.floor(rsvpData.totalInvites * 0.6);
+        rsvpData.pending = Math.floor(rsvpData.totalInvites * 0.3);
+        rsvpData.declined = rsvpData.totalInvites - rsvpData.confirmed - rsvpData.pending;
+
+        updateAnalyticsDisplay();
+    }
+
+    function updateAnalyticsDisplay() {
+        document.getElementById('totalInvites').textContent = rsvpData.totalInvites;
+        document.getElementById('confirmedRSVP').textContent = rsvpData.confirmed;
+        document.getElementById('pendingRSVP').textContent = rsvpData.pending;
+
+        const progressPercentage = (rsvpData.confirmed / rsvpData.totalInvites) * 100;
+        document.getElementById('rsvpProgress').style.width = progressPercentage + '%';
+    }
+
+    // Interactive Preview Controls
+    function initializePreviewControls() {
+        const invitationElement = invitationPreview.querySelector('.invitation');
+        if (!invitationElement) return;
+
+        rotationSlider.addEventListener('input', (e) => {
+            invitationElement.style.transform = `rotate(${e.target.value}deg)`;
+        });
+
+        scaleSlider.addEventListener('input', (e) => {
+            invitationElement.style.transform = `scale(${e.target.value})`;
+        });
+
+        brightnessSlider.addEventListener('input', (e) => {
+            invitationElement.style.filter = `brightness(${e.target.value})`;
+        });
+
+        resetPreview.addEventListener('click', () => {
+            rotationSlider.value = 0;
+            scaleSlider.value = 1;
+            brightnessSlider.value = 1;
+            invitationElement.style.transform = '';
+            invitationElement.style.filter = '';
+        });
+
+        savePreset.addEventListener('click', () => {
+            const preset = {
+                rotation: rotationSlider.value,
+                scale: scaleSlider.value,
+                brightness: brightnessSlider.value
+            };
+            localStorage.setItem('invitationPreset', JSON.stringify(preset));
+            showNotification('Preset saved!', 'success');
+        });
+    }
+
+    // AR Preview (Simulated)
+    function initializeAR() {
+        enableAR.addEventListener('change', () => {
+            if (enableAR.checked) {
+                showNotification('AR preview enabled! (Simulated)', 'success');
+            }
+        });
+
+        startAR.addEventListener('click', () => {
+            showNotification('AR camera activated! Point at your invitation.', 'info');
+        });
+    }
+
+    // Live Collaboration (Simulated)
+    function initializeLiveCollaboration() {
+        enableLive.addEventListener('change', () => {
+            if (enableLive.checked) {
+                showCollaborationIndicator();
+                showNotification('Live collaboration enabled!', 'success');
+            } else {
+                hideCollaborationIndicator();
+            }
+        });
+    }
+
+    function showCollaborationIndicator() {
+        const indicator = document.createElement('div');
+        indicator.className = 'collaboration-indicator';
+        indicator.innerHTML = '<i class="fas fa-users me-2"></i>Live Collaboration Active';
+        document.body.appendChild(indicator);
+    }
+
+    function hideCollaborationIndicator() {
+        const indicator = document.querySelector('.collaboration-indicator');
+        if (indicator) {
+            indicator.remove();
+        }
+    }
+
+    // WhatsApp Integration Functions
+    function initializeWhatsAppIntegration() {
+        // Add WhatsApp integration UI
+        const rsvpSection = document.querySelector('#rsvpAnalytics').parentElement;
+        const whatsappCard = document.createElement('div');
+        whatsappCard.className = 'card mb-3';
+        whatsappCard.innerHTML = `
+            <div class="card-body">
+                <h6 class="card-title">
+                    <i class="fab fa-whatsapp me-2"></i>WhatsApp RSVP Integration
+                </h6>
+                <div class="whatsapp-controls">
+                    <div class="mb-3">
+                        <label class="form-label">Guest Phone Numbers (one per line)</label>
+                        <textarea class="form-control" id="guestPhoneNumbers" rows="3" 
+                            placeholder="+1234567890&#10;+0987654321&#10;+1122334455"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Custom Message</label>
+                        <textarea class="form-control" id="whatsappMessage" rows="2"
+                            placeholder="You're invited to my birthday party! Please respond with YES, NO, or MAYBE"></textarea>
+                    </div>
+                    <button class="btn btn-success btn-sm" id="sendWhatsAppBtn">
+                        <i class="fab fa-whatsapp"></i> Send Invites via WhatsApp
+                    </button>
+                    <button class="btn btn-info btn-sm ms-2" id="generateWhatsAppBtn">
+                        <i class="fas fa-link"></i> Generate WhatsApp Link
+                    </button>
+                    <button class="btn btn-primary btn-sm ms-2" id="sendWhatsAppImageBtn">
+                        <i class="fab fa-whatsapp"></i> Send Invitation Image via WhatsApp
+                    </button>
+                </div>
+                <div class="whatsapp-status mt-3" id="whatsappStatus"></div>
+            </div>
+        `;
+        rsvpSection.appendChild(whatsappCard);
+        
+        // Add event listeners
+        document.getElementById('sendWhatsAppBtn').addEventListener('click', sendWhatsAppInvites);
+        document.getElementById('generateWhatsAppBtn').addEventListener('click', generateWhatsAppLink);
+        document.getElementById('sendWhatsAppImageBtn').addEventListener('click', sendInvitationImageViaWhatsApp);
+        
+
+    }
+
+    function sendWhatsAppInvites() {
+        try {
+            console.log('sendWhatsAppInvites function called');
+            
+            const phoneNumbersElement = document.getElementById('guestPhoneNumbers');
+            const messageElement = document.getElementById('whatsappMessage');
+            
+            if (!phoneNumbersElement || !messageElement) {
+                showNotification('WhatsApp integration not initialized properly', 'error');
+                return;
+            }
+            
+            const phoneNumbers = phoneNumbersElement.value
+                .split('\n')
+                .map(num => num.trim())
+                .filter(num => num.length > 0);
+            
+            const customMessage = messageElement.value || 
+                `You're invited to ${eventName.value || 'my birthday party'}! Please respond with YES, NO, or MAYBE`;
+            
+            if (phoneNumbers.length === 0) {
+                showNotification('Please enter at least one phone number', 'error');
+                return;
+            }
+
+            console.log('Phone numbers:', phoneNumbers);
+            console.log('Custom message:', customMessage);
+
+            // Store invite data
+            whatsappInvites = phoneNumbers.map(phone => ({
+                phone: phone,
+                status: 'pending',
+                sentAt: new Date().toISOString()
+            }));
+
+            // Update RSVP data
+            rsvpData.totalInvites = phoneNumbers.length;
+            rsvpData.pending = phoneNumbers.length;
+            rsvpData.confirmed = 0;
+            rsvpData.declined = 0;
+            updateAnalyticsDisplay();
+
+            // Generate WhatsApp links for each number
+            const invitationText = encodeURIComponent(customMessage);
+            const statusDiv = document.getElementById('whatsappStatus');
+            statusDiv.innerHTML = '<div class="alert alert-info">Sending invitations...</div>';
+            
+            let linksHtml = '<div class="mt-3"><h6>WhatsApp Links:</h6>';
+            phoneNumbers.forEach((phone, index) => {
+                const cleanPhone = phone.replace(/\D/g, '');
+                const whatsappUrl = `https://wa.me/${cleanPhone}?text=${invitationText}`;
+                linksHtml += `
+                    <div class="mb-2">
+                        <a href="${whatsappUrl}" target="_blank" class="btn btn-success btn-sm">
+                            <i class="fab fa-whatsapp"></i> Send to ${phone}
+                        </a>
+                    </div>
+                `;
+            });
+            linksHtml += '</div>';
+            statusDiv.innerHTML = linksHtml;
+
+            showNotification(`Generated ${phoneNumbers.length} WhatsApp invitation links!`, 'success');
+            
+        } catch (error) {
+            console.error('Error in sendWhatsAppInvites:', error);
+            showNotification('Error generating WhatsApp links: ' + error.message, 'error');
+        }
+    }
+
+    function generateWhatsAppLink() {
+        try {
+            console.log('generateWhatsAppLink function called');
+            
+            const messageElement = document.getElementById('whatsappMessage');
+            
+            if (!messageElement) {
+                showNotification('WhatsApp integration not initialized properly', 'error');
+                return;
+            }
+            
+            const customMessage = messageElement.value || 
+                `You're invited to ${eventName.value || 'my birthday party'}! Please respond with YES, NO, or MAYBE`;
+            
+            const invitationText = encodeURIComponent(customMessage);
+            const whatsappUrl = `https://wa.me/?text=${invitationText}`;
+            
+            console.log('Generated WhatsApp URL:', whatsappUrl);
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(whatsappUrl).then(() => {
+                showNotification('WhatsApp link copied to clipboard!', 'success');
+            }).catch(err => {
+                console.error('Failed to copy to clipboard:', err);
+                showNotification('Link generated but could not copy to clipboard', 'warning');
+            });
+
+            // Show the link
+            const statusDiv = document.getElementById('whatsappStatus');
+            statusDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <h6>WhatsApp Link Generated:</h6>
+                    <input type="text" class="form-control" value="${whatsappUrl}" readonly>
+                    <small class="text-muted">Share this link with your guests</small>
+                    <button class="btn btn-sm btn-outline-primary mt-2" onclick="navigator.clipboard.writeText('${whatsappUrl}')">
+                        <i class="fas fa-copy"></i> Copy Link
+                    </button>
+                </div>
+            `;
+            
+        } catch (error) {
+            console.error('Error in generateWhatsAppLink:', error);
+            showNotification('Error generating WhatsApp link: ' + error.message, 'error');
+        }
+    }
+
+    function handleWhatsAppResponse(phone, response) {
+        const invite = whatsappInvites.find(inv => inv.phone === phone);
+        if (invite) {
+            invite.status = response.toLowerCase();
+            invite.respondedAt = new Date().toISOString();
+            
+            // Update RSVP data
+            if (response.toLowerCase() === 'yes') {
+                rsvpData.confirmed++;
+                rsvpData.pending--;
+            } else if (response.toLowerCase() === 'no') {
+                rsvpData.declined++;
+                rsvpData.pending--;
+            } else if (response.toLowerCase() === 'maybe') {
+                rsvpData.pending--; // Keep as pending but mark as responded
+            }
+            
+            updateAnalyticsDisplay();
+            updateWhatsAppStatus();
+        }
+    }
+
+    function updateWhatsAppStatus() {
+        const statusDiv = document.getElementById('whatsappStatus');
+        if (whatsappInvites.length > 0) {
+            const confirmed = whatsappInvites.filter(inv => inv.status === 'yes').length;
+            const declined = whatsappInvites.filter(inv => inv.status === 'no').length;
+            const pending = whatsappInvites.filter(inv => inv.status === 'pending').length;
+            
+            statusDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <h6>WhatsApp RSVP Status:</h6>
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>${confirmed}</strong><br>
+                            <small>Confirmed</small>
+                        </div>
+                        <div class="col-4">
+                            <strong>${declined}</strong><br>
+                            <small>Declined</small>
+                        </div>
+                        <div class="col-4">
+                            <strong>${pending}</strong><br>
+                            <small>Pending</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+
+
+
+
+
+
+    // Show WhatsApp sharing instructions
+    function showSharingInstructions() {
+        const instructionsHtml = `
+            <div class="alert alert-info mt-3">
+                <h6><i class="fab fa-whatsapp me-2"></i>How to Share via WhatsApp:</h6>
+                <ol class="mb-0">
+                    <li>Open WhatsApp on your phone</li>
+                    <li>Go to the chat where you want to share</li>
+                    <li>Tap the attachment icon (📎)</li>
+                    <li>Select "Document" or "Image"</li>
+                    <li>Choose the downloaded JPG file</li>
+                    <li>Add a message and send!</li>
+                </ol>
+                <small class="text-muted">The image is optimized for WhatsApp sharing</small>
+            </div>
+        `;
+        
+        const statusDiv = document.getElementById('whatsappStatus');
+        if (statusDiv) {
+            statusDiv.innerHTML = instructionsHtml;
+        }
+    }
+
+    // Send invitation image via WhatsApp with custom message
+    async function sendInvitationImageViaWhatsApp() {
+        try {
+            showNotification('Generating invitation image and WhatsApp links...', 'info');
+            
+            const phoneNumbersElement = document.getElementById('guestPhoneNumbers');
+            const messageElement = document.getElementById('whatsappMessage');
+            
+            if (!phoneNumbersElement || !messageElement) {
+                showNotification('WhatsApp integration not initialized properly', 'error');
+                return;
+            }
+            
+            const phoneNumbers = phoneNumbersElement.value
+                .split('\n')
+                .map(num => num.trim())
+                .filter(num => num.length > 0);
+            
+            if (phoneNumbers.length === 0) {
+                showNotification('Please enter at least one phone number', 'error');
+                return;
+            }
+
+            // Generate the invitation image first
+            const invitationHTML = generateInvitationHTML();
+            const tempContainer = document.createElement('div');
+            tempContainer.innerHTML = invitationHTML;
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.top = '-9999px';
+            tempContainer.style.width = '600px';
+            tempContainer.style.height = '800px';
+            tempContainer.style.backgroundColor = 'white';
+            tempContainer.style.padding = '20px';
+            tempContainer.style.boxSizing = 'border-box';
+            
+            document.body.appendChild(tempContainer);
+            
+            const canvas = await html2canvas(tempContainer, {
+                width: 600,
+                height: 800,
+                scale: 2,
+                backgroundColor: '#ffffff',
+                useCORS: true,
+                allowTaint: true
+            });
+            
+            document.body.removeChild(tempContainer);
+            
+            // Convert canvas to blob
+            canvas.toBlob(async (blob) => {
+                if (blob) {
+                    // Store the blob globally for download functions
+                    currentInvitationImageBlob = blob;
+                    
+                    // Create a temporary URL for the image
+                    const imageUrl = URL.createObjectURL(blob);
+                    
+                    // Generate custom message
+                    const customMessage = messageElement.value || 
+                        `You're invited to ${eventName.value || 'my birthday party'}! Please respond with YES, NO, or MAYBE`;
+                    
+                    // Store invite data
+                    whatsappInvites = phoneNumbers.map(phone => ({
+                        phone: phone,
+                        status: 'pending',
+                        sentAt: new Date().toISOString()
+                    }));
+
+                    // Update RSVP data
+                    rsvpData.totalInvites = phoneNumbers.length;
+                    rsvpData.pending = phoneNumbers.length;
+                    rsvpData.confirmed = 0;
+                    rsvpData.declined = 0;
+                    updateAnalyticsDisplay();
+
+                    // Generate WhatsApp links with image attachment
+                    const statusDiv = document.getElementById('whatsappStatus');
+                    statusDiv.innerHTML = '<div class="alert alert-info">Generating WhatsApp links with image...</div>';
+                    
+                    let linksHtml = '<div class="mt-3"><h6>WhatsApp Links with Invitation Image:</h6>';
+                    phoneNumbers.forEach((phone, index) => {
+                        const cleanPhone = phone.replace(/\D/g, '');
+                        // Note: WhatsApp doesn't support direct image attachment via URL, so we provide instructions
+                        const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(customMessage)}`;
+                        linksHtml += `
+                            <div class="mb-3 p-3 border rounded">
+                                <h6>Send to ${phone}:</h6>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <a href="${whatsappUrl}" target="_blank" class="btn btn-success btn-sm mb-2">
+                                            <i class="fab fa-whatsapp"></i> Open WhatsApp Chat
+                                        </a>
+                                        <br>
+                                        <small class="text-muted">Click the link above, then attach the downloaded image</small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-outline-primary btn-sm download-image-btn" data-phone="${phone}">
+                                            <i class="fas fa-download"></i> Download Image
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    linksHtml += `
+                        <div class="alert alert-warning">
+                            <h6><i class="fas fa-info-circle"></i> How to send with image:</h6>
+                            <ol class="mb-0">
+                                <li>Click "Open WhatsApp Chat" for each guest</li>
+                                <li>Click "Download Image" to save the invitation</li>
+                                <li>In WhatsApp, tap the attachment icon (📎)</li>
+                                <li>Select "Image" and choose the downloaded file</li>
+                                <li>Add the custom message and send!</li>
+                            </ol>
+                        </div>
+                    `;
+                    statusDiv.innerHTML = linksHtml;
+
+                    // Add event listeners for download buttons
+                    setTimeout(() => {
+                        const downloadButtons = document.querySelectorAll('.download-image-btn');
+                        downloadButtons.forEach(button => {
+                            button.addEventListener('click', function() {
+                                const phone = this.getAttribute('data-phone');
+                                downloadImageForPhone(phone);
+                            });
+                        });
+                    }, 100);
+
+                    // Download the image automatically
+                    const link = document.createElement('a');
+                    link.href = imageUrl;
+                    link.download = `birthday-invitation-${Date.now()}.jpg`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Clean up
+                    setTimeout(() => URL.revokeObjectURL(imageUrl), 1000);
+                    
+                    showNotification(`Generated ${phoneNumbers.length} WhatsApp links with invitation image!`, 'success');
+                    
+                } else {
+                    showNotification('Failed to generate invitation image', 'error');
+                }
+            }, 'image/jpeg', 0.9);
+            
+        } catch (error) {
+            console.error('Error sending invitation image via WhatsApp:', error);
+            showNotification('Error: ' + error.message, 'error');
+        }
+    }
+
+    // Download image for specific phone number
+    function downloadImageForPhone(phoneNumber) {
+        if (!currentInvitationImageBlob) {
+            showNotification('No invitation image available. Please generate the invitation first.', 'error');
+            return;
+        }
+        
+        try {
+            // Create a URL for the stored blob
+            const imageUrl = URL.createObjectURL(currentInvitationImageBlob);
+            
+            // Create download link with phone-specific filename
+            const cleanPhone = phoneNumber.replace(/\D/g, '');
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = `birthday-invitation-${cleanPhone}-${Date.now()}.jpg`;
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up
+            setTimeout(() => URL.revokeObjectURL(imageUrl), 1000);
+            
+            showNotification(`Invitation image downloaded for ${phoneNumber}!`, 'success');
+            
+        } catch (error) {
+            console.error('Error downloading image for phone:', error);
+            showNotification('Error downloading image: ' + error.message, 'error');
+        }
+    }
+
+    // Make function globally accessible
+    window.downloadImageForPhone = downloadImageForPhone;
 }); 

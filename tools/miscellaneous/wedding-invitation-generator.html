@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation Generator - Create Beautiful Wedding Invitations | Multi-Tools Hub</title>
-    <meta name="description" content="Create beautiful wedding invitations with our easy-to-use generator. Choose from elegant templates, customize text, and download your perfect invitation.">
-    <meta name="keywords" content="wedding invitation generator, wedding card maker, invitation designer, wedding template, custom invitation">
+    <meta name="description" content="Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more. The most advanced wedding invitation generator online.">
+    <meta name="keywords" content="wedding invitation generator, AI wedding invitations, voice input invitations, QR code invitations, social media wedding cards, animated wedding invitations, WhatsApp wedding invites, RSVP tracking, wedding invitation maker">
 	
 	<!-- AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687"
@@ -16,20 +16,376 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../../assets/css/style.css" rel="stylesheet">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Wedding Invitation Generator - Create Beautiful Wedding Invitations">
-    <meta property="og:description" content="Create beautiful wedding invitations with our easy-to-use generator. Choose from elegant templates, customize text, and download your perfect invitation.">
+    <meta property="og:title" content="Wedding Invitation Generator - AI-Powered Wedding Invitations">
+    <meta property="og:description" content="Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more. The most advanced wedding invitation generator online.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/wedding-invitation-generator.html">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Wedding Invitation Generator - Create Beautiful Wedding Invitations">
-    <meta name="twitter:description" content="Create beautiful wedding invitations with our easy-to-use generator. Choose from elegant templates, customize text, and download your perfect invitation.">
+    <meta name="twitter:title" content="Wedding Invitation Generator - AI-Powered Wedding Invitations">
+    <meta name="twitter:description" content="Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more.">
+    
+    <style>
+        /* Enhanced Styles */
+        .feature-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .ai-suggestion-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .ai-suggestion-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .voice-input-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .voice-input-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .voice-input-btn.recording {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .qr-code-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .social-share-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .social-share-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-share-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .facebook { background: #1877f2; }
+        .twitter { background: #1da1f2; }
+        .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .whatsapp { background: #25d366; }
+        
+        .animated-preview {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .music-controls {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .rsvp-analytics {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            transition: width 0.5s ease;
+        }
+        
+        .whatsapp-integration {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .preview-controls {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .ar-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .live-collaboration {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .template-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .template-card.active {
+            border: 3px solid #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .template-preview {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .elegant-preview { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .modern-preview { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .classic-preview { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .romantic-preview { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+        .vintage-preview { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .minimalist-preview { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.2);
+        }
+        
+        .color-option.active {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        
+        .invitation-preview {
+            position: relative;
+            min-height: 400px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .invitation {
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .invitation-content {
+            max-width: 500px;
+        }
+        
+        .couple-names {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .wedding-date {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .wedding-time {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .venue {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .address {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .additional-info {
+            font-size: 0.9rem;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .download-options {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .download-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pdf-btn { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .png-btn { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .jpg-btn { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .social-btn { background: linear-gradient(135deg, #667eea, #764ba2); }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .notification.error { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .notification.info { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <!-- Header will be loaded dynamically -->
@@ -38,20 +394,31 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4">Wedding Invitation Generator</h1>
-                <p class="lead text-center mb-4">Create beautiful wedding invitations with our easy-to-use generator</p>
+                <div class="feature-highlight">
+                    <h1><i class="fas fa-heart me-3"></i>Wedding Invitation Generator</h1>
+                    <p class="lead mb-0">Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more!</p>
+                </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-8 mx-auto">
+                <!-- AI Suggestions Card -->
+                <div class="ai-suggestion-card" id="aiSuggestions">
+                    <h5><i class="fas fa-magic me-2"></i>AI-Powered Suggestions</h5>
+                    <p class="mb-2">Let AI help you create the perfect invitation!</p>
+                    <button class="btn btn-light btn-sm" onclick="generateAISuggestions()">
+                        <i class="fas fa-sparkles"></i> Get AI Suggestions
+                    </button>
+                </div>
+
                 <!-- Generator Form Card -->
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
                         <form id="invitationForm">
                             <!-- Template Selection -->
                             <div class="mb-4">
-                                <label class="form-label">Choose Template</label>
+                                <label class="form-label"><i class="fas fa-palette me-2"></i>Choose Template</label>
                                 <div class="row g-3" id="templateSelection">
                                     <div class="col-md-4">
                                         <div class="template-card active" data-template="elegant">
@@ -86,17 +453,60 @@
                                             <div class="template-name">Classic</div>
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="template-card" data-template="romantic">
+                                            <div class="template-preview romantic-preview">
+                                                <div class="template-content">
+                                                    <h3>Romantic</h3>
+                                                    <p>Dreamy & Intimate</p>
+                                                </div>
+                                            </div>
+                                            <div class="template-name">Romantic</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="template-card" data-template="vintage">
+                                            <div class="template-preview vintage-preview">
+                                                <div class="template-content">
+                                                    <h3>Vintage</h3>
+                                                    <p>Retro & Charming</p>
+                                                </div>
+                                            </div>
+                                            <div class="template-name">Vintage</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="template-card" data-template="minimalist">
+                                            <div class="template-preview minimalist-preview">
+                                                <div class="template-content">
+                                                    <h3>Minimalist</h3>
+                                                    <p>Simple & Elegant</p>
+                                                </div>
+                                            </div>
+                                            <div class="template-name">Minimalist</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Couple Information -->
                             <div class="row mb-4">
                                 <div class="col-md-6 mb-3">
-                                    <label for="brideName" class="form-label">Bride's Name</label>
+                                    <label for="brideName" class="form-label">
+                                        <i class="fas fa-female me-2"></i>Bride's Name
+                                        <button type="button" class="voice-input-btn" onclick="startVoiceInput('brideName')">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </label>
                                     <input type="text" class="form-control" id="brideName" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="groomName" class="form-label">Groom's Name</label>
+                                    <label for="groomName" class="form-label">
+                                        <i class="fas fa-male me-2"></i>Groom's Name
+                                        <button type="button" class="voice-input-btn" onclick="startVoiceInput('groomName')">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </label>
                                     <input type="text" class="form-control" id="groomName" required>
                                 </div>
                             </div>
@@ -104,52 +514,194 @@
                             <!-- Event Details -->
                             <div class="row mb-4">
                                 <div class="col-md-6 mb-3">
-                                    <label for="weddingDate" class="form-label">Wedding Date</label>
+                                    <label for="weddingDate" class="form-label">
+                                        <i class="fas fa-calendar me-2"></i>Wedding Date
+                                    </label>
                                     <input type="date" class="form-control" id="weddingDate" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="weddingTime" class="form-label">Wedding Time</label>
+                                    <label for="weddingTime" class="form-label">
+                                        <i class="fas fa-clock me-2"></i>Wedding Time
+                                    </label>
                                     <input type="time" class="form-control" id="weddingTime" required>
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <label for="venue" class="form-label">Venue</label>
+                                <label for="venue" class="form-label">
+                                    <i class="fas fa-map-marker-alt me-2"></i>Venue
+                                    <button type="button" class="voice-input-btn" onclick="startVoiceInput('venue')">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                </label>
                                 <input type="text" class="form-control" id="venue" required>
                             </div>
 
                             <div class="mb-4">
-                                <label for="address" class="form-label">Address</label>
+                                <label for="address" class="form-label">
+                                    <i class="fas fa-home me-2"></i>Address
+                                </label>
                                 <textarea class="form-control" id="address" rows="2" required></textarea>
                             </div>
 
                             <!-- Additional Information -->
                             <div class="mb-4">
-                                <label for="additionalInfo" class="form-label">Additional Information</label>
-                                <textarea class="form-control" id="additionalInfo" rows="3" placeholder="RSVP details, dress code, etc."></textarea>
+                                <label for="additionalInfo" class="form-label">
+                                    <i class="fas fa-info-circle me-2"></i>Additional Information
+                                </label>
+                                <textarea class="form-control" id="additionalInfo" rows="3" placeholder="RSVP details, dress code, special instructions, etc."></textarea>
                             </div>
 
                             <!-- Color Scheme -->
                             <div class="mb-4">
-                                <label class="form-label">Color Scheme</label>
+                                <label class="form-label">
+                                    <i class="fas fa-palette me-2"></i>Color Scheme
+                                </label>
                                 <div class="color-scheme-selector">
                                     <div class="color-option active" data-color="gold" style="background-color: #D4AF37;"></div>
                                     <div class="color-option" data-color="rose" style="background-color: #FFB6C1;"></div>
                                     <div class="color-option" data-color="sage" style="background-color: #9CAF88;"></div>
                                     <div class="color-option" data-color="navy" style="background-color: #000080;"></div>
                                     <div class="color-option" data-color="burgundy" style="background-color: #800020;"></div>
+                                    <div class="color-option" data-color="lavender" style="background-color: #E6E6FA;"></div>
+                                    <div class="color-option" data-color="coral" style="background-color: #FF7F50;"></div>
+                                    <div class="color-option" data-color="emerald" style="background-color: #50C878;"></div>
                                 </div>
                             </div>
 
                             <!-- Font Selection -->
                             <div class="mb-4">
-                                <label for="fontSelect" class="form-label">Font Style</label>
+                                <label for="fontSelect" class="form-label">
+                                    <i class="fas fa-font me-2"></i>Font Style
+                                </label>
                                 <select class="form-select" id="fontSelect">
-                                    <option value="playfair">Playfair Display</option>
-                                    <option value="montserrat">Montserrat</option>
-                                    <option value="cursive">Cursive</option>
-                                    <option value="serif">Serif</option>
+                                    <option value="playfair">Playfair Display (Elegant)</option>
+                                    <option value="montserrat">Montserrat (Modern)</option>
+                                    <option value="dancing">Dancing Script (Romantic)</option>
+                                    <option value="greatvibes">Great Vibes (Classic)</option>
+                                    <option value="cormorant">Cormorant Garamond (Sophisticated)</option>
+                                    <option value="serif">Times New Roman (Traditional)</option>
                                 </select>
+                            </div>
+
+                            <!-- QR Code Section -->
+                            <div class="mb-4">
+                                <label class="form-label">
+                                    <i class="fas fa-qrcode me-2"></i>QR Code for Digital RSVP
+                                </label>
+                                <div class="qr-code-container">
+                                    <div id="qrCode"></div>
+                                    <small class="text-muted">Guests can scan to RSVP online</small>
+                                </div>
+                            </div>
+
+                            <!-- Social Media Sharing -->
+                            <div class="mb-4">
+                                <label class="form-label">
+                                    <i class="fas fa-share-alt me-2"></i>Share Your Invitation
+                                </label>
+                                <div class="social-share-buttons">
+                                    <button class="social-share-btn facebook" onclick="shareToSocialMedia('facebook')">
+                                        <i class="fab fa-facebook-f"></i> Facebook
+                                    </button>
+                                    <button class="social-share-btn twitter" onclick="shareToSocialMedia('twitter')">
+                                        <i class="fab fa-twitter"></i> Twitter
+                                    </button>
+                                    <button class="social-share-btn instagram" onclick="shareToSocialMedia('instagram')">
+                                        <i class="fab fa-instagram"></i> Instagram
+                                    </button>
+                                    <button class="social-share-btn whatsapp" onclick="shareToSocialMedia('whatsapp')">
+                                        <i class="fab fa-whatsapp"></i> WhatsApp
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Music Integration -->
+                            <div class="music-controls">
+                                <h6><i class="fas fa-music me-2"></i>Background Music</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select class="form-select" id="musicSelect">
+                                            <option value="romantic">Romantic Melody</option>
+                                            <option value="classical">Classical Wedding</option>
+                                            <option value="jazz">Jazz Elegance</option>
+                                            <option value="none">No Music</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-light btn-sm" onclick="playMusic()">
+                                            <i class="fas fa-play"></i> Play
+                                        </button>
+                                        <button class="btn btn-light btn-sm" onclick="pauseMusic()">
+                                            <i class="fas fa-pause"></i> Pause
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RSVP Analytics -->
+                            <div class="rsvp-analytics">
+                                <h6><i class="fas fa-chart-bar me-2"></i>RSVP Analytics</h6>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 id="totalInvites">0</h4>
+                                            <small>Total Invites</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 id="confirmedRSVP">0</h4>
+                                            <small>Confirmed</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 id="pendingRSVP">0</h4>
+                                            <small>Pending</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 id="declinedRSVP">0</h4>
+                                            <small>Declined</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-bar mt-3">
+                                    <div class="progress-fill" id="rsvpProgress" style="width: 0%"></div>
+                                </div>
+                                <button class="btn btn-light btn-sm mt-2" onclick="simulateRSVPData()">
+                                    <i class="fas fa-sync"></i> Simulate RSVP Data
+                                </button>
+                            </div>
+
+                            <!-- WhatsApp Integration -->
+                            <div class="whatsapp-integration">
+                                <h6><i class="fab fa-whatsapp me-2"></i>WhatsApp Invites</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Guest Phone Numbers (one per line)</label>
+                                        <textarea class="form-control" id="guestPhoneNumbers" rows="3" placeholder="+1234567890&#10;+1987654321"></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Custom Message</label>
+                                        <textarea class="form-control" id="whatsappMessage" rows="3" placeholder="You're invited to our wedding! Please RSVP."></textarea>
+                                    </div>
+                                </div>
+                                <button class="btn btn-light btn-sm mt-2" onclick="sendWhatsAppInvites()">
+                                    <i class="fab fa-whatsapp"></i> Send WhatsApp Invites
+                                </button>
+                                <div id="whatsappStatus" class="mt-2"></div>
+                            </div>
+
+                            <!-- AR Preview -->
+                            <div class="ar-preview">
+                                <h6><i class="fas fa-vr-cardboard me-2"></i>AR Preview</h6>
+                                <p>Experience your invitation in augmented reality</p>
+                                <button class="btn btn-light btn-sm" onclick="launchARPreview()">
+                                    <i class="fas fa-cube"></i> Launch AR Preview
+                                </button>
                             </div>
 
                             <!-- Preview and Download -->
@@ -167,39 +719,81 @@
 
                 <!-- Preview Modal -->
                 <div class="modal fade" id="previewModal" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Invitation Preview</h5>
+                                <h5 class="modal-title">
+                                    <i class="fas fa-eye me-2"></i>Invitation Preview
+                                </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <div id="invitationPreview" class="invitation-preview">
+                                <div id="invitationPreview" class="invitation-preview animated-preview">
                                     <!-- Preview will be added here dynamically -->
+                                </div>
+                                
+                                <!-- Preview Controls -->
+                                <div class="preview-controls">
+                                    <button class="control-btn" onclick="toggleParticles()">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="control-btn" onclick="toggle3D()">
+                                        <i class="fas fa-cube"></i>
+                                    </button>
+                                    <button class="control-btn" onclick="toggleMusic()">
+                                        <i class="fas fa-music"></i>
+                                    </button>
+                                    <button class="control-btn" onclick="rotatePreview()">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="downloadFromPreview">
-                                    <i class="fas fa-download me-2"></i>Download
-                                </button>
+                                <div class="download-options">
+                                    <button class="download-btn pdf-btn" onclick="downloadInvitation('pdf')">
+                                        <i class="fas fa-file-pdf"></i> PDF
+                                    </button>
+                                    <button class="download-btn png-btn" onclick="downloadInvitation('png')">
+                                        <i class="fas fa-image"></i> PNG
+                                    </button>
+                                    <button class="download-btn jpg-btn" onclick="downloadInvitation('jpg')">
+                                        <i class="fas fa-image"></i> JPG
+                                    </button>
+                                    <button class="download-btn social-btn" onclick="downloadInvitation('social')">
+                                        <i class="fas fa-share"></i> Social Media
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Live Collaboration Indicator -->
+                <div class="live-collaboration" id="collaborationIndicator">
+                    <i class="fas fa-users"></i> Live Collaboration Active
+                </div>
+
                 <!-- Information Card -->
                 <div class="card shadow-sm mb-4">
                     <div class="card-header">
-                        <h5 class="mb-0">About Wedding Invitation Generator</h5>
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>About Wedding Invitation Generator
+                        </h5>
                     </div>
                     <div class="card-body">
-                        <p>Create beautiful wedding invitations with our easy-to-use generator:</p>
+                        <p>Create stunning wedding invitations with our advanced generator featuring:</p>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-palette text-info me-2"></i>Multiple elegant templates</li>
-                            <li class="mb-2"><i class="fas fa-paint-brush text-info me-2"></i>Customizable color schemes</li>
-                            <li class="mb-2"><i class="fas fa-font text-info me-2"></i>Various font styles</li>
-                            <li class="mb-2"><i class="fas fa-download text-info me-2"></i>High-quality PDF download</li>
+                            <li class="mb-2"><i class="fas fa-magic text-info me-2"></i>AI-powered suggestions for perfect wording</li>
+                            <li class="mb-2"><i class="fas fa-microphone text-info me-2"></i>Voice input for hands-free editing</li>
+                            <li class="mb-2"><i class="fas fa-qrcode text-info me-2"></i>QR codes for digital RSVP tracking</li>
+                            <li class="mb-2"><i class="fas fa-share-alt text-info me-2"></i>Social media sharing integration</li>
+                            <li class="mb-2"><i class="fas fa-star text-info me-2"></i>Animated effects and 3D previews</li>
+                            <li class="mb-2"><i class="fab fa-whatsapp text-info me-2"></i>WhatsApp integration for easy sharing</li>
+                            <li class="mb-2"><i class="fas fa-chart-bar text-info me-2"></i>RSVP analytics and tracking</li>
+                            <li class="mb-2"><i class="fas fa-music text-info me-2"></i>Background music integration</li>
+                            <li class="mb-2"><i class="fas fa-vr-cardboard text-info me-2"></i>AR preview simulation</li>
+                            <li class="mb-2"><i class="fas fa-users text-info me-2"></i>Live collaboration features</li>
                         </ul>
                     </div>
                 </div>
@@ -207,14 +801,19 @@
                 <!-- Usage Tips Card -->
                 <div class="card shadow-sm">
                     <div class="card-header">
-                        <h5 class="mb-0">Usage Tips</h5>
+                        <h5 class="mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>Pro Tips
+                        </h5>
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose a template that matches your wedding theme</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Select colors that complement your wedding palette</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Preview before downloading to ensure everything looks perfect</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Download in high quality for printing</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use AI suggestions to create perfect wedding wording</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Try voice input for natural, conversational text</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Share QR codes for easy digital RSVP tracking</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use WhatsApp integration to send invites instantly</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Monitor RSVP analytics to track guest responses</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Preview in AR mode for immersive experience</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Download in multiple formats for different uses</li>
                         </ul>
                     </div>
                 </div>
@@ -252,6 +851,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- html2pdf.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- QR Code Generator -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <!-- Custom JS -->
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/miscellaneous/wedding-invitation-generator.js"></script>
