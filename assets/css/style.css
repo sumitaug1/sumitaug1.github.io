@@ -13,6 +13,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3eafc 100%) !important;
+    color: #212529 !important;
 }
 
 /* Header Styles */
