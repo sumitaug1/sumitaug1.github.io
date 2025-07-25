@@ -2187,3 +2187,24 @@ textarea.form-control {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
 } 
+
+/* For tool list cards or sections */
+.card, .tool-card, .tool-list-item {
+    background-color: #fff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+    border: 1px solid #e0e0e0 !important;
+    margin-bottom: 1.5rem !important;
+    padding: 1.25rem 1rem !important;
+    transition: box-shadow 0.2s;
+}
+
+.card:hover, .tool-card:hover, .tool-list-item:hover {
+    box-shadow: 0 4px 24px rgba(13,110,253,0.10) !important;
+}
+
+.tool-list {
+    background: transparent !important; /* Remove gray background from the list container */
+    padding: 0 !important;
+    margin: 0 !important;
+} 
