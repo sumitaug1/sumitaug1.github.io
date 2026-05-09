@@ -1007,75 +1007,167 @@ function initHeaderBehavior() {
         onScroll();
     }
 
-    if (REDUCED) return; // skip motion effects for accessibility
+    // ── HUD live clock (always on) ───────────────
+    const hudTime = document.getElementById('hud-time');
+    if (hudTime) {
+        const tick = () => { hudTime.textContent = new Date().toTimeString().slice(0, 8); };
+        tick();
+        setInterval(tick, 1000);
+    }
 
-    // ── Effect 1: Cursor spotlight ───────────────
+    if (REDUCED) return;
+
+    // ── 3D canvas star field ─────────────────────
+    initHeaderCanvas();
+
+    // ── Consolidated mouse handler ───────────────
+    const hudEl    = document.getElementById('nav-hud');
+    const brandEl  = document.getElementById('nav-brand-el');
+    const linksEl  = document.getElementById('nav-links-el');
+    const hologram = document.getElementById('nav-hologram');
+
+    // Lerp targets for smooth parallax
+    let tOX = 0, tOY = 0, cOX = 0, cOY = 0;
+    let rafP;
+
+    const animateParallax = () => {
+        cOX += (tOX - cOX) * 0.09;
+        cOY += (tOY - cOY) * 0.09;
+        if (hudEl)   hudEl.style.transform   = `translate(${cOX * -8}px, ${cOY * -2.5}px)`;
+        if (brandEl) brandEl.style.transform = `translate(${cOX * -4}px, ${cOY * -1.5}px)`;
+        if (linksEl) linksEl.style.transform = `translate(${cOX *  6}px, ${cOY *  2}px)`;
+        if (hologram) hologram.style.setProperty('--hx', `${cOX * 22}deg`);
+        rafP = requestAnimationFrame(animateParallax);
+    };
+    animateParallax();
+
     if (hdr) {
         hdr.addEventListener('mousemove', e => {
             const rect = hdr.getBoundingClientRect();
-            hdr.style.setProperty('--sx', (e.clientX - rect.left) + 'px');
-            hdr.style.setProperty('--sy', (e.clientY - rect.top) + 'px');
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            // Spotlight
+            hdr.style.setProperty('--sx', mx + 'px');
+            hdr.style.setProperty('--sy', my + 'px');
+            // Parallax targets (-1 to 1)
+            tOX = (mx - rect.width  / 2) / (rect.width  / 2);
+            tOY = (my - rect.height / 2) / (rect.height / 2);
         });
         hdr.addEventListener('mouseleave', () => {
             hdr.style.setProperty('--sx', '-300px');
             hdr.style.setProperty('--sy', '-300px');
+            tOX = 0; tOY = 0;
         });
     }
 
-    // ── Effect 2: Magnetic nav links ─────────────
+    // ── 3D tilt on nav links ─────────────────────
     document.querySelectorAll('.nav-link-item').forEach(link => {
         link.addEventListener('mousemove', e => {
-            const rect = link.getBoundingClientRect();
-            const dx = (e.clientX - (rect.left + rect.width  / 2)) / rect.width  * 6;
-            const dy = (e.clientY - (rect.top  + rect.height / 2)) / rect.height * 3.5;
-            link.style.transform = `translate(${dx}px, ${dy}px)`;
+            const r = link.getBoundingClientRect();
+            const dx = (e.clientX - (r.left + r.width  / 2)) / r.width  * 14;
+            const dy = (e.clientY - (r.top  + r.height / 2)) / r.height * 9;
+            link.style.transform = `perspective(320px) rotateY(${dx}deg) rotateX(${-dy}deg) translateZ(6px)`;
         });
-        link.addEventListener('mouseleave', () => {
-            link.style.transform = '';
-        });
+        link.addEventListener('mouseleave', () => { link.style.transform = ''; });
     });
 
-    // ── Effect 3: Glitch-decode brand name ───────
+    // ── Glitch-decode brand name ─────────────────
     const brandText = document.getElementById('nav-brand-text');
     if (brandText) {
         const original = 'Multi-Tools Hub';
         const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>/\\';
-        let frame = 0;
-        const total = 22;
+        let frame = 0, total = 24;
         const iv = setInterval(() => {
             brandText.textContent = original.split('').map((ch, i) => {
                 if (ch === ' ') return ' ';
                 if (frame / total > i / original.length) return ch;
                 return CHARS[Math.floor(Math.random() * CHARS.length)];
             }).join('');
-            if (++frame > total) {
-                brandText.textContent = original;
-                clearInterval(iv);
-            }
-        }, 38);
+            if (++frame > total) { brandText.textContent = original; clearInterval(iv); }
+        }, 36);
     }
 
-    // ── Effect 4: HUD live clock ─────────────────
-    const hudTime = document.getElementById('hud-time');
-    if (hudTime) {
-        const tick = () => {
-            hudTime.textContent = new Date().toTimeString().slice(0, 8);
-        };
-        tick();
-        setInterval(tick, 1000);
-    }
-
-    // ── Effect 5: Periodic scan sweep ────────────
+    // ── Periodic scan sweep ──────────────────────
     const scanEl = document.getElementById('nav-scan');
     if (scanEl) {
         const sweep = () => {
             scanEl.classList.remove('sweeping');
-            void scanEl.offsetWidth; // force reflow to restart animation
+            void scanEl.offsetWidth;
             scanEl.classList.add('sweeping');
         };
-        setTimeout(sweep, 600);          // first sweep shortly after load
-        setInterval(sweep, 4200);        // then every 4.2s
+        setTimeout(sweep, 700);
+        setInterval(sweep, 4500);
     }
+}
+
+function initHeaderCanvas() {
+    const canvas = document.getElementById('headerCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+
+    const resize = () => {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    // Mouse offset (updated from the shared header mousemove)
+    let mvx = 0, mvy = 0;
+    const hdr = document.getElementById('site-header');
+    if (hdr) {
+        hdr.addEventListener('mousemove', e => {
+            const r = hdr.getBoundingClientRect();
+            mvx = e.clientX - r.left - W / 2;
+            mvy = e.clientY - r.top  - H / 2;
+        });
+        hdr.addEventListener('mouseleave', () => { mvx = 0; mvy = 0; });
+    }
+
+    const FOCAL = 240, SPEED = 0.65;
+    const stars = Array.from({ length: 72 }, () => ({
+        x: (Math.random() - 0.5) * 1000,
+        y: (Math.random() - 0.5) * 320,
+        z: Math.random() * 400 + 20,
+        cyan: Math.random() > 0.62
+    }));
+
+    let raf;
+    const draw = () => {
+        ctx.clearRect(0, 0, W, H);
+        const cx = W / 2 + mvx * 0.16;
+        const cy = H / 2 + mvy * 0.12;
+
+        stars.forEach(s => {
+            s.z -= SPEED;
+            if (s.z < 1) {
+                s.z = 400;
+                s.x = (Math.random() - 0.5) * 1000;
+                s.y = (Math.random() - 0.5) * 320;
+            }
+            const scale = FOCAL / s.z;
+            const sx = cx + s.x * scale;
+            const sy = cy + s.y * scale;
+            if (sx < -4 || sx > W + 4 || sy < -4 || sy > H + 4) return;
+            const r = Math.min(scale * 1.4, 2.8);
+            const a = Math.min(scale * 0.6, 0.82);
+            ctx.beginPath();
+            ctx.arc(sx, sy, r, 0, 6.283);
+            ctx.fillStyle = s.cyan
+                ? `rgba(0,200,255,${a})`
+                : `rgba(168,85,247,${a})`;
+            ctx.fill();
+        });
+
+        raf = requestAnimationFrame(draw);
+    };
+    draw();
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else raf = requestAnimationFrame(draw);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', loadComponents); 
