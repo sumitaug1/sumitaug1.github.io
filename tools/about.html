@@ -1,133 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Multi-Tools Hub</title>
-    <meta name="description" content="Learn more about Multi-Tools Hub, your one-stop solution for online tools including converters, calculators, SEO tools, and more.">
-    <meta name="keywords" content="about, online tools, converters, calculators, SEO tools, text utilities, developer tools, free tools">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Multi-Tools Hub</title>
+<meta name="description" content="Learn more about Multi-Tools Hub, your one-stop solution for online tools including converters, calculators, SEO tools, and more.">
+<meta name="keywords" content="about, online tools, converters, calculators, SEO tools, text utilities, developer tools, free tools">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="/assets/css/category-page.css" rel="stylesheet">
+<style>
+.about-content { max-width: 1280px; margin: 0 auto; padding: 4rem 2rem 6rem; position: relative; z-index: 1; }
+.about-block { margin-bottom: 3.5rem; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 1.25rem; }
+.feature-card {
+  background: rgba(8,14,28,0.82);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 1.75rem 1.5rem;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  transition: border-color 0.3s ease, background 0.3s ease;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease;
+}
+.feature-card.revealed { opacity: 1; transform: translateY(0); }
+.feature-card:hover { border-color: var(--t-clr, #00c8ff); background: rgba(8,14,28,0.97); }
+.feature-icon { font-size: 1.5rem; color: var(--t-clr, #00c8ff); margin-bottom: 0.85rem; text-shadow: 0 0 18px var(--t-clr, #00c8ff); }
+.feature-title { font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 600; color: #e8eaf0; margin-bottom: 0.45rem; letter-spacing: 0.03em; }
+.feature-desc { font-size: 0.8rem; color: rgba(216,221,232,0.48); line-height: 1.6; margin: 0; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 1.25rem; }
+.cat-chip {
+  background: rgba(8,14,28,0.75);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 0.9rem 1rem;
+  display: flex; align-items: center; gap: 10px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: border-color 0.3s, background 0.3s;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
+  text-decoration: none;
+}
+.cat-chip.revealed { opacity: 1; transform: translateY(0); }
+.cat-chip:hover { border-color: var(--t-clr, #00c8ff); background: rgba(8,14,28,0.97); }
+.cat-chip-icon { font-size: 1.1rem; }
+.cat-chip-name { font-family: 'Orbitron', monospace; font-size: 0.7rem; color: #d8dde8; letter-spacing: 0.04em; }
+.why-list { list-style: none; padding: 0; margin: 1rem 0 0; }
+.why-list li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.88rem;
+  color: rgba(216,221,232,0.72);
+  opacity: 0; transform: translateX(-16px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.why-list li.revealed { opacity: 1; transform: translateX(0); }
+.why-check { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--t-clr, #00c8ff); flex-shrink: 0; text-shadow: 0 0 8px var(--t-clr, #00c8ff); }
+@media (max-width: 768px) { .about-content { padding: 2.5rem 1.5rem 4rem; } }
+</style>
 </head>
 <body>
-    <!-- Header will be loaded dynamically -->
-    <div id="header-container"></div>
+<div id="header-container"></div>
+<div class="cat-bg"><div class="cat-bg-grid"></div><div class="cat-bg-vignette"></div></div>
+<main>
+<section class="cat-hero" style="--t-clr:#00c8ff">
+  <canvas id="heroCanvas"></canvas>
+  <div class="cat-hero-glow"></div>
+  <div class="cat-hero-inner">
+    <div class="cat-badge"><span class="cat-badge-text" data-text="ABOUT_US"></span></div>
+    <h1 class="cat-title"><span class="emoji">⚡</span> Multi-Tools Hub</h1>
+    <p class="cat-lead">Your one-stop solution for 100+ free online tools. No registration, no limits — just tools that work.</p>
+  </div>
+</section>
 
-    <div class="container mt-4">
-        <!-- About Hero Section -->
-        <div class="hero-section text-center mb-5">
-            <h1 class="display-4 fw-bold">About Multi-Tools Hub</h1>
-            <p class="lead">Your One-Stop Solution for All Online Tools</p>
-        </div>
+<div class="about-content" style="--t-clr:#00c8ff">
 
-        <!-- About Content Section -->
-        <div class="about-section mb-5">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title mb-4">Our Mission</h2>
-                            <p class="card-text">
-                                Multi-Tools Hub was created with a simple mission: to provide easy access to essential online tools that help people in their daily tasks. We believe that everyone should have access to quality tools without any barriers.
-                            </p>
-                            
-                            <h3 class="mt-4 mb-3">What We Offer</h3>
-                            <div class="row g-4 mt-2">
-                                <div class="col-md-6">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <i class="fas fa-tools fa-2x text-primary mb-3"></i>
-                                            <h4>100+ Free Tools</h4>
-                                            <p>Access a wide range of tools including converters, calculators, SEO tools, and more.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <i class="fas fa-lock fa-2x text-primary mb-3"></i>
-                                            <h4>Secure & Private</h4>
-                                            <p>All tools run locally in your browser. Your data never leaves your device.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <i class="fas fa-bolt fa-2x text-primary mb-3"></i>
-                                            <h4>Fast & Efficient</h4>
-                                            <p>Optimized tools that work quickly and efficiently without any lag.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <i class="fas fa-mobile-alt fa-2x text-primary mb-3"></i>
-                                            <h4>Mobile Friendly</h4>
-                                            <p>All tools are responsive and work perfectly on any device.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3 class="mt-4 mb-3">Our Categories</h3>
-                            <div class="row g-4 mt-2">
-                                <div class="col-md-4">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <i class="fas fa-image fa-2x text-primary mb-3"></i>
-                                            <h5>Image Tools</h5>
-                                            <p>Convert, resize, and optimize your images.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <i class="fas fa-file-pdf fa-2x text-primary mb-3"></i>
-                                            <h5>PDF Tools</h5>
-                                            <p>Edit, convert, and manage PDF files.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <i class="fas fa-calculator fa-2x text-primary mb-3"></i>
-                                            <h5>Calculators</h5>
-                                            <p>Various calculators for different purposes.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3 class="mt-4 mb-3">Why Choose Us?</h3>
-                            <ul class="list-unstyled">
-                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> No registration required</li>
-                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Completely free to use</li>
-                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Regular updates and new tools</li>
-                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> User-friendly interface</li>
-                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Fast and reliable service</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Mission -->
+  <div class="about-block">
+    <div class="section-head">
+      <span class="section-label">// MISSION</span>
+      <h2 class="section-title">Our Mission</h2>
     </div>
+    <p style="font-size:0.92rem;color:rgba(216,221,232,0.62);line-height:1.8;max-width:720px;">
+      Multi-Tools Hub was created with a simple mission: to provide easy access to essential online tools that help people in their daily tasks. We believe that everyone should have access to quality tools without any barriers — no sign-ups, no paywalls, no friction.
+    </p>
+  </div>
 
-    <!-- Footer will be loaded dynamically -->
-    <div id="footer-container"></div>
+  <div class="cat-divider"></div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="../assets/js/main.js"></script>
+  <!-- What We Offer -->
+  <div class="about-block">
+    <div class="section-head">
+      <span class="section-label">// FEATURES</span>
+      <h2 class="section-title">What We Offer</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-tools"></i></div>
+        <div class="feature-title">100+ Free Tools</div>
+        <p class="feature-desc">Converters, calculators, SEO tools, image editors, developer utilities, and more — all in one place.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-lock"></i></div>
+        <div class="feature-title">Secure &amp; Private</div>
+        <p class="feature-desc">All tools run locally in your browser. Your data never leaves your device.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+        <div class="feature-title">Fast &amp; Efficient</div>
+        <p class="feature-desc">Optimized tools that deliver instant results without any lag or loading delays.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+        <div class="feature-title">Mobile Friendly</div>
+        <p class="feature-desc">Fully responsive — every tool works perfectly on phones, tablets, and desktops.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-divider"></div>
+
+  <!-- Categories -->
+  <div class="about-block">
+    <div class="section-head">
+      <span class="section-label">// CATEGORIES</span>
+      <h2 class="section-title">Tool Categories</h2>
+    </div>
+    <div class="cat-grid">
+      <a href="/tools/image-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">🖼️</span><span class="cat-chip-name">Image Tools</span>
+      </a>
+      <a href="/tools/pdf-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">📄</span><span class="cat-chip-name">PDF Tools</span>
+      </a>
+      <a href="/tools/text-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">📝</span><span class="cat-chip-name">Text Tools</span>
+      </a>
+      <a href="/tools/calculator-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">🧮</span><span class="cat-chip-name">Calculators</span>
+      </a>
+      <a href="/tools/unit-converters.html" class="cat-chip">
+        <span class="cat-chip-icon">🔄</span><span class="cat-chip-name">Unit Converters</span>
+      </a>
+      <a href="/tools/developer-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">💻</span><span class="cat-chip-name">Developer Tools</span>
+      </a>
+      <a href="/tools/seo-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">🔍</span><span class="cat-chip-name">SEO Tools</span>
+      </a>
+      <a href="/tools/security-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">🔐</span><span class="cat-chip-name">Security Tools</span>
+      </a>
+      <a href="/tools/social-media-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">📱</span><span class="cat-chip-name">Social Media</span>
+      </a>
+      <a href="/tools/business-tools.html" class="cat-chip">
+        <span class="cat-chip-icon">💼</span><span class="cat-chip-name">Business Tools</span>
+      </a>
+      <a href="/tools/miscellaneous.html" class="cat-chip">
+        <span class="cat-chip-icon">🎲</span><span class="cat-chip-name">Miscellaneous</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="cat-divider"></div>
+
+  <!-- Why Choose Us -->
+  <div class="about-block">
+    <div class="section-head">
+      <span class="section-label">// WHY US</span>
+      <h2 class="section-title">Why Choose Us?</h2>
+    </div>
+    <ul class="why-list">
+      <li><span class="why-check">✓</span> No registration required — use every tool instantly</li>
+      <li><span class="why-check">✓</span> Completely free — no hidden fees or premium tiers</li>
+      <li><span class="why-check">✓</span> Regular updates and new tools added frequently</li>
+      <li><span class="why-check">✓</span> Clean, distraction-free interface</li>
+      <li><span class="why-check">✓</span> Fast, reliable, and always available</li>
+    </ul>
+  </div>
+
+</div>
+</main>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/category-page.js"></script>
+<script>
+/* Scroll-reveal for about-page specific elements */
+document.addEventListener('DOMContentLoaded', () => {
+  const selectors = ['.feature-card', '.cat-chip', '.why-list li'];
+  selectors.forEach(sel => {
+    const els = [...document.querySelectorAll(sel)];
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = els.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${Math.min(idx * 0.06, 0.35)}s`;
+          entry.target.classList.add('revealed');
+          o.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    els.forEach(el => obs.observe(el));
+  });
+});
+</script>
+<script src="/assets/js/main.js"></script>
 </body>
-</html> 
+</html>
