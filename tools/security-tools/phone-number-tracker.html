@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HNYPXS04ZV');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Tracker - Lookup Carrier, Country & Type | Multi-Tools Hub</title>
+    <meta name="description" content="Look up phone number details: country, carrier, number type (mobile/landline/VoIP), and formatted output. Free online phone number analyzer.">
+    <meta name="keywords" content="phone number tracker, phone lookup, phone number validator, carrier lookup, phone number info">
+
+    <!-- AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../assets/css/tool-page.css" rel="stylesheet">
+
+    <meta property="og:title" content="Phone Number Tracker - Lookup Carrier, Country & Type">
+    <meta property="og:description" content="Look up phone number details: country, carrier, number type and formatted output. Free online phone number analyzer.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Phone Number Tracker - Lookup Carrier, Country & Type">
+
+    <style>
+      /* ── Scan animation ── */
+      .pnt-scan-wrap {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(0,200,255,0.18);
+        border-radius: 4px;
+        background: rgba(2,10,22,0.85);
+        padding: 2rem;
+      }
+      .pnt-scan-line {
+        display: none;
+        position: absolute;
+        left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00c8ff, transparent);
+        box-shadow: 0 0 12px #00c8ff;
+        animation: pntScan 1.4s ease-in-out infinite;
+        z-index: 5;
+      }
+      .pnt-scanning .pnt-scan-line { display: block; }
+      @keyframes pntScan {
+        0%   { top: 0%; opacity: 0; }
+        10%  { opacity: 1; }
+        90%  { opacity: 1; }
+        100% { top: 100%; opacity: 0; }
+      }
+
+      /* ── Result cards ── */
+      .pnt-result-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .pnt-stat {
+        background: rgba(0,200,255,0.04);
+        border: 1px solid rgba(0,200,255,0.14);
+        border-radius: 4px;
+        padding: 1rem 1.2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .pnt-stat::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 3px; height: 100%;
+        background: var(--tp-clr);
+        opacity: 0.5;
+      }
+      .pnt-stat-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.52rem;
+        letter-spacing: 0.2em;
+        color: rgba(0,200,255,0.5);
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.4rem;
+      }
+      .pnt-stat-value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #e8eaf0;
+        word-break: break-all;
+      }
+      .pnt-stat-flag {
+        font-size: 1.5rem;
+        margin-right: 0.4rem;
+        vertical-align: middle;
+      }
+
+      /* ── Status badge ── */
+      .pnt-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.8rem;
+        border-radius: 2px;
+      }
+      .pnt-status-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        animation: pntPulse 1.4s ease-in-out infinite;
+      }
+      @keyframes pntPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50%       { opacity: 0.4; transform: scale(0.7); }
+      }
+      .pnt-valid   { background: rgba(0,255,120,0.08); border: 1px solid rgba(0,255,120,0.3); color: #00ff78; }
+      .pnt-invalid { background: rgba(255,60,60,0.08); border: 1px solid rgba(255,60,60,0.3); color: #ff3c3c; }
+      .pnt-valid   .pnt-status-dot { background: #00ff78; box-shadow: 0 0 8px #00ff78; }
+      .pnt-invalid .pnt-status-dot { background: #ff3c3c; box-shadow: 0 0 8px #ff3c3c; animation: none; }
+
+      /* ── Type badge ── */
+      .pnt-type-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.7rem;
+        border-radius: 2px;
+        background: rgba(168,85,247,0.12);
+        border: 1px solid rgba(168,85,247,0.35);
+        color: #a855f7;
+      }
+
+      /* ── Input group styling ── */
+      .pnt-input { font-family: 'JetBrains Mono', monospace !important; font-size: 1rem !important; letter-spacing: 0.05em; }
+      .pnt-country-select { max-width: 180px; font-family: 'JetBrains Mono', monospace !important; font-size: 0.75rem !important; }
+
+      /* ── Trace button ── */
+      .btn-trace {
+        background: linear-gradient(135deg, rgba(0,200,255,0.15), rgba(168,85,247,0.15));
+        border: 1px solid rgba(0,200,255,0.45);
+        color: #00c8ff;
+        font-family: 'Orbitron', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        padding: 0.7rem 2rem;
+        text-transform: uppercase;
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        transition: background 0.25s, box-shadow 0.25s;
+      }
+      .btn-trace:hover {
+        background: linear-gradient(135deg, rgba(0,200,255,0.28), rgba(168,85,247,0.28));
+        box-shadow: 0 0 22px rgba(0,200,255,0.3);
+        color: #00c8ff;
+      }
+      .btn-trace:disabled { opacity: 0.5; cursor: not-allowed; }
+
+      /* ── History ── */
+      .pnt-history-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        cursor: pointer;
+        transition: background 0.15s;
+        border-radius: 3px;
+      }
+      .pnt-history-item:hover { background: rgba(0,200,255,0.05); }
+      .pnt-history-num {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.82rem;
+        color: #00c8ff;
+      }
+      .pnt-history-meta {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.72rem;
+        color: rgba(216,221,232,0.45);
+      }
+    </style>
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+
+        <!-- Page Title Row -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h1 class="mb-2">Phone Number Tracker</h1>
+                <p class="lead">Validate and analyze any phone number — country, carrier, type, and format details. All processing runs in your browser.</p>
+            </div>
+        </div>
+
+        <!-- Main Tool Row -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-9">
+
+                <!-- Input Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-satellite-dish me-2" style="color:#00c8ff"></i>Enter Phone Number
+                        </h5>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// default region</label>
+                                <select class="form-select pnt-country-select" id="defaultRegion">
+                                    <option value="">Auto-detect</option>
+                                    <option value="US">+1 United States</option>
+                                    <option value="GB">+44 United Kingdom</option>
+                                    <option value="IN">+91 India</option>
+                                    <option value="AU">+61 Australia</option>
+                                    <option value="CA">+1 Canada</option>
+                                    <option value="DE">+49 Germany</option>
+                                    <option value="FR">+33 France</option>
+                                    <option value="BR">+55 Brazil</option>
+                                    <option value="JP">+81 Japan</option>
+                                    <option value="CN">+86 China</option>
+                                    <option value="RU">+7 Russia</option>
+                                    <option value="MX">+52 Mexico</option>
+                                    <option value="NG">+234 Nigeria</option>
+                                    <option value="ZA">+27 South Africa</option>
+                                    <option value="AE">+971 UAE</option>
+                                    <option value="SG">+65 Singapore</option>
+                                    <option value="PK">+92 Pakistan</option>
+                                    <option value="BD">+880 Bangladesh</option>
+                                    <option value="ID">+62 Indonesia</option>
+                                    <option value="PH">+63 Philippines</option>
+                                    <option value="KR">+82 South Korea</option>
+                                    <option value="IT">+39 Italy</option>
+                                    <option value="ES">+34 Spain</option>
+                                    <option value="NL">+31 Netherlands</option>
+                                    <option value="SE">+46 Sweden</option>
+                                    <option value="NO">+47 Norway</option>
+                                    <option value="CH">+41 Switzerland</option>
+                                    <option value="AT">+43 Austria</option>
+                                    <option value="PL">+48 Poland</option>
+                                    <option value="TR">+90 Turkey</option>
+                                    <option value="SA">+966 Saudi Arabia</option>
+                                    <option value="EG">+20 Egypt</option>
+                                    <option value="KE">+254 Kenya</option>
+                                    <option value="GH">+233 Ghana</option>
+                                    <option value="TH">+66 Thailand</option>
+                                    <option value="MY">+60 Malaysia</option>
+                                    <option value="NZ">+64 New Zealand</option>
+                                    <option value="AR">+54 Argentina</option>
+                                    <option value="CO">+57 Colombia</option>
+                                    <option value="CL">+56 Chile</option>
+                                    <option value="PT">+351 Portugal</option>
+                                    <option value="GR">+30 Greece</option>
+                                    <option value="BE">+32 Belgium</option>
+                                    <option value="IE">+353 Ireland</option>
+                                    <option value="DK">+45 Denmark</option>
+                                    <option value="FI">+358 Finland</option>
+                                    <option value="IL">+972 Israel</option>
+                                    <option value="IR">+98 Iran</option>
+                                    <option value="IQ">+964 Iraq</option>
+                                    <option value="UA">+380 Ukraine</option>
+                                    <option value="RO">+40 Romania</option>
+                                    <option value="VN">+84 Vietnam</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// phone number (include + and country code)</label>
+                                <input type="tel" class="form-control pnt-input" id="phoneInput"
+                                    placeholder="+1 555 123 4567" autocomplete="tel">
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button class="btn btn-trace" id="traceBtn">
+                                <i class="fas fa-crosshairs me-2"></i>Initiate Trace
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" id="clearBtn">
+                                <i class="fas fa-times me-1"></i>Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Panel (hidden until trace) -->
+                <div class="card mb-4 d-none" id="resultPanel">
+                    <div class="card-body pnt-scan-wrap" id="scanWrap">
+                        <div class="pnt-scan-line" id="scanLine"></div>
+
+                        <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                            <h5 class="mb-0" style="font-family:'Orbitron',monospace;font-size:0.85rem;letter-spacing:0.1em;">
+                                <i class="fas fa-signal me-2" style="color:#00c8ff"></i>TRACE RESULTS
+                            </h5>
+                            <div id="statusBadge"></div>
+                        </div>
+
+                        <div class="pnt-result-grid" id="resultGrid">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <div class="mt-3 pt-3" style="border-top:1px solid rgba(255,255,255,0.06)">
+                            <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.18em;color:rgba(0,200,255,0.35);text-transform:uppercase;">// formatted output</span>
+                            <div class="row mt-2 g-2" id="formattedRow">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-end">
+                            <button class="btn btn-sm btn-outline-secondary me-1" id="copyBtn">
+                                <i class="fas fa-copy me-1"></i>Copy Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lookup History -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-history me-2" style="color:#a855f7"></i>Recent Lookups
+                            </h5>
+                            <button class="btn btn-sm btn-outline-danger" id="clearHistoryBtn">Clear</button>
+                        </div>
+                        <div id="historyList">
+                            <p class="text-center mb-0" style="color:rgba(216,221,232,0.35);font-size:0.85rem;">No recent lookups</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-info-circle me-2" style="color:#00c8ff"></i>How It Works</h5>
+                        <p class="mb-3" style="font-size:0.88rem;color:rgba(216,221,232,0.7);">
+                            This tool uses Google's open-source <strong>libphonenumber</strong> library to analyze phone numbers entirely in your browser — nothing is sent to any server.
+                        </p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0" style="font-size:0.85rem;">
+                                    <li class="mb-2"><i class="fas fa-check me-2" style="color:#00ff78"></i>Enter with international prefix (e.g. <code>+44 7700 900123</code>)</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2" style="color:#00ff78"></i>Or select a default region and enter local format</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2" style="color:#00ff78"></i>Works with mobile, landline, VoIP, toll-free numbers</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-0" style="font-size:0.85rem;">
+                                    <li class="mb-2"><i class="fas fa-shield-alt me-2" style="color:#a855f7"></i>100% client-side — no data leaves your device</li>
+                                    <li class="mb-2"><i class="fas fa-shield-alt me-2" style="color:#a855f7"></i>No registration or API key required</li>
+                                    <li class="mb-2"><i class="fas fa-shield-alt me-2" style="color:#a855f7"></i>Cannot track live GPS location — only number metadata</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Advertisement</h5>
+                        <div class="ad-space">
+                            <!-- AdSense Ad Unit -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-6204232626800687"
+                                 data-ad-slot="9572280796"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /.container -->
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Google libphonenumber -->
+    <script src="https://cdn.jsdelivr.net/npm/google-libphonenumber@3.2.34/dist/libphonenumber.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/main.js"></script>
+
+    <script>
+    (function () {
+      'use strict';
+
+      /* ── Country metadata ────────────────────────── */
+      const COUNTRY_DATA = {
+        US: { name: 'United States',      flag: '🇺🇸', tz: 'EST/CST/MST/PST' },
+        GB: { name: 'United Kingdom',     flag: '🇬🇧', tz: 'GMT/BST' },
+        IN: { name: 'India',              flag: '🇮🇳', tz: 'IST (UTC+5:30)' },
+        AU: { name: 'Australia',          flag: '🇦🇺', tz: 'AEST/ACST/AWST' },
+        CA: { name: 'Canada',             flag: '🇨🇦', tz: 'EST/CST/MST/PST' },
+        DE: { name: 'Germany',            flag: '🇩🇪', tz: 'CET (UTC+1)' },
+        FR: { name: 'France',             flag: '🇫🇷', tz: 'CET (UTC+1)' },
+        BR: { name: 'Brazil',             flag: '🇧🇷', tz: 'BRT (UTC-3)' },
+        JP: { name: 'Japan',              flag: '🇯🇵', tz: 'JST (UTC+9)' },
+        CN: { name: 'China',              flag: '🇨🇳', tz: 'CST (UTC+8)' },
+        RU: { name: 'Russia',             flag: '🇷🇺', tz: 'MSK/+ multiple' },
+        MX: { name: 'Mexico',             flag: '🇲🇽', tz: 'CST (UTC-6)' },
+        NG: { name: 'Nigeria',            flag: '🇳🇬', tz: 'WAT (UTC+1)' },
+        ZA: { name: 'South Africa',       flag: '🇿🇦', tz: 'SAST (UTC+2)' },
+        AE: { name: 'UAE',                flag: '🇦🇪', tz: 'GST (UTC+4)' },
+        SG: { name: 'Singapore',          flag: '🇸🇬', tz: 'SGT (UTC+8)' },
+        PK: { name: 'Pakistan',           flag: '🇵🇰', tz: 'PKT (UTC+5)' },
+        BD: { name: 'Bangladesh',         flag: '🇧🇩', tz: 'BST (UTC+6)' },
+        ID: { name: 'Indonesia',          flag: '🇮🇩', tz: 'WIB/WITA/WIT' },
+        PH: { name: 'Philippines',        flag: '🇵🇭', tz: 'PST (UTC+8)' },
+        KR: { name: 'South Korea',        flag: '🇰🇷', tz: 'KST (UTC+9)' },
+        IT: { name: 'Italy',              flag: '🇮🇹', tz: 'CET (UTC+1)' },
+        ES: { name: 'Spain',              flag: '🇪🇸', tz: 'CET (UTC+1)' },
+        NL: { name: 'Netherlands',        flag: '🇳🇱', tz: 'CET (UTC+1)' },
+        SE: { name: 'Sweden',             flag: '🇸🇪', tz: 'CET (UTC+1)' },
+        NO: { name: 'Norway',             flag: '🇳🇴', tz: 'CET (UTC+1)' },
+        CH: { name: 'Switzerland',        flag: '🇨🇭', tz: 'CET (UTC+1)' },
+        AT: { name: 'Austria',            flag: '🇦🇹', tz: 'CET (UTC+1)' },
+        PL: { name: 'Poland',             flag: '🇵🇱', tz: 'CET (UTC+1)' },
+        TR: { name: 'Turkey',             flag: '🇹🇷', tz: 'TRT (UTC+3)' },
+        SA: { name: 'Saudi Arabia',       flag: '🇸🇦', tz: 'AST (UTC+3)' },
+        EG: { name: 'Egypt',              flag: '🇪🇬', tz: 'EET (UTC+2)' },
+        KE: { name: 'Kenya',              flag: '🇰🇪', tz: 'EAT (UTC+3)' },
+        GH: { name: 'Ghana',              flag: '🇬🇭', tz: 'GMT (UTC+0)' },
+        TH: { name: 'Thailand',           flag: '🇹🇭', tz: 'ICT (UTC+7)' },
+        MY: { name: 'Malaysia',           flag: '🇲🇾', tz: 'MYT (UTC+8)' },
+        NZ: { name: 'New Zealand',        flag: '🇳🇿', tz: 'NZST (UTC+12)' },
+        AR: { name: 'Argentina',          flag: '🇦🇷', tz: 'ART (UTC-3)' },
+        CO: { name: 'Colombia',           flag: '🇨🇴', tz: 'COT (UTC-5)' },
+        CL: { name: 'Chile',              flag: '🇨🇱', tz: 'CLT (UTC-4)' },
+        PT: { name: 'Portugal',           flag: '🇵🇹', tz: 'WET (UTC+0)' },
+        GR: { name: 'Greece',             flag: '🇬🇷', tz: 'EET (UTC+2)' },
+        BE: { name: 'Belgium',            flag: '🇧🇪', tz: 'CET (UTC+1)' },
+        IE: { name: 'Ireland',            flag: '🇮🇪', tz: 'GMT/IST' },
+        DK: { name: 'Denmark',            flag: '🇩🇰', tz: 'CET (UTC+1)' },
+        FI: { name: 'Finland',            flag: '🇫🇮', tz: 'EET (UTC+2)' },
+        IL: { name: 'Israel',             flag: '🇮🇱', tz: 'IST (UTC+2)' },
+        IR: { name: 'Iran',               flag: '🇮🇷', tz: 'IRST (UTC+3:30)' },
+        IQ: { name: 'Iraq',               flag: '🇮🇶', tz: 'AST (UTC+3)' },
+        UA: { name: 'Ukraine',            flag: '🇺🇦', tz: 'EET (UTC+2)' },
+        RO: { name: 'Romania',            flag: '🇷🇴', tz: 'EET (UTC+2)' },
+        VN: { name: 'Vietnam',            flag: '🇻🇳', tz: 'ICT (UTC+7)' },
+      };
+
+      /* ── Number type labels ──────────────────────── */
+      const TYPE_LABELS = {
+        0:  'Fixed Line',
+        1:  'Mobile',
+        2:  'Fixed / Mobile',
+        3:  'Toll-Free',
+        4:  'Premium Rate',
+        5:  'Shared Cost',
+        6:  'VoIP',
+        7:  'Personal Number',
+        8:  'Pager',
+        9:  'UAN',
+        10: 'Voicemail',
+        99: 'Unknown',
+      };
+
+      /* ── State ───────────────────────────────────── */
+      let lastResult = null;
+      let history = JSON.parse(localStorage.getItem('pntHistory') || '[]');
+
+      /* ── DOM refs ────────────────────────────────── */
+      const phoneInput     = document.getElementById('phoneInput');
+      const regionSel      = document.getElementById('defaultRegion');
+      const traceBtn       = document.getElementById('traceBtn');
+      const clearBtn       = document.getElementById('clearBtn');
+      const resultPanel    = document.getElementById('resultPanel');
+      const scanWrap       = document.getElementById('scanWrap');
+      const statusBadge    = document.getElementById('statusBadge');
+      const resultGrid     = document.getElementById('resultGrid');
+      const formattedRow   = document.getElementById('formattedRow');
+      const copyBtn        = document.getElementById('copyBtn');
+      const historyList    = document.getElementById('historyList');
+      const clearHistoryBtn= document.getElementById('clearHistoryBtn');
+
+      /* ── Init ────────────────────────────────────── */
+      renderHistory();
+
+      phoneInput.addEventListener('keydown', e => { if (e.key === 'Enter') runTrace(); });
+      traceBtn.addEventListener('click', runTrace);
+      clearBtn.addEventListener('click', clearAll);
+      copyBtn.addEventListener('click', copyReport);
+      clearHistoryBtn.addEventListener('click', clearHistory);
+
+      /* ── Core trace function ─────────────────────── */
+      function runTrace() {
+        const raw = phoneInput.value.trim();
+        if (!raw) { phoneInput.focus(); return; }
+
+        // Show scan animation
+        scanWrap.classList.add('pnt-scanning');
+        traceBtn.disabled = true;
+        traceBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Tracing...';
+        resultPanel.classList.remove('d-none');
+
+        setTimeout(() => {
+          try {
+            const PNF   = window.libphonenumber.PhoneNumberFormat;
+            const PNT   = window.libphonenumber.PhoneNumberType;
+            const util  = window.libphonenumber.PhoneNumberUtil.getInstance();
+
+            const region = regionSel.value || undefined;
+            const parsed = util.parseAndKeepRawInput(raw, region);
+            const valid  = util.isValidNumber(parsed);
+            const possible = util.isPossibleNumber(parsed);
+            const regionCode = util.getRegionCodeForNumber(parsed);
+            const countryCode = parsed.getCountryCode();
+            const numType = util.getNumberType(parsed);
+            const typeName = TYPE_LABELS[numType] ?? TYPE_LABELS[99];
+
+            const intlFmt  = util.format(parsed, PNF.INTERNATIONAL);
+            const natFmt   = util.format(parsed, PNF.NATIONAL);
+            const e164Fmt  = util.format(parsed, PNF.E164);
+            const rfc3966  = util.format(parsed, PNF.RFC3966);
+
+            const country = COUNTRY_DATA[regionCode] || {
+              name: regionCode || 'Unknown',
+              flag: '🌐',
+              tz:   'Unknown'
+            };
+
+            const result = {
+              valid, possible, regionCode, countryCode,
+              numType, typeName, intlFmt, natFmt, e164Fmt, rfc3966,
+              country, raw
+            };
+
+            lastResult = result;
+            renderResult(result);
+            addToHistory(result);
+
+          } catch (err) {
+            renderInvalidResult(raw);
+          } finally {
+            scanWrap.classList.remove('pnt-scanning');
+            traceBtn.disabled = false;
+            traceBtn.innerHTML = '<i class="fas fa-crosshairs me-2"></i>Initiate Trace';
+          }
+        }, 1600);
+      }
+
+      /* ── Render valid result ─────────────────────── */
+      function renderResult(r) {
+        // Status badge
+        if (r.valid) {
+          statusBadge.innerHTML = `<span class="pnt-status pnt-valid"><span class="pnt-status-dot"></span>VALID NUMBER</span>`;
+        } else if (r.possible) {
+          statusBadge.innerHTML = `<span class="pnt-status" style="background:rgba(255,200,0,0.08);border:1px solid rgba(255,200,0,0.3);color:#ffc800"><span class="pnt-status-dot" style="background:#ffc800;box-shadow:0 0 8px #ffc800"></span>POSSIBLE (FORMAT OK)</span>`;
+        } else {
+          statusBadge.innerHTML = `<span class="pnt-status pnt-invalid"><span class="pnt-status-dot"></span>INVALID NUMBER</span>`;
+        }
+
+        // Stat cards
+        resultGrid.innerHTML = `
+          ${stat('Country', `<span class="pnt-stat-flag">${r.country.flag}</span>${r.country.name}`)}
+          ${stat('Country Code', `+${r.countryCode}`)}
+          ${stat('Region Code', r.regionCode || '—')}
+          ${stat('Number Type', `<span class="pnt-type-badge">${r.typeName}</span>`)}
+          ${stat('Timezone', r.country.tz)}
+          ${stat('E.164 Format', r.e164Fmt)}
+        `;
+
+        // Formatted output
+        formattedRow.innerHTML = `
+          ${fmtCard('International', r.intlFmt)}
+          ${fmtCard('National', r.natFmt)}
+          ${fmtCard('RFC 3966 (URI)', r.rfc3966)}
+        `;
+      }
+
+      /* ── Render invalid result ───────────────────── */
+      function renderInvalidResult(raw) {
+        lastResult = null;
+        statusBadge.innerHTML = `<span class="pnt-status pnt-invalid"><span class="pnt-status-dot"></span>CANNOT PARSE</span>`;
+        resultGrid.innerHTML = `
+          <div class="col-12" style="font-family:'Space Grotesk',sans-serif;font-size:0.88rem;color:rgba(216,221,232,0.55);padding:0.5rem 0">
+            The number <code>${escHtml(raw)}</code> could not be parsed. Make sure it includes the country code (e.g. <code>+44 7700 900123</code>) or select a default region above.
+          </div>
+        `;
+        formattedRow.innerHTML = '';
+      }
+
+      /* ── Helpers ─────────────────────────────────── */
+      function stat(label, value) {
+        return `<div class="pnt-stat">
+          <span class="pnt-stat-label">${label}</span>
+          <span class="pnt-stat-value">${value}</span>
+        </div>`;
+      }
+
+      function fmtCard(label, value) {
+        return `<div class="col-md-4">
+          <div class="pnt-stat">
+            <span class="pnt-stat-label">${label}</span>
+            <span class="pnt-stat-value" style="font-family:'JetBrains Mono',monospace;font-size:0.88rem">${escHtml(value)}</span>
+          </div>
+        </div>`;
+      }
+
+      function escHtml(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      /* ── Copy report ─────────────────────────────── */
+      function copyReport() {
+        if (!lastResult) return;
+        const r = lastResult;
+        const text = [
+          `Phone Number Trace Report`,
+          `═══════════════════════`,
+          `Input:         ${r.raw}`,
+          `E.164:         ${r.e164Fmt}`,
+          `International: ${r.intlFmt}`,
+          `National:      ${r.natFmt}`,
+          `Country:       ${r.country.name} (${r.regionCode})`,
+          `Dial Code:     +${r.countryCode}`,
+          `Type:          ${r.typeName}`,
+          `Timezone:      ${r.country.tz}`,
+          `Valid:         ${r.valid ? 'Yes' : 'No'}`,
+        ].join('\n');
+
+        navigator.clipboard.writeText(text).then(() => {
+          const orig = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+          setTimeout(() => { copyBtn.innerHTML = orig; }, 2000);
+        });
+      }
+
+      /* ── Clear ───────────────────────────────────── */
+      function clearAll() {
+        phoneInput.value = '';
+        regionSel.value = '';
+        resultPanel.classList.add('d-none');
+        lastResult = null;
+      }
+
+      /* ── History ─────────────────────────────────── */
+      function addToHistory(r) {
+        history = history.filter(h => h.e164 !== r.e164Fmt);
+        history.unshift({
+          e164:    r.e164Fmt,
+          intl:    r.intlFmt,
+          country: r.country.name,
+          flag:    r.country.flag,
+          type:    r.typeName,
+          valid:   r.valid,
+          ts:      new Date().toISOString(),
+        });
+        if (history.length > 12) history.pop();
+        localStorage.setItem('pntHistory', JSON.stringify(history));
+        renderHistory();
+      }
+
+      function renderHistory() {
+        if (!history.length) {
+          historyList.innerHTML = '<p class="text-center mb-0" style="color:rgba(216,221,232,0.35);font-size:0.85rem;">No recent lookups</p>';
+          return;
+        }
+        historyList.innerHTML = history.map(h => `
+          <div class="pnt-history-item" onclick="reLookup('${escHtml(h.e164)}')">
+            <div>
+              <span class="pnt-stat-flag">${h.flag}</span>
+              <span class="pnt-history-num">${escHtml(h.intl)}</span>
+              <br>
+              <span class="pnt-history-meta">${h.country} &bull; ${h.type} &bull; ${new Date(h.ts).toLocaleTimeString()}</span>
+            </div>
+            <span class="pnt-type-badge">${h.valid ? '✓ Valid' : '⚠ Check'}</span>
+          </div>
+        `).join('');
+      }
+
+      window.reLookup = function(num) {
+        phoneInput.value = num;
+        regionSel.value = '';
+        runTrace();
+      };
+
+      function clearHistory() {
+        history = [];
+        localStorage.removeItem('pntHistory');
+        renderHistory();
+      }
+
+    })();
+    </script>
+</body>
+</html>
