@@ -1,174 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-HNYPXS04ZV');
-	</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Multi-Tools Hub</title>
-    <meta name="description" content="Get in touch with Multi-Tools Hub. We're here to help with any questions, feedback, or support you need.">
-    <meta name="keywords" content="contact, support, feedback, help, online tools, Multi-Tools Hub">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - Multi-Tools Hub</title>
+<meta name="description" content="Get in touch with Multi-Tools Hub. We're here to help with any questions, feedback, or support you need.">
+<meta name="keywords" content="contact, support, feedback, help, online tools, Multi-Tools Hub">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="/assets/css/category-page.css" rel="stylesheet">
+<style>
+.contact-content { max-width: 1280px; margin: 0 auto; padding: 4rem 2rem 6rem; position: relative; z-index: 1; }
+.contact-block { margin-bottom: 3.5rem; }
+.contact-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-top: 1.25rem; }
+
+/* Info cards */
+.info-card {
+  background: rgba(8,14,28,0.82);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 1.4rem;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  margin-bottom: 10px;
+  opacity: 0; transform: translateX(-20px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
+}
+.info-card.revealed { opacity: 1; transform: translateX(0); }
+.info-card:hover { border-color: var(--t-clr, #ec4899); }
+.info-icon { font-size: 1.1rem; color: var(--t-clr, #ec4899); margin-bottom: 0.5rem; text-shadow: 0 0 14px var(--t-clr, #ec4899); }
+.info-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--t-clr, #ec4899); letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75; margin-bottom: 3px; }
+.info-value { font-size: 0.85rem; color: rgba(216,221,232,0.7); }
+
+.social-row { display: flex; gap: 12px; margin-top: 0.5rem; }
+.social-btn {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(8,14,28,0.6);
+  color: rgba(216,221,232,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+  text-decoration: none;
+}
+.social-btn:hover { color: var(--t-clr, #ec4899); border-color: var(--t-clr, #ec4899); background: rgba(8,14,28,0.9); }
+
+/* Form */
+.contact-form-wrap {
+  background: rgba(8,14,28,0.82);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 2rem;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s;
+}
+.contact-form-wrap.revealed { opacity: 1; transform: translateY(0); }
+.form-group { margin-bottom: 1.1rem; }
+.form-label-cyber {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--t-clr, #ec4899);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 5px;
+}
+.cyber-input {
+  width: 100%;
+  background: rgba(2,4,10,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #d8dde8;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  padding: 0.65rem 0.9rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.cyber-input:focus { border-color: var(--t-clr, #ec4899); box-shadow: 0 0 0 2px rgba(236,72,153,0.12); }
+.cyber-input::placeholder { color: rgba(216,221,232,0.25); }
+textarea.cyber-input { resize: vertical; min-height: 120px; }
+.submit-btn {
+  background: transparent;
+  border: 1px solid var(--t-clr, #ec4899);
+  color: var(--t-clr, #ec4899);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+.submit-btn:hover { background: var(--t-clr, #ec4899); color: #02040a; box-shadow: 0 0 24px rgba(236,72,153,0.35); }
+#formStatus { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; margin-top: 0.75rem; min-height: 1.2em; }
+
+/* FAQ */
+.faq-item {
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.faq-item.revealed { opacity: 1; transform: translateY(0); }
+.faq-question {
+  width: 100%;
+  background: rgba(8,14,28,0.75);
+  border: none;
+  color: #e8eaf0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.faq-question:hover { background: rgba(8,14,28,0.97); color: var(--t-clr, #ec4899); }
+.faq-question.open { color: var(--t-clr, #ec4899); }
+.faq-arrow { font-size: 0.7rem; transition: transform 0.3s ease; font-family: 'JetBrains Mono', monospace; }
+.faq-question.open .faq-arrow { transform: rotate(180deg); }
+.faq-answer {
+  background: rgba(2,4,10,0.5);
+  font-size: 0.83rem;
+  color: rgba(216,221,232,0.55);
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), padding 0.3s ease;
+  padding: 0 1.25rem;
+}
+.faq-answer.open { max-height: 200px; padding: 1rem 1.25rem; }
+
+@media (max-width: 768px) {
+  .contact-content { padding: 2.5rem 1.5rem 4rem; }
+  .contact-layout { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
-    <!-- Header will be loaded dynamically -->
-    <div id="header-container"></div>
+<div id="header-container"></div>
+<div class="cat-bg"><div class="cat-bg-grid"></div><div class="cat-bg-vignette"></div></div>
+<main>
+<section class="cat-hero" style="--t-clr:#ec4899">
+  <canvas id="heroCanvas"></canvas>
+  <div class="cat-hero-glow"></div>
+  <div class="cat-hero-inner">
+    <div class="cat-badge"><span class="cat-badge-text" data-text="CONTACT_US"></span></div>
+    <h1 class="cat-title"><span class="emoji">📡</span> Get In Touch</h1>
+    <p class="cat-lead">Have a question, found a bug, or want to suggest a new tool? We'd love to hear from you.</p>
+  </div>
+</section>
 
-    <div class="container mt-4">
-        <!-- Contact Hero Section -->
-        <div class="hero-section text-center mb-5">
-            <h1 class="display-4 fw-bold">Contact Us</h1>
-            <p class="lead">We'd love to hear from you</p>
-        </div>
+<div class="contact-content" style="--t-clr:#ec4899">
 
-        <!-- Contact Content Section -->
-        <div class="contact-section mb-5">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row g-4">
-                                <!-- Contact Information -->
-                                <div class="col-md-4">
-                                    <h3 class="mb-4">Contact Info</h3>
-                                    <div class="contact-info">
-                                        <div class="mb-4">
-                                            <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
-                                            <h5>Email</h5>
-                                            <p>itknowledge4u@gmail.com</p>
-                                        </div>
-                                        <div class="mb-4">
-                                            <i class="fas fa-clock fa-2x text-primary mb-3"></i>
-                                            <h5>Response Time</h5>
-                                            <p>Within 24 hours</p>
-                                        </div>
-                                        <div class="mb-4">
-                                            <i class="fas fa-globe fa-2x text-primary mb-3"></i>
-                                            <h5>Follow Us</h5>
-                                            <div class="social-links mt-3">
-                                                <a href="#" class="text-primary me-3"><i class="fab fa-facebook fa-2x"></i></a>
-                                                <a href="#" class="text-primary me-3"><i class="fab fa-twitter fa-2x"></i></a>
-                                                <a href="#" class="text-primary me-3"><i class="fab fa-linkedin fa-2x"></i></a>
-                                                <a href="#" class="text-primary"><i class="fab fa-github fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Contact Form -->
-                                <div class="col-md-8">
-                                    <h3 class="mb-4">Send us a Message</h3>
-                                    <form id="contactForm">
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="name" name="from_name" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="reply_to" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="subject" class="form-label">Subject</label>
-                                            <input type="text" class="form-control" id="subject" name="subject" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="message" class="form-label">Message</label>
-                                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Send Message</button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <!-- FAQ Section -->
-                            <div class="mt-5">
-                                <h3 class="mb-4">Frequently Asked Questions</h3>
-                                <div class="accordion" id="faqAccordion">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                                How can I report a bug or issue?
-                                            </button>
-                                        </h2>
-                                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                You can report any bugs or issues by filling out the contact form above. Please provide as much detail as possible about the problem you're experiencing.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                                Can I suggest new tools?
-                                            </button>
-                                        </h2>
-                                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                Yes! We welcome suggestions for new tools. Use the contact form to send us your ideas, and we'll consider them for future updates.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                                How can I support Multi-Tools Hub?
-                                            </button>
-                                        </h2>
-                                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                            <div class="accordion-body">
-                                                You can support us by sharing our tools with others, providing feedback, and following us on social media. Your support helps us continue to provide free tools to everyone.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Contact Form + Info -->
+  <div class="contact-block">
+    <div class="section-head">
+      <span class="section-label">// REACH_OUT</span>
+      <h2 class="section-title">Send Us a Message</h2>
     </div>
-
-    <!-- Ad Section -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Advertisement</h5>
-                    <div class="ad-space">
-                        <!-- Ad content will be loaded here -->
-                    </div>
-                </div>
-            </div>
+    <div class="contact-layout">
+      <!-- Info column -->
+      <div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div class="info-label">Email</div>
+          <div class="info-value">itknowledge4u@gmail.com</div>
         </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-clock"></i></div>
+          <div class="info-label">Response Time</div>
+          <div class="info-value">Within 24 hours</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-globe"></i></div>
+          <div class="info-label">Follow Us</div>
+          <div class="social-row">
+            <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Form column -->
+      <div class="contact-form-wrap">
+        <form id="contactForm">
+          <div class="form-group">
+            <label class="form-label-cyber" for="name">Name</label>
+            <input type="text" class="cyber-input" id="name" name="from_name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label-cyber" for="email">Email</label>
+            <input type="email" class="cyber-input" id="email" name="reply_to" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label-cyber" for="subject">Subject</label>
+            <input type="text" class="cyber-input" id="subject" name="subject" placeholder="What is this about?" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label-cyber" for="message">Message</label>
+            <textarea class="cyber-input" id="message" name="message" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message →</button>
+          <div id="formStatus"></div>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <!-- Footer will be loaded dynamically -->
-    <div id="footer-container"></div>
+  <div class="cat-divider"></div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("D2IyS8OzC4s_YhVzw");
-        })();
-    </script>
-    <!-- Custom JS -->
-    <script src="../assets/js/main.js"></script>
+  <!-- FAQ -->
+  <div class="contact-block">
+    <div class="section-head">
+      <span class="section-label">// FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+    <div id="faqList">
+      <div class="faq-item">
+        <button class="faq-question" data-target="faq1">
+          How can I report a bug or issue?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" id="faq1">
+          Fill out the contact form above and describe the problem in detail — which tool, what happened, and which browser you're using. We'll look into it and respond within 24 hours.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-target="faq2">
+          Can I suggest new tools?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" id="faq2">
+          Yes! We welcome tool suggestions. Use the contact form and describe what the tool should do — we consider all ideas for future updates.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-target="faq3">
+          How can I support Multi-Tools Hub?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" id="faq3">
+          Share our tools with others, provide feedback, and follow us on social media. Your support helps us keep the platform free and growing.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" data-target="faq4">
+          Is my data safe when using these tools?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer" id="faq4">
+          Yes. All tools run entirely in your browser. No data is sent to our servers — everything stays on your device.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">(function(){ emailjs.init("D2IyS8OzC4s_YhVzw"); })();</script>
+<script src="/assets/js/category-page.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* Scroll-reveal for contact-page elements */
+  const revealGroups = [
+    { sel: '.info-card',          threshold: 0.15 },
+    { sel: '.contact-form-wrap',  threshold: 0.1  },
+    { sel: '.faq-item',           threshold: 0.15 },
+  ];
+  revealGroups.forEach(({ sel, threshold }) => {
+    const els = [...document.querySelectorAll(sel)];
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = els.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${Math.min(idx * 0.08, 0.3)}s`;
+          entry.target.classList.add('revealed');
+          o.unobserve(entry.target);
+        }
+      });
+    }, { threshold, rootMargin: '0px 0px -20px 0px' });
+    els.forEach(el => obs.observe(el));
+  });
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const answer = document.getElementById(targetId);
+      const isOpen = answer.classList.contains('open');
+      /* close all */
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-question').forEach(b => b.classList.remove('open'));
+      /* open clicked if it was closed */
+      if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+    });
+  });
+
+  /* Contact form via EmailJS */
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const status = document.getElementById('formStatus');
+    status.style.color = 'rgba(216,221,232,0.5)';
+    status.textContent = '// Sending...';
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+      .then(() => {
+        status.style.color = '#00c8ff';
+        status.textContent = '// Message sent successfully.';
+        this.reset();
+      }, () => {
+        status.style.color = '#ff2d78';
+        status.textContent = '// Failed to send. Please email us directly.';
+      });
+  });
+});
+</script>
+<script src="/assets/js/main.js"></script>
 </body>
-</html> 
+</html>
