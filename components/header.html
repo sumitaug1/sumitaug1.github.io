@@ -8,6 +8,7 @@
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(0,200,255,0.1);
   transition: background 0.3s, box-shadow 0.3s;
+  overflow: hidden;
 }
 #site-header.scrolled {
   background: rgba(6,8,14,0.97);
@@ -21,8 +22,85 @@
   background: linear-gradient(90deg, transparent 0%, #00c8ff 35%, #a855f7 65%, transparent 100%);
   opacity: 0.5;
   pointer-events: none;
+  z-index: 3;
 }
 
+/* ── Cursor spotlight ──────────────────── */
+.nav-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle 200px at var(--sx, -300px) var(--sy, -300px), rgba(0,200,255,0.09), transparent 70%);
+}
+
+/* ── Scan sweep ────────────────────────── */
+.nav-scan-sweep {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: -4px;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.7) 50%, transparent 100%);
+  box-shadow: 0 0 10px #00c8ff, 0 0 24px rgba(0,200,255,0.25);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+.nav-scan-sweep.sweeping {
+  animation: navSweep 1s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes navSweep {
+  0%   { left: -4px;  opacity: 0.9; }
+  85%  { opacity: 0.7; }
+  100% { left: 100%;  opacity: 0; }
+}
+
+/* ── HUD strip ─────────────────────────── */
+.nav-hud {
+  position: relative;
+  z-index: 2;
+  background: rgba(0,0,0,0.28);
+  border-bottom: 1px solid rgba(0,200,255,0.06);
+  height: 22px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+.hud-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hud-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: rgba(0,200,255,0.38);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.hud-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #00c8ff;
+  box-shadow: 0 0 6px #00c8ff;
+  animation: hudPulse 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes hudPulse {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 6px #00c8ff; }
+  50%       { opacity: 0.2; box-shadow: none; }
+}
+.hud-center { letter-spacing: 0.14em; }
+.hud-right  { opacity: 0.6; }
+
+/* ── Main nav bar ──────────────────────── */
 .nav-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -30,14 +108,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 62px;
+  height: 58px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Brand ─────────────────────────────── */
 .nav-brand {
   font-family: 'Orbitron', monospace;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   letter-spacing: 0.08em;
   color: #e8eaf0;
   text-decoration: none;
@@ -49,8 +129,7 @@
   flex-shrink: 0;
   white-space: nowrap;
 }
-.nav-brand:hover { text-shadow: 0 0 30px rgba(0,200,255,0.6); color: #e8eaf0; text-decoration: none; }
-
+.nav-brand:hover { text-shadow: 0 0 32px rgba(0,200,255,0.65); color: #e8eaf0; text-decoration: none; }
 .nav-brand-icon {
   width: 34px; height: 34px;
   border: 1px solid rgba(0,200,255,0.38);
@@ -63,11 +142,12 @@
   font-family: 'JetBrains Mono', monospace;
   flex-shrink: 0;
   letter-spacing: 0;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 .nav-brand:hover .nav-brand-icon {
-  background: rgba(0,200,255,0.12);
-  border-color: rgba(0,200,255,0.6);
+  background: rgba(0,200,255,0.13);
+  border-color: rgba(0,200,255,0.65);
+  box-shadow: inset 0 0 12px rgba(0,200,255,0.1);
 }
 
 /* ── Desktop nav links ─────────────────── */
@@ -92,9 +172,10 @@
   align-items: center;
   gap: 5px;
   border-radius: 2px;
-  transition: color 0.2s, background 0.2s;
+  transition: color 0.2s, background 0.2s, transform 0.35s cubic-bezier(0.16,1,0.3,1);
   position: relative;
   white-space: nowrap;
+  will-change: transform;
 }
 .nav-link-item::after {
   content: '';
@@ -141,7 +222,6 @@
   pointer-events: all;
   transform: translateX(-50%) translateY(0);
 }
-
 .dd-item {
   display: flex;
   align-items: center;
@@ -196,9 +276,11 @@
   max-height: 0;
   transition: max-height 0.38s cubic-bezier(0.16,1,0.3,1);
   border-top: 1px solid transparent;
+  position: relative;
+  z-index: 2;
 }
 .nav-mobile.mob-open {
-  max-height: 620px;
+  max-height: 640px;
   border-top-color: rgba(0,200,255,0.07);
 }
 .nav-mobile-inner {
@@ -230,7 +312,6 @@
 }
 .mob-link:hover { color: #e8eaf0; padding-left: 0.75rem; text-decoration: none; }
 .mob-link:hover::before { opacity: 1; }
-
 .mob-section-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.5rem;
@@ -245,18 +326,38 @@
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .nav-brand { font-size: 0.84rem; }
+  .hud-center { display: none; }
 }
 @media (max-width: 380px) {
   .nav-brand-icon { display: none; }
   .nav-inner { padding: 0 1rem; }
+  .nav-hud { padding: 0 1rem; }
 }
 </style>
 
 <header id="site-header">
+  <!-- Cursor spotlight overlay -->
+  <div class="nav-spotlight" id="nav-spotlight"></div>
+  <!-- Scan sweep line -->
+  <div class="nav-scan-sweep" id="nav-scan"></div>
+
+  <!-- HUD status strip -->
+  <div class="nav-hud">
+    <div class="hud-inner">
+      <div class="hud-item">
+        <span class="hud-dot"></span>
+        <span>SYS_ONLINE</span>
+      </div>
+      <div class="hud-item hud-center" id="hud-time">--:--:--</div>
+      <div class="hud-item hud-right">100+ TOOLS LOADED</div>
+    </div>
+  </div>
+
+  <!-- Main nav -->
   <div class="nav-inner">
     <a class="nav-brand" href="/">
       <div class="nav-brand-icon">&lt;/&gt;</div>
-      Multi-Tools Hub
+      <span id="nav-brand-text">Multi-Tools Hub</span>
     </a>
 
     <ul class="nav-links">
@@ -296,6 +397,7 @@
     </button>
   </div>
 
+  <!-- Mobile menu -->
   <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
     <div class="nav-mobile-inner">
       <a class="mob-link" href="/">Home</a>
