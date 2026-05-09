@@ -1,224 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEO Tools - Multi-Tools Hub</title>
-    <meta name="description" content="Collection of free online SEO tools including keyword analyzers, backlink checkers, meta tag generators, and more.">
-    <meta name="keywords" content="seo tools, keyword analyzer, backlink checker, meta tag generator, free online tools">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="/assets/css/style.css" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Tools - Multi-Tools Hub</title>
+<meta name="description" content="Free online SEO tools: keyword analyzer, meta tag generator, sitemap builder, backlink checker and more. No sign-up required.">
+<meta name="keywords" content="seo tools, keyword analyzer, backlink checker, meta tag generator, free online tools">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">
+<style>
+body{background:#02040a!important;background-image:none!important;color:#d8dde8!important;font-family:'Space Grotesk',sans-serif!important;}
+main{background:transparent!important;max-width:none!important;padding:0!important;margin:0!important;width:100%!important;}
+.card,.tool-card,.tool-list-item{background:none!important;border:none!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0!important;}
+.cat-hero{position:relative;background:#060912;padding:4rem 2rem 3rem;border-bottom:1px solid rgba(255,255,255,0.06);overflow:hidden;}
+.cat-hero::before{content:'';position:absolute;top:-80px;left:-80px;width:500px;height:350px;background:var(--t-clr);opacity:.07;filter:blur(90px);pointer-events:none;}
+.cat-hero-inner{max-width:1280px;margin:0 auto;position:relative;z-index:1;}
+.cat-badge{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t-clr);letter-spacing:.2em;text-transform:uppercase;text-shadow:0 0 18px var(--t-clr);margin-bottom:.9rem;display:flex;align-items:center;gap:8px;}
+.cat-badge::before{content:'//';color:#ff2d78;}
+.cat-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(1.7rem,4vw,2.8rem);color:#e8eaf0;margin-bottom:.6rem;line-height:1.2;}
+.cat-lead{font-size:.95rem;color:rgba(216,221,232,.55);max-width:580px;line-height:1.65;}
+.cat-content{max-width:1280px;margin:0 auto;padding:3rem 2rem 5rem;}
+.tools-section{margin-bottom:3rem;}
+.section-head{margin-bottom:1.25rem;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--t-clr,#00c8ff);letter-spacing:.2em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:3px;}
+.section-title{font-family:'Orbitron',monospace;font-weight:600;font-size:1rem;color:#e8eaf0;letter-spacing:.05em;}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
+.t-tile{position:relative;background:rgba(8,14,28,.85);border:1px solid rgba(255,255,255,.06);padding:1.4rem;text-decoration:none;color:#d8dde8;display:flex;flex-direction:column;gap:.5rem;overflow:hidden;transition:border-color .3s,background .3s,transform .25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
+.t-tile::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,var(--t-clr),transparent 65%);opacity:0;transition:opacity .4s;}
+.t-tile::after{content:'';position:absolute;top:0;right:0;width:12px;height:12px;border-top:1px solid var(--t-clr);border-right:1px solid var(--t-clr);opacity:.5;transition:opacity .3s;}
+.t-tile:hover{border-color:var(--t-clr);background:rgba(8,14,28,.95);transform:translateY(-2px);color:#e8eaf0;}
+.t-tile:hover::before{opacity:.06;}
+.t-tile:hover::after{opacity:1;}
+.t-ident{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--t-clr);letter-spacing:.14em;opacity:.7;text-shadow:0 0 8px var(--t-clr);}
+.t-name{font-family:'Orbitron',monospace;font-weight:600;font-size:.78rem;letter-spacing:.04em;color:#e8eaf0;position:relative;z-index:1;line-height:1.3;}
+.t-desc{font-size:.8rem;color:rgba(216,221,232,.5);line-height:1.5;position:relative;z-index:1;flex:1;}
+.t-footer{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;margin-top:.2rem;}
+.t-stars{color:var(--t-clr);font-size:.72rem;opacity:.85;}
+.t-cta{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--t-clr);letter-spacing:.08em;opacity:.8;transition:opacity .2s;}
+.t-tile:hover .t-cta{opacity:1;}
+.cat-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);margin:0 0 3rem;}
+@media(max-width:768px){.cat-hero{padding:2.5rem 1.25rem 2rem;}.cat-content{padding:2rem 1.25rem 4rem;}.tools-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.tools-grid{grid-template-columns:1fr;}.cat-title{font-size:1.5rem;}}
+</style>
 </head>
 <body>
-    <!-- Header Container -->
-    <div id="header-container"></div>
-
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="mb-4">SEO Tools</h1>
-                <p class="lead mb-4">A comprehensive collection of SEO tools to help you optimize your website, analyze keywords, and improve your search engine rankings.</p>
-            </div>
-        </div>
-
-        <!-- Analysis Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Analysis Tools</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-search me-2"></i>
-                                    Keyword Density Checker
-                                </h5>
-                                <p class="card-text small text-muted">Analyze keyword density and distribution in your content.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="seo-tools/keyword-density.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-link me-2"></i>
-                                    Backlink Checker
-                                </h5>
-                                <p class="card-text small text-muted">Check and analyze backlinks pointing to your website.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="seo-tools/backlink-checker.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-tachometer-alt me-2"></i>
-                                    Page Speed Test
-                                </h5>
-                                <p class="card-text small text-muted">Test your website's loading speed and get optimization suggestions.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="seo-tools/page-speed.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-mobile-alt me-2"></i>
-                                    Mobile-Friendly Test
-                                </h5>
-                                <p class="card-text small text-muted">Check if your website is mobile-friendly and get improvement tips.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="seo-tools/mobile-friendly.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Generation Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Generation Tools</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-tags me-2"></i>
-                                    Meta Tag Generator
-                                </h5>
-                                <p class="card-text small text-muted">Generate optimized meta tags for your web pages.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="seo-tools/meta-tag-generator.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-sitemap me-2"></i>
-                                    Sitemap Generator
-                                </h5>
-                                <p class="card-text small text-muted">Generate XML sitemaps for your website automatically.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="seo-tools/sitemap-generator.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Validation Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Validation Tools</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-check-circle me-2"></i>
-                                    Sitemap Validator
-                                </h5>
-                                <p class="card-text small text-muted">Validate your XML sitemap for errors and warnings.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="seo-tools/sitemap-validator.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-robot me-2"></i>
-                                    Robots.txt Generator
-                                </h5>
-                                <p class="card-text small text-muted">Create and validate robots.txt files for your website.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="seo-tools/robots-txt.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Authority Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Authority Tools</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-chart-line me-2"></i>
-                                    Domain Authority Checker
-                                </h5>
-                                <p class="card-text small text-muted">Check domain authority and page authority metrics.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="seo-tools/domain-authority.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-search me-2"></i>
-                                    Google Index Checker
-                                </h5>
-                                <p class="card-text small text-muted">Check if your pages are indexed by Google.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="seo-tools/google-index.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer Container -->
-    <div id="footer-container"></div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="/assets/js/main.js"></script>
+<div id="header-container"></div>
+<main>
+<section class="cat-hero" style="--t-clr:#22c55e">
+  <div class="cat-hero-inner">
+    <div class="cat-badge">SEO_MODULE</div>
+    <h1 class="cat-title">🔍 SEO Tools</h1>
+    <p class="cat-lead">Analyze, generate, and validate SEO assets for better search rankings. 10 free tools — no sign-up.</p>
+  </div>
+</section>
+<div class="cat-content" style="--t-clr:#22c55e">
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// ANALYSIS</span>
+      <h2 class="section-title">Analysis Tools</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="seo-tools/keyword-density.html" class="t-tile">
+        <div class="t-ident">SEO_001</div>
+        <div class="t-name">Keyword Density Checker</div>
+        <p class="t-desc">Analyze keyword density and distribution in your content.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="seo-tools/backlink-checker.html" class="t-tile">
+        <div class="t-ident">SEO_002</div>
+        <div class="t-name">Backlink Checker</div>
+        <p class="t-desc">Check and analyze backlinks pointing to your website.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="seo-tools/page-speed.html" class="t-tile">
+        <div class="t-ident">SEO_003</div>
+        <div class="t-name">Page Speed Test</div>
+        <p class="t-desc">Test your website's loading speed and get optimization suggestions.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="seo-tools/mobile-friendly.html" class="t-tile">
+        <div class="t-ident">SEO_004</div>
+        <div class="t-name">Mobile-Friendly Test</div>
+        <p class="t-desc">Check if your website is mobile-friendly and get improvement tips.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+  <div class="cat-divider"></div>
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// GENERATION</span>
+      <h2 class="section-title">Generation Tools</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="seo-tools/meta-tag-generator.html" class="t-tile">
+        <div class="t-ident">SEO_005</div>
+        <div class="t-name">Meta Tag Generator</div>
+        <p class="t-desc">Generate optimized meta tags for your web pages.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="seo-tools/sitemap-generator.html" class="t-tile">
+        <div class="t-ident">SEO_006</div>
+        <div class="t-name">Sitemap Generator</div>
+        <p class="t-desc">Generate XML sitemaps for your website automatically.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+  <div class="cat-divider"></div>
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// VALIDATION</span>
+      <h2 class="section-title">Validation Tools</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="seo-tools/sitemap-validator.html" class="t-tile">
+        <div class="t-ident">SEO_007</div>
+        <div class="t-name">Sitemap Validator</div>
+        <p class="t-desc">Validate your XML sitemap for errors and warnings.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="seo-tools/robots-txt.html" class="t-tile">
+        <div class="t-ident">SEO_008</div>
+        <div class="t-name">Robots.txt Generator</div>
+        <p class="t-desc">Create and validate robots.txt files for your website.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+  <div class="cat-divider"></div>
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// AUTHORITY</span>
+      <h2 class="section-title">Authority Tools</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="seo-tools/domain-authority.html" class="t-tile">
+        <div class="t-ident">SEO_009</div>
+        <div class="t-name">Domain Authority Checker</div>
+        <p class="t-desc">Check domain authority and page authority metrics.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="seo-tools/google-index.html" class="t-tile">
+        <div class="t-ident">SEO_010</div>
+        <div class="t-name">Google Index Checker</div>
+        <p class="t-desc">Check if your pages are indexed by Google.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+</div>
+</main>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
-</html> 
+</html>
