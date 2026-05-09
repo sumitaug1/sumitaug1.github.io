@@ -184,7 +184,7 @@
       });
 
       card.addEventListener('mousemove', e => {
-        if (!active) return;
+        if (!active || card.classList.contains('nx-hovered')) return;
         const r = card.getBoundingClientRect();
         const dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
         const dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
@@ -278,7 +278,69 @@
   }
 
   /* ══════════════════════════════
-     8. PAGE ENTRANCE (overlay fade)
+     8. NETFLIX TILE HOVER
+     ══════════════════════════════ */
+  function initNetflixTiles() {
+    if (REDUCED || NO_HOVER) return;
+
+    // Inject expand panel into every tile that doesn't already have one
+    document.querySelectorAll('.t-tile').forEach(tile => {
+      if (!tile.querySelector('.t-expand')) {
+        const exp = document.createElement('div');
+        exp.className = 't-expand';
+        exp.innerHTML = '<div class="t-expand-cta">Launch Tool →</div>';
+        tile.appendChild(exp);
+      }
+    });
+
+    // Per-grid Netflix logic
+    document.querySelectorAll('.tools-grid').forEach(grid => {
+      let hoverTimer = null, leaveTimer = null, active = null;
+
+      function activate(tile) {
+        if (active === tile) return;
+        deactivate();
+        active = tile;
+        grid.classList.add('nx-active');
+        tile.classList.add('nx-hovered');
+        tile.style.transform = 'scale(1.18)';
+
+        tile._nxMove = e => {
+          const r = tile.getBoundingClientRect();
+          const dx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+          const dy = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+          tile.style.transform =
+            `scale(1.18) perspective(800px) rotateX(${(-dy * 8).toFixed(2)}deg) rotateY(${(dx * 8).toFixed(2)}deg)`;
+        };
+        tile.addEventListener('mousemove', tile._nxMove);
+      }
+
+      function deactivate() {
+        if (!active) return;
+        const t = active;
+        t.classList.remove('nx-hovered');
+        t.style.transform = '';
+        if (t._nxMove) { t.removeEventListener('mousemove', t._nxMove); delete t._nxMove; }
+        grid.classList.remove('nx-active');
+        active = null;
+      }
+
+      grid.querySelectorAll('.t-tile').forEach(tile => {
+        tile.addEventListener('mouseenter', () => {
+          clearTimeout(leaveTimer);
+          clearTimeout(hoverTimer);
+          hoverTimer = setTimeout(() => activate(tile), 520);
+        });
+        tile.addEventListener('mouseleave', () => {
+          clearTimeout(hoverTimer);
+          leaveTimer = setTimeout(deactivate, 240);
+        });
+      });
+    });
+  }
+
+  /* ══════════════════════════════
+     9. PAGE ENTRANCE (overlay fade)
      ══════════════════════════════ */
   function initPageEntrance() {
     if (REDUCED) return;
@@ -307,6 +369,7 @@
     initTypewriter();
     initScrollReveal();
     initTilt();
+    initNetflixTiles();
     initHeroGlow();
     initRipple();
 
