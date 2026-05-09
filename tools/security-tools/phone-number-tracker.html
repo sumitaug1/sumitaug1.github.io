@@ -26,6 +26,8 @@
     <link href="../../assets/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="../../assets/css/tool-page.css" rel="stylesheet">
+    <!-- Leaflet map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 
     <meta property="og:title" content="Phone Number Tracker - Lookup Carrier, Country & Type">
     <meta property="og:description" content="Look up phone number details: country, carrier, number type and formatted output. Free online phone number analyzer.">
@@ -191,6 +193,32 @@
         font-size: 0.72rem;
         color: rgba(216,221,232,0.45);
       }
+
+      /* ── Map section ── */
+      #phoneMap {
+        height: 300px;
+        border: 1px solid rgba(0,200,255,0.2);
+        border-radius: 4px;
+        margin-top: 0.75rem;
+        filter: hue-rotate(185deg) saturate(0.6) brightness(0.78);
+      }
+      .pnt-map-disclaimer {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.12em;
+        color: rgba(255,180,0,0.65);
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 0.5rem;
+      }
+      .pnt-map-region-label {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.82rem;
+        color: rgba(216,221,232,0.65);
+        margin-top: 0.4rem;
+      }
     </style>
 </head>
 <body>
@@ -318,6 +346,17 @@
                             </div>
                         </div>
 
+                        <!-- Registration Region Map -->
+                        <div class="mt-3 pt-3" id="mapSection" style="border-top:1px solid rgba(255,255,255,0.06);display:none">
+                            <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.18em;color:rgba(0,200,255,0.35);text-transform:uppercase;">// registration region map</span>
+                            <div id="phoneMap"></div>
+                            <p class="pnt-map-region-label" id="mapRegionLabel"></p>
+                            <div class="pnt-map-disclaimer">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Shows number registration region only — NOT real-time device location
+                            </div>
+                        </div>
+
                         <div class="mt-3 text-end">
                             <button class="btn btn-sm btn-outline-secondary me-1" id="copyBtn">
                                 <i class="fas fa-copy me-1"></i>Copy Report
@@ -405,12 +444,236 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Google libphonenumber -->
     <script src="https://cdn.jsdelivr.net/npm/google-libphonenumber@3.2.34/dist/libphonenumber.min.js"></script>
+    <!-- Leaflet map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <!-- Custom JS -->
     <script src="../../assets/js/main.js"></script>
 
     <script>
     (function () {
       'use strict';
+
+      /* ── Country centroid coordinates ───────────── */
+      const COUNTRY_COORDS = {
+        US:[37.09,-95.71], GB:[55.38,-3.44], IN:[20.59,78.96], AU:[-25.27,133.78],
+        CA:[56.13,-106.35], DE:[51.17,10.45], FR:[46.23,2.21], BR:[-14.24,-51.93],
+        JP:[36.20,138.25], CN:[35.86,104.20], RU:[61.52,105.32], MX:[23.63,-102.55],
+        NG:[9.08,8.68], ZA:[-30.56,22.94], AE:[23.42,53.85], SG:[1.35,103.82],
+        PK:[30.38,69.35], BD:[23.68,90.36], ID:[-0.79,113.92], PH:[12.88,121.77],
+        KR:[35.91,127.77], IT:[41.87,12.57], ES:[40.46,-3.75], NL:[52.13,5.29],
+        SE:[60.13,18.64], NO:[60.47,8.47], CH:[46.82,8.23], AT:[47.52,14.55],
+        PL:[51.92,19.15], TR:[38.96,35.24], SA:[23.89,45.08], EG:[26.82,30.80],
+        KE:[-0.02,37.91], GH:[7.95,-1.02], TH:[15.87,100.99], MY:[4.21,101.98],
+        NZ:[-40.90,174.89], AR:[-38.42,-63.62], CO:[4.57,-74.30], CL:[-35.68,-71.54],
+        PT:[39.40,-8.22], GR:[39.07,21.82], BE:[50.50,4.47], IE:[53.41,-8.24],
+        DK:[56.26,9.50], FI:[61.92,25.75], IL:[31.05,34.85], IR:[32.43,53.69],
+        IQ:[33.22,43.68], UA:[48.38,31.17], RO:[45.94,24.97], VN:[14.06,108.28],
+        ZW:[-19.02,29.15], TZ:[-6.37,34.89], ET:[9.15,40.49], MA:[31.79,-7.09],
+        DZ:[28.03,1.66], TN:[33.89,9.54], LY:[26.34,17.23], SD:[12.86,30.22],
+        MZ:[-18.67,35.53], UG:[1.37,32.29], CM:[3.85,11.50], SN:[14.50,-14.45],
+        CI:[7.54,-5.55], AO:[-11.20,17.87], MW:[-13.25,34.30], ZM:[-13.13,27.85],
+        HK:[22.32,114.17], TW:[23.70,120.96], MM:[21.92,95.96], LK:[7.87,80.77],
+        NP:[28.39,84.12], AF:[33.94,67.71], UZ:[41.38,64.59], KZ:[48.02,66.92],
+        AZ:[40.14,47.58], GE:[42.32,43.36], AM:[40.07,45.04], BY:[53.71,27.95],
+        LT:[55.17,23.88], LV:[56.88,24.60], EE:[58.60,25.01], RS:[44.02,21.01],
+        HR:[45.10,15.20], BA:[43.92,17.68], MK:[41.61,21.75], AL:[41.15,20.17],
+        ME:[42.71,19.37], SI:[46.15,14.99], SK:[48.67,19.70], CZ:[49.82,15.47],
+        HU:[47.16,19.50], BG:[42.73,25.49], MD:[47.41,28.37], MN:[46.86,103.85],
+        KG:[41.20,74.77], TJ:[38.86,71.28], TM:[38.97,59.56], PG:[-6.31,143.96],
+        FJ:[-17.71,178.07], NC:[-20.90,165.62], VU:[-15.38,166.96], WS:[-13.76,-172.10],
+        TO:[-21.18,-175.20], CK:[-21.24,-159.78], PF:[-17.68,-149.41], MH:[7.10,171.18],
+        FM:[7.43,150.55], PW:[7.51,134.58], NR:[-0.52,166.93], TV:[-7.11,177.65],
+        KI:[-3.37,-168.73],
+      };
+
+      /* ── US area code → city coordinates ────────── */
+      const US_AREA = {
+        '201':['Jersey City, NJ',40.728,-74.078], '202':['Washington, DC',38.895,-77.037],
+        '203':['New Haven, CT',41.308,-72.928], '205':['Birmingham, AL',33.520,-86.802],
+        '206':['Seattle, WA',47.606,-122.332], '207':['Portland, ME',43.657,-70.258],
+        '208':['Boise, ID',43.615,-116.202], '209':['Stockton, CA',37.958,-121.290],
+        '210':['San Antonio, TX',29.425,-98.494], '212':['New York, NY',40.713,-74.006],
+        '213':['Los Angeles, CA',34.052,-118.244], '214':['Dallas, TX',32.776,-96.797],
+        '215':['Philadelphia, PA',39.952,-75.164], '216':['Cleveland, OH',41.500,-81.695],
+        '217':['Springfield, IL',39.801,-89.644], '218':['Duluth, MN',46.786,-92.101],
+        '219':['Hammond, IN',41.583,-87.500], '224':['Chicago (suburb), IL',42.038,-87.931],
+        '225':['Baton Rouge, LA',30.451,-91.154], '228':['Biloxi, MS',30.396,-88.885],
+        '229':['Albany, GA',31.578,-84.156], '231':['Traverse City, MI',44.763,-85.621],
+        '234':['Akron, OH',41.082,-81.519], '239':['Fort Myers, FL',26.640,-81.872],
+        '240':['Bethesda, MD',38.985,-77.095], '248':['Troy, MI',42.606,-83.145],
+        '251':['Mobile, AL',30.694,-88.040], '252':['Greenville, NC',35.613,-77.367],
+        '253':['Tacoma, WA',47.253,-122.445], '254':['Waco, TX',31.549,-97.147],
+        '256':['Huntsville, AL',34.730,-86.586], '260':['Fort Wayne, IN',41.130,-85.129],
+        '262':['Racine, WI',42.726,-87.783], '267':['Philadelphia (sub), PA',40.002,-75.118],
+        '270':['Bowling Green, KY',36.990,-86.444], '276':['Abingdon, VA',36.710,-81.977],
+        '281':['Houston, TX',29.760,-95.370], '301':['Rockville, MD',39.084,-77.153],
+        '302':['Wilmington, DE',39.746,-75.547], '303':['Denver, CO',39.739,-104.984],
+        '304':['Charleston, WV',38.350,-81.633], '305':['Miami, FL',25.774,-80.194],
+        '307':['Cheyenne, WY',41.140,-104.820], '308':['Grand Island, NE',40.925,-98.342],
+        '309':['Peoria, IL',40.694,-89.589], '310':['Santa Monica, CA',34.020,-118.491],
+        '312':['Chicago, IL',41.850,-87.650], '313':['Detroit, MI',42.330,-83.046],
+        '314':['St. Louis, MO',38.627,-90.198], '315':['Syracuse, NY',43.048,-76.148],
+        '316':['Wichita, KS',37.687,-97.330], '317':['Indianapolis, IN',39.768,-86.158],
+        '318':['Shreveport, LA',32.525,-93.750], '319':['Cedar Rapids, IA',42.008,-91.644],
+        '320':['St. Cloud, MN',45.560,-94.162], '321':['Melbourne, FL',28.083,-80.608],
+        '323':['Los Angeles, CA',34.052,-118.244], '325':['Abilene, TX',32.450,-99.733],
+        '330':['Akron, OH',41.082,-81.519], '334':['Montgomery, AL',32.360,-86.300],
+        '336':['Greensboro, NC',36.073,-79.792], '337':['Lafayette, LA',30.224,-92.020],
+        '339':['Quincy, MA',42.252,-71.002], '346':['Houston, TX',29.760,-95.370],
+        '347':['New York, NY',40.713,-74.006], '351':['Lowell, MA',42.630,-71.317],
+        '352':['Gainesville, FL',29.652,-82.325], '360':['Olympia, WA',47.038,-122.900],
+        '361':['Corpus Christi, TX',27.801,-97.396], '380':['Columbus, OH',39.961,-82.999],
+        '385':['Salt Lake City, UT',40.759,-111.888], '386':['Daytona Beach, FL',29.211,-81.024],
+        '401':['Providence, RI',41.824,-71.413], '402':['Omaha, NE',41.258,-95.938],
+        '404':['Atlanta, GA',33.749,-84.388], '405':['Oklahoma City, OK',35.467,-97.517],
+        '406':['Billings, MT',45.783,-108.501], '407':['Orlando, FL',28.538,-81.379],
+        '408':['San Jose, CA',37.338,-121.886], '409':['Beaumont, TX',30.086,-94.102],
+        '410':['Baltimore, MD',39.290,-76.612], '412':['Pittsburgh, PA',40.441,-79.996],
+        '413':['Springfield, MA',42.102,-72.590], '414':['Milwaukee, WI',43.039,-87.907],
+        '415':['San Francisco, CA',37.775,-122.419], '417':['Springfield, MO',37.215,-93.298],
+        '419':['Toledo, OH',41.663,-83.555], '423':['Chattanooga, TN',35.045,-85.309],
+        '424':['Los Angeles, CA',34.052,-118.244], '425':['Bellevue, WA',47.611,-122.192],
+        '430':['Tyler, TX',32.351,-95.301], '432':['Midland, TX',31.997,-102.078],
+        '434':['Charlottesville, VA',38.029,-78.478], '435':['St. George, UT',37.105,-113.584],
+        '440':['Mentor, OH',41.666,-81.340], '442':['Oceanside, CA',33.196,-117.379],
+        '443':['Baltimore, MD',39.290,-76.612], '445':['Philadelphia, PA',39.952,-75.164],
+        '447':['Champaign, IL',40.116,-88.243], '458':['Eugene, OR',44.052,-123.087],
+        '469':['Dallas, TX',32.776,-96.797], '470':['Atlanta, GA',33.749,-84.388],
+        '475':['Bridgeport, CT',41.179,-73.190], '478':['Macon, GA',32.840,-83.633],
+        '479':['Fort Smith, AR',35.386,-94.398], '480':['Scottsdale, AZ',33.494,-111.926],
+        '484':['Allentown, PA',40.608,-75.490], '501':['Little Rock, AR',34.746,-92.289],
+        '502':['Louisville, KY',38.253,-85.759], '503':['Portland, OR',45.524,-122.681],
+        '504':['New Orleans, LA',29.951,-90.072], '505':['Albuquerque, NM',35.085,-106.651],
+        '507':['Rochester, MN',44.022,-92.470], '508':['Worcester, MA',42.262,-71.803],
+        '509':['Spokane, WA',47.659,-117.426], '510':['Oakland, CA',37.804,-122.271],
+        '512':['Austin, TX',30.267,-97.743], '513':['Cincinnati, OH',39.103,-84.512],
+        '515':['Des Moines, IA',41.591,-93.604], '516':['Hempstead, NY',40.707,-73.618],
+        '517':['Lansing, MI',42.733,-84.556], '518':['Albany, NY',42.651,-73.755],
+        '520':['Tucson, AZ',32.222,-110.969], '530':['Redding, CA',40.587,-122.392],
+        '531':['Omaha, NE',41.258,-95.938], '534':['Eau Claire, WI',44.812,-91.498],
+        '539':['Tulsa, OK',36.154,-95.993], '540':['Roanoke, VA',37.271,-79.942],
+        '541':['Eugene, OR',44.052,-123.087], '551':['Jersey City, NJ',40.728,-74.078],
+        '559':['Fresno, CA',36.747,-119.772], '561':['West Palm Beach, FL',26.715,-80.053],
+        '562':['Long Beach, CA',33.770,-118.194], '563':['Davenport, IA',41.524,-90.578],
+        '564':['Bellingham, WA',48.754,-122.479], '567':['Toledo, OH',41.663,-83.555],
+        '571':['Arlington, VA',38.880,-77.101], '573':['Columbia, MO',38.952,-92.334],
+        '574':['South Bend, IN',41.676,-86.252], '575':['Las Cruces, NM',32.314,-106.779],
+        '580':['Lawton, OK',34.608,-98.390], '585':['Rochester, NY',43.161,-77.611],
+        '586':['Warren, MI',42.490,-83.031], '601':['Jackson, MS',32.298,-90.180],
+        '602':['Phoenix, AZ',33.448,-112.074], '603':['Manchester, NH',42.996,-71.455],
+        '605':['Sioux Falls, SD',43.544,-96.731], '606':['Ashland, KY',38.479,-82.638],
+        '607':['Binghamton, NY',42.099,-75.911], '608':['Madison, WI',43.073,-89.401],
+        '609':['Trenton, NJ',40.217,-74.743], '610':['Reading, PA',40.336,-75.927],
+        '612':['Minneapolis, MN',44.980,-93.269], '614':['Columbus, OH',39.961,-82.999],
+        '615':['Nashville, TN',36.166,-86.784], '616':['Grand Rapids, MI',42.963,-85.668],
+        '617':['Boston, MA',42.358,-71.060], '618':['Belleville, IL',38.520,-89.984],
+        '619':['San Diego, CA',32.715,-117.157], '620':['Dodge City, KS',37.753,-100.018],
+        '623':['Glendale, AZ',33.539,-112.186], '626':['Pasadena, CA',34.148,-118.144],
+        '628':['San Francisco, CA',37.775,-122.419], '629':['Nashville, TN',36.166,-86.784],
+        '630':['Naperville, IL',41.786,-88.147], '631':['Islip, NY',40.729,-73.213],
+        '636':['Chesterfield, MO',38.658,-90.534], '641':['Mason City, IA',43.154,-93.202],
+        '646':['New York, NY',40.713,-74.006], '647':['Toronto, ON',43.651,-79.383],
+        '650':['Palo Alto, CA',37.442,-122.143], '651':['St. Paul, MN',44.954,-93.093],
+        '657':['Anaheim, CA',33.836,-117.914], '659':['Birmingham, AL',33.520,-86.802],
+        '660':['Sedalia, MO',38.704,-93.229], '661':['Bakersfield, CA',35.373,-119.019],
+        '662':['Tupelo, MS',34.258,-88.704], '667':['Baltimore, MD',39.290,-76.612],
+        '669':['San Jose, CA',37.338,-121.886], '671':['Hagatna, GU',13.476,144.749],
+        '678':['Atlanta, GA',33.749,-84.388], '681':['Charleston, WV',38.350,-81.633],
+        '682':['Fort Worth, TX',32.726,-97.321], '689':['Orlando, FL',28.538,-81.379],
+        '701':['Bismarck, ND',46.809,-100.779], '702':['Las Vegas, NV',36.175,-115.137],
+        '703':['Arlington, VA',38.880,-77.101], '704':['Charlotte, NC',35.227,-80.843],
+        '706':['Augusta, GA',33.474,-82.009], '707':['Santa Rosa, CA',38.440,-122.714],
+        '708':['Oak Park, IL',41.885,-87.781], '712':['Sioux City, IA',42.500,-96.400],
+        '713':['Houston, TX',29.760,-95.370], '714':['Anaheim, CA',33.836,-117.914],
+        '715':['Wausau, WI',44.959,-89.628], '716':['Buffalo, NY',42.886,-78.878],
+        '717':['Harrisburg, PA',40.264,-76.884], '718':['New York, NY',40.713,-74.006],
+        '719':['Colorado Springs, CO',38.834,-104.822], '720':['Denver, CO',39.739,-104.984],
+        '724':['Greensburg, PA',40.301,-79.539], '725':['Las Vegas, NV',36.175,-115.137],
+        '726':['San Antonio, TX',29.425,-98.494], '727':['Clearwater, FL',27.967,-82.800],
+        '731':['Jackson, TN',35.615,-88.814], '732':['New Brunswick, NJ',40.487,-74.444],
+        '734':['Ann Arbor, MI',42.281,-83.748], '737':['Austin, TX',30.267,-97.743],
+        '740':['Newark, OH',40.058,-82.402], '743':['Greensboro, NC',36.073,-79.792],
+        '747':['Los Angeles, CA',34.052,-118.244], '752':['Sacramento, CA',38.580,-121.494],
+        '754':['Fort Lauderdale, FL',26.122,-80.143], '757':['Norfolk, VA',36.851,-76.286],
+        '760':['Palm Springs, CA',33.831,-116.544], '762':['Augusta, GA',33.474,-82.009],
+        '763':['Minneapolis, MN',44.980,-93.269], '764':['Palo Alto, CA',37.442,-122.143],
+        '765':['Lafayette, IN',40.417,-86.878], '769':['Jackson, MS',32.298,-90.180],
+        '770':['Marietta, GA',33.953,-84.550], '771':['Bethesda, MD',38.985,-77.095],
+        '772':['Port St. Lucie, FL',27.293,-80.351], '773':['Chicago, IL',41.850,-87.650],
+        '774':['Worcester, MA',42.262,-71.803], '775':['Reno, NV',39.529,-119.814],
+        '779':['Rockford, IL',42.271,-89.094], '781':['Boston, MA',42.358,-71.060],
+        '785':['Topeka, KS',39.046,-95.689], '786':['Miami, FL',25.774,-80.194],
+        '787':['San Juan, PR',18.466,-66.106], '801':['Salt Lake City, UT',40.759,-111.888],
+        '802':['Burlington, VT',44.480,-73.213], '803':['Columbia, SC',34.001,-81.035],
+        '804':['Richmond, VA',37.541,-77.434], '805':['Oxnard, CA',34.198,-119.177],
+        '806':['Lubbock, TX',33.578,-101.856], '808':['Honolulu, HI',21.307,-157.858],
+        '810':['Flint, MI',43.013,-83.688], '812':['Evansville, IN',37.975,-87.558],
+        '813':['Tampa, FL',27.948,-82.459], '814':['Erie, PA',42.129,-80.085],
+        '815':['Rockford, IL',42.271,-89.094], '816':['Kansas City, MO',39.100,-94.579],
+        '817':['Fort Worth, TX',32.726,-97.321], '818':['Burbank, CA',34.181,-118.309],
+        '820':['San Luis Obispo, CA',35.283,-120.660], '828':['Asheville, NC',35.575,-82.554],
+        '830':['San Antonio (sub), TX',29.425,-98.494], '831':['Salinas, CA',36.677,-121.655],
+        '832':['Houston, TX',29.760,-95.370], '835':['Allentown, PA',40.608,-75.490],
+        '843':['Charleston, SC',32.776,-79.931], '845':['Poughkeepsie, NY',41.700,-73.921],
+        '847':['Waukegan, IL',42.364,-87.845], '848':['New Brunswick, NJ',40.487,-74.444],
+        '850':['Pensacola, FL',30.421,-87.217], '854':['Charleston, SC',32.776,-79.931],
+        '856':['Camden, NJ',39.926,-75.120], '857':['Boston, MA',42.358,-71.060],
+        '858':['San Diego, CA',32.715,-117.157], '859':['Lexington, KY',38.040,-84.504],
+        '860':['Hartford, CT',41.764,-72.685], '862':['Newark, NJ',40.736,-74.172],
+        '863':['Lakeland, FL',28.040,-81.953], '864':['Greenville, SC',34.852,-82.394],
+        '865':['Knoxville, TN',35.961,-83.921], '870':['Jonesboro, AR',35.842,-90.704],
+        '872':['Chicago, IL',41.850,-87.650], '878':['Pittsburgh, PA',40.441,-79.996],
+        '901':['Memphis, TN',35.149,-90.049], '903':['Tyler, TX',32.351,-95.301],
+        '904':['Jacksonville, FL',30.332,-81.656], '906':['Marquette, MI',46.544,-87.395],
+        '907':['Anchorage, AK',61.218,-149.900], '908':['Elizabeth, NJ',40.664,-74.213],
+        '909':['Pomona, CA',34.055,-117.752], '910':['Fayetteville, NC',35.053,-78.878],
+        '912':['Savannah, GA',32.083,-81.100], '913':['Overland Park, KS',38.982,-94.671],
+        '914':['Yonkers, NY',40.931,-73.899], '915':['El Paso, TX',31.760,-106.487],
+        '916':['Sacramento, CA',38.580,-121.494], '917':['New York, NY',40.713,-74.006],
+        '918':['Tulsa, OK',36.154,-95.993], '919':['Raleigh, NC',35.772,-78.638],
+        '920':['Green Bay, WI',44.520,-88.016], '925':['Concord, CA',37.978,-122.031],
+        '928':['Flagstaff, AZ',35.198,-111.651], '929':['New York, NY',40.713,-74.006],
+        '930':['Bloomington, IN',39.165,-86.527], '931':['Clarksville, TN',36.530,-87.360],
+        '934':['Islip, NY',40.729,-73.213], '936':['Nacogdoches, TX',31.604,-94.655],
+        '937':['Dayton, OH',39.759,-84.192], '938':['Huntsville, AL',34.730,-86.586],
+        '940':['Wichita Falls, TX',33.914,-98.493], '941':['Sarasota, FL',27.337,-82.531],
+        '945':['Dallas, TX',32.776,-96.797], '947':['Troy, MI',42.606,-83.145],
+        '949':['Irvine, CA',33.684,-117.826], '951':['Riverside, CA',33.953,-117.396],
+        '952':['Eden Prairie, MN',44.853,-93.471], '954':['Fort Lauderdale, FL',26.122,-80.143],
+        '956':['Laredo, TX',27.506,-99.508], '959':['Hartford, CT',41.764,-72.685],
+        '970':['Fort Collins, CO',40.586,-105.084], '971':['Portland, OR',45.524,-122.681],
+        '972':['Dallas, TX',32.776,-96.797], '973':['Newark, NJ',40.736,-74.172],
+        '978':['Lowell, MA',42.630,-71.317], '979':['Bryan, TX',30.674,-96.370],
+        '980':['Charlotte, NC',35.227,-80.843], '983':['Colorado Springs, CO',38.834,-104.822],
+        '984':['Raleigh, NC',35.772,-78.638], '985':['Houma, LA',29.596,-90.720],
+        '989':['Saginaw, MI',43.421,-83.949],
+      };
+
+      /* ── UK prefix → city coordinates ───────────── */
+      const UK_PREFIX = {
+        '020':['London',51.507,-0.128], '0121':['Birmingham',52.480,-1.903],
+        '0113':['Leeds',53.801,-1.549], '0114':['Sheffield',53.383,-1.466],
+        '0115':['Nottingham',52.955,-1.149], '0116':['Leicester',52.638,-1.132],
+        '0117':['Bristol',51.455,-2.588], '0118':['Reading',51.455,-0.970],
+        '0131':['Edinburgh',55.953,-3.189], '0141':['Glasgow',55.865,-4.257],
+        '0151':['Liverpool',53.409,-2.978], '0161':['Manchester',53.481,-2.243],
+        '0191':['Newcastle',54.977,-1.612], '01632':['Newcastle',54.977,-1.612],
+        '01224':['Aberdeen',57.149,-2.099], '01382':['Dundee',56.462,-2.971],
+        '029':['Cardiff',51.482,-3.179], '028':['Belfast',54.597,-5.930],
+        '01293':['Crawley',51.107,-0.188], '01483':['Guildford',51.237,-0.574],
+        '01223':['Cambridge',52.205,0.119], '01865':['Oxford',51.752,-1.258],
+        '01227':['Canterbury',51.280,1.077], '01392':['Exeter',50.725,-3.534],
+        '01752':['Plymouth',50.376,-4.144], '01872':['Truro',50.259,-5.052],
+        '01603':['Norwich',52.628,1.299], '01473':['Ipswich',52.055,1.155],
+        '01245':['Chelmsford',51.736,0.470], '01502':['Lowestoft',52.481,1.751],
+        '01534':['St. Helier, Jersey',49.188,-2.107], '01481':['St. Peter Port, Guernsey',49.457,-2.535],
+        '01624':['Douglas, Isle of Man',54.152,-4.486],
+        '0113':['Leeds',53.801,-1.549], '01132':['Leeds',53.801,-1.549],
+        '01204':['Bolton',53.577,-2.429], '01302':['Doncaster',53.523,-1.128],
+        '01274':['Bradford',53.795,-1.756], '01422':['Halifax',53.724,-1.864],
+        '01484':['Huddersfield',53.646,-1.786], '01924':['Wakefield',53.683,-1.506],
+        '01977':['Pontefract',53.691,-1.309],
+      };
 
       /* ── Country metadata ────────────────────────── */
       const COUNTRY_DATA = {
@@ -487,6 +750,7 @@
       /* ── State ───────────────────────────────────── */
       let lastResult = null;
       let history = JSON.parse(localStorage.getItem('pntHistory') || '[]');
+      let leafletMap = null;
 
       /* ── DOM refs ────────────────────────────────── */
       const phoneInput     = document.getElementById('phoneInput');
@@ -568,6 +832,88 @@
         }, 1600);
       }
 
+      /* ── Resolve coordinates from number data ───── */
+      function resolveCoords(r) {
+        const region = r.regionCode;
+
+        // US / Canada: try to match area code
+        if (region === 'US' || region === 'CA') {
+          // Extract national significant number digits
+          const nsn = r.e164Fmt.replace(/^\+1/, '');
+          const ac = nsn.substring(0, 3);
+          if (US_AREA[ac]) {
+            const [city, lat, lng] = US_AREA[ac];
+            return { lat, lng, zoom: 10, label: `${city} area (area code ${ac})` };
+          }
+          const coords = COUNTRY_COORDS[region];
+          return coords
+            ? { lat: coords[0], lng: coords[1], zoom: 4, label: region === 'CA' ? 'Canada' : 'United States' }
+            : null;
+        }
+
+        // UK: try to match prefix
+        if (region === 'GB') {
+          const nsn = r.e164Fmt.replace(/^\+44/, '0');
+          const prefixes = Object.keys(UK_PREFIX).sort((a, b) => b.length - a.length);
+          for (const p of prefixes) {
+            if (nsn.startsWith(p)) {
+              const [city, lat, lng] = UK_PREFIX[p];
+              return { lat, lng, zoom: 11, label: `${city} area` };
+            }
+          }
+          return { lat: 55.38, lng: -3.44, zoom: 5, label: 'United Kingdom' };
+        }
+
+        // All other countries: country centroid
+        const coords = COUNTRY_COORDS[region];
+        if (coords) {
+          return { lat: coords[0], lng: coords[1], zoom: 4, label: r.country.name };
+        }
+        return null;
+      }
+
+      /* ── Show/update Leaflet map ─────────────────── */
+      function showMap(coords, label) {
+        const mapSection = document.getElementById('mapSection');
+        const mapRegionLabel = document.getElementById('mapRegionLabel');
+
+        mapSection.style.display = 'block';
+        mapRegionLabel.textContent = `📍 Registration region: ${label}`;
+
+        // Destroy old map instance before creating new one
+        if (leafletMap) {
+          leafletMap.remove();
+          leafletMap = null;
+        }
+
+        leafletMap = L.map('phoneMap', { zoomControl: true, attributionControl: true })
+          .setView([coords.lat, coords.lng], coords.zoom);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 18,
+        }).addTo(leafletMap);
+
+        // Custom cyan marker
+        const icon = L.divIcon({
+          className: '',
+          html: `<div style="
+            width:18px;height:18px;
+            border-radius:50%;
+            background:#00c8ff;
+            border:3px solid #fff;
+            box-shadow:0 0 12px #00c8ff,0 0 24px rgba(0,200,255,0.5);
+          "></div>`,
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+        });
+
+        L.marker([coords.lat, coords.lng], { icon })
+          .addTo(leafletMap)
+          .bindPopup(`<b>${label}</b><br><span style="font-size:0.75rem;color:#666">Registration region — not live location</span>`, { maxWidth: 200 })
+          .openPopup();
+      }
+
       /* ── Render valid result ─────────────────────── */
       function renderResult(r) {
         // Status badge
@@ -595,6 +941,15 @@
           ${fmtCard('National', r.natFmt)}
           ${fmtCard('RFC 3966 (URI)', r.rfc3966)}
         `;
+
+        // Map
+        const coords = resolveCoords(r);
+        if (coords) {
+          // Leaflet needs the container to be visible before init
+          setTimeout(() => showMap(coords, coords.label), 50);
+        } else {
+          document.getElementById('mapSection').style.display = 'none';
+        }
       }
 
       /* ── Render invalid result ───────────────────── */
@@ -607,6 +962,7 @@
           </div>
         `;
         formattedRow.innerHTML = '';
+        document.getElementById('mapSection').style.display = 'none';
       }
 
       /* ── Helpers ─────────────────────────────────── */
@@ -661,6 +1017,8 @@
         regionSel.value = '';
         resultPanel.classList.add('d-none');
         lastResult = null;
+        if (leafletMap) { leafletMap.remove(); leafletMap = null; }
+        document.getElementById('mapSection').style.display = 'none';
       }
 
       /* ── History ─────────────────────────────────── */
