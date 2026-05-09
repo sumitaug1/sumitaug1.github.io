@@ -12,49 +12,20 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/assets/css/style.css" rel="stylesheet">
-<style>
-body{background:#02040a!important;background-image:none!important;color:#d8dde8!important;font-family:'Space Grotesk',sans-serif!important;}
-main{background:transparent!important;max-width:none!important;padding:0!important;margin:0!important;width:100%!important;}
-.card,.tool-card,.tool-list-item{background:none!important;border:none!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0!important;}
-.cat-hero{position:relative;background:#060912;padding:4rem 2rem 3rem;border-bottom:1px solid rgba(255,255,255,0.06);overflow:hidden;}
-.cat-hero::before{content:'';position:absolute;top:-80px;left:-80px;width:500px;height:350px;background:var(--t-clr);opacity:.07;filter:blur(90px);pointer-events:none;}
-.cat-hero-inner{max-width:1280px;margin:0 auto;position:relative;z-index:1;}
-.cat-badge{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t-clr);letter-spacing:.2em;text-transform:uppercase;text-shadow:0 0 18px var(--t-clr);margin-bottom:.9rem;display:flex;align-items:center;gap:8px;}
-.cat-badge::before{content:'//';color:#ff2d78;}
-.cat-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(1.7rem,4vw,2.8rem);color:#e8eaf0;margin-bottom:.6rem;line-height:1.2;}
-.cat-lead{font-size:.95rem;color:rgba(216,221,232,.55);max-width:580px;line-height:1.65;}
-.cat-content{max-width:1280px;margin:0 auto;padding:3rem 2rem 5rem;}
-.tools-section{margin-bottom:3rem;}
-.section-head{margin-bottom:1.25rem;}
-.section-label{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--t-clr,#00c8ff);letter-spacing:.2em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:3px;}
-.section-title{font-family:'Orbitron',monospace;font-weight:600;font-size:1rem;color:#e8eaf0;letter-spacing:.05em;}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
-.t-tile{position:relative;background:rgba(8,14,28,.85);border:1px solid rgba(255,255,255,.06);padding:1.4rem;text-decoration:none;color:#d8dde8;display:flex;flex-direction:column;gap:.5rem;overflow:hidden;transition:border-color .3s,background .3s,transform .25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
-.t-tile::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,var(--t-clr),transparent 65%);opacity:0;transition:opacity .4s;}
-.t-tile::after{content:'';position:absolute;top:0;right:0;width:12px;height:12px;border-top:1px solid var(--t-clr);border-right:1px solid var(--t-clr);opacity:.5;transition:opacity .3s;}
-.t-tile:hover{border-color:var(--t-clr);background:rgba(8,14,28,.95);transform:translateY(-2px);color:#e8eaf0;}
-.t-tile:hover::before{opacity:.06;}
-.t-tile:hover::after{opacity:1;}
-.t-ident{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--t-clr);letter-spacing:.14em;opacity:.7;text-shadow:0 0 8px var(--t-clr);}
-.t-name{font-family:'Orbitron',monospace;font-weight:600;font-size:.78rem;letter-spacing:.04em;color:#e8eaf0;position:relative;z-index:1;line-height:1.3;}
-.t-desc{font-size:.8rem;color:rgba(216,221,232,.5);line-height:1.5;position:relative;z-index:1;flex:1;}
-.t-footer{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;margin-top:.2rem;}
-.t-stars{color:var(--t-clr);font-size:.72rem;opacity:.85;}
-.t-cta{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--t-clr);letter-spacing:.08em;opacity:.8;transition:opacity .2s;}
-.t-tile:hover .t-cta{opacity:1;}
-.cat-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);margin:0 0 3rem;}
-@media(max-width:768px){.cat-hero{padding:2.5rem 1.25rem 2rem;}.cat-content{padding:2rem 1.25rem 4rem;}.tools-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:480px){.tools-grid{grid-template-columns:1fr;}.cat-title{font-size:1.5rem;}}
-</style>
+<link href="/assets/css/category-page.css" rel="stylesheet">
 </head>
 <body>
 <div id="header-container"></div>
+<div class="cat-bg"><div class="cat-bg-grid"></div><div class="cat-bg-vignette"></div></div>
 <main>
 <section class="cat-hero" style="--t-clr:#f59e0b">
+  <canvas id="heroCanvas"></canvas>
+  <div class="cat-hero-glow"></div>
   <div class="cat-hero-inner">
-    <div class="cat-badge">MSC_MODULE</div>
-    <h1 class="cat-title">🎲 Miscellaneous Tools</h1>
+    <div class="cat-badge"><span class="cat-badge-text" data-text="MSC_MODULE"></span></div>
+    <h1 class="cat-title"><span class="emoji">🎲 </span>Miscellaneous Tools</h1>
     <p class="cat-lead">A variety of useful tools for everyday tasks and creative projects. 18 free tools — no sign-up.</p>
+    <div class="cat-stat"><span class="cat-stat-num" data-count="13">0</span><span class="cat-stat-label">tools available</span></div>
   </div>
 </section>
 <div class="cat-content" style="--t-clr:#f59e0b">
@@ -65,42 +36,70 @@ main{background:transparent!important;max-width:none!important;padding:0!importa
     </div>
     <div class="tools-grid">
       <a href="/tools/miscellaneous/random-number-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_001</div>
         <div class="t-name">Random Number Generator</div>
         <p class="t-desc">Generate random numbers within specified ranges.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/barcode-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_002</div>
         <div class="t-name">Barcode Generator</div>
         <p class="t-desc">Generate various types of barcodes and QR codes instantly.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/meme-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_003</div>
         <div class="t-name">Meme Generator</div>
         <p class="t-desc">Create funny memes with custom text and images.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/random-quote-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_004</div>
         <div class="t-name">Random Quote Generator</div>
         <p class="t-desc">Generate inspirational and motivational quotes on demand.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/fake-address-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_005</div>
         <div class="t-name">Fake Address Generator</div>
         <p class="t-desc">Generate fake addresses for testing and development purposes.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/ebook-creator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_006</div>
         <div class="t-name">Ebook Creator</div>
         <p class="t-desc">Create and format ebooks with professional layouts and styling.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/story-plot-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_007</div>
         <div class="t-name">Story Plot Generator</div>
         <p class="t-desc">Generate creative story plots and writing prompts for authors.</p>
@@ -116,12 +115,20 @@ main{background:transparent!important;max-width:none!important;padding:0!importa
     </div>
     <div class="tools-grid">
       <a href="/tools/miscellaneous/birthday-invitation-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_008</div>
         <div class="t-name">Birthday Invitation Generator</div>
         <p class="t-desc">Create beautiful birthday party invitations with custom designs.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/wedding-invitation-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_009</div>
         <div class="t-name">Wedding Invitation Generator</div>
         <p class="t-desc">Design elegant wedding invitations with personalized details.</p>
@@ -137,6 +144,10 @@ main{background:transparent!important;max-width:none!important;padding:0!importa
     </div>
     <div class="tools-grid">
       <a href="/tools/miscellaneous/ai-chatbot-demo.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_010</div>
         <div class="t-name">AI Chatbot Demo</div>
         <p class="t-desc">Experience an interactive AI chatbot with natural language processing.</p>
@@ -152,18 +163,30 @@ main{background:transparent!important;max-width:none!important;padding:0!importa
     </div>
     <div class="tools-grid">
       <a href="/tools/miscellaneous/flip-coin-simulator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_011</div>
         <div class="t-name">Flip Coin Simulator</div>
         <p class="t-desc">Simulate coin flips with realistic animations and statistics.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/dice-roller.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_012</div>
         <div class="t-name">Dice Roller</div>
         <p class="t-desc">Roll virtual dice with different sides and multiple dice options.</p>
         <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
       </a>
       <a href="/tools/miscellaneous/lottery-number-generator.html" class="t-tile">
+        <div class="t-tile-glow"></div>
+        <div class="t-tile-scan"></div>
+        <div class="t-tile-corner"></div>
+        <div class="t-tile-bar"></div>
         <div class="t-ident">MSC_013</div>
         <div class="t-name">Lottery Number Generator</div>
         <p class="t-desc">Generate random lottery numbers for various lottery games.</p>
@@ -175,6 +198,7 @@ main{background:transparent!important;max-width:none!important;padding:0!importa
 </main>
 <div id="footer-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/category-page.js"></script>
 <script src="/assets/js/main.js"></script>
 </body>
 </html>
