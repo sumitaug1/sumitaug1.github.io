@@ -1,203 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-HNYPXS04ZV');
-	</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Tools - Multi-Tools Hub</title>
-    <meta name="description" content="Collection of free online developer tools including code formatters, validators, generators, and more.">
-    <meta name="keywords" content="developer tools, code formatter, code validator, code generator, free online tools">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="/assets/css/style.css" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Tools - Multi-Tools Hub</title>
+<meta name="description" content="Free online developer tools: code formatters, validators, generators, minifiers and more. No sign-up required.">
+<meta name="keywords" content="developer tools, code formatter, code validator, code generator, free online tools">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">
+<style>
+body{background:#02040a!important;background-image:none!important;color:#d8dde8!important;font-family:'Space Grotesk',sans-serif!important;}
+main{background:transparent!important;max-width:none!important;padding:0!important;margin:0!important;width:100%!important;}
+.card,.tool-card,.tool-list-item{background:none!important;border:none!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0!important;}
+.cat-hero{position:relative;background:#060912;padding:4rem 2rem 3rem;border-bottom:1px solid rgba(255,255,255,0.06);overflow:hidden;}
+.cat-hero::before{content:'';position:absolute;top:-80px;left:-80px;width:500px;height:350px;background:var(--t-clr);opacity:.07;filter:blur(90px);pointer-events:none;}
+.cat-hero-inner{max-width:1280px;margin:0 auto;position:relative;z-index:1;}
+.cat-badge{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--t-clr);letter-spacing:.2em;text-transform:uppercase;text-shadow:0 0 18px var(--t-clr);margin-bottom:.9rem;display:flex;align-items:center;gap:8px;}
+.cat-badge::before{content:'//';color:#ff2d78;}
+.cat-title{font-family:'Orbitron',monospace;font-weight:700;font-size:clamp(1.7rem,4vw,2.8rem);color:#e8eaf0;margin-bottom:.6rem;line-height:1.2;}
+.cat-lead{font-size:.95rem;color:rgba(216,221,232,.55);max-width:580px;line-height:1.65;}
+.cat-content{max-width:1280px;margin:0 auto;padding:3rem 2rem 5rem;}
+.tools-section{margin-bottom:3rem;}
+.section-head{margin-bottom:1.25rem;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--t-clr,#00c8ff);letter-spacing:.2em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:3px;}
+.section-title{font-family:'Orbitron',monospace;font-weight:600;font-size:1rem;color:#e8eaf0;letter-spacing:.05em;}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
+.t-tile{position:relative;background:rgba(8,14,28,.85);border:1px solid rgba(255,255,255,.06);padding:1.4rem;text-decoration:none;color:#d8dde8;display:flex;flex-direction:column;gap:.5rem;overflow:hidden;transition:border-color .3s,background .3s,transform .25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
+.t-tile::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,var(--t-clr),transparent 65%);opacity:0;transition:opacity .4s;}
+.t-tile::after{content:'';position:absolute;top:0;right:0;width:12px;height:12px;border-top:1px solid var(--t-clr);border-right:1px solid var(--t-clr);opacity:.5;transition:opacity .3s;}
+.t-tile:hover{border-color:var(--t-clr);background:rgba(8,14,28,.95);transform:translateY(-2px);color:#e8eaf0;}
+.t-tile:hover::before{opacity:.06;}
+.t-tile:hover::after{opacity:1;}
+.t-ident{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--t-clr);letter-spacing:.14em;opacity:.7;text-shadow:0 0 8px var(--t-clr);}
+.t-name{font-family:'Orbitron',monospace;font-weight:600;font-size:.78rem;letter-spacing:.04em;color:#e8eaf0;position:relative;z-index:1;line-height:1.3;}
+.t-desc{font-size:.8rem;color:rgba(216,221,232,.5);line-height:1.5;position:relative;z-index:1;flex:1;}
+.t-footer{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;margin-top:.2rem;}
+.t-stars{color:var(--t-clr);font-size:.72rem;opacity:.85;}
+.t-cta{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--t-clr);letter-spacing:.08em;opacity:.8;transition:opacity .2s;}
+.t-tile:hover .t-cta{opacity:1;}
+.cat-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);margin:0 0 3rem;}
+@media(max-width:768px){.cat-hero{padding:2.5rem 1.25rem 2rem;}.cat-content{padding:2rem 1.25rem 4rem;}.tools-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.tools-grid{grid-template-columns:1fr;}.cat-title{font-size:1.5rem;}}
+</style>
 </head>
 <body>
-    <!-- Header Container -->
-    <div id="header-container"></div>
-
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="mb-4">Developer Tools</h1>
-                <p class="lead mb-4">A comprehensive collection of tools to help developers write, format, validate, and optimize their code.</p>
-            </div>
-        </div>
-
-        <!-- Code Formatting Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Code Formatting</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fab fa-js me-2"></i>
-                                    JavaScript Formatter
-                                </h5>
-                                <p class="card-text small text-muted">Format and beautify JavaScript code with proper indentation.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="/tools/developer-tools/json-formatter.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-database me-2"></i>
-                                    SQL Formatter
-                                </h5>
-                                <p class="card-text small text-muted">Format and beautify SQL queries with proper indentation and syntax highlighting.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="/tools/developer-tools/sql-formatter.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Code Validation Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Code Validation</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-file-code me-2"></i>
-                                    File Comparison
-                                </h5>
-                                <p class="card-text small text-muted">Compare two files and highlight differences between them.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="/tools/developer-tools/file-comparison.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-code me-2"></i>
-                                    Base64 Encoder/Decoder
-                                </h5>
-                                <p class="card-text small text-muted">Encode text to Base64 or decode Base64 to text format.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="/tools/developer-tools/base64-encoder-decoder.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Code Generation Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Code Generation</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-exchange-alt me-2"></i>
-                                    htaccess Redirect Generator
-                                </h5>
-                                <p class="card-text small text-muted">Generate .htaccess redirect rules for Apache web servers.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="/tools/developer-tools/htaccess-redirect-generator.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-file-alt me-2"></i>
-                                    HTML to Markdown
-                                </h5>
-                                <p class="card-text small text-muted">Convert HTML code to Markdown format with proper syntax.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★☆</div>
-                                    <a href="/tools/developer-tools/html-to-markdown.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Code Optimization Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-4">Code Optimization</h2>
-                <div class="row">
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-compress me-2"></i>
-                                    CSS Minifier
-                                </h5>
-                                <p class="card-text small text-muted">Minify CSS code to reduce file size.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="/tools/developer-tools/css-minifier.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-compress me-2"></i>
-                                    JavaScript Minifier
-                                </h5>
-                                <p class="card-text small text-muted">Minify JavaScript code to reduce file size.</p>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <div class="text-warning small">★★★★★</div>
-                                    <a href="/tools/developer-tools/javascript-minifier.html" class="btn btn-primary">Use Tool</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer Container -->
-    <div id="footer-container"></div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="/assets/js/main.js"></script>
+<div id="header-container"></div>
+<main>
+<section class="cat-hero" style="--t-clr:#f97316">
+  <div class="cat-hero-inner">
+    <div class="cat-badge">DEV_MODULE</div>
+    <h1 class="cat-title">⚡ Developer Tools</h1>
+    <p class="cat-lead">Format, validate, generate, and optimize code. 11 free tools — no sign-up, instant results.</p>
+  </div>
+</section>
+<div class="cat-content" style="--t-clr:#f97316">
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// FORMATTING</span>
+      <h2 class="section-title">Code Formatting</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="/tools/developer-tools/json-formatter.html" class="t-tile">
+        <div class="t-ident">DEV_001</div>
+        <div class="t-name">JavaScript Formatter</div>
+        <p class="t-desc">Format and beautify JavaScript code with proper indentation.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="/tools/developer-tools/sql-formatter.html" class="t-tile">
+        <div class="t-ident">DEV_002</div>
+        <div class="t-name">SQL Formatter</div>
+        <p class="t-desc">Format and beautify SQL queries with proper indentation and syntax highlighting.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+  <div class="cat-divider"></div>
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// VALIDATION</span>
+      <h2 class="section-title">Code Validation</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="/tools/developer-tools/file-comparison.html" class="t-tile">
+        <div class="t-ident">DEV_003</div>
+        <div class="t-name">File Comparison</div>
+        <p class="t-desc">Compare two files and highlight differences between them.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="/tools/developer-tools/base64-encoder-decoder.html" class="t-tile">
+        <div class="t-ident">DEV_004</div>
+        <div class="t-name">Base64 Encoder/Decoder</div>
+        <p class="t-desc">Encode text to Base64 or decode Base64 to text format.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+  <div class="cat-divider"></div>
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// GENERATION</span>
+      <h2 class="section-title">Code Generation</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="/tools/developer-tools/htaccess-redirect-generator.html" class="t-tile">
+        <div class="t-ident">DEV_005</div>
+        <div class="t-name">htaccess Redirect Generator</div>
+        <p class="t-desc">Generate .htaccess redirect rules for Apache web servers.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="/tools/developer-tools/html-to-markdown.html" class="t-tile">
+        <div class="t-ident">DEV_006</div>
+        <div class="t-name">HTML to Markdown</div>
+        <p class="t-desc">Convert HTML code to Markdown format with proper syntax.</p>
+        <div class="t-footer"><span class="t-stars">★★★★☆</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+  <div class="cat-divider"></div>
+  <div class="tools-section">
+    <div class="section-head">
+      <span class="section-label">// OPTIMIZATION</span>
+      <h2 class="section-title">Code Optimization</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="/tools/developer-tools/css-minifier.html" class="t-tile">
+        <div class="t-ident">DEV_007</div>
+        <div class="t-name">CSS Minifier</div>
+        <p class="t-desc">Minify CSS code to reduce file size for faster loading.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+      <a href="/tools/developer-tools/javascript-minifier.html" class="t-tile">
+        <div class="t-ident">DEV_008</div>
+        <div class="t-name">JavaScript Minifier</div>
+        <p class="t-desc">Minify JavaScript code to reduce file size for faster loading.</p>
+        <div class="t-footer"><span class="t-stars">★★★★★</span><span class="t-cta">Use Tool →</span></div>
+      </a>
+    </div>
+  </div>
+</div>
+</main>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
-</html> 
+</html>
