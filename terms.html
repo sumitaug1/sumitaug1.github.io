@@ -1,114 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-HNYPXS04ZV');
-	</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Multi-Tools Hub</title>
-    <meta name="description" content="Terms of Service for Multi-Tools Hub - Learn about our terms and conditions of use.">
-    <meta name="keywords" content="terms of service, terms and conditions, legal, terms">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service - Multi-Tools Hub</title>
+<meta name="description" content="Terms of Service for Multi-Tools Hub — learn about our terms and conditions of use.">
+<meta name="keywords" content="terms of service, terms and conditions, legal, terms">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="/assets/css/category-page.css" rel="stylesheet">
+<style>
+.policy-content { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 6rem; position: relative; z-index: 1; }
+
+.policy-block {
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.policy-block.revealed { opacity: 1; transform: translateY(0); }
+
+.policy-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--t-clr, #a855f7);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.policy-heading {
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #e8eaf0;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.policy-body {
+  font-size: 0.88rem;
+  color: rgba(216,221,232,0.6);
+  line-height: 1.8;
+}
+.policy-body p { margin-bottom: 0.6rem; }
+
+.policy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.policy-list li {
+  display: flex;
+  gap: 10px;
+  padding: 0.4rem 0;
+  font-size: 0.86rem;
+  color: rgba(216,221,232,0.58);
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.policy-list li::before {
+  content: '→';
+  color: var(--t-clr, #a855f7);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  text-shadow: 0 0 8px var(--t-clr, #a855f7);
+}
+.policy-list li strong { color: rgba(216,221,232,0.85); font-weight: 500; }
+
+.policy-notice {
+  background: rgba(168,85,247,0.04);
+  border: 1px solid rgba(168,85,247,0.18);
+  padding: 1rem 1.25rem;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: rgba(216,221,232,0.6);
+  line-height: 1.7;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.policy-notice.revealed { opacity: 1; transform: translateY(0); }
+.policy-notice-icon { color: var(--t-clr, #a855f7); font-size: 0.9rem; margin-top: 2px; flex-shrink: 0; text-shadow: 0 0 10px var(--t-clr, #a855f7); }
+.policy-notice strong { color: rgba(216,221,232,0.85); }
+.policy-notice a { color: var(--t-clr, #a855f7); text-decoration: none; }
+.policy-notice a:hover { text-decoration: underline; }
+
+.policy-updated {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: rgba(216,221,232,0.3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+@media (max-width: 768px) { .policy-content { padding: 2.5rem 1.5rem 4rem; } }
+</style>
 </head>
 <body>
-    <!-- Header Container -->
-    <div id="header-container"></div>
+<div id="header-container"></div>
+<div class="cat-bg"><div class="cat-bg-grid"></div><div class="cat-bg-vignette"></div></div>
+<main>
+<section class="cat-hero" style="--t-clr:#a855f7">
+  <canvas id="heroCanvas"></canvas>
+  <div class="cat-hero-glow"></div>
+  <div class="cat-hero-inner">
+    <div class="cat-badge"><span class="cat-badge-text" data-text="TERMS_OF_SVC"></span></div>
+    <h1 class="cat-title"><span class="emoji">📋</span> Terms of Service</h1>
+    <p class="cat-lead">Please read these terms carefully before using Multi-Tools Hub. By using our tools, you agree to be bound by these terms.</p>
+    <span class="policy-updated">Last updated: January 2024</span>
+  </div>
+</section>
 
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="mb-4">Terms of Service</h1>
-                <p class="lead mb-4">Last updated: January 2024</p>
-            </div>
-        </div>
+<div class="policy-content" style="--t-clr:#a855f7">
 
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="h4 mb-3">1. Acceptance of Terms</h2>
-                        <p>By accessing and using Multi-Tools Hub ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</p>
+  <div class="policy-block">
+    <span class="policy-num">// 01 — ACCEPTANCE</span>
+    <h2 class="policy-heading">Acceptance of Terms</h2>
+    <div class="policy-body">
+      <p>By accessing and using Multi-Tools Hub ("the Service"), you accept and agree to be bound by these terms. If you do not agree to these terms, please do not use this service.</p>
+    </div>
+  </div>
 
-                        <h2 class="h4 mb-3 mt-4">2. Use License</h2>
-                        <p>Permission is granted to temporarily access Multi-Tools Hub for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
-                        <ul>
-                            <li>Modify or copy the materials</li>
-                            <li>Use the materials for any commercial purpose or for any public display</li>
-                            <li>Attempt to reverse engineer any software contained on the website</li>
-                            <li>Remove any copyright or other proprietary notations from the materials</li>
-                            <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
-                        </ul>
+  <div class="cat-divider"></div>
 
-                        <h2 class="h4 mb-3 mt-4">3. Disclaimer</h2>
-                        <p>The materials on Multi-Tools Hub are provided on an 'as is' basis. Multi-Tools Hub makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+  <div class="policy-block">
+    <span class="policy-num">// 02 — LICENSE</span>
+    <h2 class="policy-heading">Use License</h2>
+    <div class="policy-body">
+      <p>Permission is granted to temporarily access Multi-Tools Hub for personal, non-commercial use only. Under this license you may not:</p>
+      <ul class="policy-list">
+        <li>Modify or copy the materials or source code</li>
+        <li>Use the materials for any commercial purpose or public display</li>
+        <li>Attempt to reverse engineer any software contained on the website</li>
+        <li>Remove any copyright or proprietary notations from the materials</li>
+        <li>Transfer the materials to another person or mirror them on any other server</li>
+      </ul>
+    </div>
+  </div>
 
-                        <h2 class="h4 mb-3 mt-4">4. Limitations</h2>
-                        <p>In no event shall Multi-Tools Hub or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Multi-Tools Hub, even if Multi-Tools Hub or a Multi-Tools Hub authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+  <div class="cat-divider"></div>
 
-                        <h2 class="h4 mb-3 mt-4">5. Accuracy of Materials</h2>
-                        <p>The materials appearing on Multi-Tools Hub could include technical, typographical, or photographic errors. Multi-Tools Hub does not warrant that any of the materials on its website are accurate, complete, or current. Multi-Tools Hub may make changes to the materials contained on its website at any time without notice.</p>
+  <div class="policy-block">
+    <span class="policy-num">// 03 — DISCLAIMER</span>
+    <h2 class="policy-heading">Disclaimer</h2>
+    <div class="policy-body">
+      <p>The materials on Multi-Tools Hub are provided on an "as is" basis. Multi-Tools Hub makes no warranties, expressed or implied, and hereby disclaims all other warranties including, without limitation, implied warranties of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+    </div>
+  </div>
 
-                        <h2 class="h4 mb-3 mt-4">6. Links</h2>
-                        <p>Multi-Tools Hub has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Multi-Tools Hub of the site. Use of any such linked website is at the user's own risk.</p>
+  <div class="cat-divider"></div>
 
-                        <h2 class="h4 mb-3 mt-4">7. Modifications</h2>
-                        <p>Multi-Tools Hub may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these Terms of Service.</p>
+  <div class="policy-block">
+    <span class="policy-num">// 04 — LIMITATIONS</span>
+    <h2 class="policy-heading">Limitations of Liability</h2>
+    <div class="policy-body">
+      <p>In no event shall Multi-Tools Hub or its suppliers be liable for any damages — including without limitation, damages for loss of data, loss of profit, or business interruption — arising out of the use or inability to use the materials on this website, even if notified of the possibility of such damage.</p>
+    </div>
+  </div>
 
-                        <h2 class="h4 mb-3 mt-4">8. User Conduct</h2>
-                        <p>You agree not to use the Service to:</p>
-                        <ul>
-                            <li>Upload, post, or transmit any content that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, or otherwise objectionable</li>
-                            <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity</li>
-                            <li>Interfere with or disrupt the Service or servers or networks connected to the Service</li>
-                            <li>Attempt to gain unauthorized access to any portion of the Service or any systems or networks</li>
-                            <li>Use any automated means to access or use the Service</li>
-                        </ul>
+  <div class="cat-divider"></div>
 
-                        <h2 class="h4 mb-3 mt-4">9. Intellectual Property</h2>
-                        <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Multi-Tools Hub and its licensors. The Service is protected by copyright, trademark, and other laws.</p>
+  <div class="policy-block">
+    <span class="policy-num">// 05 — ACCURACY</span>
+    <h2 class="policy-heading">Accuracy of Materials</h2>
+    <div class="policy-body">
+      <p>The materials on Multi-Tools Hub may include technical, typographical, or other errors. Multi-Tools Hub does not warrant that any materials on this website are accurate, complete, or current, and may make changes to the materials at any time without notice.</p>
+    </div>
+  </div>
 
-                        <h2 class="h4 mb-3 mt-4">10. Termination</h2>
-                        <p>We may terminate or suspend your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+  <div class="cat-divider"></div>
 
-                        <h2 class="h4 mb-3 mt-4">11. Governing Law</h2>
-                        <p>These Terms shall be interpreted and governed by the laws of the jurisdiction in which Multi-Tools Hub operates, without regard to its conflict of law provisions.</p>
+  <div class="policy-block">
+    <span class="policy-num">// 06 — LINKS</span>
+    <h2 class="policy-heading">External Links</h2>
+    <div class="policy-body">
+      <p>Multi-Tools Hub has not reviewed all sites linked to or from this website and is not responsible for the contents of any linked site. The inclusion of any link does not imply endorsement. Use of any linked website is at the user's own risk.</p>
+    </div>
+  </div>
 
-                        <h2 class="h4 mb-3 mt-4">12. Contact Information</h2>
-                        <p>If you have any questions about these Terms of Service, please contact us:</p>
-                        <ul>
-                            <li>Email: itknowledge4u@gmail.com</li>
-                            <li>Contact Form: <a href="tools/contact.html">Contact Page</a></li>
-                        </ul>
+  <div class="cat-divider"></div>
 
-                        <div class="alert alert-info mt-4">
-                            <i class="fas fa-info-circle me-2"></i>
-                            <strong>Note:</strong> These terms of service apply to all tools and services provided by Multi-Tools Hub.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+  <div class="policy-block">
+    <span class="policy-num">// 07 — MODIFICATIONS</span>
+    <h2 class="policy-heading">Modifications to Terms</h2>
+    <div class="policy-body">
+      <p>Multi-Tools Hub may revise these terms of service at any time without notice. By continuing to use this website after changes are posted, you agree to be bound by the updated terms.</p>
+    </div>
+  </div>
 
-    <!-- Footer Container -->
-    <div id="footer-container"></div>
+  <div class="cat-divider"></div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="assets/js/main.js"></script>
+  <div class="policy-block">
+    <span class="policy-num">// 08 — CONDUCT</span>
+    <h2 class="policy-heading">User Conduct</h2>
+    <div class="policy-body">
+      <p>You agree not to use the Service to:</p>
+      <ul class="policy-list">
+        <li>Upload or transmit any content that is unlawful, harmful, threatening, abusive, or otherwise objectionable</li>
+        <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity</li>
+        <li>Interfere with or disrupt the Service or connected servers and networks</li>
+        <li>Attempt to gain unauthorised access to any portion of the Service</li>
+        <li>Use any automated means (bots, scrapers) to access or use the Service</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cat-divider"></div>
+
+  <div class="policy-block">
+    <span class="policy-num">// 09 — IP RIGHTS</span>
+    <h2 class="policy-heading">Intellectual Property</h2>
+    <div class="policy-body">
+      <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Multi-Tools Hub and its licensors. The Service is protected by copyright, trademark, and other applicable laws.</p>
+    </div>
+  </div>
+
+  <div class="cat-divider"></div>
+
+  <div class="policy-block">
+    <span class="policy-num">// 10 — TERMINATION</span>
+    <h2 class="policy-heading">Termination</h2>
+    <div class="policy-body">
+      <p>We may terminate or suspend your access immediately, without prior notice or liability, for any reason — including if you breach these Terms. Upon termination, your right to use the Service ceases immediately.</p>
+    </div>
+  </div>
+
+  <div class="cat-divider"></div>
+
+  <div class="policy-block">
+    <span class="policy-num">// 11 — GOVERNING LAW</span>
+    <h2 class="policy-heading">Governing Law</h2>
+    <div class="policy-body">
+      <p>These Terms shall be interpreted and governed by the laws of the jurisdiction in which Multi-Tools Hub operates, without regard to conflict of law provisions. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts in that jurisdiction.</p>
+    </div>
+  </div>
+
+  <div class="cat-divider"></div>
+
+  <div class="policy-block">
+    <span class="policy-num">// 12 — CONTACT</span>
+    <h2 class="policy-heading">Contact Information</h2>
+    <div class="policy-body">
+      <p>If you have any questions about these Terms of Service, please reach out:</p>
+      <ul class="policy-list">
+        <li>Email: itknowledge4u@gmail.com</li>
+        <li>Contact form: <a href="/tools/contact.html" style="color:var(--t-clr,#a855f7);text-decoration:none;">Contact Page</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="policy-notice">
+    <span class="policy-notice-icon"><i class="fas fa-gavel"></i></span>
+    <span><strong>Note:</strong> These terms of service apply to all tools and services provided by Multi-Tools Hub. By using any of our tools, you agree to the terms outlined above.</span>
+  </div>
+
+</div>
+</main>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/category-page.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const els = [...document.querySelectorAll('.policy-block, .policy-notice')];
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const idx = els.indexOf(entry.target);
+      entry.target.style.transitionDelay = `${Math.min(idx * 0.04, 0.2)}s`;
+      entry.target.classList.add('revealed');
+      o.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  els.forEach(el => obs.observe(el));
+});
+</script>
+<script src="/assets/js/main.js"></script>
 </body>
-</html> 
+</html>
