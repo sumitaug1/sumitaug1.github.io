@@ -960,6 +960,8 @@ async function loadComponents() {
 
 // Load components when the DOM is ready
 function initHeaderBehavior() {
+    const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // ── Dropdown ────────────────────────────────
     const toggle = document.getElementById('nl-tools');
     const dropdown = document.getElementById('tools-dropdown');
@@ -1003,6 +1005,76 @@ function initHeaderBehavior() {
         const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 10);
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
+    }
+
+    if (REDUCED) return; // skip motion effects for accessibility
+
+    // ── Effect 1: Cursor spotlight ───────────────
+    if (hdr) {
+        hdr.addEventListener('mousemove', e => {
+            const rect = hdr.getBoundingClientRect();
+            hdr.style.setProperty('--sx', (e.clientX - rect.left) + 'px');
+            hdr.style.setProperty('--sy', (e.clientY - rect.top) + 'px');
+        });
+        hdr.addEventListener('mouseleave', () => {
+            hdr.style.setProperty('--sx', '-300px');
+            hdr.style.setProperty('--sy', '-300px');
+        });
+    }
+
+    // ── Effect 2: Magnetic nav links ─────────────
+    document.querySelectorAll('.nav-link-item').forEach(link => {
+        link.addEventListener('mousemove', e => {
+            const rect = link.getBoundingClientRect();
+            const dx = (e.clientX - (rect.left + rect.width  / 2)) / rect.width  * 6;
+            const dy = (e.clientY - (rect.top  + rect.height / 2)) / rect.height * 3.5;
+            link.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.transform = '';
+        });
+    });
+
+    // ── Effect 3: Glitch-decode brand name ───────
+    const brandText = document.getElementById('nav-brand-text');
+    if (brandText) {
+        const original = 'Multi-Tools Hub';
+        const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>/\\';
+        let frame = 0;
+        const total = 22;
+        const iv = setInterval(() => {
+            brandText.textContent = original.split('').map((ch, i) => {
+                if (ch === ' ') return ' ';
+                if (frame / total > i / original.length) return ch;
+                return CHARS[Math.floor(Math.random() * CHARS.length)];
+            }).join('');
+            if (++frame > total) {
+                brandText.textContent = original;
+                clearInterval(iv);
+            }
+        }, 38);
+    }
+
+    // ── Effect 4: HUD live clock ─────────────────
+    const hudTime = document.getElementById('hud-time');
+    if (hudTime) {
+        const tick = () => {
+            hudTime.textContent = new Date().toTimeString().slice(0, 8);
+        };
+        tick();
+        setInterval(tick, 1000);
+    }
+
+    // ── Effect 5: Periodic scan sweep ────────────
+    const scanEl = document.getElementById('nav-scan');
+    if (scanEl) {
+        const sweep = () => {
+            scanEl.classList.remove('sweeping');
+            void scanEl.offsetWidth; // force reflow to restart animation
+            scanEl.classList.add('sweeping');
+        };
+        setTimeout(sweep, 600);          // first sweep shortly after load
+        setInterval(sweep, 4200);        // then every 4.2s
     }
 }
 
