@@ -493,6 +493,78 @@ main {
   .cat-title  { font-size: 1.55rem; }
 }
 
+/* ── NETFLIX TILE HOVER ─────────────────── */
+.tools-grid { overflow: visible; }
+
+.t-tile.nx-hovered {
+  overflow: visible !important;
+  clip-path: none !important;
+  z-index: 50 !important;
+  border-color: var(--t-clr, #00c8ff) !important;
+  background: rgba(5,9,18,0.99) !important;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,0.88),
+    0 0 0 1px var(--t-clr, #00c8ff),
+    0 0 40px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+.tools-grid.nx-active .t-tile:not(.nx-hovered) {
+  transform: scale(0.93) !important;
+  opacity: 0.38 !important;
+  filter: brightness(0.48) saturate(0.55) !important;
+}
+
+.t-expand {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.44s cubic-bezier(0.16,1,0.3,1) 0.06s,
+    opacity 0.28s ease 0.12s,
+    border-top-color 0.3s,
+    margin-top 0.3s,
+    padding-top 0.3s;
+  border-top: 1px solid transparent;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.t-tile.nx-hovered .t-expand {
+  max-height: 72px;
+  opacity: 1;
+  border-top-color: rgba(255,255,255,0.06);
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.t-expand-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--t-clr, #00c8ff);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--t-clr, #00c8ff);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.28s ease, letter-spacing 0.28s ease;
+}
+.t-tile.nx-hovered .t-expand-cta { gap: 16px; letter-spacing: 0.24em; }
+
+@media (hover: none), (max-width: 768px) {
+  .t-tile.nx-hovered {
+    transform: none !important;
+    box-shadow: none !important;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)) !important;
+    overflow: hidden !important;
+  }
+  .tools-grid.nx-active .t-tile:not(.nx-hovered) {
+    transform: none !important; opacity: 1 !important; filter: none !important;
+  }
+  .t-tile.nx-hovered .t-expand { max-height: 0 !important; opacity: 0 !important; }
+}
+
 /* ── REDUCED MOTION ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
