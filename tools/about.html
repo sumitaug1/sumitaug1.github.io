@@ -14,52 +14,198 @@
 <link href="/assets/css/style.css" rel="stylesheet">
 <link href="/assets/css/category-page.css" rel="stylesheet">
 <style>
+/* ── PAGE LAYOUT ── */
 .about-content { max-width: 1280px; margin: 0 auto; padding: 4rem 2rem 6rem; position: relative; z-index: 1; }
-.about-block { margin-bottom: 3.5rem; }
+.about-block  { margin-bottom: 3.5rem; }
+
+/* ── GLITCH TITLE ── */
+@keyframes glitch1 {
+  0%,96%,100% { clip-path: none; transform: none; }
+  97%  { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 0); }
+  98%  { clip-path: inset(60% 0 10% 0); transform: translate(3px, 0); }
+  99%  { clip-path: inset(40% 0 30% 0); transform: translate(-2px, 0); }
+}
+.cat-title { animation: heroReveal 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both, glitch1 8s ease-in-out 3s infinite; }
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 2.5rem 0 0;
+  opacity: 0;
+  animation: heroReveal 0.9s ease 0.9s both;
+}
+.stat-card {
+  background: rgba(8,14,28,0.75);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s ease;
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 1px; width: 0;
+  background: var(--t-clr, #00c8ff);
+  box-shadow: 0 0 10px var(--t-clr, #00c8ff);
+  transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.stat-card:hover { border-color: var(--t-clr, #00c8ff); }
+.stat-card:hover::after { width: 100%; }
+.stat-num {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--t-clr, #00c8ff);
+  text-shadow: 0 0 28px var(--t-clr, #00c8ff);
+  line-height: 1;
+  display: block;
+}
+.stat-suffix { font-size: 1.1rem; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: rgba(216,221,232,0.4);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 0.45rem;
+  display: block;
+}
+@media (max-width: 600px) { .stats-row { grid-template-columns: repeat(2,1fr); } }
+
+/* ── FEATURE CARDS (t-tile style) ── */
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 1.25rem; }
 .feature-card {
+  position: relative;
   background: rgba(8,14,28,0.82);
   border: 1px solid rgba(255,255,255,0.07);
   padding: 1.75rem 1.5rem;
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  transition: border-color 0.3s ease, background 0.3s ease;
+  overflow: hidden;
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s;
 }
-.feature-card.revealed { opacity: 1; transform: translateY(0); }
+.feature-card.revealed { opacity: 1; transform: translateY(0) scale(1); }
 .feature-card:hover { border-color: var(--t-clr, #00c8ff); background: rgba(8,14,28,0.97); }
-.feature-icon { font-size: 1.5rem; color: var(--t-clr, #00c8ff); margin-bottom: 0.85rem; text-shadow: 0 0 18px var(--t-clr, #00c8ff); }
-.feature-title { font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 600; color: #e8eaf0; margin-bottom: 0.45rem; letter-spacing: 0.03em; }
-.feature-desc { font-size: 0.8rem; color: rgba(216,221,232,0.48); line-height: 1.6; margin: 0; }
+.fc-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 25%, var(--t-clr, #00c8ff), transparent 65%);
+  opacity: 0; transition: opacity 0.45s; pointer-events: none;
+}
+.fc-scan {
+  position: absolute; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--t-clr, #00c8ff) 50%, transparent);
+  top: -4px; opacity: 0; pointer-events: none; filter: blur(1px); z-index: 3;
+}
+.fc-corner {
+  position: absolute; top: 0; right: 0; width: 14px; height: 14px;
+  border-top: 1px solid var(--t-clr, #00c8ff); border-right: 1px solid var(--t-clr, #00c8ff);
+  opacity: 0.4; transition: opacity 0.3s, width 0.35s, height 0.35s; z-index: 2;
+}
+.fc-bar {
+  position: absolute; bottom: 0; left: 0; height: 1px; width: 0;
+  background: var(--t-clr, #00c8ff); box-shadow: 0 0 10px var(--t-clr, #00c8ff);
+  transition: width 0.45s cubic-bezier(0.16,1,0.3,1); z-index: 2;
+}
+.feature-card:hover .fc-glow   { opacity: 0.07; }
+.feature-card:hover .fc-corner { opacity: 1; width: 22px; height: 22px; }
+.feature-card:hover .fc-bar    { width: 100%; }
+.feature-card:hover .fc-scan   { animation: scanDown 0.65s ease forwards; }
+@keyframes scanDown { 0%{top:-4px;opacity:1} 85%{top:100%;opacity:0.4} 100%{top:100%;opacity:0} }
+
+.feature-icon { font-size: 1.4rem; color: var(--t-clr, #00c8ff); margin-bottom: 0.8rem; text-shadow: 0 0 16px var(--t-clr, #00c8ff); position: relative; z-index: 1; }
+.feature-title { font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 600; color: #e8eaf0; margin-bottom: 0.45rem; position: relative; z-index: 1; }
+.feature-desc  { font-size: 0.8rem; color: rgba(216,221,232,0.48); line-height: 1.6; margin: 0; position: relative; z-index: 1; }
+
+/* ── CATEGORY CHIPS ── */
 .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 1.25rem; }
 .cat-chip {
+  position: relative;
   background: rgba(8,14,28,0.75);
   border: 1px solid rgba(255,255,255,0.06);
   padding: 0.9rem 1rem;
   display: flex; align-items: center; gap: 10px;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  transition: border-color 0.3s, background 0.3s;
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
-  text-decoration: none;
+  text-decoration: none; overflow: hidden;
+  opacity: 0; transform: translateY(20px) scale(0.97);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s;
 }
-.cat-chip.revealed { opacity: 1; transform: translateY(0); }
+.cat-chip.revealed { opacity: 1; transform: translateY(0) scale(1); }
 .cat-chip:hover { border-color: var(--t-clr, #00c8ff); background: rgba(8,14,28,0.97); }
-.cat-chip-icon { font-size: 1.1rem; }
-.cat-chip-name { font-family: 'Orbitron', monospace; font-size: 0.7rem; color: #d8dde8; letter-spacing: 0.04em; }
+.cat-chip-icon { font-size: 1.05rem; position: relative; z-index: 1; }
+.cat-chip-name { font-family: 'Orbitron', monospace; font-size: 0.68rem; color: #d8dde8; letter-spacing: 0.04em; position: relative; z-index: 1; }
+.cat-chip-ripple {
+  position: absolute; border-radius: 50%;
+  width: 6px; height: 6px;
+  background: var(--t-clr, #00c8ff); opacity: 0.5;
+  transform: scale(0); pointer-events: none; z-index: 0;
+  animation: chipRipple 0.55s ease forwards;
+}
+@keyframes chipRipple { to { transform: scale(28); opacity: 0; } }
+
+/* ── TERMINAL BLOCK ── */
+.terminal-wrap {
+  margin-top: 1.5rem;
+  background: rgba(2,4,10,0.9);
+  border: 1px solid rgba(255,255,255,0.07);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  overflow: hidden;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.terminal-wrap.revealed { opacity: 1; transform: translateY(0); }
+.terminal-bar {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0.55rem 1rem;
+  display: flex; align-items: center; gap: 6px;
+}
+.terminal-dot { width: 8px; height: 8px; border-radius: 50%; }
+.terminal-dot-r { background: #ff5f57; }
+.terminal-dot-y { background: #febc2e; }
+.terminal-dot-g { background: #28c840; }
+.terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: rgba(216,221,232,0.35); margin-left: 6px; letter-spacing: 0.1em; }
+.terminal-body { padding: 1.1rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.73rem; line-height: 1.9; min-height: 260px; }
+.term-line { display: block; color: rgba(216,221,232,0.55); white-space: pre; }
+.term-line .term-ok   { color: #28c840; }
+.term-line .term-key  { color: var(--t-clr, #00c8ff); }
+.term-line .term-dim  { color: rgba(216,221,232,0.25); }
+.term-line .term-warn { color: #febc2e; }
+.term-cursor { display: inline-block; width: 8px; height: 1em; background: var(--t-clr, #00c8ff); opacity: 0.9; animation: cursorBlink 0.9s step-end infinite; vertical-align: text-bottom; margin-left: 2px; }
+
+/* ── WHY LIST ── */
 .why-list { list-style: none; padding: 0; margin: 1rem 0 0; }
 .why-list li {
   display: flex; align-items: center; gap: 12px;
-  padding: 0.65rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  font-size: 0.88rem;
-  color: rgba(216,221,232,0.72);
+  padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.88rem; color: rgba(216,221,232,0.72);
   opacity: 0; transform: translateX(-16px);
   transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 .why-list li.revealed { opacity: 1; transform: translateX(0); }
 .why-check { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--t-clr, #00c8ff); flex-shrink: 0; text-shadow: 0 0 8px var(--t-clr, #00c8ff); }
+
+/* ── FLOATING DATA DOTS ── */
+.data-particle {
+  position: fixed; border-radius: 50%;
+  width: 3px; height: 3px;
+  background: var(--t-clr, #00c8ff);
+  pointer-events: none; z-index: 0; opacity: 0;
+  animation: dataFloat linear infinite;
+}
+@keyframes dataFloat {
+  0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+  10%  { opacity: 0.35; }
+  90%  { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-100vh) rotate(360deg); }
+}
+
 @media (max-width: 768px) { .about-content { padding: 2.5rem 1.5rem 4rem; } }
 </style>
 </head>
@@ -73,7 +219,26 @@
   <div class="cat-hero-inner">
     <div class="cat-badge"><span class="cat-badge-text" data-text="ABOUT_US"></span></div>
     <h1 class="cat-title"><span class="emoji">⚡</span> Multi-Tools Hub</h1>
-    <p class="cat-lead">Your one-stop solution for 100+ free online tools. No registration, no limits — just tools that work.</p>
+    <p class="cat-lead">Your one-stop solution for free online tools. No registration, no limits — just tools that work.</p>
+    <!-- Animated stats -->
+    <div class="stats-row" style="--t-clr:#00c8ff">
+      <div class="stat-card">
+        <span class="stat-num" data-target="100"><span class="val">0</span><span class="stat-suffix">+</span></span>
+        <span class="stat-label">Free Tools</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" data-target="11"><span class="val">0</span></span>
+        <span class="stat-label">Categories</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num"><span class="val">∞</span></span>
+        <span class="stat-label">Sign-ups Needed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" data-target="100"><span class="val">0</span><span class="stat-suffix">%</span></span>
+        <span class="stat-label">Free to Use</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -86,13 +251,13 @@
       <h2 class="section-title">Our Mission</h2>
     </div>
     <p style="font-size:0.92rem;color:rgba(216,221,232,0.62);line-height:1.8;max-width:720px;">
-      Multi-Tools Hub was created with a simple mission: to provide easy access to essential online tools that help people in their daily tasks. We believe that everyone should have access to quality tools without any barriers — no sign-ups, no paywalls, no friction.
+      Multi-Tools Hub was built with one mission: give everyone access to essential online tools without barriers. No sign-ups, no paywalls, no friction — just powerful tools that run entirely in your browser.
     </p>
   </div>
 
   <div class="cat-divider"></div>
 
-  <!-- What We Offer -->
+  <!-- Features -->
   <div class="about-block">
     <div class="section-head">
       <span class="section-label">// FEATURES</span>
@@ -100,21 +265,25 @@
     </div>
     <div class="feature-grid">
       <div class="feature-card">
+        <div class="fc-glow"></div><div class="fc-scan"></div><div class="fc-corner"></div><div class="fc-bar"></div>
         <div class="feature-icon"><i class="fas fa-tools"></i></div>
         <div class="feature-title">100+ Free Tools</div>
-        <p class="feature-desc">Converters, calculators, SEO tools, image editors, developer utilities, and more — all in one place.</p>
+        <p class="feature-desc">Converters, calculators, SEO tools, image editors, developer utilities and more — all in one place.</p>
       </div>
       <div class="feature-card">
+        <div class="fc-glow"></div><div class="fc-scan"></div><div class="fc-corner"></div><div class="fc-bar"></div>
         <div class="feature-icon"><i class="fas fa-lock"></i></div>
         <div class="feature-title">Secure &amp; Private</div>
         <p class="feature-desc">All tools run locally in your browser. Your data never leaves your device.</p>
       </div>
       <div class="feature-card">
+        <div class="fc-glow"></div><div class="fc-scan"></div><div class="fc-corner"></div><div class="fc-bar"></div>
         <div class="feature-icon"><i class="fas fa-bolt"></i></div>
         <div class="feature-title">Fast &amp; Efficient</div>
         <p class="feature-desc">Optimized tools that deliver instant results without any lag or loading delays.</p>
       </div>
       <div class="feature-card">
+        <div class="fc-glow"></div><div class="fc-scan"></div><div class="fc-corner"></div><div class="fc-bar"></div>
         <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
         <div class="feature-title">Mobile Friendly</div>
         <p class="feature-desc">Fully responsive — every tool works perfectly on phones, tablets, and desktops.</p>
@@ -131,39 +300,38 @@
       <h2 class="section-title">Tool Categories</h2>
     </div>
     <div class="cat-grid">
-      <a href="/tools/image-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">🖼️</span><span class="cat-chip-name">Image Tools</span>
-      </a>
-      <a href="/tools/pdf-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">📄</span><span class="cat-chip-name">PDF Tools</span>
-      </a>
-      <a href="/tools/text-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">📝</span><span class="cat-chip-name">Text Tools</span>
-      </a>
-      <a href="/tools/calculator-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">🧮</span><span class="cat-chip-name">Calculators</span>
-      </a>
-      <a href="/tools/unit-converters.html" class="cat-chip">
-        <span class="cat-chip-icon">🔄</span><span class="cat-chip-name">Unit Converters</span>
-      </a>
-      <a href="/tools/developer-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">💻</span><span class="cat-chip-name">Developer Tools</span>
-      </a>
-      <a href="/tools/seo-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">🔍</span><span class="cat-chip-name">SEO Tools</span>
-      </a>
-      <a href="/tools/security-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">🔐</span><span class="cat-chip-name">Security Tools</span>
-      </a>
-      <a href="/tools/social-media-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">📱</span><span class="cat-chip-name">Social Media</span>
-      </a>
-      <a href="/tools/business-tools.html" class="cat-chip">
-        <span class="cat-chip-icon">💼</span><span class="cat-chip-name">Business Tools</span>
-      </a>
-      <a href="/tools/miscellaneous.html" class="cat-chip">
-        <span class="cat-chip-icon">🎲</span><span class="cat-chip-name">Miscellaneous</span>
-      </a>
+      <a href="/tools/image-tools.html"        class="cat-chip"><span class="cat-chip-icon">🖼️</span><span class="cat-chip-name">Image Tools</span></a>
+      <a href="/tools/pdf-tools.html"          class="cat-chip"><span class="cat-chip-icon">📄</span><span class="cat-chip-name">PDF Tools</span></a>
+      <a href="/tools/text-tools.html"         class="cat-chip"><span class="cat-chip-icon">📝</span><span class="cat-chip-name">Text Tools</span></a>
+      <a href="/tools/calculator-tools.html"   class="cat-chip"><span class="cat-chip-icon">🧮</span><span class="cat-chip-name">Calculators</span></a>
+      <a href="/tools/unit-converters.html"    class="cat-chip"><span class="cat-chip-icon">🔄</span><span class="cat-chip-name">Unit Converters</span></a>
+      <a href="/tools/developer-tools.html"    class="cat-chip"><span class="cat-chip-icon">💻</span><span class="cat-chip-name">Developer Tools</span></a>
+      <a href="/tools/seo-tools.html"          class="cat-chip"><span class="cat-chip-icon">🔍</span><span class="cat-chip-name">SEO Tools</span></a>
+      <a href="/tools/security-tools.html"     class="cat-chip"><span class="cat-chip-icon">🔐</span><span class="cat-chip-name">Security Tools</span></a>
+      <a href="/tools/social-media-tools.html" class="cat-chip"><span class="cat-chip-icon">📱</span><span class="cat-chip-name">Social Media</span></a>
+      <a href="/tools/business-tools.html"     class="cat-chip"><span class="cat-chip-icon">💼</span><span class="cat-chip-name">Business Tools</span></a>
+      <a href="/tools/miscellaneous.html"      class="cat-chip"><span class="cat-chip-icon">🎲</span><span class="cat-chip-name">Miscellaneous</span></a>
+    </div>
+  </div>
+
+  <div class="cat-divider"></div>
+
+  <!-- Terminal -->
+  <div class="about-block">
+    <div class="section-head">
+      <span class="section-label">// SYSTEM_STATUS</span>
+      <h2 class="section-title">Live Tool Index</h2>
+    </div>
+    <div class="terminal-wrap">
+      <div class="terminal-bar">
+        <span class="terminal-dot terminal-dot-r"></span>
+        <span class="terminal-dot terminal-dot-y"></span>
+        <span class="terminal-dot terminal-dot-g"></span>
+        <span class="terminal-title">multi-tools-hub — tool-scanner v2.0</span>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <span class="term-cursor" id="termCursor"></span>
+      </div>
     </div>
   </div>
 
@@ -172,7 +340,7 @@
   <!-- Why Choose Us -->
   <div class="about-block">
     <div class="section-head">
-      <span class="section-label">// WHY US</span>
+      <span class="section-label">// WHY_US</span>
       <h2 class="section-title">Why Choose Us?</h2>
     </div>
     <ul class="why-list">
@@ -190,24 +358,177 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/category-page.js"></script>
 <script>
-/* Scroll-reveal for about-page specific elements */
-document.addEventListener('DOMContentLoaded', () => {
-  const selectors = ['.feature-card', '.cat-chip', '.why-list li'];
-  selectors.forEach(sel => {
+(function () {
+  'use strict';
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NO_HOVER = window.matchMedia('(hover: none)').matches;
+
+  /* ── 1. ANIMATED STATS COUNTERS ── */
+  function initStats() {
+    document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+      const target = parseInt(el.dataset.target, 10);
+      const valEl  = el.querySelector('.val');
+      if (!valEl || isNaN(target)) return;
+      if (REDUCED) { valEl.textContent = target; return; }
+      setTimeout(() => {
+        const dur = 1600, t0 = performance.now();
+        (function step(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          const e = 1 - Math.pow(1 - p, 3);
+          valEl.textContent = Math.round(e * target);
+          if (p < 1) requestAnimationFrame(step);
+          else valEl.textContent = target;
+        })(t0);
+      }, 800);
+    });
+  }
+
+  /* ── 2. SCROLL REVEAL (generic) ── */
+  function reveal(sel, threshold = 0.1, delayStep = 0.06) {
     const els = [...document.querySelectorAll(sel)];
     const obs = new IntersectionObserver((entries, o) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = els.indexOf(entry.target);
-          entry.target.style.transitionDelay = `${Math.min(idx * 0.06, 0.35)}s`;
-          entry.target.classList.add('revealed');
-          o.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        const idx = els.indexOf(entry.target);
+        entry.target.style.transitionDelay = `${Math.min(idx * delayStep, 0.4)}s`;
+        entry.target.classList.add('revealed');
+        o.unobserve(entry.target);
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    }, { threshold, rootMargin: '0px 0px -20px 0px' });
     els.forEach(el => obs.observe(el));
+  }
+
+  /* ── 3. FEATURE CARD 3-D TILT ── */
+  function initFeatureTilt() {
+    if (REDUCED || NO_HOVER) return;
+    document.querySelectorAll('.feature-card').forEach(card => {
+      let active = false;
+      card.addEventListener('mouseenter', () => { active = true; });
+      card.addEventListener('mousemove', e => {
+        if (!active) return;
+        const r = card.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+        const dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+        card.style.transform = `perspective(600px) rotateX(${-dy * 6}deg) rotateY(${dx * 6}deg) translateY(-4px) scale(1.012)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        active = false;
+        card.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s, opacity 0.55s';
+        card.style.transform = '';
+        setTimeout(() => { if (!active) card.style.transition = ''; }, 560);
+      });
+    });
+  }
+
+  /* ── 4. CAT CHIP RIPPLE ── */
+  function initChipRipple() {
+    document.querySelectorAll('.cat-chip').forEach(chip => {
+      chip.addEventListener('click', e => {
+        const r = chip.getBoundingClientRect();
+        const rpl = document.createElement('span');
+        rpl.className = 'cat-chip-ripple';
+        rpl.style.left = `${e.clientX - r.left - 3}px`;
+        rpl.style.top  = `${e.clientY - r.top  - 3}px`;
+        chip.appendChild(rpl);
+        setTimeout(() => rpl.remove(), 600);
+      });
+    });
+  }
+
+  /* ── 5. TERMINAL ANIMATION ── */
+  function initTerminal() {
+    const body   = document.getElementById('terminalBody');
+    const cursor = document.getElementById('termCursor');
+    if (!body || REDUCED) {
+      if (body) body.innerHTML = '<span class="term-line"><span class="term-ok">// all systems operational</span></span>';
+      return;
+    }
+
+    const lines = [
+      { text: '> initializing tool scanner...', delay: 0 },
+      { text: '> connecting to index database...', delay: 400 },
+      { text: ' ', delay: 700 },
+      { text: '> scanning categories:', delay: 900, cls: 'term-key' },
+      { text: '  image-tools .......... 9 tools   ✓', delay: 1200, ok: true },
+      { text: '  pdf-tools ............ 3 tools   ✓', delay: 1550, ok: true },
+      { text: '  text-tools ........... 8 tools   ✓', delay: 1900, ok: true },
+      { text: '  developer-tools ...... 8 tools   ✓', delay: 2250, ok: true },
+      { text: '  calculator-tools ..... 8 tools   ✓', delay: 2600, ok: true },
+      { text: '  unit-converters ...... 10 tools  ✓', delay: 2950, ok: true },
+      { text: '  seo-tools ............ 10 tools  ✓', delay: 3300, ok: true },
+      { text: '  security-tools ....... 10 tools  ✓', delay: 3650, ok: true },
+      { text: '  social-media-tools ... 10 tools  ✓', delay: 4000, ok: true },
+      { text: '  business-tools ....... 4 tools   ✓', delay: 4350, ok: true },
+      { text: '  miscellaneous ........ 13 tools  ✓', delay: 4700, ok: true },
+      { text: ' ', delay: 5000 },
+      { text: '> ─────────────────────────────────────', delay: 5100, cls: 'term-dim' },
+      { text: '> total: 95 tools indexed', delay: 5300, cls: 'term-key' },
+      { text: '> status: ALL SYSTEMS OPERATIONAL ■', delay: 5600, ok: true },
+    ];
+
+    const obs = new IntersectionObserver(([entry], o) => {
+      if (!entry.isIntersecting) return;
+      o.disconnect();
+      lines.forEach(({ text, delay, ok, cls }) => {
+        setTimeout(() => {
+          const span = document.createElement('span');
+          span.className = 'term-line';
+          if (ok) span.innerHTML = `<span class="term-ok">${text}</span>`;
+          else if (cls) span.innerHTML = `<span class="${cls}">${text}</span>`;
+          else span.textContent = text;
+          body.insertBefore(span, cursor);
+          body.scrollTop = body.scrollHeight;
+        }, delay);
+      });
+      setTimeout(() => { if (cursor) cursor.remove(); }, 5800);
+    }, { threshold: 0.3 });
+    obs.observe(body);
+  }
+
+  /* ── 6. FLOATING DATA DOTS ── */
+  function initDataDots() {
+    if (REDUCED) return;
+    const tclr = getComputedStyle(document.querySelector('.about-content') || document.body)
+                   .getPropertyValue('--t-clr').trim() || '#00c8ff';
+    for (let i = 0; i < 12; i++) {
+      setTimeout(() => {
+        const d = document.createElement('div');
+        d.className = 'data-particle';
+        d.style.cssText = `
+          left:${Math.random() * 100}vw;
+          bottom:${-10 + Math.random() * 20}px;
+          animation-duration:${8 + Math.random() * 12}s;
+          animation-delay:${Math.random() * 6}s;
+          width:${1.5 + Math.random() * 2.5}px;
+          height:${1.5 + Math.random() * 2.5}px;
+          background:${tclr};
+          box-shadow: 0 0 6px ${tclr};
+        `;
+        document.body.appendChild(d);
+        d.addEventListener('animationend', () => d.remove());
+        /* respawn */
+        setInterval(() => {
+          if (!document.body.contains(d)) return;
+          d.style.left = `${Math.random() * 100}vw`;
+        }, 15000);
+      }, i * 800);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initStats();
+    reveal('.feature-card', 0.1, 0.08);
+    reveal('.cat-chip',     0.08, 0.05);
+    reveal('.why-list li',  0.1,  0.07);
+    reveal('.terminal-wrap',0.1,  0);
+    initFeatureTilt();
+    initChipRipple();
+    initTerminal();
+    initDataDots();
+
+    /* section-head reveal via category-page.js already handles .section-head */
   });
-});
+})();
 </script>
 <script src="/assets/js/main.js"></script>
 </body>
