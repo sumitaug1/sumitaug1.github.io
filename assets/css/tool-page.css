@@ -467,6 +467,51 @@ hr {
 /* ── Ad section ────────────────────────────────── */
 .ad-space { background: rgba(5,9,18,0.6); padding: 1rem; border: 1px solid rgba(255,255,255,0.04); }
 
+/* ── 2-column sticky ad sidebar layout ─────────── */
+/* Activates on any .container that contains an .ad-space element */
+.container:has(.ad-space) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 300px !important;
+  column-gap: 2rem !important;
+  align-items: start !important;
+  max-width: 1300px !important;
+}
+
+/* All direct children go to left content column */
+.container:has(.ad-space) > * {
+  grid-column: 1 !important;
+}
+
+/* The row containing the ad goes to right column and sticks */
+.container:has(.ad-space) > .row:has(.ad-space) {
+  grid-column: 2 !important;
+  grid-row: 1 / 999 !important;
+  position: sticky !important;
+  top: 90px !important;
+  margin-bottom: 0 !important;
+  align-self: start !important;
+}
+
+/* Tighten Bootstrap padding inside the ad sidebar column */
+.container:has(.ad-space) > .row:has(.ad-space) > .col-12 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Ad sidebar card styling */
+.container:has(.ad-space) > .row:has(.ad-space) .card {
+  border: 1px solid rgba(0,200,255,0.12) !important;
+  background: rgba(5,9,18,0.85) !important;
+}
+.container:has(.ad-space) > .row:has(.ad-space) .card-title {
+  font-size: 0.6rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: rgba(0,200,255,0.4) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  margin-bottom: 0.75rem !important;
+}
+
 /* ── Scrollbar ─────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
@@ -474,6 +519,19 @@ hr {
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,200,255,0.45); }
 
 /* ── Responsive ────────────────────────────────── */
+@media (max-width: 960px) {
+  /* Collapse to single column on tablet/mobile */
+  .container:has(.ad-space) {
+    grid-template-columns: 1fr !important;
+  }
+  .container:has(.ad-space) > .row:has(.ad-space) {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    position: static !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
 @media (max-width: 768px) {
   .tool-header { padding: 2rem 1.25rem 1.75rem !important; }
   .tool-header h1 { font-size: 1.25rem !important; }
