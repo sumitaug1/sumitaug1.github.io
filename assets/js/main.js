@@ -888,32 +888,18 @@ async function loadComponents() {
                 const headerContent = await headerResponse.text();
                 headerContainer.innerHTML = headerContent;
                 
-                // Update navigation links based on current location
+                // Set active nav item based on current path
                 const currentPath = window.location.pathname;
-                const isInToolsDirectory = currentPath.includes('/tools/');
-                const prefix = isInToolsDirectory ? '../' : '';
-
-                // Update all navigation links
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href && !href.startsWith('#')) {
-                        if (href === 'about.html') {
-                            link.href = prefix + 'tools/about.html';
-                        } else if (href === 'contact.html') {
-                            link.href = prefix + 'tools/contact.html';
-                        } else {
-                            link.href = prefix + href;
-                        }
-                    }
-                });
-
-                // Update dropdown links
-                document.querySelectorAll('.dropdown-item').forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href) {
-                        link.href = prefix + href;
-                    }
-                });
+                if (currentPath === '/' || /\/?index\.html$/.test(currentPath)) {
+                    document.getElementById('nl-home')?.classList.add('active');
+                } else if (currentPath.includes('about')) {
+                    document.getElementById('nl-about')?.classList.add('active');
+                } else if (currentPath.includes('contact')) {
+                    document.getElementById('nl-contact')?.classList.add('active');
+                } else if (currentPath.includes('/tools/')) {
+                    document.getElementById('nl-tools')?.classList.add('active');
+                }
+                initHeaderBehavior();
             }
         }
 
@@ -973,4 +959,51 @@ async function loadComponents() {
 }
 
 // Load components when the DOM is ready
+function initHeaderBehavior() {
+    // ── Dropdown ────────────────────────────────
+    const toggle = document.getElementById('nl-tools');
+    const dropdown = document.getElementById('tools-dropdown');
+    if (toggle && dropdown) {
+        toggle.addEventListener('click', e => {
+            e.preventDefault();
+            const open = toggle.classList.toggle('dd-open');
+            dropdown.classList.toggle('dd-open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', e => {
+            if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                toggle.classList.remove('dd-open');
+                dropdown.classList.remove('dd-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                toggle.classList.remove('dd-open');
+                dropdown.classList.remove('dd-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // ── Hamburger ───────────────────────────────
+    const ham = document.getElementById('nav-hamburger');
+    const mob = document.getElementById('nav-mobile');
+    if (ham && mob) {
+        ham.addEventListener('click', () => {
+            const open = mob.classList.toggle('mob-open');
+            ham.classList.toggle('ham-open', open);
+            ham.setAttribute('aria-expanded', String(open));
+        });
+    }
+
+    // ── Scroll shadow ───────────────────────────
+    const hdr = document.getElementById('site-header');
+    if (hdr) {
+        const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 10);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+}
+
 document.addEventListener('DOMContentLoaded', loadComponents); 
