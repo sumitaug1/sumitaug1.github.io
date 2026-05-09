@@ -625,8 +625,9 @@ nav::after {
   text-decoration: none;
   color: var(--text);
   overflow: hidden;
-  transition: border-color .3s, background .3s;
+  transition: border-color .3s, background .3s, transform 0.42s cubic-bezier(0.16,1,0.3,1), box-shadow 0.42s ease, opacity 0.32s ease, filter 0.32s ease;
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  will-change: transform;
 }
 
 .cat-tile::before {
@@ -713,6 +714,89 @@ nav::after {
 }
 
 .cat-meta .ct { color: var(--t-clr); font-weight: 500; }
+
+/* ─── NETFLIX-STYLE CATEGORY HOVER ─── */
+.cat-grid { overflow: visible; }
+
+.cat-tile.nx-hovered {
+  overflow: visible !important;
+  clip-path: none !important;
+  z-index: 50 !important;
+  border-color: var(--t-clr) !important;
+  background: rgba(5,9,18,0.99) !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,0.9),
+    0 0 0 1px var(--t-clr),
+    0 0 60px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.cat-grid.nx-active .cat-tile:not(.nx-hovered) {
+  transform: scale(0.91);
+  opacity: 0.38;
+  filter: brightness(0.5) saturate(0.6);
+}
+
+.cat-expand {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.48s cubic-bezier(0.16,1,0.3,1) 0.05s, opacity 0.3s ease 0.1s, border-top-color 0.3s, margin-top 0.3s, padding-top 0.3s;
+  border-top: 1px solid transparent;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.cat-tile.nx-hovered .cat-expand {
+  max-height: 130px;
+  opacity: 1;
+  border-top-color: rgba(255,255,255,0.07);
+  margin-top: 0.9rem;
+  padding-top: 0.65rem;
+}
+
+.cat-expand-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 0.55rem;
+}
+
+.cat-tool-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.54rem;
+  color: rgba(216,221,232,0.42);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 2px 7px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px));
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cat-tool-chip:hover { background: rgba(255,255,255,0.08); color: rgba(216,221,232,0.8); border-color: rgba(255,255,255,0.15); }
+
+.cat-expand-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--t-clr);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px var(--t-clr);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.28s ease, letter-spacing 0.28s ease;
+}
+
+.cat-tile.nx-hovered .cat-expand-cta { gap: 14px; letter-spacing: 0.22em; }
+
+@media (hover: none), (max-width: 768px) {
+  .cat-tile.nx-hovered { transform: none !important; box-shadow: none !important; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px)) !important; overflow: hidden !important; }
+  .cat-grid.nx-active .cat-tile:not(.nx-hovered) { transform: none; opacity: 1; filter: none; }
+  .cat-tile.nx-hovered .cat-expand { max-height: 0 !important; opacity: 0 !important; }
+}
 
 /* ─── TOOL CARDS ─── */
 .tools-grid {
@@ -1361,17 +1445,17 @@ footer::before {
 <script>
 /* ── DATA ── */
 const CATS = [
-  { name:'Image Tools',     emoji:'🖼️',  count:11, clr:'#0ea5e9', id:'IMG', path:'tools/image-tools.html' },
-  { name:'PDF Tools',       emoji:'📄',  count:3,  clr:'#ef4444', id:'PDF', path:'tools/pdf-tools.html' },
-  { name:'SEO Tools',       emoji:'🔍',  count:10, clr:'#22c55e', id:'SEO', path:'tools/seo-tools.html' },
-  { name:'Text Tools',      emoji:'✍️',  count:10, clr:'#a855f7', id:'TXT', path:'tools/text-tools.html' },
-  { name:'Developer Tools', emoji:'⚡',  count:11, clr:'#f97316', id:'DEV', path:'tools/developer-tools.html' },
-  { name:'Calculators',     emoji:'🧮',  count:10, clr:'#eab308', id:'CAL', path:'tools/calculator-tools.html' },
-  { name:'Unit Converters', emoji:'🔄',  count:10, clr:'#14b8a6', id:'UNT', path:'tools/unit-converters.html' },
-  { name:'Security Tools',  emoji:'🔒',  count:10, clr:'#ec4899', id:'SEC', path:'tools/security-tools.html' },
-  { name:'Social Media',    emoji:'📱',  count:10, clr:'#6366f1', id:'SOC', path:'tools/social-media-tools.html' },
-  { name:'Business Tools',  emoji:'💼',  count:4,  clr:'#84cc16', id:'BIZ', path:'tools/business-tools.html' },
-  { name:'Miscellaneous',   emoji:'🎲',  count:18, clr:'#f59e0b', id:'MSC', path:'tools/miscellaneous.html' },
+  { name:'Image Tools',     emoji:'🖼️',  count:11, clr:'#0ea5e9', id:'IMG', path:'tools/image-tools.html',        tools:['PNG Converter','Image Resizer','QR Code Generator','Compressor'] },
+  { name:'PDF Tools',       emoji:'📄',  count:3,  clr:'#ef4444', id:'PDF', path:'tools/pdf-tools.html',          tools:['PDF Merger','JPG to PDF','PDF to JPG'] },
+  { name:'SEO Tools',       emoji:'🔍',  count:10, clr:'#22c55e', id:'SEO', path:'tools/seo-tools.html',          tools:['Meta Tag Generator','Keyword Density','Sitemap Generator','Backlink Checker'] },
+  { name:'Text Tools',      emoji:'✍️',  count:10, clr:'#a855f7', id:'TXT', path:'tools/text-tools.html',         tools:['Word Counter','Case Converter','Lorem Ipsum','Diff Checker'] },
+  { name:'Developer Tools', emoji:'⚡',  count:11, clr:'#f97316', id:'DEV', path:'tools/developer-tools.html',    tools:['JSON Formatter','Base64 Encoder','Regex Tester','UUID Generator'] },
+  { name:'Calculators',     emoji:'🧮',  count:10, clr:'#eab308', id:'CAL', path:'tools/calculator-tools.html',   tools:['Scientific Calc','BMI Calculator','Loan EMI','Age Calculator'] },
+  { name:'Unit Converters', emoji:'🔄',  count:10, clr:'#14b8a6', id:'UNT', path:'tools/unit-converters.html',    tools:['Length','Weight','Temperature','Speed'] },
+  { name:'Security Tools',  emoji:'🔒',  count:10, clr:'#ec4899', id:'SEC', path:'tools/security-tools.html',     tools:['Password Generator','Hash Generator','JWT Decoder','Encryptor'] },
+  { name:'Social Media',    emoji:'📱',  count:10, clr:'#6366f1', id:'SOC', path:'tools/social-media-tools.html', tools:['Post Generator','Hashtag Generator','YT Thumbnail','Emoji Keyboard'] },
+  { name:'Business Tools',  emoji:'💼',  count:4,  clr:'#84cc16', id:'BIZ', path:'tools/business-tools.html',     tools:['Invoice Generator','Bill Calculator','Name Generator','Daily Planner'] },
+  { name:'Miscellaneous',   emoji:'🎲',  count:18, clr:'#f59e0b', id:'MSC', path:'tools/miscellaneous.html',      tools:['Random Number','Barcode Generator','Meme Generator','Dice Roller'] },
 ];
 
 const TOOLS = [
@@ -1475,8 +1559,61 @@ CATS.forEach(c=>{
     <span class="cat-emoji">${c.emoji}</span>
     <div class="cat-name">${c.name}</div>
     <div class="cat-meta"><span class="ct">${c.count}</span> tools available</div>
+    <div class="cat-expand">
+      <div class="cat-expand-tools">${c.tools.map(t=>`<span class="cat-tool-chip">${t}</span>`).join('')}</div>
+      <div class="cat-expand-cta">Explore Category →</div>
+    </div>
   </a>`);
 });
+
+/* ── NETFLIX CATEGORY HOVER ── */
+(function () {
+  if (!FINE_POINTER || REDUCED_MOTION) return;
+  const grid = document.getElementById('catGrid');
+  if (!grid) return;
+
+  let hoverTimer = null, leaveTimer = null, active = null;
+
+  function activate(tile) {
+    if (active === tile) return;
+    deactivate();
+    active = tile;
+    grid.classList.add('nx-active');
+    tile.classList.add('nx-hovered');
+    tile.style.transform = 'scale(1.35)';
+
+    tile._nxMove = e => {
+      const r = tile.getBoundingClientRect();
+      const dx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      const dy = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+      tile.style.transform =
+        `scale(1.35) perspective(800px) rotateX(${(-dy * 9).toFixed(2)}deg) rotateY(${(dx * 9).toFixed(2)}deg)`;
+    };
+    tile.addEventListener('mousemove', tile._nxMove);
+  }
+
+  function deactivate() {
+    if (!active) return;
+    const t = active;
+    t.classList.remove('nx-hovered');
+    t.style.transform = '';
+    if (t._nxMove) { t.removeEventListener('mousemove', t._nxMove); delete t._nxMove; }
+    grid.classList.remove('nx-active');
+    active = null;
+  }
+
+  grid.querySelectorAll('.cat-tile').forEach(tile => {
+    tile.addEventListener('mouseenter', () => {
+      clearTimeout(leaveTimer);
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(() => activate(tile), 520);
+    });
+    tile.addEventListener('mouseleave', () => {
+      clearTimeout(hoverTimer);
+      leaveTimer = setTimeout(deactivate, 240);
+    });
+  });
+})();
 
 /* ── RENDER TOOLS ── */
 const tg = document.getElementById('toolsGrid');
