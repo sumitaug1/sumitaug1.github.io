@@ -1,195 +1,1793 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-HNYPXS04ZV');
-	</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITKnowledge4U Tools Hub - Your One-Stop Solution for Online Tools</title>
-    <meta name="description" content="Access 100+ free online tools including converters, calculators, SEO tools, text utilities, and more. All tools are free to use and require no registration.">
-    <meta name="keywords" content="online tools, converters, calculators, SEO tools, text utilities, developer tools, free tools">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITKnowledge4U Tools Hub — 100+ Free Online Tools, No Sign-Up</title>
+<meta name="description" content="100+ free online tools for developers, designers and creators. Image, PDF, SEO, text, calculator, security, and converter tools. No registration, instant results, free forever.">
+<meta name="keywords" content="online tools, free tools, image tools, pdf tools, seo tools, text tools, developer tools, calculators, unit converters, security tools, no signup">
+<meta name="theme-color" content="#02040a">
+<link rel="canonical" href="https://itknowledge4u.com/">
 
-    <!-- AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687"
-    crossorigin="anonymous"></script>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <style>
-        .search-section {
-            background-color: #34eba4;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-        }
-        .search-section .form-control {
-            border: none;
-            padding: 1rem;
-            font-size: 1.1rem;
-        }
-        .search-section .btn-primary {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-        .search-section .form-control:focus {
-            box-shadow: none;
-            border-color: #34eba4;
-        }
-        .search-section .btn-primary:hover {
-            background-color: #2bc48f;
-            border-color: #2bc48f;
-        }
-        .search-section .btn-primary:focus {
-            background-color: #2bc48f;
-            border-color: #2bc48f;
-            box-shadow: none;
-        }
-        .search-section .btn-primary:active {
-            background-color: #2bc48f !important;
-            border-color: #2bc48f !important;
-        }
-    </style>
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://itknowledge4u.com/">
+<meta property="og:title" content="ITKnowledge4U Tools Hub — 100+ Free Online Tools">
+<meta property="og:description" content="100+ free online tools for developers, designers and creators. No sign-up, instant results.">
+<meta property="og:site_name" content="ITKnowledge4U">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ITKnowledge4U Tools Hub — 100+ Free Online Tools">
+<meta name="twitter:description" content="100+ free online tools for developers, designers and creators. No sign-up, instant results.">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HNYPXS04ZV');
+</script>
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #02040a;
+  --deep: #060912;
+  --panel: rgba(8,14,28,0.85);
+  --glass: rgba(15,25,50,0.6);
+  --border: rgba(0,200,255,0.12);
+  --border-hot: rgba(0,200,255,0.4);
+  --cyan: #00c8ff;
+  --cyan-dim: rgba(0,200,255,0.15);
+  --magenta: #ff2d78;
+  --magenta-dim: rgba(255,45,120,0.15);
+  --green: #00ff9d;
+  --green-dim: rgba(0,255,157,0.12);
+  --amber: #ffaa00;
+  --amber-dim: rgba(255,170,0,0.12);
+  --violet: #9b5bff;
+  --violet-dim: rgba(155,91,255,0.15);
+  --text: #c8d8f0;
+  --text-dim: #4a6080;
+  --glow-cyan: 0 0 20px rgba(0,200,255,0.5), 0 0 60px rgba(0,200,255,0.2);
+  --glow-mag: 0 0 20px rgba(255,45,120,0.5), 0 0 60px rgba(255,45,120,0.2);
+  --glow-green: 0 0 20px rgba(0,255,157,0.4), 0 0 60px rgba(0,255,157,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── CUSTOM CURSOR (only on real mice; touch/trackpad keep native cursor) ─── */
+.cursor, .cursor-ring { display: none; pointer-events: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+
+  .cursor {
+    display: block;
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width .15s, height .15s, background .15s;
+    box-shadow: var(--glow-cyan);
+  }
+
+  .cursor-ring {
+    display: block;
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 1px solid rgba(0,200,255,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all .08s ease;
+  }
+
+  body:has(a:hover) .cursor,
+  body:has(button:hover) .cursor { width: 20px; height: 20px; background: var(--magenta); box-shadow: var(--glow-mag); }
+  body:has(a:hover) .cursor-ring,
+  body:has(button:hover) .cursor-ring { width: 60px; height: 60px; border-color: rgba(255,45,120,0.5); }
+
+  /* override default link/button cursors so the custom one is fully hidden */
+  a, button, .hint, .cat-tile, .tool-tile, .search-execute { cursor: none; }
+  /* but text inputs SHOULD show an I-beam so users know to type */
+  input[type="text"], textarea { cursor: text !important; }
+}
+
+/* ─── CANVAS BG ─── */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── SCANLINES ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  background: rgba(2,4,10,0.9);
+  backdrop-filter: blur(30px);
+  border-bottom: 1px solid var(--border);
+}
+
+nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
+  opacity: .5;
+}
+
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: .1em;
+  text-shadow: var(--glow-cyan);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-bracket { color: var(--magenta); text-shadow: var(--glow-mag); }
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  color: var(--green);
+  text-shadow: var(--glow-green);
+}
+
+.status-dot {
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: var(--glow-green);
+  animation: statusBlink 2s ease-in-out infinite;
+}
+
+@keyframes statusBlink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: color .2s, text-shadow .2s;
+  position: relative;
+}
+
+.nav-links a::before {
+  content: '// ';
+  color: var(--cyan);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.nav-links a:hover { color: var(--cyan); text-shadow: var(--glow-cyan); }
+.nav-links a:hover::before { opacity: 1; }
+
+.nav-cta {
+  font-family: 'Orbitron', monospace !important;
+  font-weight: 700 !important;
+  font-size: .65rem !important;
+  color: var(--void) !important;
+  background: var(--cyan);
+  padding: 8px 20px;
+  border-radius: 3px;
+  letter-spacing: .1em;
+  box-shadow: var(--glow-cyan);
+  transition: box-shadow .2s, transform .15s !important;
+}
+
+.nav-cta:hover { box-shadow: 0 0 30px rgba(0,200,255,0.8), 0 0 80px rgba(0,200,255,0.3) !important; transform: translateY(-1px); }
+.nav-cta::before { display: none !important; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 5rem;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75rem;
+  color: var(--green);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeIn .8s ease both;
+  text-shadow: var(--glow-green);
+}
+
+.eyebrow-line {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green));
+}
+.eyebrow-line.right {
+  background: linear-gradient(90deg, var(--green), transparent);
+}
+
+.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6.5vw, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -.02em;
+  margin-bottom: 1rem;
+  animation: fadeIn .8s .15s ease both;
+}
+
+.hero-title .t1 {
+  display: block;
+  color: var(--text);
+  text-shadow: 0 0 40px rgba(200,216,240,0.2);
+}
+
+.hero-title .t2 {
+  display: block;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--cyan));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite, fadeIn .8s .15s ease both;
+  filter: drop-shadow(0 0 20px rgba(0,200,255,0.4));
+}
+
+@keyframes shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 520px;
+  margin: 1.5rem auto 3rem;
+  font-weight: 300;
+  line-height: 1.7;
+  animation: fadeIn .8s .3s ease both;
+}
+
+.hero-sub em {
+  color: var(--cyan);
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .9em;
+}
+
+/* ─── SEARCH ─── */
+.search-outer {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  animation: fadeIn .8s .45s ease both;
+}
+
+.search-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--violet), var(--cyan));
+  background-size: 300% 100%;
+  animation: borderSpin 4s linear infinite;
+  opacity: .7;
+  filter: blur(4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes borderSpin { 0%{background-position:0%} 100%{background-position:300%} }
+
+.search-outer { isolation: isolate; }
+
+.search-inner {
+  position: relative;
+  z-index: 2;
+  background: rgba(6,9,18,0.95);
+  border: 1px solid var(--border-hot);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 6px 6px 6px 20px;
+  gap: 10px;
+  cursor: text;
+  pointer-events: auto;
+}
+
+.search-inner input,
+.search-inner button { pointer-events: auto !important; }
+.search-inner input { cursor: text; }
+.search-inner:focus-within { border-color: var(--cyan); box-shadow: 0 0 24px rgba(0,200,255,0.25); }
+
+.search-prompt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .8rem;
+  color: var(--green);
+  white-space: nowrap;
+  text-shadow: var(--glow-green);
+}
+
+.search-inner input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  caret-color: var(--cyan);
+}
+
+.search-inner input::placeholder { color: var(--text-dim); }
+
+.search-execute {
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  border: none;
+  border-radius: 5px;
+  padding: 10px 22px;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: .65rem;
+  letter-spacing: .1em;
+  color: var(--void);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  box-shadow: 0 0 20px rgba(0,200,255,0.3);
+}
+
+.search-execute:hover { box-shadow: 0 0 40px rgba(0,200,255,0.6); transform: scale(1.03); }
+
+/* ─── SEARCH RESULTS DROPDOWN ─── */
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0; right: 0;
+  background: rgba(2,4,10,0.98);
+  border: 1px solid var(--border-hot);
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,200,255,0.15);
+  max-height: 360px;
+  overflow-y: auto;
+  display: none;
+  z-index: 50;
+  backdrop-filter: blur(20px);
+}
+.search-results.open { display: block; }
+
+.search-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  text-decoration: none;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  transition: background .15s, color .15s;
+}
+.search-result:last-child { border-bottom: none; }
+.search-result:hover, .search-result.active {
+  background: rgba(0,200,255,0.08);
+  color: var(--cyan);
+}
+.sr-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .9rem;
+  font-weight: 500;
+}
+.sr-arrow {
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  transition: color .15s, transform .15s;
+}
+.search-result:hover .sr-arrow,
+.search-result.active .sr-arrow {
+  color: var(--cyan);
+  transform: translateX(3px);
+}
+.search-empty {
+  padding: 16px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .8rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+.search-results::-webkit-scrollbar { width: 6px; }
+.search-results::-webkit-scrollbar-track { background: transparent; }
+.search-results::-webkit-scrollbar-thumb { background: rgba(0,200,255,0.2); border-radius: 3px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .search-result { cursor: none; }
+}
+
+.search-hints {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  animation: fadeIn .8s .6s ease both;
+}
+
+.hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  color: var(--text-dim);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 4px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+  letter-spacing: .04em;
+}
+
+.hint:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: var(--cyan-dim);
+  box-shadow: 0 0 12px rgba(0,200,255,0.2);
+}
+
+/* ─── STATS ROW ─── */
+.stats-row {
+  display: flex;
+  gap: 0;
+  margin-top: 4.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  animation: fadeIn .8s .75s ease both;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+}
+
+.stat-block {
+  flex: 1;
+  padding: 1.25rem 2rem;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-block:last-child { border-right: none; }
+
+.stat-block::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--stat-clr, var(--cyan));
+  transform: scaleX(0);
+  transition: transform .4s ease;
+  box-shadow: 0 0 10px var(--stat-clr, var(--cyan));
+}
+
+.stat-block:hover::before { transform: scaleX(1); }
+
+.stat-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--stat-clr, var(--cyan));
+  text-shadow: 0 0 20px var(--stat-clr, var(--cyan));
+  letter-spacing: -.02em;
+}
+
+.stat-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: var(--text-dim);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ─── SECTION SHARED ─── */
+.section {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 2.5rem;
+}
+
+.s-head {
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.s-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  color: var(--cyan);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-shadow: var(--glow-cyan);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.s-label::before { content: '//'; color: var(--magenta); text-shadow: var(--glow-mag); }
+
+.s-title {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.s-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: .08em;
+  transition: color .2s;
+  white-space: nowrap;
+}
+
+.s-link:hover { color: var(--cyan); }
+
+/* ─── DIVIDER ─── */
+.divider {
+  position: relative;
+  z-index: 10;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-hot) 50%, transparent 100%);
+  margin: 0 2.5rem;
+}
+
+/* ─── CATEGORY HEX GRID ─── */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px;
+}
+
+.cat-tile {
+  position: relative;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  overflow: hidden;
+  transition: border-color .3s, background .3s;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+
+.cat-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, var(--t-clr), transparent 65%);
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+.cat-tile::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 16px; height: 16px;
+  border-top: 1px solid var(--t-clr);
+  border-right: 1px solid var(--t-clr);
+  opacity: .6;
+  transition: opacity .3s;
+}
+
+.cat-tile:hover {
+  border-color: var(--t-clr);
+  background: rgba(8,14,28,0.95);
+}
+
+.cat-tile:hover::before { opacity: .08; }
+.cat-tile:hover::after { opacity: 1; }
+
+.cat-tile:hover .cat-scan { transform: translateY(0); opacity: .06; }
+
+.cat-scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--t-clr) 0px,
+    var(--t-clr) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 1.5s ease, opacity .3s;
+  pointer-events: none;
+}
+
+.cat-ident {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .6rem;
+  color: var(--t-clr);
+  letter-spacing: .15em;
+  margin-bottom: 1.2rem;
+  opacity: .7;
+  text-shadow: 0 0 10px var(--t-clr);
+}
+
+.cat-emoji {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: .75rem;
+  filter: drop-shadow(0 0 10px var(--t-clr));
+  position: relative;
+  z-index: 1;
+}
+
+.cat-name {
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  font-size: .85rem;
+  letter-spacing: .05em;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.cat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: var(--text-dim);
+  position: relative;
+  z-index: 1;
+}
+
+.cat-meta .ct { color: var(--t-clr); font-weight: 500; }
+
+/* ─── TOOL CARDS ─── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media(max-width:900px) { .tools-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:600px) { .tools-grid { grid-template-columns: 1fr; } }
+
+.tool-tile {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  transition: border-color .3s, transform .25s;
+  cursor: pointer;
+}
+
+.tool-tile::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--t-clr, var(--cyan)), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.tool-tile:hover {
+  border-color: rgba(0,200,255,0.2);
+  transform: translateY(-3px);
+}
+
+.tool-tile:hover::before { opacity: 1; }
+
+.tool-tile-corner {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 40px; height: 40px;
+  overflow: hidden;
+  opacity: .4;
+}
+
+.tool-tile-corner::after {
+  content: '';
+  position: absolute;
+  bottom: 8px; right: -20px;
+  width: 40px; height: 1px;
+  background: var(--t-clr, var(--cyan));
+  transform: rotate(-45deg);
+}
+
+.tt-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tt-icon {
+  width: 44px; height: 44px;
+  background: color-mix(in srgb, var(--t-clr, var(--cyan)) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--t-clr, var(--cyan)) 25%, transparent);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px var(--t-clr, var(--cyan)));
+}
+
+.tt-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: .1em;
+  padding: 3px 8px;
+  border: 1px solid var(--t-clr, var(--cyan));
+  color: var(--t-clr, var(--cyan));
+  border-radius: 2px;
+  opacity: .7;
+  white-space: nowrap;
+}
+
+.tt-name {
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  font-size: .85rem;
+  letter-spacing: .03em;
+  line-height: 1.3;
+}
+
+.tt-desc {
+  font-size: .83rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.tt-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tt-launch {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  color: var(--t-clr, var(--cyan));
+  letter-spacing: .08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap .2s;
+}
+
+.tool-tile:hover .tt-launch { gap: 10px; }
+
+.tt-stars {
+  font-size: .7rem;
+  letter-spacing: 2px;
+  color: var(--amber);
+  text-shadow: 0 0 8px rgba(255,170,0,0.5);
+}
+
+/* ─── TERMINAL BLOCK ─── */
+.terminal-section {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, rgba(0,200,255,0.04) 0%, rgba(155,91,255,0.04) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 5rem 2.5rem;
+  overflow: hidden;
+}
+
+.terminal-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.terminal-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.term-copy { position: relative; z-index: 1; }
+
+.term-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  color: var(--green);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-shadow: var(--glow-green);
+}
+
+.term-headline {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 2.8rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.term-headline span {
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 15px rgba(0,255,157,0.3));
+}
+
+.term-body {
+  color: var(--text-dim);
+  font-size: .95rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.term-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  color: var(--void);
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  padding: 14px 32px;
+  border-radius: 3px;
+  text-decoration: none;
+  box-shadow: 0 0 30px rgba(0,200,255,0.3);
+  transition: box-shadow .2s, transform .15s;
+}
+
+.term-cta:hover { box-shadow: 0 0 50px rgba(0,200,255,0.5); transform: translateY(-2px); }
+
+.terminal-box {
+  position: relative;
+  z-index: 1;
+  background: rgba(2,4,10,0.95);
+  border: 1px solid var(--border-hot);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,200,255,0.1), 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(6,9,18,0.8);
+}
+
+.term-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.term-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  color: var(--text-dim);
+  letter-spacing: .1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.term-code {
+  padding: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .8rem;
+  line-height: 2;
+}
+
+.tc-line { display: flex; gap: 12px; }
+.tc-num { color: rgba(255,255,255,0.15); min-width: 20px; }
+.tc-comment { color: #3a5060; }
+.tc-key { color: var(--violet); }
+.tc-str { color: var(--green); }
+.tc-fn { color: var(--cyan); }
+.tc-punc { color: var(--text-dim); }
+.tc-val { color: var(--amber); }
+
+/* ─── MARQUEE ─── */
+.marquee-section {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,200,255,0.02);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 40s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover { animation-play-state: paused; }
+
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+.m-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  text-decoration: none;
+  letter-spacing: .05em;
+  transition: color .2s;
+  border-right: 1px solid var(--border);
+}
+
+.m-item:hover { color: var(--cyan); }
+.m-item .m-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
+
+/* ─── FOOTER ─── */
+footer {
+  position: relative;
+  z-index: 10;
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  padding: 5rem 2.5rem 2.5rem;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), var(--violet), transparent);
+}
+
+.foot-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.foot-brand .logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  letter-spacing: .1em;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.foot-brand p {
+  font-size: .85rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 300px;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.foot-socials { display: flex; gap: 10px; }
+
+.fsoc {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all .2s;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+.fsoc:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+
+.foot-col h6 {
+  font-family: 'Orbitron', monospace;
+  font-size: .65rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 1.2rem;
+  text-shadow: var(--glow-cyan);
+}
+
+.foot-col ul { list-style: none; }
+.foot-col li { margin-bottom: .6rem; }
+.foot-col a {
+  font-size: .82rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.foot-col a::before {
+  content: '›';
+  color: var(--cyan);
+  opacity: 0;
+  transition: opacity .2s, transform .2s;
+  transform: translateX(-4px);
+}
+
+.foot-col a:hover { color: var(--text); }
+.foot-col a:hover::before { opacity: 1; transform: translateX(0); }
+
+.foot-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.foot-bottom p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: var(--text-dim);
+  letter-spacing: .06em;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px) {
+  .nav-links { display: none; }
+  .stats-row { flex-wrap: wrap; }
+  .stat-block { flex: 1 1 40%; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .terminal-inner { grid-template-columns: 1fr; }
+  .terminal-box { display: none; }
+  .foot-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .foot-brand { grid-column: 1/-1; }
+  .s-head { flex-direction: column; align-items: flex-start; }
+}
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  #bgCanvas { display: none; }
+  body::after { display: none; } /* scanlines */
+  .marquee-track { animation: none; }
+  .status-dot { animation: none; opacity: 1; }
+  .hero-title .t2 { animation: none; background-position: 0%; }
+  .search-glow { animation: none; opacity: .3; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
 </head>
 <body>
-    <!-- Header will be loaded dynamically -->
-    <div id="header-container"></div>
 
-    <div class="container mt-4">
-        <!-- Hero Section -->
-        <div class="hero-section text-center mb-5">
-            <h1 class="display-4 fw-bold">ITKnowledge4U Tools Hub</h1>
-            <p class="lead">Your One-Stop Solution for All Online Tools</p>
-            <div class="search-container mt-4">
-                <div class="input-group">
-                    <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search for tools...">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-        <!-- Categories Section -->
-        <section id="tool-categories" class="categories-section mb-5">
-            <h2 class="text-center mb-4">Tool Categories</h2>
-            <div class="row g-4" id="categories-container">
-                <!-- Categories will be loaded dynamically -->
-            </div>
-        </section>
+<!-- BG CANVAS -->
+<canvas id="bgCanvas"></canvas>
 
-        <!-- Popular Tools Section -->
-        <section id="popular-tools" class="popular-tools-section mb-5">
-            <h2 class="text-center mb-4">Popular Tools</h2>
-            <div class="row g-4" id="popular-tools-container">
-                <!-- Popular tools will be loaded dynamically -->
-            </div>
-        </section>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="logo-bracket">[</span>ITK4U<span class="logo-bracket">]</span>
+  </a>
+  <div class="nav-status">
+    <span class="status-dot"></span>
+    SYSTEM ONLINE · 100+ TOOLS ACTIVE
+  </div>
+  <ul class="nav-links">
+    <li><a href="tools/image-tools.html">Tools</a></li>
+    <li><a href="tools/about.html">About</a></li>
+    <li><a href="tools/contact.html">Contact</a></li>
+    <li><a href="tools/about.html" class="nav-cta">ACCESS HUB</a></li>
+  </ul>
+</nav>
 
-        <!-- Image Tools Section -->
-        <section id="image-tools" class="image-tools-section mb-5">
-            <h2 class="text-center mb-4">Image Tools</h2>
-            <div class="row g-4" id="image-tools-container">
-                <!-- Image tools will be loaded dynamically -->
-            </div>
-        </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="eyebrow-line"></span>
+    SYSTEM INITIALISED · ALL TOOLS FREE · NO REGISTRATION
+    <span class="eyebrow-line right"></span>
+  </div>
 
-        <!-- PDF Tools Section -->
-        <section id="pdf-tools" class="pdf-tools-section mb-5">
-            <h2 class="text-center mb-4">PDF Tools</h2>
-            <div class="row g-4" id="pdf-tools-container">
-                <!-- PDF tools will be loaded dynamically -->
-            </div>
-        </section>
+  <h1 class="hero-title">
+    <span class="t1">THE ULTIMATE</span>
+    <span class="t2">TOOL ARSENAL</span>
+  </h1>
 
-        <!-- SEO Tools Section -->
-        <section id="seo-tools" class="seo-tools-section mb-5">
-            <h2 class="text-center mb-4">SEO Tools</h2>
-            <div class="row g-4" id="seo-tools-container">
-                <!-- SEO tools will be loaded dynamically -->
-            </div>
-        </section>
+  <p class="hero-sub">
+    <em>100+</em> free online tools for developers, designers &amp; creators.
+    Convert, calculate, generate, compress — instant results, zero sign-up.
+  </p>
 
-        <!-- Text Tools Section -->
-        <section id="text-tools" class="text-tools-section mb-5">
-            <h2 class="text-center mb-4">Text Tools</h2>
-            <div class="row g-4" id="text-tools-container">
-                <!-- Text tools will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Developer Tools Section -->
-        <section id="developer-tools" class="developer-tools-section mb-5">
-            <h2 class="text-center mb-4">Developer Tools</h2>
-            <div class="row g-4" id="developer-tools-container">
-                <!-- Developer tools will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Calculators Section -->
-        <section id="calculators" class="calculators-section mb-5">
-            <h2 class="text-center mb-4">Calculators</h2>
-            <div class="row g-4" id="calculators-container">
-                <!-- Calculators will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Unit Converters Section -->
-        <section id="unit-converters" class="unit-converters-section mb-5">
-            <h2 class="text-center mb-4">Unit Converters</h2>
-            <div class="row g-4" id="unit-converters-container">
-                <!-- Unit converters will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Security Tools Section -->
-        <section id="security-tools" class="security-tools-section mb-5">
-            <h2 class="text-center mb-4">Security Tools</h2>
-            <div class="row g-4" id="security-tools-container">
-                <!-- Security tools will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Social Media Tools Section -->
-        <section id="social-media-tools" class="social-media-tools-section mb-5">
-            <h2 class="text-center mb-4">Social Media Tools</h2>
-            <div class="row g-4" id="social-media-tools-container">
-                <!-- Social media tools will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Business Tools Section -->
-        <section id="business-tools" class="business-tools-section mb-5">
-            <h2 class="text-center mb-4">Business Tools</h2>
-            <div class="row g-4" id="business-tools-container">
-                <!-- Business tools will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Miscellaneous Section -->
-        <section id="miscellaneous" class="miscellaneous-section mb-5">
-            <h2 class="text-center mb-4">Miscellaneous</h2>
-            <div class="row g-4" id="miscellaneous-container">
-                <!-- Miscellaneous tools will be loaded dynamically -->
-            </div>
-        </section>
+  <div class="search-outer">
+    <div class="search-glow"></div>
+    <div class="search-inner">
+      <span class="search-prompt">~/tools $</span>
+      <input type="text" id="searchInput" placeholder="search —  try 'qr code', 'pdf merge', 'json'…" autocomplete="off">
+      <button class="search-execute" onclick="doSearch()">EXECUTE ›</button>
     </div>
+  </div>
+  <div class="search-hints" id="hints"></div>
 
-    <!-- Footer will be loaded dynamically -->
-    <div id="footer-container"></div>
+  <div class="stats-row">
+    <div class="stat-block" style="--stat-clr:var(--cyan)">
+      <div class="stat-val" id="sc1">0+</div>
+      <div class="stat-key">FREE_TOOLS</div>
+    </div>
+    <div class="stat-block" style="--stat-clr:var(--magenta)">
+      <div class="stat-val" id="sc2">0</div>
+      <div class="stat-key">CATEGORIES</div>
+    </div>
+    <div class="stat-block" style="--stat-clr:var(--green)">
+      <div class="stat-val">ZERO</div>
+      <div class="stat-key">SIGN_UPS</div>
+    </div>
+    <div class="stat-block" style="--stat-clr:var(--violet)">
+      <div class="stat-val">∞</div>
+      <div class="stat-key">FREE_FOREVER</div>
+    </div>
+  </div>
+</section>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="assets/js/main.js"></script>
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section reveal">
+  <div class="s-head">
+    <div>
+      <div class="s-label">SELECT_CATEGORY</div>
+      <div class="s-title">What's your mission?</div>
+    </div>
+    <a href="#" class="s-link">VIEW ALL MODULES →</a>
+  </div>
+  <div class="cat-grid" id="catGrid"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TERMINAL SECTION -->
+<div class="terminal-section">
+  <div class="terminal-inner">
+    <div class="term-copy reveal">
+      <div class="term-tag">// ZERO FRICTION ACCESS</div>
+      <h2 class="term-headline">Built for speed.<br><span>Zero bloat.</span></h2>
+      <p class="term-body">Every tool launches instantly in your browser. No downloads, no accounts, no waiting. Just paste, click, done. Privacy-first — your files never leave your machine.</p>
+      <a href="tools/about.html" class="term-cta">EXPLORE ALL TOOLS ›</a>
+    </div>
+    <div class="terminal-box reveal">
+      <div class="term-bar">
+        <div class="term-dot" style="background:#ff5f57"></div>
+        <div class="term-dot" style="background:#febc2e"></div>
+        <div class="term-dot" style="background:#28c840"></div>
+        <div class="term-title">itknowledge4u.com — tool_manifest.json</div>
+      </div>
+      <div class="term-code" id="termCode"></div>
+    </div>
+  </div>
+</div>
+
+<!-- POPULAR TOOLS -->
+<div class="section reveal">
+  <div class="s-head">
+    <div>
+      <div class="s-label">POPULAR_TOOLS</div>
+      <div class="s-title">Most-used right now</div>
+    </div>
+    <a href="#" class="s-link">LOAD ALL →</a>
+  </div>
+  <div class="tools-grid" id="toolsGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <span class="logo">[ITKnowledge4U]</span>
+      <p>Your command centre for 100+ free online tools. Convert, calculate, generate, analyse — no accounts, no fees, no limits. Built for people who get things done.</p>
+      <div class="foot-socials">
+        <a href="#" class="fsoc">𝕏</a>
+        <a href="#" class="fsoc">in</a>
+        <a href="#" class="fsoc">GH</a>
+        <a href="#" class="fsoc">YT</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h6>Tools</h6>
+      <ul>
+        <li><a href="tools/image-tools.html">Image Tools</a></li>
+        <li><a href="tools/pdf-tools.html">PDF Tools</a></li>
+        <li><a href="tools/seo-tools.html">SEO Tools</a></li>
+        <li><a href="tools/text-tools.html">Text Tools</a></li>
+        <li><a href="tools/developer-tools.html">Dev Tools</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h6>More</h6>
+      <ul>
+        <li><a href="tools/calculator-tools.html">Calculators</a></li>
+        <li><a href="tools/unit-converters.html">Unit Converters</a></li>
+        <li><a href="tools/security-tools.html">Security</a></li>
+        <li><a href="tools/social-media-tools.html">Social Media</a></li>
+        <li><a href="tools/business-tools.html">Business</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h6>Info</h6>
+      <ul>
+        <li><a href="tools/about.html">About</a></li>
+        <li><a href="tools/contact.html">Contact</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>© <span id="yr"></span> ITKnowledge4U · All systems operational</p>
+    <p>CRAFTED FOR DEVELOPERS &amp; CREATORS · FREE FOREVER</p>
+  </div>
+</footer>
+
+<script>
+/* ── DATA ── */
+const CATS = [
+  { name:'Image Tools',     emoji:'🖼️',  count:11, clr:'#0ea5e9', id:'IMG', path:'tools/image-tools.html' },
+  { name:'PDF Tools',       emoji:'📄',  count:3,  clr:'#ef4444', id:'PDF', path:'tools/pdf-tools.html' },
+  { name:'SEO Tools',       emoji:'🔍',  count:10, clr:'#22c55e', id:'SEO', path:'tools/seo-tools.html' },
+  { name:'Text Tools',      emoji:'✍️',  count:10, clr:'#a855f7', id:'TXT', path:'tools/text-tools.html' },
+  { name:'Developer Tools', emoji:'⚡',  count:11, clr:'#f97316', id:'DEV', path:'tools/developer-tools.html' },
+  { name:'Calculators',     emoji:'🧮',  count:10, clr:'#eab308', id:'CAL', path:'tools/calculator-tools.html' },
+  { name:'Unit Converters', emoji:'🔄',  count:10, clr:'#14b8a6', id:'UNT', path:'tools/unit-converters.html' },
+  { name:'Security Tools',  emoji:'🔒',  count:10, clr:'#ec4899', id:'SEC', path:'tools/security-tools.html' },
+  { name:'Social Media',    emoji:'📱',  count:10, clr:'#6366f1', id:'SOC', path:'tools/social-media-tools.html' },
+  { name:'Business Tools',  emoji:'💼',  count:4,  clr:'#84cc16', id:'BIZ', path:'tools/business-tools.html' },
+  { name:'Miscellaneous',   emoji:'🎲',  count:18, clr:'#f59e0b', id:'MSC', path:'tools/miscellaneous.html' },
+];
+
+const TOOLS = [
+  { name:'QR Code Generator',   emoji:'⬛', desc:'Generate QR codes from any URL, text or contact. Custom colours, high-res export.', cat:'IMAGE', clr:'#0ea5e9', path:'tools/image-tools/qr-code-generator.html', stars:'★★★★★' },
+  { name:'JSON Formatter',      emoji:'{}', desc:'Beautify, minify and validate JSON with syntax highlighting and error detection.',    cat:'DEV',   clr:'#f97316', path:'tools/developer-tools/json-formatter.html', stars:'★★★★★' },
+  { name:'PDF Merger',          emoji:'📎', desc:'Combine multiple PDFs into one document with drag-and-drop page ordering.',           cat:'PDF',   clr:'#ef4444', path:'tools/pdf-tools/pdf-merger.html', stars:'★★★★★' },
+  { name:'Password Generator',  emoji:'🔑', desc:'Generate cryptographically strong passwords with custom length and character sets.',  cat:'SEC',   clr:'#ec4899', path:'tools/security-tools/password-generator.html', stars:'★★★★★' },
+  { name:'Image Compressor',    emoji:'🗜️', desc:'Reduce image file size without visible quality loss. Drag &amp; drop, instant result.', cat:'IMAGE', clr:'#0ea5e9', path:'tools/image-tools/image-compressor.html', stars:'★★★★☆' },
+  { name:'Word Counter',        emoji:'📝', desc:'Count words, characters, sentences and reading time. Great for writers and editors.',  cat:'TEXT',  clr:'#a855f7', path:'tools/text-tools/word-counter.html', stars:'★★★★☆' },
+  { name:'Meta Tag Generator',  emoji:'🏷️', desc:'Generate perfect meta tags for SEO — title, description, Open Graph, Twitter Card.',  cat:'SEO',   clr:'#22c55e', path:'tools/seo-tools/meta-tag-generator.html', stars:'★★★★☆' },
+  { name:'BMI Calculator',      emoji:'⚖️', desc:'Calculate Body Mass Index with health assessment and ideal weight range.',             cat:'CALC',  clr:'#eab308', path:'tools/calculator-tools/bmi-calculator.html', stars:'★★★★☆' },
+  { name:'Base64 Encoder',      emoji:'🔐', desc:'Encode and decode Base64 strings instantly. Supports files and raw text.',             cat:'DEV',   clr:'#f97316', path:'tools/developer-tools/base64-encoder-decoder.html', stars:'★★★★☆' },
+];
+
+const HINTS = ['qr code','pdf merge','json format','word count','bmi calculator','password generator','image compress','meta tags'];
+
+/* ── ENVIRONMENT FLAGS ── */
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE_POINTER  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const IS_MOBILE     = window.matchMedia('(max-width: 768px)').matches;
+
+/* ── CURSOR (only on real mice, and only when motion isn't reduced) ── */
+if (FINE_POINTER && !REDUCED_MOTION) {
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+  const animRing = () => {
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  };
+  animRing();
+}
+
+/* ── CANVAS PARTICLES (skip entirely under reduced motion) ── */
+if (!REDUCED_MOTION) {
+  try {
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      let W,H,particles=[];
+      const PARTICLE_COUNT = IS_MOBILE ? 40 : 120;
+      const DRAW_LINKS = !IS_MOBILE;
+
+      function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      class Particle {
+        constructor(){
+          this.x = Math.random()*W;
+          this.y = Math.random()*H;
+          this.vx = (Math.random()-.5)*.3;
+          this.vy = (Math.random()-.5)*.3;
+          this.r = Math.random()*1.5+.5;
+          const c = ['rgba(0,200,255','rgba(255,45,120','rgba(0,255,157','rgba(155,91,255'][Math.floor(Math.random()*4)];
+          this.col = c+','+( Math.random()*.5+.3)+')';
+        }
+        update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0)this.x=W; if(this.x>W)this.x=0; if(this.y<0)this.y=H; if(this.y>H)this.y=0; }
+        draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=this.col; ctx.fill(); }
+      }
+
+      for(let i=0;i<PARTICLE_COUNT;i++) particles.push(new Particle());
+
+      function drawConnections(){
+        for(let i=0;i<particles.length;i++){
+          for(let j=i+1;j<particles.length;j++){
+            const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+            const d=Math.sqrt(dx*dx+dy*dy);
+            if(d<120){
+              ctx.beginPath();
+              ctx.strokeStyle=`rgba(0,200,255,${(.1*(1-d/120)).toFixed(3)})`;
+              ctx.lineWidth=.5;
+              ctx.moveTo(particles[i].x,particles[i].y);
+              ctx.lineTo(particles[j].x,particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animate(){
+        ctx.clearRect(0,0,W,H);
+        particles.forEach(p=>{ p.update(); p.draw(); });
+        if (DRAW_LINKS) drawConnections();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+  } catch(e) { /* canvas blocked or unsupported — page still works */ }
+}
+
+/* ── RENDER CATEGORIES ── */
+const cg = document.getElementById('catGrid');
+CATS.forEach(c=>{
+  cg.insertAdjacentHTML('beforeend', `
+  <a href="${c.path}" class="cat-tile" style="--t-clr:${c.clr}">
+    <div class="cat-scan"></div>
+    <div class="cat-ident">${c.id}_MODULE</div>
+    <span class="cat-emoji">${c.emoji}</span>
+    <div class="cat-name">${c.name}</div>
+    <div class="cat-meta"><span class="ct">${c.count}</span> tools available</div>
+  </a>`);
+});
+
+/* ── RENDER TOOLS ── */
+const tg = document.getElementById('toolsGrid');
+TOOLS.forEach(t=>{
+  tg.insertAdjacentHTML('beforeend', `
+  <a href="${t.path}" class="tool-tile" style="--t-clr:${t.clr}">
+    <div class="tool-tile-corner"></div>
+    <div class="tt-top">
+      <div class="tt-icon">${t.emoji}</div>
+      <div class="tt-badge">${t.cat}</div>
+    </div>
+    <div class="tt-name">${t.name}</div>
+    <div class="tt-desc">${t.desc}</div>
+    <div class="tt-foot">
+      <div class="tt-launch">LAUNCH TOOL <span>→</span></div>
+      <div class="tt-stars">${t.stars}</div>
+    </div>
+  </a>`);
+});
+
+/* ── HINTS ── */
+const hc = document.getElementById('hints');
+HINTS.forEach(h=>{
+  hc.insertAdjacentHTML('beforeend', `<a href="#" class="hint" data-q="${h}">${h}</a>`);
+});
+hc.addEventListener('click', e=>{
+  const a = e.target.closest('.hint');
+  if (!a) return;
+  e.preventDefault();
+  const inp = document.getElementById('searchInput');
+  inp.value = a.dataset.q;
+  inp.focus();
+  inp.dispatchEvent(new Event('input'));
+});
+
+/* ── TERMINAL CODE BLOCK ── */
+const lines = [
+  {num:'01',type:'comment',txt:'// ITKnowledge4U — tool manifest'},
+  {num:'02',type:'punc',txt:'{'},
+  {num:'03',type:'',txt:'  <span class="tc-key">"version"</span><span class="tc-punc">:</span> <span class="tc-str">"2.0.0"</span><span class="tc-punc">,</span>'},
+  {num:'04',type:'',txt:'  <span class="tc-key">"tools"</span><span class="tc-punc">:</span> <span class="tc-val">109</span><span class="tc-punc">,</span>'},
+  {num:'05',type:'',txt:'  <span class="tc-key">"categories"</span><span class="tc-punc">:</span> <span class="tc-val">11</span><span class="tc-punc">,</span>'},
+  {num:'06',type:'',txt:'  <span class="tc-key">"cost"</span><span class="tc-punc">:</span> <span class="tc-str">"$0.00"</span><span class="tc-punc">,</span>'},
+  {num:'07',type:'',txt:'  <span class="tc-key">"registration"</span><span class="tc-punc">:</span> <span class="tc-val">false</span><span class="tc-punc">,</span>'},
+  {num:'08',type:'',txt:'  <span class="tc-key">"status"</span><span class="tc-punc">:</span> <span class="tc-str">"ONLINE"</span><span class="tc-punc">,</span>'},
+  {num:'09',type:'comment',txt:'  // new tools added weekly'},
+  {num:'10',type:'',txt:'  <span class="tc-key">"access"</span><span class="tc-punc">:</span> <span class="tc-fn">open</span><span class="tc-punc">()</span>'},
+  {num:'11',type:'punc',txt:'}'},
+];
+const tc = document.getElementById('termCode');
+lines.forEach(l=>{
+  let content = l.txt;
+  if(l.type==='comment') content=`<span class="tc-comment">${l.txt}</span>`;
+  if(l.type==='punc') content=`<span class="tc-punc">${l.txt}</span>`;
+  tc.innerHTML+=`<div class="tc-line"><span class="tc-num">${l.num}</span><span>${content}</span></div>`;
+});
+
+/* ── MARQUEE ── */
+const allItems = [...CATS.map(c=>({name:c.name,clr:c.clr})), ...TOOLS.map(t=>({name:t.name,clr:t.clr}))];
+const mt = document.getElementById('marqueeTrack');
+const makeM = ()=> allItems.map(i=>`<span class="m-item"><span class="m-dot" style="background:${i.clr}"></span>${i.name}</span>`).join('');
+mt.innerHTML = makeM()+makeM();
+
+/* ── COUNTER ── */
+function countUp(id, target, suffix=''){
+  const el = document.getElementById(id);
+  let n=0; const step=Math.ceil(target/50);
+  const t = setInterval(()=>{ n=Math.min(n+step,target); el.textContent=n+suffix; if(n>=target)clearInterval(t); },30);
+}
+setTimeout(()=>{ countUp('sc1',100,'+'); countUp('sc2',11); },800);
+
+/* ── SEARCH INDEX (curated; covers common tool searches) ── */
+const SEARCH_INDEX = [
+  // Image
+  {n:'QR Code Generator', p:'tools/image-tools/qr-code-generator.html', k:'qr code generator image'},
+  {n:'Image Compressor', p:'tools/image-tools/image-compressor.html', k:'compress reduce size image'},
+  {n:'Image Resizer', p:'tools/image-tools/image-resizer.html', k:'resize image dimensions'},
+  {n:'Image Cropper', p:'tools/image-tools/image-cropper.html', k:'crop image'},
+  {n:'Image Rotator', p:'tools/image-tools/image-rotator.html', k:'rotate image'},
+  {n:'Image to PNG', p:'tools/image-tools/image-to-png.html', k:'convert png image'},
+  {n:'Image to JPG', p:'tools/image-tools/image-to-jpg.html', k:'convert jpg jpeg image'},
+  {n:'WebP to PNG', p:'tools/image-tools/webp-to-png.html', k:'webp png convert'},
+  {n:'Base64 Image', p:'tools/image-tools/base64-image.html', k:'base64 image encode'},
+  {n:'GIF Maker', p:'tools/image-tools/gif-maker.html', k:'gif animated maker'},
+  {n:'Screenshot to PDF', p:'tools/image-tools/screenshot-to-pdf.html', k:'screenshot pdf'},
+  // PDF
+  {n:'PDF Merger', p:'tools/pdf-tools/pdf-merger.html', k:'pdf merge combine'},
+  {n:'JPG to PDF', p:'tools/pdf-tools/jpg-to-pdf.html', k:'jpg pdf convert'},
+  {n:'PDF to JPG', p:'tools/pdf-tools/pdf-to-jpg.html', k:'pdf jpg extract'},
+  // Dev
+  {n:'JSON Formatter', p:'tools/developer-tools/json-formatter.html', k:'json format beautify minify'},
+  {n:'Base64 Encoder/Decoder', p:'tools/developer-tools/base64-encoder-decoder.html', k:'base64 encode decode'},
+  {n:'CSS Minifier', p:'tools/developer-tools/css-minifier.html', k:'css minify compress'},
+  {n:'JavaScript Minifier', p:'tools/developer-tools/javascript-minifier.html', k:'javascript js minify'},
+  {n:'SQL Formatter', p:'tools/developer-tools/sql-formatter.html', k:'sql format beautify'},
+  {n:'Markdown to HTML', p:'tools/developer-tools/markdown-to-html.html', k:'markdown md html'},
+  {n:'HTML to Markdown', p:'tools/developer-tools/html-to-markdown.html', k:'html markdown convert'},
+  {n:'Color Picker', p:'tools/developer-tools/color-code-picker.html', k:'color picker hex rgb'},
+  {n:'IP Address Lookup', p:'tools/developer-tools/ip-address-lookup.html', k:'ip address lookup'},
+  {n:'File Comparison', p:'tools/developer-tools/file-comparison.html', k:'diff compare files'},
+  {n:'.htaccess Redirect Generator', p:'tools/developer-tools/htaccess-redirect-generator.html', k:'htaccess redirect apache'},
+  // Text
+  {n:'Word Counter', p:'tools/text-tools/word-counter.html', k:'word count text'},
+  {n:'Character Counter', p:'tools/text-tools/character-counter.html', k:'character count text'},
+  {n:'Case Converter', p:'tools/text-tools/case-converter.html', k:'case upper lower text'},
+  {n:'Text to Speech', p:'tools/text-tools/text-to-speech.html', k:'tts text speech voice'},
+  {n:'Speech to Text', p:'tools/text-tools/speech-to-text.html', k:'stt speech text dictate'},
+  {n:'Grammar Checker', p:'tools/text-tools/grammar-checker.html', k:'grammar spelling check'},
+  {n:'Plagiarism Checker', p:'tools/text-tools/plagiarism-checker.html', k:'plagiarism check'},
+  {n:'Text Summarizer', p:'tools/text-tools/text-summarizer.html', k:'summarize summarise text'},
+  {n:'Fancy Text', p:'tools/text-tools/fancy-text.html', k:'fancy unicode text'},
+  {n:'URL Encoder', p:'tools/text-tools/url-encoder.html', k:'url encode decode'},
+  {n:'Random Text', p:'tools/text-tools/random-text.html', k:'lorem ipsum random text'},
+  // SEO
+  {n:'Meta Tag Generator', p:'tools/seo-tools/meta-tag-generator.html', k:'meta tags seo og twitter'},
+  {n:'Sitemap Generator', p:'tools/seo-tools/sitemap-generator.html', k:'sitemap xml seo'},
+  {n:'Sitemap Validator', p:'tools/seo-tools/sitemap-validator.html', k:'sitemap validate seo'},
+  {n:'Keyword Density', p:'tools/seo-tools/keyword-density.html', k:'keyword density seo'},
+  {n:'Robots.txt Generator', p:'tools/seo-tools/robots-txt.html', k:'robots txt seo'},
+  {n:'Page Speed', p:'tools/seo-tools/page-speed.html', k:'page speed seo performance'},
+  {n:'Backlink Checker', p:'tools/seo-tools/backlink-checker.html', k:'backlink seo'},
+  {n:'Mobile Friendly Test', p:'tools/seo-tools/mobile-friendly.html', k:'mobile friendly seo'},
+  {n:'Domain Authority', p:'tools/seo-tools/domain-authority.html', k:'domain authority da seo'},
+  {n:'Google Index Checker', p:'tools/seo-tools/google-index.html', k:'google index seo'},
+  // Security
+  {n:'Password Generator', p:'tools/security-tools/password-generator.html', k:'password strong generator'},
+  {n:'MD5 Hash Generator', p:'tools/security-tools/md5-hash-generator.html', k:'md5 hash'},
+  {n:'SHA-256 Hash Generator', p:'tools/security-tools/sha256-hash-generator.html', k:'sha256 hash'},
+  {n:'Random String Generator', p:'tools/security-tools/random-string-generator.html', k:'random string token'},
+  {n:'SSL Certificate Checker', p:'tools/security-tools/ssl-certificate-checker.html', k:'ssl certificate https'},
+  {n:'WHOIS Lookup', p:'tools/security-tools/whois-lookup.html', k:'whois domain'},
+  {n:'IP Geolocation', p:'tools/security-tools/ip-geolocation-finder.html', k:'ip geolocation location'},
+  {n:'HTTP Headers Checker', p:'tools/security-tools/http-headers-checker.html', k:'http headers'},
+  {n:'URL Shortener', p:'tools/security-tools/url-shortener.html', k:'url shorten short link'},
+  {n:'Privacy Policy Generator', p:'tools/security-tools/privacy-policy-generator.html', k:'privacy policy generator'},
+  // Calculators
+  {n:'Basic Calculator', p:'tools/calculator-tools/basic-calculator.html', k:'basic calculator math'},
+  {n:'Scientific Calculator', p:'tools/calculator-tools/scientific-calculator.html', k:'scientific calculator math'},
+  {n:'BMI Calculator', p:'tools/calculator-tools/bmi-calculator.html', k:'bmi body mass index health'},
+  {n:'Age Calculator', p:'tools/calculator-tools/age-calculator.html', k:'age calculator birthday'},
+  {n:'Loan EMI Calculator', p:'tools/calculator-tools/loan-emi-calculator.html', k:'loan emi mortgage'},
+  {n:'Currency Converter', p:'tools/calculator-tools/currency-converter.html', k:'currency converter forex'},
+  {n:'Percentage Calculator', p:'tools/calculator-tools/percentage-calculator.html', k:'percentage percent'},
+  {n:'Discount Calculator', p:'tools/calculator-tools/discount-calculator.html', k:'discount sale price'},
+  {n:'Tip Calculator', p:'tools/calculator-tools/tip-calculator.html', k:'tip calculator restaurant'},
+  {n:'Time Zone Converter', p:'tools/calculator-tools/time-zone-converter.html', k:'time zone converter'},
+  {n:'Binary Decimal', p:'tools/calculator-tools/binary-decimal.html', k:'binary decimal hex convert'},
+  // Unit Converters
+  {n:'Length Converter', p:'tools/unit-converters/length-converter.html', k:'length meter feet inch'},
+  {n:'Weight Converter', p:'tools/unit-converters/weight-converter.html', k:'weight kg lb pound'},
+  {n:'Temperature Converter', p:'tools/unit-converters/temperature-converter.html', k:'temperature celsius fahrenheit'},
+  {n:'Speed Converter', p:'tools/unit-converters/speed-converter.html', k:'speed mph kmh'},
+  {n:'Volume Converter', p:'tools/unit-converters/volume-converter.html', k:'volume litre gallon'},
+  {n:'Pressure Converter', p:'tools/unit-converters/pressure-converter.html', k:'pressure psi bar'},
+  {n:'Energy Converter', p:'tools/unit-converters/energy-converter.html', k:'energy joule calorie'},
+  {n:'Angle Converter', p:'tools/unit-converters/angle-converter.html', k:'angle degree radian'},
+  {n:'Data Storage Converter', p:'tools/unit-converters/data-storage-converter.html', k:'data storage gb mb'},
+  {n:'Fuel Efficiency', p:'tools/unit-converters/fuel-efficiency-converter.html', k:'fuel mpg km/l'},
+  // Social
+  {n:'YouTube Thumbnail Downloader', p:'tools/social-media-tools/youtube-thumbnail-downloader.html', k:'youtube thumbnail download'},
+  {n:'YouTube Tags Extractor', p:'tools/social-media-tools/youtube-tags-extractor.html', k:'youtube tags extract'},
+  {n:'Instagram Photo Downloader', p:'tools/social-media-tools/instagram-photo-downloader.html', k:'instagram photo download'},
+  {n:'Twitter Video Downloader', p:'tools/social-media-tools/twitter-video-downloader.html', k:'twitter x video download'},
+  {n:'TikTok Video Downloader', p:'tools/social-media-tools/tiktok-video-downloader.html', k:'tiktok video download'},
+  {n:'Facebook Video Downloader', p:'tools/social-media-tools/facebook-video-downloader.html', k:'facebook video download'},
+  {n:'Hashtag Generator', p:'tools/social-media-tools/hashtag-generator.html', k:'hashtag generator social'},
+  {n:'Emoji Keyboard', p:'tools/social-media-tools/emoji-keyboard.html', k:'emoji keyboard'},
+  {n:'Twitter Character Counter', p:'tools/social-media-tools/twitter-character-counter.html', k:'twitter character count'},
+  {n:'Social Media Post Generator', p:'tools/social-media-tools/social-media-post-generator.html', k:'social media post'},
+  // Business
+  {n:'Invoice Generator', p:'tools/business-tools/invoice-generator.html', k:'invoice generator billing'},
+  {n:'Business Name Generator', p:'tools/business-tools/business-name-generator.html', k:'business name generator'},
+  {n:'Daily Planner Creator', p:'tools/business-tools/daily-planner-creator.html', k:'planner daily schedule'},
+  {n:'Electric Bill Calculator', p:'tools/business-tools/electric-bill-calculator.html', k:'electric bill electricity'},
+  // Misc highlights
+  {n:'Resume Builder', p:'tools/miscellaneous/resume-builder.html', k:'resume cv builder'},
+  {n:'Meme Generator', p:'tools/miscellaneous/meme-generator.html', k:'meme generator'},
+  {n:'Dice Roller', p:'tools/miscellaneous/dice-roller.html', k:'dice roller random'},
+  {n:'Coin Flip', p:'tools/miscellaneous/flip-coin-simulator.html', k:'coin flip toss'},
+  {n:'Random Number Generator', p:'tools/miscellaneous/random-number-generator.html', k:'random number'},
+  {n:'Lottery Number Generator', p:'tools/miscellaneous/lottery-number-generator.html', k:'lottery number'},
+  {n:'Internet Speed Test', p:'tools/miscellaneous/internet-speed-test.html', k:'internet speed test'},
+  {n:'Barcode Generator', p:'tools/miscellaneous/barcode-generator.html', k:'barcode generator'},
+  {n:'Fake Address Generator', p:'tools/miscellaneous/fake-address-generator.html', k:'fake address test data'},
+  {n:'Random Quote Generator', p:'tools/miscellaneous/random-quote-generator.html', k:'random quote'},
+  {n:'Story Plot Generator', p:'tools/miscellaneous/story-plot-generator.html', k:'story plot writing'},
+  {n:'Leap Year Checker', p:'tools/miscellaneous/leap-year-checker.html', k:'leap year'},
+  {n:'IP Address Tracker', p:'tools/miscellaneous/ip-address-tracker.html', k:'ip tracker'},
+  {n:'Wedding Invitation Generator', p:'tools/miscellaneous/wedding-invitation-generator.html', k:'wedding invitation'},
+  {n:'Birthday Invitation Generator', p:'tools/miscellaneous/birthday-invitation-generator.html', k:'birthday invitation'},
+  {n:'Name Numerology Calculator', p:'tools/miscellaneous/name-numerology-calculator.html', k:'numerology name'},
+  {n:'eBook Creator', p:'tools/miscellaneous/ebook-creator.html', k:'ebook creator'},
+  {n:'AI Chatbot Demo', p:'tools/miscellaneous/ai-chatbot-demo.html', k:'ai chatbot demo'},
+];
+
+/* ── SEARCH UI ── */
+const searchInput = document.getElementById('searchInput');
+const searchOuter = document.querySelector('.search-outer');
+const searchInnerEl = document.querySelector('.search-inner');
+
+// click anywhere on the bar focuses the input (helps when user clicks the prompt label or padding)
+searchInnerEl.addEventListener('click', e => {
+  if (e.target === searchInnerEl || e.target.classList.contains('search-prompt')) {
+    searchInput.focus();
+  }
+});
+
+const resultsBox = document.createElement('div');
+resultsBox.className = 'search-results';
+resultsBox.id = 'searchResults';
+searchOuter.appendChild(resultsBox);
+
+let activeIdx = -1;
+let currentMatches = [];
+
+function rankMatches(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) return [];
+  return SEARCH_INDEX
+    .map(t => {
+      const name = t.n.toLowerCase();
+      const keys = t.k.toLowerCase();
+      let score = 0;
+      if (name === q) score = 1000;
+      else if (name.startsWith(q)) score = 500;
+      else if (name.includes(q)) score = 250;
+      else if (keys.includes(q)) score = 100;
+      return { t, score };
+    })
+    .filter(x => x.score > 0)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 8)
+    .map(x => x.t);
+}
+
+function renderResults(matches) {
+  currentMatches = matches;
+  activeIdx = -1;
+  if (!matches.length) {
+    resultsBox.innerHTML = '<div class="search-empty">// no matches — try another keyword</div>';
+    resultsBox.classList.add('open');
+    return;
+  }
+  resultsBox.innerHTML = matches.map((t,i) => `
+    <a href="${t.p}" class="search-result" data-idx="${i}">
+      <span class="sr-name">${t.n}</span>
+      <span class="sr-arrow">→</span>
+    </a>
+  `).join('');
+  resultsBox.classList.add('open');
+}
+
+function closeResults() {
+  resultsBox.classList.remove('open');
+  activeIdx = -1;
+}
+
+function highlightActive() {
+  [...resultsBox.querySelectorAll('.search-result')].forEach((el,i) => {
+    el.classList.toggle('active', i === activeIdx);
+  });
+}
+
+searchInput.addEventListener('input', e => {
+  const matches = rankMatches(e.target.value);
+  renderResults(matches);
+});
+
+searchInput.addEventListener('focus', e => {
+  if (e.target.value) renderResults(rankMatches(e.target.value));
+});
+
+searchInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (currentMatches.length) { activeIdx = (activeIdx + 1) % currentMatches.length; highlightActive(); }
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (currentMatches.length) { activeIdx = (activeIdx - 1 + currentMatches.length) % currentMatches.length; highlightActive(); }
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    const target = activeIdx >= 0 ? currentMatches[activeIdx] : currentMatches[0];
+    if (target) window.location.href = target.p;
+  } else if (e.key === 'Escape') {
+    closeResults();
+    searchInput.blur();
+  }
+});
+
+document.addEventListener('click', e => {
+  if (!searchOuter.contains(e.target)) closeResults();
+});
+
+function doSearch(){
+  if (currentMatches.length) {
+    window.location.href = currentMatches[0].p;
+  } else if (searchInput.value.trim()) {
+    // no curated match — fall through to popular tools section
+    document.querySelector('.tools-grid')?.scrollIntoView({behavior: 'smooth'});
+  }
+}
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); } });
+},{threshold:0});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+setTimeout(()=>{ document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible')); }, 1000);
+
+/* ── YEAR ── */
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
 </body>
-</html> 
+</html>
