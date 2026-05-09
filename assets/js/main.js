@@ -910,24 +910,6 @@ async function loadComponents() {
             if (footerResponse.ok) {
                 const footerContent = await footerResponse.text();
                 footerContainer.innerHTML = footerContent;
-                
-                // Update footer links
-                const currentPath = window.location.pathname;
-                const isInToolsDirectory = currentPath.includes('/tools/');
-                const prefix = isInToolsDirectory ? '../' : '';
-
-                document.querySelectorAll('.footer-links a').forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href && !href.startsWith('#')) {
-                        if (href === 'about.html') {
-                            link.href = prefix + 'tools/about.html';
-                        } else if (href === 'contact.html') {
-                            link.href = prefix + 'tools/contact.html';
-                        } else {
-                            link.href = prefix + href;
-                        }
-                    }
-                });
             }
         }
     } catch (error) {
