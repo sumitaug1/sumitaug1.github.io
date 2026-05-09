@@ -18,57 +18,7 @@ body {
 }
 
 /* Header Styles */
-header {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    background-color: #34eb83 !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #000000 !important;
-    text-decoration: none;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-    color: #000000 !important;
-    font-weight: 500;
-}
-
-.navbar-dark .navbar-brand {
-    color: #000000 !important;
-    font-weight: 600;
-}
-
-.navbar-dark .navbar-toggler {
-    border-color: #000000;
-}
-
-.navbar-dark .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.dropdown-menu {
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.dropdown-item:hover {
-    background-color: #34eb83;
-    color: #000000;
-}
+/* Legacy Bootstrap nav overrides removed — header uses #site-header styles in header.html */
 
 /* Main Content Styles */
 main {
