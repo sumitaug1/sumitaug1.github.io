@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free personalised birthday song generator — enter a name and context to create a unique birthday song instantly. Classic, pop, rap, country, ballad, and kids styles.">
+  <meta name="keywords" content="birthday song generator, personalised birthday song, custom birthday song, birthday poem generator">
+  <title>Birthday Song Generator — Personalised Songs Instantly</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Great+Vibes&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F5E08B;
+      --gold-dark: #9B7E2E;
+      --bg: #0b0b12;
+      --surface: #12121e;
+      --surface2: #1a1a2e;
+      --border: rgba(212,175,55,.22);
+      --text: #f0e8d0;
+      --text-dim: rgba(240,232,208,.5);
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
+
+    /* HERO */
+    .song-hero {
+      position: relative;
+      padding: 3.5rem 1.5rem 2.5rem;
+      text-align: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,.13) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+    #noteCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Orbitron', monospace;
+      font-size: .68rem;
+      letter-spacing: .15em;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: .28rem .9rem;
+      margin-bottom: 1.1rem;
+      background: rgba(212,175,55,.07);
+    }
+    .song-hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--gold-light);
+      text-shadow: 0 0 40px rgba(212,175,55,.4);
+      margin-bottom: .7rem;
+    }
+    .song-hero p { color: var(--text-dim); font-size: 1rem; max-width: 480px; margin: 0 auto; }
+
+    /* LAYOUT */
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* CONTROLS */
+    .controls-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      position: sticky;
+      top: 1.5rem;
+    }
+    .controls-panel h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: .8rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      margin-bottom: 1.4rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .75rem;
+    }
+    .field-group { margin-bottom: 1.1rem; }
+    .field-group label {
+      display: block;
+      font-size: .75rem;
+      color: var(--text-dim);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: .4rem;
+    }
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .6rem .85rem;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .93rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus { border-color: var(--gold); }
+    .field-group input::placeholder,
+    .field-group textarea::placeholder { color: var(--text-dim); }
+    .field-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23D4AF37' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .8rem center;
+      padding-right: 2rem;
+    }
+    .field-group select option { background: var(--surface2); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .field-group textarea { resize: vertical; min-height: 68px; }
+
+    /* PILL SELECTORS */
+    .pill-group { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .pill {
+      padding: .32rem .78rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-dim);
+      font-size: .8rem;
+      cursor: pointer;
+      transition: all .18s;
+      user-select: none;
+    }
+    .pill:hover { border-color: var(--gold); color: var(--gold); }
+    .pill.active { background: var(--gold); border-color: var(--gold); color: #0b0b12; font-weight: 600; }
+    .pill.pill-multi.active { background: rgba(212,175,55,.15); border-color: var(--gold); color: var(--gold-light); font-weight: 500; }
+
+    /* GENERATE BUTTON */
+    .generate-btn {
+      width: 100%;
+      padding: .85rem;
+      background: linear-gradient(135deg, #D4AF37 0%, #F5E08B 50%, #9B7E2E 100%);
+      background-size: 200% 200%;
+      animation: btnShift 4s ease infinite;
+      border: none;
+      border-radius: 10px;
+      color: #0b0b12;
+      font-family: 'Orbitron', monospace;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      cursor: pointer;
+      margin-top: 1.4rem;
+      transition: opacity .2s, transform .1s;
+    }
+    .generate-btn:hover { opacity: .9; transform: translateY(-1px); }
+    .generate-btn:active { transform: translateY(0); }
+    @keyframes btnShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+    /* SONG PANEL */
+    .song-panel { min-height: 420px; }
+
+    /* PLACEHOLDER */
+    .song-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+      padding: 3rem;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow { 0%,100%{border-color:rgba(212,175,55,.18)} 50%{border-color:rgba(212,175,55,.45)} }
+    .ph-icon { font-size: 4.5rem; margin-bottom: 1.2rem; animation: floatBounce 2.2s ease-in-out infinite; }
+    @keyframes floatBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .song-placeholder p { color: var(--text-dim); font-size: .98rem; line-height: 1.6; }
+
+    /* COMPOSING STATE */
+    .composing-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      gap: 1.4rem;
+    }
+    .note-spinner { font-size: 3.5rem; animation: noteSpin 1.1s linear infinite; }
+    @keyframes noteSpin { 0%{transform:rotate(-15deg) scale(1)} 50%{transform:rotate(15deg) scale(1.25)} 100%{transform:rotate(-15deg) scale(1)} }
+    .composing-label {
+      color: var(--gold);
+      font-family: 'Orbitron', monospace;
+      font-size: .82rem;
+      letter-spacing: .15em;
+      animation: pulse 1s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    /* SONG CARD */
+    .song-card-wrapper {
+      border-radius: var(--radius);
+      padding: 2px;
+      background: conic-gradient(from 0deg, #D4AF37, #F5E08B, #9B7E2E, #D4AF37);
+      animation: rotateBorder 6s linear infinite;
+    }
+    @keyframes rotateBorder { to { filter: hue-rotate(360deg); } }
+    .song-card {
+      background: var(--surface);
+      border-radius: calc(var(--radius) - 1px);
+      padding: 2.2rem;
+      position: relative;
+      overflow: hidden;
+      animation: cardReveal .55s ease-out;
+    }
+    @keyframes cardReveal { from{opacity:0;transform:translateY(18px) scale(.97)} to{opacity:1;transform:none} }
+
+    /* SONG HEADER */
+    .song-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .song-style-badge {
+      display: inline-block;
+      font-size: .68rem;
+      font-family: 'Orbitron', monospace;
+      letter-spacing: .1em;
+      padding: .22rem .75rem;
+      border-radius: 12px;
+      margin-bottom: .75rem;
+    }
+    .song-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: .35rem;
+      color: var(--gold);
+    }
+    .song-subtitle { font-size: .82rem; color: var(--text-dim); font-style: italic; }
+    .corner-note {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: .15;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    .corner-note.tl { top: .5rem; left: .6rem; animation-delay: 0s; }
+    .corner-note.tr { top: .5rem; right: .6rem; animation-delay: .75s; }
+    .corner-note.bl { bottom: .5rem; left: .6rem; animation-delay: 1.5s; }
+    .corner-note.br { bottom: .5rem; right: .6rem; animation-delay: 2.25s; }
+    @keyframes twinkle { 0%,100%{opacity:.15} 50%{opacity:.45} }
+
+    /* SONG SECTIONS */
+    .song-section { margin-bottom: 1.6rem; }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .7rem;
+      font-family: 'Orbitron', monospace;
+      letter-spacing: .12em;
+      padding: .18rem .65rem;
+      border-radius: 20px;
+      margin-bottom: .7rem;
+    }
+    .label-verse  { background: rgba(212,175,55,.1); color: var(--gold); border: 1px solid rgba(212,175,55,.28); }
+    .label-chorus { background: rgba(255,255,255,.06); color: #e8e0f0; border: 1px solid rgba(255,255,255,.18); }
+    .label-bridge { background: rgba(150,123,182,.1); color: #c9a0e8; border: 1px solid rgba(150,123,182,.28); }
+    .label-outro  { background: rgba(212,175,55,.07); color: var(--gold-light); border: 1px solid rgba(212,175,55,.18); }
+    .song-text {
+      font-size: .97rem;
+      line-height: 2;
+      white-space: pre-line;
+      color: var(--text);
+      padding-left: .5rem;
+      border-left: 2px solid transparent;
+    }
+    .song-section.is-chorus .song-text {
+      font-weight: 500;
+      font-style: italic;
+      color: var(--gold-light);
+      border-left-color: var(--gold);
+      padding-left: 1rem;
+    }
+    .song-section.is-bridge .song-text {
+      color: #d8b4fe;
+      border-left-color: #967BB6;
+      padding-left: 1rem;
+    }
+    .song-divider {
+      text-align: center;
+      margin: .8rem 0;
+      color: var(--gold);
+      letter-spacing: .5em;
+      font-size: .9rem;
+      opacity: .35;
+    }
+
+    /* ACTION BUTTONS */
+    .song-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-top: 1.8rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--border);
+    }
+    .action-btn {
+      flex: 1;
+      min-width: 110px;
+      padding: .55rem .8rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-size: .8rem;
+      cursor: pointer;
+      transition: all .18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .35rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .action-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .action-btn.primary { background: rgba(212,175,55,.15); border-color: var(--gold); color: var(--gold); font-weight: 600; }
+    .action-btn.primary:hover { background: rgba(212,175,55,.25); }
+    .action-btn.speaking { background: rgba(212,175,55,.12); border-color: var(--gold); color: var(--gold); }
+
+    /* STYLE-SPECIFIC THEMES */
+    .theme-classic .song-title { color: var(--gold); }
+    .theme-classic .song-style-badge { background: rgba(212,175,55,.12); color: var(--gold); border: 1px solid rgba(212,175,55,.35); }
+
+    .theme-pop .song-card { background: linear-gradient(160deg, #12121e 0%, #1a0a2e 100%); }
+    .theme-pop .song-title { font-family: 'Playfair Display', serif; color: #FF6B9D; font-style: italic; text-shadow: 0 0 30px rgba(255,107,157,.45); }
+    .theme-pop .song-style-badge { background: rgba(255,107,157,.1); color: #FF6B9D; border: 1px solid rgba(255,107,157,.3); }
+    .theme-pop .song-section.is-chorus .song-text { color: #FF6B9D; border-left-color: #FF6B9D; }
+
+    .theme-rap .song-card { background: linear-gradient(160deg, #0e0e0e 0%, #1a0000 100%); }
+    .theme-rap .song-title { font-family: 'Orbitron', monospace; font-size: 1.7rem; color: #E63946; text-shadow: 0 0 20px rgba(230,57,70,.4); }
+    .theme-rap .song-style-badge { background: rgba(230,57,70,.1); color: #E63946; border: 1px solid rgba(230,57,70,.3); }
+    .theme-rap .section-label.label-verse { color: #E63946; border-color: rgba(230,57,70,.3); background: rgba(230,57,70,.08); }
+    .theme-rap .song-section.is-chorus .song-text { color: #E63946; border-left-color: #E63946; }
+    .theme-rap .song-text { font-family: 'JetBrains Mono', monospace; font-size: .88rem; line-height: 1.9; }
+
+    .theme-country .song-card { background: linear-gradient(160deg, #1a100a 0%, #2a180a 100%); }
+    .theme-country .song-title { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #E8A045; }
+    .theme-country .song-style-badge { background: rgba(232,160,69,.1); color: #E8A045; border: 1px solid rgba(232,160,69,.3); }
+    .theme-country .song-section.is-chorus .song-text { color: #E8A045; border-left-color: #E8A045; }
+
+    .theme-ballad .song-card { background: linear-gradient(160deg, #100a1a 0%, #1a0a22 100%); }
+    .theme-ballad .song-title { font-family: 'Playfair Display', serif; font-style: italic; color: #C9A0E8; text-shadow: 0 0 30px rgba(201,160,232,.4); }
+    .theme-ballad .song-style-badge { background: rgba(201,160,232,.08); color: #C9A0E8; border: 1px solid rgba(201,160,232,.28); }
+    .theme-ballad .song-section.is-chorus .song-text { color: #C9A0E8; border-left-color: #967BB6; }
+
+    .theme-kids .song-card { background: linear-gradient(160deg, #0a1520 0%, #0f2030 100%); }
+    .theme-kids .song-title { font-family: 'Dancing Script', cursive; font-size: 2.9rem; color: #FFD93D; text-shadow: 0 0 20px rgba(255,217,61,.4); }
+    .theme-kids .song-style-badge { background: rgba(255,217,61,.08); color: #FFD93D; border: 1px solid rgba(255,217,61,.3); }
+    .theme-kids .song-section.is-chorus .song-text { color: #FFD93D; border-left-color: #FFD93D; }
+    .theme-kids .song-text { line-height: 2.2; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .main-wrapper { grid-template-columns: 1fr; }
+      .controls-panel { position: static; }
+    }
+    @media (max-width: 580px) {
+      .song-card { padding: 1.4rem; }
+      .song-title { font-size: 2rem !important; }
+      .field-row { grid-template-columns: 1fr; }
+      .action-btn { min-width: 80px; font-size: .75rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="header-container"></div>
+<main>
+
+  <section class="song-hero">
+    <canvas id="noteCanvas"></canvas>
+    <div class="hero-badge">MSC_022 // BIRTHDAY SONG GENERATOR</div>
+    <h1>🎵 Birthday Song Generator</h1>
+    <p>Enter a name and a little context — get a personalised birthday song in seconds.</p>
+  </section>
+
+  <div class="main-wrapper">
+
+    <!-- Controls -->
+    <div class="controls-panel">
+      <h2>🎼 SONG DETAILS</h2>
+
+      <div class="field-group">
+        <label>Birthday Person's Name *</label>
+        <input type="text" id="nameInput" placeholder="e.g. Emma, James…" maxlength="40">
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Age (optional)</label>
+          <input type="number" id="ageInput" placeholder="e.g. 30" min="1" max="120">
+        </div>
+        <div class="field-group">
+          <label>Pronoun</label>
+          <select id="pronounSelect">
+            <option value="they">They / Them</option>
+            <option value="she">She / Her</option>
+            <option value="he">He / Him</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Your Relationship</label>
+        <select id="relationSelect">
+          <option value="friend">Friend</option>
+          <option value="partner">Partner / Spouse</option>
+          <option value="parent">Parent</option>
+          <option value="child">Child</option>
+          <option value="sibling">Sibling</option>
+          <option value="colleague">Colleague</option>
+          <option value="grandparent">Grandparent</option>
+          <option value="self">Myself</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>Song Style</label>
+        <div class="pill-group" id="styleGroup">
+          <span class="pill active" data-val="classic">🎼 Classic</span>
+          <span class="pill" data-val="pop">🎤 Pop</span>
+          <span class="pill" data-val="rap">🎧 Rap</span>
+          <span class="pill" data-val="country">🤠 Country</span>
+          <span class="pill" data-val="ballad">🌹 Ballad</span>
+          <span class="pill" data-val="kids">🎈 Kids</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Personality Traits (up to 3)</label>
+        <div class="pill-group" id="traitsGroup">
+          <span class="pill pill-multi" data-val="funny">😄 Funny</span>
+          <span class="pill pill-multi" data-val="sweet">🌸 Sweet</span>
+          <span class="pill pill-multi" data-val="adventurous">🏔️ Adventurous</span>
+          <span class="pill pill-multi" data-val="artistic">🎨 Artistic</span>
+          <span class="pill pill-multi" data-val="sporty">⚡ Sporty</span>
+          <span class="pill pill-multi" data-val="nerdy">🤓 Nerdy</span>
+          <span class="pill pill-multi" data-val="musical">🎵 Musical</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Hobbies / Interests (optional)</label>
+        <input type="text" id="hobbyInput" placeholder="e.g. hiking, painting, cooking…">
+      </div>
+
+      <div class="field-group">
+        <label>Special Message to Include (optional)</label>
+        <textarea id="messageInput" placeholder="Add a personal line or heartfelt wish…"></textarea>
+      </div>
+
+      <button class="generate-btn" id="generateBtn">✨ Compose Birthday Song</button>
+    </div>
+
+    <!-- Output -->
+    <div class="song-panel" id="songPanel">
+      <div class="song-placeholder">
+        <div class="ph-icon">🎂</div>
+        <p>Your personalised birthday song<br>will appear here.<br><br>
+        <span style="font-size:.82rem;opacity:.6">Fill in the details and click Compose.</span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ad -->
+  <div class="container py-3 mb-4">
+    <div class="card" style="background:var(--surface);border:1px solid var(--border);">
+      <div class="card-body text-center">
+        <ins class="adsbygoogle" style="display:block"
+          data-ad-client="ca-pub-6204232626800687"
+          data-ad-slot="9572280796"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+const S = { style: 'classic', traits: [], variant: 0 };
+
+// ─── SONG TEMPLATES ──────────────────────────────────────────────────────────
+const T = {
+  classic: {
+    badge: '🎼 CLASSIC',
+    titles: (n) => [`A Birthday Song for ${n}`, `Happy Birthday, ${n}`, `Here's to You, ${n}`],
+    verse1: [
+      (n) => `On this very special day, with hearts both warm and true,\nWe gather 'round to celebrate — ${n}, we sing for you.\nThe years you've graced this world with love have made our lives so bright,\nYou fill each day with laughter and you fill each day with light.`,
+      (n) => `Another year has come and gone, another chapter done,\nAnother chance to tell ${n} they're a truly special one.\nFrom morning light to evening stars, through every joy and storm,\n${n}, your presence in our lives has kept our spirits warm.`,
+      (n) => `The candles glow upon the cake, one flickering for each year,\n${n}, it's time to celebrate — the day that we hold so dear.\nWe sing to you this birthday song with voices full of cheer,\nBecause you're just the kind of soul we treasure every year.`,
+    ],
+    chorus: [
+      (n) => `Happy birthday, ${n}, may your every wish come true,\nMay the stars align in your favour and the skies stay always blue.\nMay your days be filled with laughter and your nights with peaceful rest,\nHappy birthday, dear ${n} — you truly are the best!`,
+      (n) => `Here's to you, ${n}, on this most glorious day,\nHere's to all the wonder that is coming your way.\nBlow the candles, make a wish, and let your dreams take flight,\nHappy birthday, dear ${n} — you are our shining light!`,
+      (n) => `So raise your voice and sing it out, and let the whole world know,\nThat on this birthday, ${n}, it's your time to glow.\nMay every single birthday that is yet to come your way\nBe just as full of love as you have made our every day!`,
+    ],
+    verse2: [
+      (n, a, h) => a
+        ? `${a} glorious years of memories, of love and joy and care,\n${a} beautiful years of making every moment beyond compare.\nAnd with each year that passes, you grow wiser, warmer, true,\n${n}, every year just brings more reasons to love you.`
+        : `The years have brought you wisdom with a gentle, knowing smile,\nThe kind that comes from living life with grace and humble style.\nSo here's to all the chapters yet to fill with joy and song,\nTo all the roads still waiting and the places you'll belong.`,
+      (n, a, h) => h
+        ? `You love to ${h.toLowerCase()} with a heart so full of fire,\nYour passion and your spirit lift the rest of us up higher.\nOn this birthday, here's a wish from everyone who cares:\nMay all your greatest dreams come true, beyond what hope dares.`
+        : `So here's to all the memories that still are yet to be,\nTo all the grand adventures waiting patiently.\nWe wish you health and happiness and love beyond all measure,\n${n}, every single day with you is an absolute treasure.`,
+      (n, a, h) => `The world is full of wonder and you've always known the way\nTo find the joy inside each moment, coax the light from grey.\nSo on this birthday, we just want to say what's always true:\n${n}, the finest gift life ever gave us? That was you.`,
+    ],
+    bridge: [
+      (n) => `And when the world feels heavy and the nights grow long and cold,\nRemember that your story is still beautifully untold.`,
+      (n) => `For every year that passes is a gift beyond compare,\nAnd ${n}, you are surrounded by people who truly care.`,
+      (n) => `So celebrate this moment, let the love wash over you,\n${n}, you deserve the world — and then a little more, it's true.`,
+    ],
+    outro: (n) => `✨ Happy Birthday, ${n}! Wishing you endless joy and love! 🎂`,
+  },
+
+  pop: {
+    badge: '🎤 POP',
+    titles: (n) => [`${n}'s Birthday Anthem`, `Shine On, ${n}!`, `Born to Celebrate — ${n}`],
+    verse1: [
+      (n) => `Lights up! It's ${n}'s birthday and the party's just begun,\nWe've been counting down the moments — yeah, we've been your biggest fan.\nTurn the music louder, let the confetti fall,\n${n}, you deserve the biggest celebration of them all!`,
+      (n) => `You walk into the room and every heartbeat finds its groove,\n${n}, it's your birthday — time to step into the move.\nThe way you make us feel is like a hit song on replay,\nAnd we are here to let you know: today is your day!`,
+      (n) => `Start the countdown, somebody drop the beat,\n${n}'s birthday makes this moment feel complete.\nFrom zero to amazing, that's the way you live,\nAnd on this birthday, we've got everything to give!`,
+    ],
+    chorus: [
+      (n) => `Whoa-oh, happy birthday, ${n}, we're screaming out your name,\nLighting up the night sky 'cause you'll never be the same.\nWish upon the birthday candles, let your spirit soar,\nHappy birthday, ${n} — who could ever ask for more?!`,
+      (n) => `Ba-da-dum, it's your birthday, yeah we're here for you,\nLiving in the moment, painting life brand new.\nBlow it out and wish it, let the magic start,\nHappy birthday, ${n} — you're a work of art!`,
+      (n) => `We sing it loud, we sing it proud, we sing it just for you,\n${n}, on your birthday, dreams are coming true.\nThis is your moment — take it, let it shine so bright,\nHappy birthday, ${n} — you light up our night!`,
+    ],
+    verse2: [
+      (n, a, h) => a
+        ? `${a} years of being legendary — that's the way you roll,\nEvery year a brand new chapter, every moment makes you whole.\nThe best is still before you, keep the fire burning bright,\n${n}, you're the kind of star that lights the darkest night.`
+        : `Every year you only get more you — and that is saying something,\nThe kind of magic that you bring keeps every heartbeat drumming.\nSo here's to all the chapters that are still ahead in store,\n${n}, every birthday just reveals a little more.`,
+      (n, a, h) => h
+        ? `You're into ${h.toLowerCase()} and you bring it to the floor,\nThere's nobody quite like you, and trust us, we want more.\nOn this birthday, here's the wish we're shouting to the sky:\nMay everything you reach for let your spirit fly!`
+        : `The world keeps spinning forward and you always keep your cool,\nThe way you face each challenge — honestly, it's beautiful.\nSo here's to the next chapter, may it take you to the stars,\n${n}, you were born to shine — the universe is ours!`,
+      (n, a, h) => `You make the ordinary feel extraordinary, true,\nThe way you see the beauty — nobody does it quite like you.\nSo on this birthday, all we want to do is say:\n${n}, keep on shining — you were made for this, okay?`,
+    ],
+    bridge: [
+      (n) => `And even when the music stops and silence fills the air,\nJust know that for ${n}, there's love beyond compare.`,
+      (n) => `This beat is just for you, ${n}, so let it fill your soul,\nYou had us from the start — and, honestly, you've got us whole.`,
+      (n) => `So dance until the morning comes and dance a little more,\n${n}, this is your birthday — that is what birthdays are for!`,
+    ],
+    outro: (n) => `🎤 Happy Birthday, ${n}! Keep shining bright! ✨🎊`,
+  },
+
+  rap: {
+    badge: '🎧 HIP-HOP',
+    titles: (n) => [`The ${n} Birthday Freestyle`, `Happy B-Day, ${n}`, `A Birthday Dedication — ${n}`],
+    verse1: [
+      (n) => `Yo, shout out to ${n}, it's your day no debate,\nStep into the spotlight, let's celebrate.\nEvery room you walk in, the energy shifts,\nBirthday legend showing off all the gifts.`,
+      (n) => `Listen up, I got a story 'bout a legend in the making,\n${n}'s name is ringing out — the foundation's shaking.\nEvery year around the sun you level up the game,\nBirthday cake and candles, but you'll never be the same.`,
+      (n) => `Real talk — ${n} never needed any hype,\nBecause the life they're living hits every note right.\nBirthday season's here and we're here to testify,\nNobody does it better — we're not even asking why.`,
+    ],
+    chorus: [
+      (n) => `Happy birthday, ${n}, yeah we sing it loud — hey!\nRocking this celebration, we the realest crowd.\nRise and claim your crown, because today's your throne,\nEvery single wish you make, you never stand alone. (x2)`,
+      (n) => `${n}, ${n}, it's your special day — aye!\nDrop the beat and let the birthday vibes play.\nYear by year you only getting better with time,\nHappy birthday, ${n} — the flow is yours, the rhyme!`,
+      (n) => `We rep ${n}, always, birthday or not,\nBut today we turn it up 'cause today's all you've got.\nSo step into your moment, let the world know your name,\nHappy birthday — nothing about you is the same!`,
+    ],
+    verse2: [
+      (n, a, h) => a
+        ? `${a} years of being legendary — bars stacked high,\nEvery obstacle you faced, you looked it in the eye.\nThe journey's been a movie — plot twists and all,\nBut ${n} always rises every time they fall.`
+        : `The road behind you paved with every win and L,\nBut the story that ${n} is writing? Too good to tell.\nSo many chapters still to write, so much more to be,\nThe greatest version of yourself — that's what we see.`,
+      (n, a, h) => h
+        ? `Into ${h.toLowerCase()} — you bring that passion flame,\nEverything you touch, ${n}, ain't never the same.\nOn this birthday, here's a verse from everyone around:\nYou the reason that we keep this celebration sound.`
+        : `The way you move through life is different — got a certain grace,\nA smile that holds a story, warmth that fills the space.\nSo here's to the next level, here's to what's ahead,\n${n}, you were built for greatness — enough said.`,
+      (n, a, h) => `Facts: ${n} been consistent since day one,\nNever stopped the grind until the dream was done.\nBirthday time is just a checkpoint on the road,\n${n}, you've been carrying that legendary load.`,
+    ],
+    bridge: [
+      (n) => `And when the noise dies down and the crowd is gone,\nJust know that ${n}'s legacy keeps rolling on.`,
+      (n) => `No cap, we love ${n} — birthday or any day,\nBut today we making sure you know it, okay?`,
+      (n) => `Mic drop moment, no rewind needed here,\n${n}, you're one of a kind — that much is clear.`,
+    ],
+    outro: (n) => `🎧 Big birthday energy, ${n}! Go off! 🎂🔥`,
+  },
+
+  country: {
+    badge: '🤠 COUNTRY',
+    titles: (n) => [`A Country Ballad for ${n}`, `Here's to ${n}`, `Sweet Birthday Song for ${n}`],
+    verse1: [
+      (n) => `Well the good Lord smiled on a sweet and golden morn',\nAnd the world became a little brighter the day that ${n} was born.\nWith a heart full of honey and a laugh like a summer creek,\n${n}, you're the kind of soul that everyone's been looking to seek.`,
+      (n) => `Pour yourself some sunshine, mix it with a little grace,\nAnd you'd almost have the warmth that ${n} brings to every place.\nFrom the back porch to the mountains, through the long and winding road,\n${n} makes the journey lighter and the heart a touch of gold.`,
+      (n) => `There's a song the meadows sing when the morning dew is bright,\nA melody of goodness playing gently in the light.\nAnd somehow, in that music, in each note the whole world plays,\nI hear the spirit of ${n} shining out in different ways.`,
+    ],
+    chorus: [
+      (n) => `Happy birthday, ${n}, from the bottom of our hearts,\nYou're the one who holds us together when the music starts.\nHere's to all the sweet tomorrows, here's to memories we've made,\nHappy birthday, ${n}, may your love never, ever fade!`,
+      (n) => `So raise your glass and holler, let the good times roll on through,\nThere's no finer way to celebrate than spending time with you.\nFrom the fireflies at twilight to the morning's golden glow,\nHappy birthday, ${n} — you're the best we'll ever know!`,
+      (n) => `We'll sing it from the rooftops, we'll shout it to the sky,\nHappy birthday, dear ${n}, may your spirits always fly.\nMay the good Lord keep on blessing you through every coming year,\nHappy birthday, dear ${n} — it's the one day we hold dear!`,
+    ],
+    verse2: [
+      (n, a, h) => a
+        ? `${a} years of stories written in the lines upon your face,\n${a} years of showing everyone the meaning of pure grace.\nLike the finest wine in the cellar, getting better every year,\n${n}, what a treasure you have become to everyone here.`
+        : `The seasons change like pages in a book we love to read,\nAnd ${n} gets more wonderful — on that we all agreed.\nSo here's to all the harvests and the winters yet to come,\n${n}, you're the reason that we call this place called home.`,
+      (n, a, h) => h
+        ? `You love to ${h.toLowerCase()} with a heart as wide as open skies,\nAnd everyone around you sees that fire in your eyes.\nOn this birthday, here's the prayer from every heart that cares:\nMay life give you more joy than your humble heart ever dares.`
+        : `The sweetest kind of living is the living that you do,\nThere's something in the way you love that makes us love you too.\nSo here's to all the pastures and the rivers still to cross,\n${n}, in this life of ours, you're never at a loss.`,
+      (n, a, h) => `Ol' wisdom used to say that life ain't measured in the years,\nBut in the hearts we've touched along the way — in laughter and in tears.\nWell, ${n}, by that measure, you're the richest one around,\nA heart of gold, a spirit bright — the finest soul we've found.`,
+    ],
+    bridge: [
+      (n) => `And if the road gets dusty and the days feel long and tough,\nJust know that having ${n} in our world is more than enough.`,
+      (n) => `Like a front porch in the evening and a warm and starlit night,\n${n}, you make every ordinary moment feel just right.`,
+      (n) => `So let the banjo play and let the fiddle sing along,\n${n}'s birthday is the reason for this sweet and golden song.`,
+    ],
+    outro: (n) => `🤠 Happy Birthday, ${n}! Y'all are loved! 🎂✨`,
+  },
+
+  ballad: {
+    badge: '🌹 BALLAD',
+    titles: (n) => [`An Ode to ${n}`, `For ${n}, on This Day`, `A Song of Love for ${n}`],
+    verse1: [
+      (n) => `In the quiet of the morning when the world begins to wake,\nI think of all the beauty that a single life can make.\n${n}, you are a melody that lingers in my heart,\nA masterpiece of kindness — life's most rare and precious art.`,
+      (n) => `Like the turning of the seasons and the rising of the tide,\nYour life is something beautiful, and we stand here full of pride.\nEvery year a new beginning, every dawn a brand new song,\n${n}, in this world of ours, you've always, always belonged.`,
+      (n) => `There are songs that move the mountains and there are words that touch the soul,\nAnd the story of ${n}'s journey is the finest one I know.\nEvery chapter full of warmth and every verse alive with grace,\nA life so beautifully written in a warm and tender space.`,
+    ],
+    chorus: [
+      (n) => `Happy birthday, ${n}, like a love song softly played,\nEvery note you bring to life will never, ever fade.\nMay the world be yours to wander and the stars be yours to climb,\nHappy birthday, ${n}, every year grows more sublime.`,
+      (n) => `So sing it soft and tender, sing it from the heart,\nFor ${n} is the kind of gift that life can't tear apart.\nYears go by like verses in a song we know by heart,\nHappy birthday, ${n} — you're the most beautiful part.`,
+      (n) => `May the love that surrounds you be a harbour in the storm,\nMay the light inside ${n} always keep the world so warm.\nFrom the first note to the last, through every bridge and key,\nHappy birthday, ${n} — you're the song we need.`,
+    ],
+    verse2: [
+      (n, a, h) => a
+        ? `${a} years of gentle wisdom, ${a} years of steady grace,\n${a} years of painting beauty on this world's imperfect face.\nLike a symphony in progress, every movement rich and true,\n${n}, you grow more glorious in everything you do.`
+        : `The world is full of noise and rush, of hurry and of fray,\nBut ${n} finds the quiet note that makes it all okay.\nAnd in that space of stillness — in that soft and sacred place,\nA birthday seems like just the start of an extraordinary grace.`,
+      (n, a, h) => h
+        ? `You pour your heart into ${h.toLowerCase()}, and it shows in all you do,\nA passion like a river, clear and deep and true.\nOn this birthday, here's the prayer that falls like gentle rain:\nMay every joy you've given find its way back home again.`
+        : `For every moment you have been a light in someone's grey,\nFor every act of kindness you have scattered on your way —\nMay the beauty that you've given find its way back home to you,\n${n}, on this birthday, may your every wish come true.`,
+      (n, a, h) => `How rare it is to find a soul that gives so freely so,\nThat everyone around them feels their own heartbeat begin to glow.\n${n}, that is you — the rarest, warmest kind,\nThe kind of birthday treasure that is nearly hard to find.`,
+    ],
+    bridge: [
+      (n) => `And if the years ahead hold questions that the heart can't yet define,\nRemember that you walk them with a light that will always shine.`,
+      (n) => `For love is the verse that ${n} writes in every single day,\nAnd we are just the chorus, singing beautifully along the way.`,
+      (n) => `So let the music carry you to every dream you hold,\n${n}, your story is the finest song ever told.`,
+    ],
+    outro: (n) => `🌹 Happy Birthday, ${n}. You are deeply, deeply loved. 🎂`,
+  },
+
+  kids: {
+    badge: '🎈 KIDS',
+    titles: (n) => [`Happy Birthday, ${n}!`, `Hip Hip Hooray for ${n}!`, `${n}'s Super Birthday Song!`],
+    verse1: [
+      (n) => `Hip hip hooray, it's ${n}'s big day,\nPut on your crown and come out to play!\nBalloons are floating and cake is done,\n${n} is shining just like the sun!`,
+      (n) => `The streamers are bright and the decorations too,\nEverything today is just for you!\n${n}, ${n}, let's shout and cheer,\nThe best little birthday star of the year!`,
+      (n) => `Wake up, wake up, it's a special day,\nThe whole wide world wants to sing and say:\n${n}, ${n}, hooraaaay!!\nHappy birthday on your most magical day!`,
+    ],
+    chorus: [
+      (n) => `Happy birthday to you, hooray hooray!\n${n}, ${n}, it's your special day!\nMake a wish and blow the candles out,\nThat's what birthdays are all about! 🎂`,
+      (n) => `La la la, it's a birthday song,\nSing it loud and sing it all day long!\n${n}, ${n}, yay yay yay,\nHappy happy birthday on your wonderful day!`,
+      (n) => `Clap your hands and stomp your feet,\n${n}'s birthday makes life feel complete!\nJump up high and spin around,\nYou're the best birthday star around!`,
+    ],
+    verse2: [
+      (n, a, h) => a
+        ? `${a} whole years of giggles and fun,\n${a} years of adventures — they've only just begun!\nWith each year you grow a little more,\n${n}, we love you to the moon and the shore!`
+        : `You bring the giggles and the grins each day,\nYou bring the sunshine come what may.\nWith every laugh and every game,\n${n}, life is never quite the same!`,
+      (n, a, h) => h
+        ? `You love ${h.toLowerCase()} more than words can say,\nAnd we love watching you go and play!\nOn this birthday, here's a wish so bright:\nMay every day be filled with pure delight!`
+        : `Birthday games and birthday treats,\nCandy, cake, and sprinkle sweets!\nWith friends around and love to spare,\n${n}, there is magic everywhere!`,
+      (n, a, h) => `Butterflies and rainbow skies,\nBlowing birthday wishes up so high.\nEverything is sparkly and new,\n${n}, today's all about wonderful you!`,
+    ],
+    bridge: [
+      (n) => `Cake and ice cream, games and fun,\n${n}'s birthday has only just begun!`,
+      (n) => `Make a wish, a really big one too,\n${n}, the whole sky's smiling just for you!`,
+      (n) => `Hip hip hip hip hooooray,\n${n} is the star of this beautiful day!`,
+    ],
+    outro: (n) => `🎈 Happy Birthday, ${n}! Yay yay yay! 🎂🌟`,
+  },
+};
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function pick(arr, idx) { return arr[idx % arr.length]; }
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+function getTraitSubtitle(traits, name) {
+  const phrases = {
+    funny:       'with a sense of humour that could light up any room',
+    sweet:       'whose kindness and warmth touches everyone around them',
+    adventurous: 'who chases every horizon with fearless, open arms',
+    artistic:    'whose creativity and vision inspire everything they touch',
+    sporty:      'with a champion\'s spirit and unstoppable drive',
+    nerdy:       'whose brilliant curiosity makes the world endlessly fascinating',
+    musical:     'with a soul that speaks most beautifully through music',
+  };
+  if (!traits.length) return '';
+  return traits.slice(0, 2).map(t => phrases[t]).filter(Boolean).join(', and ');
+}
+
+// ─── SONG GENERATION ─────────────────────────────────────────────────────────
+function generateSong() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) {
+    document.getElementById('nameInput').focus();
+    document.getElementById('nameInput').style.borderColor = '#E63946';
+    setTimeout(() => document.getElementById('nameInput').style.borderColor = '', 2000);
+    return;
+  }
+
+  const age    = document.getElementById('ageInput').value.trim();
+  const hobby  = document.getElementById('hobbyInput').value.trim();
+  const msg    = document.getElementById('messageInput').value.trim();
+  const tmpl   = T[S.style];
+  const v      = S.variant;
+
+  const title   = pick(tmpl.titles(name), v);
+  const verse1  = pick(tmpl.verse1, v)(name, age, hobby);
+  const chorus  = pick(tmpl.chorus, v)(name, age);
+  const verse2  = pick(tmpl.verse2, v)(name, age, hobby);
+  const bridge  = pick(tmpl.bridge, v)(name);
+  const outro   = tmpl.outro(name);
+  const customLine = msg ? `\n\n"${msg}"` : '';
+  const traitLine  = getTraitSubtitle(S.traits, name);
+
+  const html = `
+    <div class="song-card-wrapper theme-${S.style}">
+      <div class="song-card">
+        <span class="corner-note tl">♪</span>
+        <span class="corner-note tr">♫</span>
+        <span class="corner-note bl">♩</span>
+        <span class="corner-note br">♬</span>
+
+        <div class="song-header">
+          <div class="song-style-badge">${tmpl.badge}</div>
+          <div class="song-title">${esc(title)}</div>
+          ${traitLine ? `<p class="song-subtitle">A song for someone ${esc(traitLine)}</p>` : ''}
+        </div>
+
+        <div class="song-section">
+          <div class="section-label label-verse">♪ VERSE 1</div>
+          <div class="song-text">${esc(verse1)}</div>
+        </div>
+
+        <div class="song-divider">~ ~ ~</div>
+
+        <div class="song-section is-chorus">
+          <div class="section-label label-chorus">♫ CHORUS</div>
+          <div class="song-text">${esc(chorus)}</div>
+        </div>
+
+        <div class="song-divider">~ ~ ~</div>
+
+        <div class="song-section">
+          <div class="section-label label-verse">♪ VERSE 2</div>
+          <div class="song-text">${esc(verse2)}</div>
+        </div>
+
+        <div class="song-divider">~ ~ ~</div>
+
+        <div class="song-section is-bridge">
+          <div class="section-label label-bridge">♬ BRIDGE</div>
+          <div class="song-text">${esc(bridge)}${esc(customLine)}</div>
+        </div>
+
+        <div class="song-divider">~ ~ ~</div>
+
+        <div class="song-section is-chorus">
+          <div class="section-label label-chorus">♫ CHORUS (REPRISE)</div>
+          <div class="song-text">${esc(chorus)}</div>
+        </div>
+
+        <div class="song-section" style="text-align:center;margin-top:1.4rem;">
+          <div class="section-label label-outro" style="display:inline-flex;">✨ OUTRO</div>
+          <div class="song-text" style="text-align:center;padding-left:0;margin-top:.5rem;font-style:italic;">${esc(outro)}</div>
+        </div>
+
+        <div class="song-actions">
+          <button class="action-btn primary" id="regenBtn">🔄 Regenerate</button>
+          <button class="action-btn" id="copyBtn">📋 Copy</button>
+          <button class="action-btn" id="dlBtn">⬇️ Download</button>
+          <button class="action-btn" id="readBtn">🔊 Read Aloud</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('songPanel').innerHTML = html;
+
+  // Bind action buttons (capture local vars in closure)
+  document.getElementById('regenBtn').onclick = () => {
+    S.variant = (S.variant + 1) % 3;
+    showComposing();
+  };
+  document.getElementById('copyBtn').onclick = () => {
+    const text = buildText(title, verse1, chorus, verse2, bridge, customLine, outro, name);
+    navigator.clipboard.writeText(text).then(() => {
+      const b = document.getElementById('copyBtn');
+      b.textContent = '✅ Copied!';
+      setTimeout(() => { b.textContent = '📋 Copy'; }, 2000);
+    });
+  };
+  document.getElementById('dlBtn').onclick = () => {
+    const text = buildText(title, verse1, chorus, verse2, bridge, customLine, outro, name);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
+    a.download = `birthday-song-${name.toLowerCase().replace(/\s+/g, '-')}.txt`;
+    a.click();
+  };
+  document.getElementById('readBtn').onclick = () => readAloud(verse1, chorus, verse2, bridge, outro);
+
+  document.getElementById('songPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function buildText(title, v1, ch, v2, br, customLine, outro, name) {
+  return [
+    `♪ ${title} ♪`, '',
+    '[VERSE 1]', v1, '',
+    '[CHORUS]', ch, '',
+    '[VERSE 2]', v2, '',
+    '[BRIDGE]', br + customLine, '',
+    '[CHORUS]', ch, '',
+    '[OUTRO]', outro, '',
+    '— Generated at Multi-Tools Hub Birthday Song Generator',
+  ].join('\n');
+}
+
+let ttsUtterance = null;
+function readAloud(v1, ch, v2, br, outro) {
+  if (!('speechSynthesis' in window)) {
+    alert('Speech synthesis is not supported in your browser.');
+    return;
+  }
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    ttsUtterance = null;
+    const btn = document.getElementById('readBtn');
+    if (btn) { btn.textContent = '🔊 Read Aloud'; btn.classList.remove('speaking'); }
+    return;
+  }
+  const text = [v1, ch, v2, br, ch, outro].join('\n\n').replace(/[♪♫♩♬✨🎂🎈🎤🎧🤠🌹]/g, '');
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.rate = 0.88;
+  utt.pitch = 1.05;
+  ttsUtterance = utt;
+  const btn = document.getElementById('readBtn');
+  if (btn) { btn.textContent = '⏹ Stop'; btn.classList.add('speaking'); }
+  utt.onend = utt.onerror = () => {
+    ttsUtterance = null;
+    const b = document.getElementById('readBtn');
+    if (b) { b.textContent = '🔊 Read Aloud'; b.classList.remove('speaking'); }
+  };
+  window.speechSynthesis.speak(utt);
+}
+
+function showComposing() {
+  document.getElementById('songPanel').innerHTML = `
+    <div class="composing-overlay">
+      <div class="note-spinner">🎵</div>
+      <div class="composing-label">COMPOSING YOUR SONG…</div>
+    </div>
+  `;
+  setTimeout(generateSong, 1400);
+}
+
+// ─── PILL CONTROLS ────────────────────────────────────────────────────────────
+document.querySelectorAll('#styleGroup .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('#styleGroup .pill').forEach(x => x.classList.remove('active'));
+    p.classList.add('active');
+    S.style = p.dataset.val;
+    S.variant = 0;
+  });
+});
+
+document.querySelectorAll('#traitsGroup .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.val;
+    if (S.traits.includes(v)) {
+      S.traits = S.traits.filter(t => t !== v);
+      p.classList.remove('active');
+    } else if (S.traits.length < 3) {
+      S.traits.push(v);
+      p.classList.add('active');
+    }
+  });
+});
+
+document.getElementById('generateBtn').addEventListener('click', () => {
+  S.variant = 0;
+  showComposing();
+});
+
+document.getElementById('nameInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { S.variant = 0; showComposing(); }
+});
+
+// ─── MUSIC NOTE PARTICLE CANVAS ───────────────────────────────────────────────
+(function () {
+  const canvas = document.getElementById('noteCanvas');
+  const ctx = canvas.getContext('2d');
+  const notes = ['♩', '♪', '♫', '♬'];
+  const particles = Array.from({ length: 22 }, () => ({
+    x: Math.random() * 100,
+    y: Math.random() * 100 + 60,
+    note: notes[Math.floor(Math.random() * notes.length)],
+    size: 9 + Math.random() * 15,
+    speed: 0.18 + Math.random() * 0.38,
+    opacity: 0.05 + Math.random() * 0.18,
+    drift: (Math.random() - .5) * 0.25,
+  }));
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.save();
+      ctx.globalAlpha = p.opacity;
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = `${p.size}px serif`;
+      ctx.fillText(p.note, p.x / 100 * canvas.width, p.y / 100 * canvas.height);
+      ctx.restore();
+      p.y -= p.speed;
+      p.x += p.drift;
+      if (p.y < -5) { p.y = 115; p.x = Math.random() * 100; }
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>
