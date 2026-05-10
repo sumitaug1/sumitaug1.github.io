@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer - Focus & Productivity Timer | Multi-Tools Hub</title>
+    <meta name="description" content="Free online Pomodoro timer to boost focus and productivity. Customizable work/break intervals with session tracking and sound alerts.">
+    <meta name="keywords" content="pomodoro timer, focus timer, productivity timer, work timer, break timer, pomodoro technique">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../assets/css/tool-page.css" rel="stylesheet">
+    <style>
+      /* Ring */
+      .pom-ring-wrap {
+        position: relative;
+        width: 260px;
+        height: 260px;
+        margin: 0 auto;
+      }
+      .pom-ring-svg { width: 260px; height: 260px; transform: rotate(-90deg); }
+      .pom-ring-bg  { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 10; }
+      .pom-ring-arc { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.5s; }
+      .pom-ring-center {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+      }
+      .pom-time {
+        font-family: 'Orbitron', monospace;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #e8eaf0;
+        line-height: 1;
+        display: block;
+      }
+      .pom-mode-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.55rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 0.3rem;
+      }
+      .pom-session-dots {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .pom-dot {
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        transition: background 0.3s, box-shadow 0.3s;
+      }
+      .pom-dot.done { background: #00c8ff; box-shadow: 0 0 8px rgba(0,200,255,0.6); border-color: #00c8ff; }
+      .pom-dot.break { background: #a855f7; box-shadow: 0 0 8px rgba(168,85,247,0.6); border-color: #a855f7; }
+
+      /* Controls */
+      .pom-btn {
+        width: 52px; height: 52px;
+        border-radius: 50%;
+        border: 1px solid rgba(0,200,255,0.35);
+        background: rgba(0,200,255,0.06);
+        color: #00c8ff;
+        font-size: 1.1rem;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .pom-btn:hover { background: rgba(0,200,255,0.18); box-shadow: 0 0 16px rgba(0,200,255,0.25); }
+      .pom-btn.active { background: rgba(0,200,255,0.2); border-color: #00c8ff; }
+
+      /* Mode tabs */
+      .pom-tabs { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+      .pom-tab {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.9rem;
+        border-radius: 3px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: transparent;
+        color: rgba(216,221,232,0.45);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .pom-tab.active { border-color: #00c8ff; color: #00c8ff; background: rgba(0,200,255,0.1); }
+      .pom-tab.active[data-mode="break"] { border-color: #a855f7; color: #a855f7; background: rgba(168,85,247,0.1); }
+      .pom-tab.active[data-mode="long"]  { border-color: #f59e0b; color: #f59e0b; background: rgba(245,158,11,0.1); }
+
+      /* Stats */
+      .pom-stats { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+      .pom-stat-item { text-align: center; }
+      .pom-stat-val {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.5rem;
+        color: #00c8ff;
+        display: block;
+      }
+      .pom-stat-lbl {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.52rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(0,200,255,0.4);
+      }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h1 class="mb-2">Pomodoro Timer</h1>
+                <p class="lead">Stay focused with timed work sessions and breaks. Built on the Pomodoro Technique.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-9">
+                <div class="row g-4">
+
+                    <!-- Timer Card -->
+                    <div class="col-md-7">
+                        <div class="card h-100">
+                            <div class="card-body text-center py-4">
+                                <!-- Mode tabs -->
+                                <div class="pom-tabs">
+                                    <button class="pom-tab active" data-mode="work">Work</button>
+                                    <button class="pom-tab" data-mode="break">Short Break</button>
+                                    <button class="pom-tab" data-mode="long">Long Break</button>
+                                </div>
+
+                                <!-- Ring -->
+                                <div class="pom-ring-wrap">
+                                    <svg class="pom-ring-svg" viewBox="0 0 260 260">
+                                        <circle class="pom-ring-bg" cx="130" cy="130" r="118"/>
+                                        <circle class="pom-ring-arc" id="ringArc" cx="130" cy="130" r="118"
+                                            stroke="#00c8ff"
+                                            stroke-dasharray="741.42"
+                                            stroke-dashoffset="0"/>
+                                    </svg>
+                                    <div class="pom-ring-center">
+                                        <span class="pom-time" id="pomTime">25:00</span>
+                                        <span class="pom-mode-label" id="pomModeLabel" style="color:#00c8ff">Work Session</span>
+                                    </div>
+                                </div>
+
+                                <!-- Controls -->
+                                <div class="d-flex gap-3 justify-content-center align-items-center mt-3">
+                                    <button class="pom-btn" id="skipBtn" title="Skip"><i class="fas fa-step-forward"></i></button>
+                                    <button class="pom-btn" id="startStopBtn" style="width:64px;height:64px;font-size:1.4rem" title="Start/Pause"><i class="fas fa-play"></i></button>
+                                    <button class="pom-btn" id="resetBtn" title="Reset"><i class="fas fa-redo"></i></button>
+                                </div>
+
+                                <!-- Session dots -->
+                                <div class="pom-session-dots" id="sessionDots"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings + Stats Card -->
+                    <div class="col-md-5">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title" style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// Settings</h6>
+                                <div class="mb-2">
+                                    <label class="form-label" style="font-size:0.8rem">Work <span id="workVal">25</span> min</label>
+                                    <input type="range" class="form-range" id="workMin" min="5" max="60" step="5" value="25">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label" style="font-size:0.8rem">Short Break <span id="shortVal">5</span> min</label>
+                                    <input type="range" class="form-range" id="shortMin" min="1" max="15" step="1" value="5">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label" style="font-size:0.8rem">Long Break <span id="longVal">15</span> min</label>
+                                    <input type="range" class="form-range" id="longMin" min="10" max="30" step="5" value="15">
+                                </div>
+                                <div class="mb-0">
+                                    <label class="form-label" style="font-size:0.8rem">Long break every <span id="sessVal">4</span> sessions</label>
+                                    <input type="range" class="form-range" id="sessCount" min="2" max="8" step="1" value="4">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title" style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// Today's Stats</h6>
+                                <div class="pom-stats">
+                                    <div class="pom-stat-item"><span class="pom-stat-val" id="statSessions">0</span><span class="pom-stat-lbl">Sessions</span></div>
+                                    <div class="pom-stat-item"><span class="pom-stat-val" id="statFocus">0</span><span class="pom-stat-lbl">Focus min</span></div>
+                                    <div class="pom-stat-item"><span class="pom-stat-val" id="statBreaks">0</span><span class="pom-stat-lbl">Breaks</span></div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <button class="btn btn-sm btn-outline-danger" id="clearStatsBtn">Reset Stats</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How it works -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-info-circle me-2" style="color:#00c8ff"></i>The Pomodoro Technique</h5>
+                        <div class="row g-3 mt-1">
+                            <div class="col-sm-6 col-lg-3 text-center">
+                                <div style="font-size:1.5rem;margin-bottom:0.4rem">🎯</div>
+                                <strong style="font-size:0.85rem">1. Choose a task</strong>
+                                <p style="font-size:0.78rem;color:rgba(216,221,232,0.55);margin-top:0.2rem">Pick something you need to work on.</p>
+                            </div>
+                            <div class="col-sm-6 col-lg-3 text-center">
+                                <div style="font-size:1.5rem;margin-bottom:0.4rem">⏱️</div>
+                                <strong style="font-size:0.85rem">2. Work 25 min</strong>
+                                <p style="font-size:0.78rem;color:rgba(216,221,232,0.55);margin-top:0.2rem">Focus with zero distractions.</p>
+                            </div>
+                            <div class="col-sm-6 col-lg-3 text-center">
+                                <div style="font-size:1.5rem;margin-bottom:0.4rem">☕</div>
+                                <strong style="font-size:0.85rem">3. Short break</strong>
+                                <p style="font-size:0.78rem;color:rgba(216,221,232,0.55);margin-top:0.2rem">5-minute rest between sessions.</p>
+                            </div>
+                            <div class="col-sm-6 col-lg-3 text-center">
+                                <div style="font-size:1.5rem;margin-bottom:0.4rem">🌴</div>
+                                <strong style="font-size:0.85rem">4. Long break</strong>
+                                <p style="font-size:0.78rem;color:rgba(216,221,232,0.55);margin-top:0.2rem">15–30 min after every 4 sessions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Advertisement</h5>
+                        <div class="ad-space">
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6204232626800687" data-ad-slot="9572280796" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script>
+    (function(){
+      'use strict';
+
+      const CIRCUMFERENCE = 2 * Math.PI * 118; // ~741.42
+
+      const ringArc      = document.getElementById('ringArc');
+      const pomTime      = document.getElementById('pomTime');
+      const pomModeLabel = document.getElementById('pomModeLabel');
+      const startStopBtn = document.getElementById('startStopBtn');
+      const resetBtn     = document.getElementById('resetBtn');
+      const skipBtn      = document.getElementById('skipBtn');
+      const sessionDots  = document.getElementById('sessionDots');
+      const workMinEl    = document.getElementById('workMin');
+      const shortMinEl   = document.getElementById('shortMin');
+      const longMinEl    = document.getElementById('longMin');
+      const sessCountEl  = document.getElementById('sessCount');
+      const clearStatsBtn= document.getElementById('clearStatsBtn');
+      const statSessions = document.getElementById('statSessions');
+      const statFocus    = document.getElementById('statFocus');
+      const statBreaks   = document.getElementById('statBreaks');
+
+      let mode       = 'work';  // 'work' | 'break' | 'long'
+      let running    = false;
+      let interval   = null;
+      let totalSecs  = 0;
+      let remaining  = 0;
+      let sessionNum = 0;  // completed work sessions since last long break
+      let completedDots = [];
+
+      // Stats from localStorage
+      let stats = JSON.parse(localStorage.getItem('pomStats') || '{"sessions":0,"focus":0,"breaks":0}');
+
+      const MODES = {
+        work:  { label: 'Work Session', color: '#00c8ff', ring: '#00c8ff' },
+        break: { label: 'Short Break',  color: '#a855f7', ring: '#a855f7' },
+        long:  { label: 'Long Break',   color: '#f59e0b', ring: '#f59e0b' },
+      };
+
+      function getMins() {
+        return { work: +workMinEl.value, break: +shortMinEl.value, long: +longMinEl.value };
+      }
+      function getSessCount() { return +sessCountEl.value; }
+
+      function setMode(m, reset=true) {
+        mode = m;
+        document.querySelectorAll('.pom-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === m));
+        ringArc.style.stroke = MODES[m].ring;
+        pomModeLabel.style.color = MODES[m].color;
+        pomModeLabel.textContent = MODES[m].label;
+        if (reset) {
+          totalSecs = getMins()[m] * 60;
+          remaining = totalSecs;
+          updateDisplay();
+        }
+      }
+
+      function pad2(n) { return String(n).padStart(2,'0'); }
+
+      function updateDisplay() {
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        pomTime.textContent = `${pad2(m)}:${pad2(s)}`;
+        const frac = totalSecs > 0 ? remaining / totalSecs : 1;
+        ringArc.style.strokeDashoffset = CIRCUMFERENCE * (1 - frac);
+        document.title = running ? `${pad2(m)}:${pad2(s)} — Pomodoro` : 'Pomodoro Timer';
+      }
+
+      function beep() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.frequency.value = mode === 'work' ? 880 : 660;
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(0.4, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+          osc.start(); osc.stop(ctx.currentTime + 0.8);
+        } catch(e) {}
+      }
+
+      function nextMode() {
+        beep();
+        if (mode === 'work') {
+          stats.sessions++;
+          stats.focus += getMins().work;
+          sessionNum++;
+          completedDots.push('work');
+          if (sessionNum >= getSessCount()) {
+            sessionNum = 0;
+            setMode('long');
+          } else {
+            stats.breaks++;
+            setMode('break');
+          }
+        } else {
+          if (mode === 'break') completedDots.push('break');
+          if (mode === 'long')  completedDots.push('break');
+          setMode('work');
+        }
+        saveStats();
+        renderDots();
+        startTimer();
+      }
+
+      function tick() {
+        if (remaining <= 0) { clearInterval(interval); running = false; startStopBtn.innerHTML = '<i class="fas fa-play"></i>'; nextMode(); return; }
+        remaining--;
+        updateDisplay();
+      }
+
+      function startTimer() {
+        running = true;
+        startStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        interval = setInterval(tick, 1000);
+      }
+
+      function pauseTimer() {
+        running = false;
+        startStopBtn.innerHTML = '<i class="fas fa-play"></i>';
+        clearInterval(interval);
+        document.title = 'Pomodoro Timer';
+      }
+
+      startStopBtn.onclick = () => { running ? pauseTimer() : startTimer(); };
+
+      resetBtn.onclick = () => {
+        pauseTimer();
+        setMode(mode);
+      };
+
+      skipBtn.onclick = () => {
+        pauseTimer();
+        nextMode();
+      };
+
+      document.querySelectorAll('.pom-tab').forEach(t => {
+        t.onclick = () => { pauseTimer(); setMode(t.dataset.mode); };
+      });
+
+      // Settings sliders
+      [['workMin','workVal'], ['shortMin','shortVal'], ['longMin','longVal'], ['sessCount','sessVal']].forEach(([id, valId]) => {
+        const el = document.getElementById(id);
+        const val = document.getElementById(valId);
+        el.oninput = () => {
+          val.textContent = el.value;
+          if (!running) setMode(mode);
+          renderDots();
+        };
+      });
+
+      function renderDots() {
+        const count = getSessCount();
+        sessionDots.innerHTML = '';
+        for (let i = 0; i < count * 2; i++) {
+          const d = document.createElement('div');
+          d.className = 'pom-dot';
+          if (completedDots[i] === 'work')  d.classList.add('done');
+          if (completedDots[i] === 'break') d.classList.add('break');
+          sessionDots.appendChild(d);
+        }
+      }
+
+      function saveStats() {
+        localStorage.setItem('pomStats', JSON.stringify(stats));
+        statSessions.textContent = stats.sessions;
+        statFocus.textContent    = stats.focus;
+        statBreaks.textContent   = stats.breaks;
+      }
+
+      clearStatsBtn.onclick = () => {
+        stats = { sessions:0, focus:0, breaks:0 };
+        saveStats();
+      };
+
+      // Init
+      ringArc.style.strokeDasharray = CIRCUMFERENCE;
+      ringArc.style.strokeDashoffset = 0;
+      setMode('work');
+      renderDots();
+      saveStats();
+
+    })();
+    </script>
+</body>
+</html>
