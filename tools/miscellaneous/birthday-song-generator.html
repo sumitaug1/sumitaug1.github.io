@@ -417,6 +417,102 @@
     .wish-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,.07); }
     .wish-btn.speaking { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,.1); }
 
+    /* QUICK SONGS STRIP */
+    .quick-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2.5rem;
+    }
+    .quick-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: .7rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .quick-label {
+      font-family: 'Orbitron', monospace;
+      font-size: .78rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+    }
+    .quick-sub { font-size: .78rem; color: var(--text-dim); }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .85rem;
+    }
+    .quick-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .quick-card:hover { border-color: var(--gold); background: rgba(212,175,55,.06); transform: translateY(-2px); }
+    .quick-card.playing { border-color: var(--gold); background: rgba(212,175,55,.1); }
+    .quick-card-icon { font-size: 1.6rem; }
+    .quick-card-title { font-size: .88rem; font-weight: 600; color: var(--text); }
+    .quick-card-preview { font-size: .75rem; color: var(--text-dim); line-height: 1.5; white-space: pre-line; }
+    .quick-card-actions { display: flex; gap: .4rem; margin-top: .3rem; }
+    .quick-act-btn {
+      flex: 1;
+      padding: .3rem .5rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-dim);
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .15s;
+      text-align: center;
+    }
+    .quick-act-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .quick-act-btn.play { background: rgba(212,175,55,.12); border-color: rgba(212,175,55,.4); color: var(--gold); }
+
+    /* SIMPLE SONG CARD (for quick songs shown in panel) */
+    .simple-song-wrapper {
+      border-radius: var(--radius);
+      padding: 2px;
+      background: conic-gradient(from 0deg, #D4AF37, #F5E08B, #9B7E2E, #D4AF37);
+      animation: rotateBorder 6s linear infinite;
+    }
+    .simple-song-card {
+      background: var(--surface);
+      border-radius: calc(var(--radius) - 1px);
+      padding: 2.2rem;
+      text-align: center;
+      animation: cardReveal .5s ease-out;
+    }
+    .simple-song-icon { font-size: 2.8rem; margin-bottom: .8rem; }
+    .simple-song-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .simple-song-text {
+      font-size: 1.05rem;
+      line-height: 2.1;
+      white-space: pre-line;
+      color: var(--text);
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+    }
+    .simple-song-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      justify-content: center;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .main-wrapper { grid-template-columns: 1fr; }
@@ -427,6 +523,7 @@
       .song-title { font-size: 2rem !important; }
       .field-row { grid-template-columns: 1fr; }
       .action-btn { min-width: 80px; font-size: .75rem; }
+      .quick-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -538,6 +635,15 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- Quick Songs Strip -->
+  <div class="quick-section">
+    <div class="quick-header">
+      <span class="quick-label">♩ QUICK BIRTHDAY SONGS</span>
+      <span class="quick-sub">Pick a simple song — shows instantly & reads aloud</span>
+    </div>
+    <div class="quick-grid" id="quickGrid"></div>
   </div>
 
   <!-- Ad -->
@@ -1156,6 +1262,163 @@ document.getElementById('nameInput').addEventListener('keydown', e => {
 });
 document.getElementById('nameInput').addEventListener('input', updateWishBtn);
 document.getElementById('wishBtn').addEventListener('click', speakBirthdayWish);
+
+// ─── QUICK SONGS ─────────────────────────────────────────────────────────────
+const QUICK_SONGS = [
+  {
+    id: 'traditional',
+    icon: '🎂',
+    title: 'The Traditional',
+    preview: 'Happy Birthday to you,\nHappy Birthday to you…',
+    song: (n) =>
+      `Happy Birthday to you,\nHappy Birthday to you,\nHappy Birthday dear ${n},\nHappy Birthday to you!\n\nMay all your wishes come true,\nAnd your dreams see you through,\nHappy Birthday dear ${n},\nHappy Birthday to you!`,
+    rate: 0.78, pitch: 1.1,
+  },
+  {
+    id: 'sweet',
+    icon: '🌸',
+    title: 'Sweet & Simple',
+    preview: 'Wishing you a happy birthday,\nFull of joy and full of cheer…',
+    song: (n) =>
+      `Wishing you a happy birthday,\nFull of joy and full of cheer,\nMay this day be extra special,\nThe brightest day of all the year!\n\nHappy Birthday, ${n}!\nYou are so loved today and always.`,
+    rate: 0.82, pitch: 1.1,
+  },
+  {
+    id: 'fun',
+    icon: '🎉',
+    title: 'Fun & Cheerful',
+    preview: 'Hip hip hooray!\nIt\'s your special day!…',
+    song: (n) =>
+      `Hip hip hooray!\nIt's your special day!\nBlow out the candles\nAnd shout hooray!\n\nIt's time to laugh, it's time to cheer,\n${n}, the greatest one here!\n\nHappy Birthday to you! Happy Birthday to you!\nHappy Birthday dear ${n}, Happy Birthday to you!`,
+    rate: 0.90, pitch: 1.2,
+  },
+  {
+    id: 'poem',
+    icon: '📜',
+    title: 'Birthday Poem',
+    preview: 'Another year older,\nAnother year wiser…',
+    song: (n) =>
+      `Another year older,\nAnother year wiser,\nAnother year sweeter —\nCould life be any nicer?\n\nMay laughter fill your morning,\nMay peace fill your night,\nMay love surround you always\nAnd keep your world bright.\n\nHappy Birthday, ${n}!\nMay this year be your most beautiful yet.`,
+    rate: 0.80, pitch: 1.05,
+  },
+  {
+    id: 'blessing',
+    icon: '✨',
+    title: 'A Birthday Blessing',
+    preview: 'May your birthday be filled with sunshine,\nMay your year be filled with cheer…',
+    song: (n) =>
+      `May your birthday be filled with sunshine,\nMay your year be filled with cheer,\nMay every wish you make come true\nOn this, your most special day, my dear.\n\nMay good health walk beside you,\nMay joy light up your way,\nAnd may you feel how deeply loved\nYou are each and every day.\n\nHappy Birthday, ${n}.\nYou are truly, deeply loved.`,
+    rate: 0.76, pitch: 1.08,
+  },
+];
+
+let quickSpeaking = null;
+
+function renderQuickGrid() {
+  const grid = document.getElementById('quickGrid');
+  if (!grid) return;
+  grid.innerHTML = QUICK_SONGS.map(qs => `
+    <div class="quick-card" id="qc-${qs.id}" onclick="showQuickSong('${qs.id}')">
+      <div class="quick-card-icon">${qs.icon}</div>
+      <div class="quick-card-title">${qs.title}</div>
+      <div class="quick-card-preview">${esc(qs.preview)}</div>
+      <div class="quick-card-actions">
+        <button class="quick-act-btn" onclick="event.stopPropagation();showQuickSong('${qs.id}')">📄 Show</button>
+        <button class="quick-act-btn play" id="qplay-${qs.id}" onclick="event.stopPropagation();speakQuickSong('${qs.id}')">▶ Play</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showQuickSong(id) {
+  const qs   = QUICK_SONGS.find(q => q.id === id);
+  if (!qs) return;
+  const name = document.getElementById('nameInput').value.trim() || 'dear friend';
+  const text = qs.song(name);
+
+  document.getElementById('songPanel').innerHTML = `
+    <div class="simple-song-wrapper">
+      <div class="simple-song-card">
+        <div class="simple-song-icon">${qs.icon}</div>
+        <div class="simple-song-title">${esc(qs.title)}</div>
+        <div class="simple-song-text">${esc(text)}</div>
+        <div class="simple-song-actions">
+          <button class="action-btn play primary" id="qpanel-play-${id}">▶ Play Song</button>
+          <button class="action-btn" id="qpanel-copy-${id}">📋 Copy</button>
+          <button class="action-btn" id="qpanel-dl-${id}">⬇️ Download</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById(`qpanel-play-${id}`).onclick = () => speakQuickSong(id, true);
+  document.getElementById(`qpanel-copy-${id}`).onclick = () => {
+    navigator.clipboard.writeText(text).then(() => {
+      const b = document.getElementById(`qpanel-copy-${id}`);
+      b.textContent = '✅ Copied!';
+      setTimeout(() => { b.textContent = '📋 Copy'; }, 2000);
+    });
+  };
+  document.getElementById(`qpanel-dl-${id}`).onclick = () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
+    a.download = `birthday-song-${id}-${name.toLowerCase().replace(/\s+/g,'-')}.txt`;
+    a.click();
+  };
+
+  document.getElementById('songPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // highlight active card
+  document.querySelectorAll('.quick-card').forEach(c => c.classList.remove('playing'));
+  const card = document.getElementById(`qc-${id}`);
+  if (card) card.classList.add('playing');
+}
+
+function speakQuickSong(id, fromPanel) {
+  const qs   = QUICK_SONGS.find(q => q.id === id);
+  if (!qs || !('speechSynthesis' in window)) return;
+  const name = document.getElementById('nameInput').value.trim() || 'dear friend';
+
+  const playBtn = fromPanel
+    ? document.getElementById(`qpanel-play-${id}`)
+    : document.getElementById(`qplay-${id}`);
+
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('[id^="qplay-"], [id^="qpanel-play-"]').forEach(b => {
+      b.textContent = b.id.startsWith('qpanel') ? '▶ Play Song' : '▶ Play';
+    });
+    quickSpeaking = null;
+    return;
+  }
+
+  if (!fromPanel) showQuickSong(id);
+
+  const text = qs.song(name).replace(/[🎂🌸🎉📜✨]/g, '');
+  const utt  = new SpeechSynthesisUtterance(text);
+  utt.rate   = qs.rate;
+  utt.pitch  = qs.pitch;
+  quickSpeaking = id;
+
+  const doSpeak = () => {
+    const voices = window.speechSynthesis.getVoices();
+    const v = voices.find(vx => /samantha|google uk english female|karen|moira/i.test(vx.name))
+           || voices.find(vx => vx.lang.startsWith('en'));
+    if (v) utt.voice = v;
+    window.speechSynthesis.speak(utt);
+  };
+  window.speechSynthesis.getVoices().length ? doSpeak() : (window.speechSynthesis.onvoiceschanged = doSpeak);
+
+  if (playBtn) playBtn.textContent = '⏹ Stop';
+  utt.onend = utt.onerror = () => {
+    quickSpeaking = null;
+    document.querySelectorAll('[id^="qplay-"], [id^="qpanel-play-"]').forEach(b => {
+      b.textContent = b.id.startsWith('qpanel') ? '▶ Play Song' : '▶ Play';
+    });
+  };
+}
+
+renderQuickGrid();
 
 // ─── MUSIC NOTE PARTICLE CANVAS ───────────────────────────────────────────────
 (function () {
