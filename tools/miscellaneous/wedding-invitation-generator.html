@@ -1,873 +1,1241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-HNYPXS04ZV');
-	</script>	
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation Generator - Create Beautiful Wedding Invitations | Multi-Tools Hub</title>
-    <meta name="description" content="Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more. The most advanced wedding invitation generator online.">
-    <meta name="keywords" content="wedding invitation generator, AI wedding invitations, voice input invitations, QR code invitations, social media wedding cards, animated wedding invitations, WhatsApp wedding invites, RSVP tracking, wedding invitation maker">
-	
-	<!-- AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687"
-    crossorigin="anonymous"></script>
-    
-    <!-- Bootstrap CSS -->
+    <title>Wedding Invitation Generator - Animated Elegant Invites | Multi-Tools Hub</title>
+    <meta name="description" content="Create stunning animated wedding invitations with 6 themes, live preview, photo upload, QR code, ceremony & reception details, countdown, and instant download. Free, no sign-up.">
+    <meta name="keywords" content="wedding invitation generator, animated wedding invite, elegant wedding invitation maker, free wedding invitation">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Montserrat:wght@300;400;500;600&family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="../../assets/css/style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="../../assets/css/tool-page.css" rel="stylesheet">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Wedding Invitation Generator - AI-Powered Wedding Invitations">
-    <meta property="og:description" content="Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more. The most advanced wedding invitation generator online.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/tools/miscellaneous/wedding-invitation-generator.html">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Wedding Invitation Generator - AI-Powered Wedding Invitations">
-    <meta name="twitter:description" content="Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more.">
-    
-    <style>
-        /* Enhanced Styles */
-        .feature-highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .ai-suggestion-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .ai-suggestion-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .voice-input-btn {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            border: none;
-            color: white;
-            border-radius: 50px;
-            padding: 10px 20px;
-            margin-left: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .voice-input-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .voice-input-btn.recording {
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .qr-code-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .social-share-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        
-        .social-share-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .social-share-btn:hover {
-            transform: translateY(-3px);
-        }
-        
-        .facebook { background: #1877f2; }
-        .twitter { background: #1da1f2; }
-        .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .whatsapp { background: #25d366; }
-        
-        .animated-preview {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .music-controls {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-        
-        .rsvp-analytics {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-        
-        .progress-bar {
-            height: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-            transition: width 0.5s ease;
-        }
-        
-        .whatsapp-integration {
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-        
-        .preview-controls {
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .control-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 5px;
-            margin: 0 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .ar-preview {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        .live-collaboration {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px 15px;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            display: none;
-        }
-        
-        .template-card {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .template-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .template-card.active {
-            border: 3px solid #667eea;
-            transform: translateY(-5px);
-        }
-        
-        .template-preview {
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .elegant-preview { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .modern-preview { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .classic-preview { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .romantic-preview { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
-        .vintage-preview { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
-        .minimalist-preview { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
-        
-        .color-option {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .color-option:hover {
-            transform: scale(1.2);
-        }
-        
-        .color-option.active {
-            border-color: #333;
-            transform: scale(1.1);
-        }
-        
-        .invitation-preview {
-            position: relative;
-            min-height: 400px;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .invitation {
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .invitation-content {
-            max-width: 500px;
-        }
-        
-        .couple-names {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .wedding-date {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-        
-        .wedding-time {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        
-        .venue {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .address {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .additional-info {
-            font-size: 0.9rem;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-        
-        .download-options {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .download-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .pdf-btn { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
-        .png-btn { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-        .jpg-btn { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-        .social-btn { background: linear-gradient(135deg, #667eea, #764ba2); }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 10px;
-            color: white;
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification.success { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-        .notification.error { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
-        .notification.info { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-        
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+
+<style>
+/* ══════════════════════════ Layout ══════════════════════════ */
+.tool-header { text-align:center; margin-bottom:1.5rem; }
+.tool-header h1 { margin-bottom:.3rem; }
+.tool-header p  { color:var(--text-secondary); font-size:.95rem; }
+
+.big-wrapper {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+@media (max-width: 960px) {
+    .big-wrapper { grid-template-columns: 1fr; }
+    .preview-panel { position: static !important; }
+}
+
+/* ══════════════════════════ Quick Templates ══════════════════════════ */
+.tmpl-bar {
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    background:var(--card-bg); border:1px solid var(--border-color);
+    border-radius:12px; padding:.7rem 1rem; margin-bottom:1.5rem;
+}
+.tmpl-bar-label { font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); white-space:nowrap; }
+.tmpl-btn {
+    padding:5px 14px; border-radius:20px; border:1px solid var(--border-color);
+    background:transparent; color:var(--text-primary); font-size:.82rem;
+    cursor:pointer; transition:all .2s; white-space:nowrap;
+}
+.tmpl-btn:hover { border-color:#c8a0a0; color:#c8a0a0; background:rgba(200,160,160,.06); }
+
+/* ══════════════════════════ Form Panel ══════════════════════════ */
+.form-panel {
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    border-radius:16px;
+    padding:1.4rem;
+}
+.sec-head {
+    font-size:.68rem; letter-spacing:3px; text-transform:uppercase;
+    color:var(--text-secondary); margin:1rem 0 .5rem; display:flex;
+    align-items:center; gap:6px;
+}
+.sec-head:first-child { margin-top:0; }
+.sec-head::after { content:''; flex:1; height:1px; background:var(--border-color); }
+
+/* Theme thumbnails */
+.theme-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-bottom:.5rem; }
+.theme-thumb {
+    border-radius:9px; padding:3px; cursor:pointer;
+    border:2px solid transparent; transition:all .18s;
+}
+.theme-thumb:hover { transform:translateY(-2px); }
+.theme-thumb.active { border-color:#c8a0a0; box-shadow:0 0 0 3px rgba(200,160,160,.22); }
+.theme-thumb-inner {
+    height:62px; border-radius:7px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.6rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+}
+.th-elegant  { background:linear-gradient(135deg,#fffbf0,#f5e6c8); color:#8B5E3C; }
+.th-romantic { background:linear-gradient(135deg,#ffe4e4,#ffc0cb); color:#8B0A3A; }
+.th-classic  { background:linear-gradient(135deg,#eef2ff,#c8d4f0); color:#1B3A6D; }
+.th-vintage  { background:linear-gradient(135deg,#faf3e6,#f0d9b5); color:#6b3a2a; }
+.th-garden   { background:linear-gradient(135deg,#f0faf3,#c8e6cc); color:#2d5a2d; }
+.th-modern   { background:linear-gradient(135deg,#f5f5f5,#ddd); color:#333; }
+
+/* Color pills */
+.color-bar { display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:.4rem; }
+.color-pill {
+    width:24px; height:24px; border-radius:50%; cursor:pointer;
+    border:3px solid transparent; box-shadow:0 1px 4px rgba(0,0,0,.3);
+    transition:transform .18s, border-color .18s;
+}
+.color-pill:hover { transform:scale(1.2); }
+.color-pill.active { border-color:var(--text-primary); transform:scale(1.18); }
+.color-custom {
+    width:24px; height:24px; border-radius:50%; border:2px solid var(--border-color);
+    cursor:pointer; overflow:hidden; padding:0;
+    background:conic-gradient(#C0826A,#FFB6C1,#9CAF88,#1B3A6D,#800020,#C0826A);
+}
+.color-custom input[type=color] { opacity:0; width:100%; height:100%; cursor:pointer; border:none; padding:0; }
+
+/* Design controls */
+.design-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:.4rem; }
+.design-select {
+    background:var(--card-bg); border:1px solid var(--border-color);
+    border-radius:7px; color:var(--text-primary);
+    padding:7px 10px; font-size:.82rem; width:100%; cursor:pointer;
+}
+.design-select:focus { border-color:#c8a0a0; outline:none; }
+
+/* Form fields */
+.f-group { margin-bottom:.7rem; }
+.f-group label {
+    font-size:.68rem; font-weight:600; letter-spacing:.5px;
+    text-transform:uppercase; color:var(--text-secondary);
+    margin-bottom:3px; display:block;
+}
+.f-input-wrap { position:relative; display:flex; align-items:center; }
+.f-input-wrap input, .f-input-wrap textarea {
+    flex:1; background:var(--card-bg); border:1px solid var(--border-color);
+    border-radius:7px; color:var(--text-primary); padding:8px 12px;
+    font-size:.88rem; width:100%; transition:border-color .2s;
+}
+.f-input-wrap textarea { resize:vertical; min-height:72px; }
+.f-input-wrap input:focus, .f-input-wrap textarea:focus {
+    border-color:#c8a0a0; outline:none; box-shadow:0 0 0 2px rgba(200,160,160,.14);
+}
+.f-input-wrap input[type=date], .f-input-wrap input[type=time] { color-scheme:dark; }
+.f-input-wrap .voice-btn {
+    position:absolute; right:8px; background:none; border:none;
+    color:var(--text-secondary); cursor:pointer; padding:4px; font-size:.85rem;
+    transition:color .2s;
+}
+.f-input-wrap .voice-btn:hover { color:#c8a0a0; }
+.f-input-wrap .voice-btn.listening { color:#ef4444; animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.f-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+
+/* Conjunction selector */
+.conj-row { display:flex; gap:6px; margin-bottom:.7rem; }
+.conj-btn {
+    flex:1; padding:7px 4px; text-align:center; border-radius:7px;
+    border:1px solid var(--border-color); background:transparent;
+    color:var(--text-primary); font-size:1rem; cursor:pointer; transition:all .2s;
+}
+.conj-btn.active { border-color:#c8a0a0; background:rgba(200,160,160,.1); color:#c8a0a0; }
+
+/* Toggles */
+.toggle-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:.5rem; }
+.toggle-item {
+    display:flex; align-items:center; gap:6px;
+    padding:6px 8px; border-radius:7px; cursor:pointer;
+    border:1px solid var(--border-color); transition:all .2s;
+    font-size:.78rem; user-select:none;
+}
+.toggle-item.on { border-color:#c8a0a0; background:rgba(200,160,160,.08); color:#c8a0a0; }
+.toggle-item i { font-size:.75rem; }
+
+/* Photo upload */
+.photo-upload-area {
+    border:2px dashed var(--border-color); border-radius:10px;
+    padding:.8rem; text-align:center; cursor:pointer; transition:all .2s;
+    position:relative; overflow:hidden;
+}
+.photo-upload-area:hover { border-color:#c8a0a0; }
+.photo-upload-area input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+.photo-preview {
+    width:80px; height:80px; border-radius:50%; object-fit:cover;
+    border:3px solid #c8a0a0; margin:0 auto .5rem; display:block;
+}
+.photo-upload-text { font-size:.78rem; color:var(--text-secondary); }
+.photo-clear-btn {
+    font-size:.72rem; color:#ef4444; background:none; border:none;
+    cursor:pointer; padding:2px 6px; margin-top:4px;
+}
+
+/* Generate button */
+.gen-btn {
+    width:100%; padding:13px;
+    background:linear-gradient(135deg,#C0826A,#c8a0a0,#a0727a);
+    color:#fff; border:none; border-radius:10px;
+    font-size:.95rem; font-weight:600; letter-spacing:1px;
+    cursor:pointer; transition:opacity .2s, transform .1s;
+    margin-top:.8rem;
+}
+.gen-btn:hover { opacity:.88; }
+.gen-btn:active { transform:scale(.98); }
+
+/* ══════════════════════════ Preview Panel ══════════════════════════ */
+.preview-panel { position:sticky; top:90px; }
+
+.preview-toolbar {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:.8rem;
+}
+.preview-live-badge {
+    font-size:.65rem; letter-spacing:3px; text-transform:uppercase;
+    color:var(--text-secondary); display:flex; align-items:center; gap:5px;
+}
+.live-dot {
+    width:7px; height:7px; border-radius:50%; background:#10b981;
+    animation:blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.zoom-controls { display:flex; align-items:center; gap:4px; }
+.zoom-btn {
+    width:26px; height:26px; border-radius:6px; border:1px solid var(--border-color);
+    background:transparent; color:var(--text-primary); cursor:pointer;
+    font-size:.85rem; display:flex; align-items:center; justify-content:center;
+    transition:border-color .2s;
+}
+.zoom-btn:hover { border-color:#c8a0a0; color:#c8a0a0; }
+.zoom-val { font-size:.78rem; color:var(--text-secondary); min-width:36px; text-align:center; }
+.inv-scaler { transform-origin:top center; transition:transform .2s; }
+
+/* Placeholder */
+.inv-placeholder {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-height:400px; color:var(--text-secondary); text-align:center; gap:1rem;
+    border:2px dashed var(--border-color); border-radius:16px;
+}
+.inv-placeholder i { font-size:2.8rem; opacity:.22; }
+.inv-placeholder strong { font-size:.95rem; }
+.inv-placeholder p { font-size:.82rem; opacity:.5; margin:.2rem 0 0; }
+
+/* Countdown */
+.countdown-widget { display:flex; gap:8px; margin-top:.8rem; display:none; }
+.countdown-widget.visible { display:flex; }
+.cd-item {
+    flex:1; text-align:center; padding:10px 5px;
+    background:var(--card-bg); border:1px solid var(--border-color); border-radius:10px;
+}
+.cd-item span { display:block; font-size:1.6rem; font-weight:700; font-family:'JetBrains Mono',monospace; }
+.cd-item small { font-size:.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); }
+
+/* Action rows */
+.dl-row, .share-row { display:flex; gap:6px; margin-top:.6rem; flex-wrap:wrap; }
+.act-btn {
+    flex:1; min-width:70px; padding:8px 6px;
+    background:transparent; border:1px solid var(--border-color);
+    border-radius:7px; color:var(--text-primary);
+    font-size:.78rem; cursor:pointer; transition:all .2s;
+    display:flex; align-items:center; justify-content:center; gap:4px;
+    white-space:nowrap;
+}
+.act-btn:hover { border-color:#c8a0a0; color:#c8a0a0; }
+.share-label { font-size:.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); display:flex; align-items:center; padding:0 4px; white-space:nowrap; }
+
+/* ══════════════════════════ Confetti ══════════════════════════ */
+#confettiCanvas {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    pointer-events:none; z-index:9999; display:none;
+}
+
+/* ══════════════════════════ INVITATION CARD ══════════════════════════ */
+.inv-card-outer {
+    position:relative; border-radius:22px; padding:3px;
+    animation:borderHue 7s linear infinite;
+    background:conic-gradient(from 0deg,#D4AF37 0%,#FFB6C1 25%,#C0826A 50%,#967BB6 75%,#D4AF37 100%);
+}
+@keyframes borderHue { to { filter:hue-rotate(360deg); } }
+.inv-card { border-radius:20px; overflow:hidden; }
+
+/* Animations */
+.anim-zoom  { animation:animZoom   .75s cubic-bezier(.22,.68,0,1.2) both; }
+.anim-fade  { animation:animFade   .6s ease both; }
+.anim-slide { animation:animSlide  .65s cubic-bezier(.22,1,.36,1) both; }
+.anim-bounce{ animation:animBounce .8s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes animZoom   { from{opacity:0;transform:scale(.82) translateY(20px)} to{opacity:1;transform:none} }
+@keyframes animFade   { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+@keyframes animSlide  { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:none} }
+@keyframes animBounce { from{opacity:0;transform:scale(.7)} to{opacity:1;transform:none} }
+
+.inv-inner { position:relative; overflow:hidden; text-align:center; }
+
+/* Particles */
+.inv-p {
+    position:absolute; border-radius:50%; pointer-events:none;
+    animation:floatUp linear infinite;
+}
+@keyframes floatUp {
+    0%  {transform:translateY(108%) rotate(0deg);opacity:0}
+    8%  {opacity:.7}
+    92% {opacity:.6}
+    100%{transform:translateY(-12%) rotate(720deg);opacity:0}
+}
+
+/* Corner ornaments */
+.inv-corner {
+    position:absolute; font-size:1.2rem; opacity:.45; line-height:1;
+    animation:twinkle 3s ease-in-out infinite;
+}
+.inv-corner.tl{top:13px;left:15px}
+.inv-corner.tr{top:13px;right:15px;animation-delay:.8s}
+.inv-corner.bl{bottom:13px;left:15px;animation-delay:1.6s}
+.inv-corner.br{bottom:13px;right:15px;animation-delay:2.4s}
+@keyframes twinkle {
+    0%,100%{opacity:.2;transform:scale(.82)}
+    50%    {opacity:.9;transform:scale(1.2)}
+}
+
+/* Photo */
+.inv-photo-wrap { margin:0 auto 1.2rem; }
+.inv-photo-wrap img {
+    object-fit:cover; display:block; margin:0 auto;
+    border:4px solid; box-shadow:0 4px 20px rgba(0,0,0,.22);
+}
+.photo-circle img { border-radius:50%; width:110px; height:110px; }
+.photo-rect   img { border-radius:14px; width:160px; height:110px; }
+
+/* Wedding typography */
+.inv-eyebrow {
+    font-family:'Montserrat',sans-serif; font-size:.68rem;
+    letter-spacing:4px; text-transform:uppercase; opacity:.6; margin-bottom:.8rem;
+}
+.inv-divider { margin:.75rem auto; width:80px; height:1.5px; border-radius:1px; }
+.inv-divider-thin { margin:.5rem auto; width:50px; height:1px; border-radius:1px; opacity:.5; }
+
+/* Couple names */
+.inv-partner-name {
+    line-height:1.1; margin:0 0 .1rem;
+}
+.inv-conjunction {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:2rem; opacity:.75; margin:.15rem 0; display:block;
+}
+.inv-tagline {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:.95rem; opacity:.7; margin:.8rem 0 1.2rem;
+}
+.inv-ceremony-label {
+    font-family:'Montserrat',sans-serif; font-size:.63rem;
+    letter-spacing:3.5px; text-transform:uppercase; opacity:.55;
+    margin-bottom:.3rem;
+}
+.inv-details { display:flex; flex-direction:column; gap:.5rem; margin:.8rem 0; }
+.inv-detail-row {
+    display:flex; align-items:center; justify-content:center; gap:.55rem;
+    font-family:'Montserrat',sans-serif; font-size:.85rem;
+}
+.inv-detail-icon {
+    width:22px; height:22px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.62rem; border:1px solid;
+}
+.inv-reception-block {
+    margin-top:1rem; padding-top:.8rem;
+}
+.inv-message {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:.92rem; line-height:1.65; opacity:.85;
+    margin:1.2rem 0; padding:.85rem 1.3rem;
+    border-radius:8px; border-left:3px solid;
+}
+.inv-qr-wrap {
+    margin:1.2rem auto .5rem;
+    display:flex; flex-direction:column; align-items:center; gap:.4rem;
+}
+.inv-qr-label {
+    font-family:'Montserrat',sans-serif; font-size:.63rem;
+    letter-spacing:2.5px; text-transform:uppercase; opacity:.55;
+}
+.inv-rsvp-wrap { padding-top:.8rem; }
+.inv-rsvp-label {
+    font-family:'Montserrat',sans-serif; font-size:.63rem;
+    letter-spacing:3px; text-transform:uppercase; opacity:.5;
+}
+.inv-rsvp-value { font-family:'Playfair Display',serif; font-size:.95rem; margin-top:.15rem; }
+
+/* Font pairs */
+.font-great-vibes .inv-partner-name { font-family:'Great Vibes',cursive; font-size:2.8rem; animation:shimmer 3.5s ease-in-out infinite; }
+.font-dancing     .inv-partner-name { font-family:'Dancing Script',cursive; font-size:2.5rem; font-weight:600; }
+.font-cormorant   .inv-partner-name { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-style:italic; font-weight:300; }
+.font-playfair    .inv-partner-name { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; }
+@keyframes shimmer {
+    0%,100%{filter:brightness(1)}
+    50%    {filter:brightness(1.3) drop-shadow(0 0 6px currentColor)}
+}
+
+/* ══ THEMES ══ */
+.theme-elegant  .inv-inner { background:linear-gradient(160deg,#fffdf5,#fff8e7 50%,#fef3d0 100%); color:#3d2b00; padding:3rem 2.5rem; }
+.theme-romantic .inv-inner { background:linear-gradient(160deg,#fff5f7,#ffe4ed 50%,#ffd6e5 100%); color:#4a0f1e; padding:3rem 2.5rem; }
+.theme-classic  .inv-inner { background:linear-gradient(160deg,#f8faff,#eef2ff 50%,#e0e8ff 100%); color:#0f1e3a; padding:3rem 2.5rem; }
+.theme-vintage  .inv-inner { background:linear-gradient(160deg,#faf3e6,#f2e2c4 50%,#e8d0a8 100%); color:#4a2c0a; padding:3rem 2.5rem; }
+.theme-garden   .inv-inner { background:linear-gradient(160deg,#f0faf3,#ddf2e5 50%,#cce8d8 100%); color:#1a3d25; padding:3rem 2.5rem; }
+.theme-modern   .inv-inner { background:linear-gradient(160deg,#ffffff,#f8f8f8 50%,#f0f0f0 100%); color:#1a1a1a; padding:3rem 2.5rem; }
+
+/* ══ PATTERNS ══ */
+.inv-inner.pat-dots::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(circle,rgba(255,255,255,.2) 1px,transparent 1px);
+    background-size:18px 18px;
+}
+.inv-inner.pat-floral::after {
+    content:'✿ ❀ ✿ ❀'; position:absolute; inset:0; pointer-events:none;
+    font-size:1.1rem; color:rgba(255,255,255,.12); word-break:break-all;
+    overflow:hidden; display:flex; flex-wrap:wrap; align-items:flex-start;
+    letter-spacing:22px; line-height:2.4; padding:.5rem;
+}
+.inv-inner.pat-lines::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(-45deg,transparent 0,transparent 6px,rgba(255,255,255,.07) 6px,rgba(255,255,255,.07) 7px);
+}
+.inv-inner.pat-lace::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:
+        radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px),
+        radial-gradient(circle,rgba(255,255,255,.1) 1px,transparent 1px);
+    background-size:12px 12px, 8px 8px;
+    background-position:0 0, 6px 6px;
+}
+
+@media print {
+    body>*:not(#print-zone),header,footer,nav,.form-panel,.tmpl-bar,
+    .countdown-widget,.dl-row,.share-row,.preview-toolbar,.tool-header,
+    .ad-space,#footer-container,#header-container { display:none !important; }
+    .big-wrapper { display:block !important; }
+    .preview-panel { position:static !important; }
+    .inv-card-outer { page-break-inside:avoid; }
+}
+</style>
 </head>
 <body>
-    <!-- Header will be loaded dynamically -->
-    <div id="header-container"></div>
+<div id="header-container"></div>
+<canvas id="confettiCanvas"></canvas>
 
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="feature-highlight">
-                    <h1><i class="fas fa-heart me-3"></i>Wedding Invitation Generator</h1>
-                    <p class="lead mb-0">Create stunning wedding invitations with AI-powered suggestions, voice input, QR codes, social media sharing, animated effects, and more!</p>
+<div class="container py-4">
+    <div class="tool-header">
+        <h1>💍 Wedding Invitation Generator</h1>
+        <p>Live preview · 6 themes · Photo upload · QR code · Ceremony & reception · Download · Share</p>
+    </div>
+
+    <!-- Quick Templates -->
+    <div class="tmpl-bar">
+        <span class="tmpl-bar-label">Quick start:</span>
+        <button class="tmpl-btn" data-tmpl="classic">⛪ Classic Church</button>
+        <button class="tmpl-btn" data-tmpl="romantic">🌹 Romantic Garden</button>
+        <button class="tmpl-btn" data-tmpl="destination">✈️ Destination</button>
+        <button class="tmpl-btn" data-tmpl="intimate">🕯️ Intimate Elopement</button>
+        <button class="tmpl-btn" data-tmpl="modern">◇ Modern Minimalist</button>
+    </div>
+
+    <div class="big-wrapper">
+
+        <!-- ══════════ FORM PANEL ══════════ -->
+        <div class="form-panel">
+
+            <!-- Theme -->
+            <span class="sec-head">Theme</span>
+            <div class="theme-grid">
+                <div class="theme-thumb active" data-theme="elegant"><div class="theme-thumb-inner th-elegant">Elegant</div></div>
+                <div class="theme-thumb" data-theme="romantic"><div class="theme-thumb-inner th-romantic">Romantic</div></div>
+                <div class="theme-thumb" data-theme="classic"><div class="theme-thumb-inner th-classic">Classic</div></div>
+                <div class="theme-thumb" data-theme="vintage"><div class="theme-thumb-inner th-vintage">Vintage</div></div>
+                <div class="theme-thumb" data-theme="garden"><div class="theme-thumb-inner th-garden">Garden</div></div>
+                <div class="theme-thumb" data-theme="modern"><div class="theme-thumb-inner th-modern">Modern</div></div>
+            </div>
+
+            <!-- Accent Color -->
+            <span class="sec-head">Accent Color</span>
+            <div class="color-bar" id="colorBar">
+                <div class="color-pill active" data-color="#C0826A" style="background:#C0826A" title="Rose Gold"></div>
+                <div class="color-pill" data-color="#D4AF37" style="background:#D4AF37" title="Gold"></div>
+                <div class="color-pill" data-color="#c8a0a0" style="background:#c8a0a0" title="Blush"></div>
+                <div class="color-pill" data-color="#9CAF88" style="background:#9CAF88" title="Sage"></div>
+                <div class="color-pill" data-color="#1B3A6D" style="background:#1B3A6D" title="Navy"></div>
+                <div class="color-pill" data-color="#800020" style="background:#800020" title="Burgundy"></div>
+                <div class="color-pill" data-color="#967BB6" style="background:#967BB6" title="Lavender"></div>
+                <div class="color-pill" data-color="#708090" style="background:#708090" title="Silver"></div>
+                <div class="color-custom" title="Custom color">
+                    <input type="color" id="customColor" value="#C0826A">
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <!-- AI Suggestions Card -->
-                <div class="ai-suggestion-card" id="aiSuggestions">
-                    <h5><i class="fas fa-magic me-2"></i>AI-Powered Suggestions</h5>
-                    <p class="mb-2">Let AI help you create the perfect invitation!</p>
-                    <button class="btn btn-light btn-sm" onclick="generateAISuggestions()">
-                        <i class="fas fa-sparkles"></i> Get AI Suggestions
-                    </button>
+            <!-- Style -->
+            <span class="sec-head">Style</span>
+            <div class="design-grid">
+                <div>
+                    <label style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Font</label>
+                    <select class="design-select" id="fontSelect">
+                        <option value="font-great-vibes">Classic Script</option>
+                        <option value="font-dancing">Dancing Script</option>
+                        <option value="font-cormorant">Cormorant Italic</option>
+                        <option value="font-playfair">Playfair Display</option>
+                    </select>
                 </div>
-
-                <!-- Generator Form Card -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-body">
-                        <form id="invitationForm">
-                            <!-- Template Selection -->
-                            <div class="mb-4">
-                                <label class="form-label"><i class="fas fa-palette me-2"></i>Choose Template</label>
-                                <div class="row g-3" id="templateSelection">
-                                    <div class="col-md-4">
-                                        <div class="template-card active" data-template="elegant">
-                                            <div class="template-preview elegant-preview">
-                                                <div class="template-content">
-                                                    <h3>Elegant</h3>
-                                                    <p>Classic & Sophisticated</p>
-                                                </div>
-                                            </div>
-                                            <div class="template-name">Elegant</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="template-card" data-template="modern">
-                                            <div class="template-preview modern-preview">
-                                                <div class="template-content">
-                                                    <h3>Modern</h3>
-                                                    <p>Clean & Contemporary</p>
-                                                </div>
-                                            </div>
-                                            <div class="template-name">Modern</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="template-card" data-template="classic">
-                                            <div class="template-preview classic-preview">
-                                                <div class="template-content">
-                                                    <h3>Classic</h3>
-                                                    <p>Traditional & Timeless</p>
-                                                </div>
-                                            </div>
-                                            <div class="template-name">Classic</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="template-card" data-template="romantic">
-                                            <div class="template-preview romantic-preview">
-                                                <div class="template-content">
-                                                    <h3>Romantic</h3>
-                                                    <p>Dreamy & Intimate</p>
-                                                </div>
-                                            </div>
-                                            <div class="template-name">Romantic</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="template-card" data-template="vintage">
-                                            <div class="template-preview vintage-preview">
-                                                <div class="template-content">
-                                                    <h3>Vintage</h3>
-                                                    <p>Retro & Charming</p>
-                                                </div>
-                                            </div>
-                                            <div class="template-name">Vintage</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="template-card" data-template="minimalist">
-                                            <div class="template-preview minimalist-preview">
-                                                <div class="template-content">
-                                                    <h3>Minimalist</h3>
-                                                    <p>Simple & Elegant</p>
-                                                </div>
-                                            </div>
-                                            <div class="template-name">Minimalist</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Couple Information -->
-                            <div class="row mb-4">
-                                <div class="col-md-6 mb-3">
-                                    <label for="brideName" class="form-label">
-                                        <i class="fas fa-female me-2"></i>Bride's Name
-                                        <button type="button" class="voice-input-btn" onclick="startVoiceInput('brideName')">
-                                            <i class="fas fa-microphone"></i>
-                                        </button>
-                                    </label>
-                                    <input type="text" class="form-control" id="brideName" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="groomName" class="form-label">
-                                        <i class="fas fa-male me-2"></i>Groom's Name
-                                        <button type="button" class="voice-input-btn" onclick="startVoiceInput('groomName')">
-                                            <i class="fas fa-microphone"></i>
-                                        </button>
-                                    </label>
-                                    <input type="text" class="form-control" id="groomName" required>
-                                </div>
-                            </div>
-
-                            <!-- Event Details -->
-                            <div class="row mb-4">
-                                <div class="col-md-6 mb-3">
-                                    <label for="weddingDate" class="form-label">
-                                        <i class="fas fa-calendar me-2"></i>Wedding Date
-                                    </label>
-                                    <input type="date" class="form-control" id="weddingDate" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="weddingTime" class="form-label">
-                                        <i class="fas fa-clock me-2"></i>Wedding Time
-                                    </label>
-                                    <input type="time" class="form-control" id="weddingTime" required>
-                                </div>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="venue" class="form-label">
-                                    <i class="fas fa-map-marker-alt me-2"></i>Venue
-                                    <button type="button" class="voice-input-btn" onclick="startVoiceInput('venue')">
-                                        <i class="fas fa-microphone"></i>
-                                    </button>
-                                </label>
-                                <input type="text" class="form-control" id="venue" required>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="address" class="form-label">
-                                    <i class="fas fa-home me-2"></i>Address
-                                </label>
-                                <textarea class="form-control" id="address" rows="2" required></textarea>
-                            </div>
-
-                            <!-- Additional Information -->
-                            <div class="mb-4">
-                                <label for="additionalInfo" class="form-label">
-                                    <i class="fas fa-info-circle me-2"></i>Additional Information
-                                </label>
-                                <textarea class="form-control" id="additionalInfo" rows="3" placeholder="RSVP details, dress code, special instructions, etc."></textarea>
-                            </div>
-
-                            <!-- Color Scheme -->
-                            <div class="mb-4">
-                                <label class="form-label">
-                                    <i class="fas fa-palette me-2"></i>Color Scheme
-                                </label>
-                                <div class="color-scheme-selector">
-                                    <div class="color-option active" data-color="gold" style="background-color: #D4AF37;"></div>
-                                    <div class="color-option" data-color="rose" style="background-color: #FFB6C1;"></div>
-                                    <div class="color-option" data-color="sage" style="background-color: #9CAF88;"></div>
-                                    <div class="color-option" data-color="navy" style="background-color: #000080;"></div>
-                                    <div class="color-option" data-color="burgundy" style="background-color: #800020;"></div>
-                                    <div class="color-option" data-color="lavender" style="background-color: #E6E6FA;"></div>
-                                    <div class="color-option" data-color="coral" style="background-color: #FF7F50;"></div>
-                                    <div class="color-option" data-color="emerald" style="background-color: #50C878;"></div>
-                                </div>
-                            </div>
-
-                            <!-- Font Selection -->
-                            <div class="mb-4">
-                                <label for="fontSelect" class="form-label">
-                                    <i class="fas fa-font me-2"></i>Font Style
-                                </label>
-                                <select class="form-select" id="fontSelect">
-                                    <option value="playfair">Playfair Display (Elegant)</option>
-                                    <option value="montserrat">Montserrat (Modern)</option>
-                                    <option value="dancing">Dancing Script (Romantic)</option>
-                                    <option value="greatvibes">Great Vibes (Classic)</option>
-                                    <option value="cormorant">Cormorant Garamond (Sophisticated)</option>
-                                    <option value="serif">Times New Roman (Traditional)</option>
-                                </select>
-                            </div>
-
-                            <!-- QR Code Section -->
-                            <div class="mb-4">
-                                <label class="form-label">
-                                    <i class="fas fa-qrcode me-2"></i>QR Code for Digital RSVP
-                                </label>
-                                <div class="qr-code-container">
-                                    <div id="qrCode"></div>
-                                    <small class="text-muted">Guests can scan to RSVP online</small>
-                                </div>
-                            </div>
-
-                            <!-- Social Media Sharing -->
-                            <div class="mb-4">
-                                <label class="form-label">
-                                    <i class="fas fa-share-alt me-2"></i>Share Your Invitation
-                                </label>
-                                <div class="social-share-buttons">
-                                    <button class="social-share-btn facebook" onclick="shareToSocialMedia('facebook')">
-                                        <i class="fab fa-facebook-f"></i> Facebook
-                                    </button>
-                                    <button class="social-share-btn twitter" onclick="shareToSocialMedia('twitter')">
-                                        <i class="fab fa-twitter"></i> Twitter
-                                    </button>
-                                    <button class="social-share-btn instagram" onclick="shareToSocialMedia('instagram')">
-                                        <i class="fab fa-instagram"></i> Instagram
-                                    </button>
-                                    <button class="social-share-btn whatsapp" onclick="shareToSocialMedia('whatsapp')">
-                                        <i class="fab fa-whatsapp"></i> WhatsApp
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Music Integration -->
-                            <div class="music-controls">
-                                <h6><i class="fas fa-music me-2"></i>Background Music</h6>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <select class="form-select" id="musicSelect">
-                                            <option value="romantic">Romantic Melody</option>
-                                            <option value="classical">Classical Wedding</option>
-                                            <option value="jazz">Jazz Elegance</option>
-                                            <option value="none">No Music</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button class="btn btn-light btn-sm" onclick="playMusic()">
-                                            <i class="fas fa-play"></i> Play
-                                        </button>
-                                        <button class="btn btn-light btn-sm" onclick="pauseMusic()">
-                                            <i class="fas fa-pause"></i> Pause
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- RSVP Analytics -->
-                            <div class="rsvp-analytics">
-                                <h6><i class="fas fa-chart-bar me-2"></i>RSVP Analytics</h6>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="text-center">
-                                            <h4 id="totalInvites">0</h4>
-                                            <small>Total Invites</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="text-center">
-                                            <h4 id="confirmedRSVP">0</h4>
-                                            <small>Confirmed</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="text-center">
-                                            <h4 id="pendingRSVP">0</h4>
-                                            <small>Pending</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="text-center">
-                                            <h4 id="declinedRSVP">0</h4>
-                                            <small>Declined</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="progress-bar mt-3">
-                                    <div class="progress-fill" id="rsvpProgress" style="width: 0%"></div>
-                                </div>
-                                <button class="btn btn-light btn-sm mt-2" onclick="simulateRSVPData()">
-                                    <i class="fas fa-sync"></i> Simulate RSVP Data
-                                </button>
-                            </div>
-
-                            <!-- WhatsApp Integration -->
-                            <div class="whatsapp-integration">
-                                <h6><i class="fab fa-whatsapp me-2"></i>WhatsApp Invites</h6>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Guest Phone Numbers (one per line)</label>
-                                        <textarea class="form-control" id="guestPhoneNumbers" rows="3" placeholder="+1234567890&#10;+1987654321"></textarea>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Custom Message</label>
-                                        <textarea class="form-control" id="whatsappMessage" rows="3" placeholder="You're invited to our wedding! Please RSVP."></textarea>
-                                    </div>
-                                </div>
-                                <button class="btn btn-light btn-sm mt-2" onclick="sendWhatsAppInvites()">
-                                    <i class="fab fa-whatsapp"></i> Send WhatsApp Invites
-                                </button>
-                                <div id="whatsappStatus" class="mt-2"></div>
-                            </div>
-
-                            <!-- AR Preview -->
-                            <div class="ar-preview">
-                                <h6><i class="fas fa-vr-cardboard me-2"></i>AR Preview</h6>
-                                <p>Experience your invitation in augmented reality</p>
-                                <button class="btn btn-light btn-sm" onclick="launchARPreview()">
-                                    <i class="fas fa-cube"></i> Launch AR Preview
-                                </button>
-                            </div>
-
-                            <!-- Preview and Download -->
-                            <div class="text-center">
-                                <button type="button" class="btn btn-primary btn-lg px-5 me-3" id="previewBtn">
-                                    <i class="fas fa-eye me-2"></i>Preview
-                                </button>
-                                <button type="button" class="btn btn-success btn-lg px-5" id="downloadBtn">
-                                    <i class="fas fa-download me-2"></i>Download
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <div>
+                    <label style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Pattern</label>
+                    <select class="design-select" id="patternSelect">
+                        <option value="pat-solid">Solid</option>
+                        <option value="pat-dots">Polka Dots</option>
+                        <option value="pat-floral">Floral</option>
+                        <option value="pat-lines">Diagonal Lines</option>
+                        <option value="pat-lace">Lace</option>
+                    </select>
                 </div>
-
-                <!-- Preview Modal -->
-                <div class="modal fade" id="previewModal" tabindex="-1">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">
-                                    <i class="fas fa-eye me-2"></i>Invitation Preview
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="invitationPreview" class="invitation-preview animated-preview">
-                                    <!-- Preview will be added here dynamically -->
-                                </div>
-                                
-                                <!-- Preview Controls -->
-                                <div class="preview-controls">
-                                    <button class="control-btn" onclick="toggleParticles()">
-                                        <i class="fas fa-star"></i>
-                                    </button>
-                                    <button class="control-btn" onclick="toggle3D()">
-                                        <i class="fas fa-cube"></i>
-                                    </button>
-                                    <button class="control-btn" onclick="toggleMusic()">
-                                        <i class="fas fa-music"></i>
-                                    </button>
-                                    <button class="control-btn" onclick="rotatePreview()">
-                                        <i class="fas fa-redo"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <div class="download-options">
-                                    <button class="download-btn pdf-btn" onclick="downloadInvitation('pdf')">
-                                        <i class="fas fa-file-pdf"></i> PDF
-                                    </button>
-                                    <button class="download-btn png-btn" onclick="downloadInvitation('png')">
-                                        <i class="fas fa-image"></i> PNG
-                                    </button>
-                                    <button class="download-btn jpg-btn" onclick="downloadInvitation('jpg')">
-                                        <i class="fas fa-image"></i> JPG
-                                    </button>
-                                    <button class="download-btn social-btn" onclick="downloadInvitation('social')">
-                                        <i class="fas fa-share"></i> Social Media
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <label style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Animation</label>
+                    <select class="design-select" id="animSelect">
+                        <option value="anim-zoom">Zoom In</option>
+                        <option value="anim-fade">Fade In</option>
+                        <option value="anim-slide">Slide In</option>
+                        <option value="anim-bounce">Bounce</option>
+                    </select>
                 </div>
-
-                <!-- Live Collaboration Indicator -->
-                <div class="live-collaboration" id="collaborationIndicator">
-                    <i class="fas fa-users"></i> Live Collaboration Active
-                </div>
-
-                <!-- Information Card -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header">
-                        <h5 class="mb-0">
-                            <i class="fas fa-info-circle me-2"></i>About Wedding Invitation Generator
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <p>Create stunning wedding invitations with our advanced generator featuring:</p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-magic text-info me-2"></i>AI-powered suggestions for perfect wording</li>
-                            <li class="mb-2"><i class="fas fa-microphone text-info me-2"></i>Voice input for hands-free editing</li>
-                            <li class="mb-2"><i class="fas fa-qrcode text-info me-2"></i>QR codes for digital RSVP tracking</li>
-                            <li class="mb-2"><i class="fas fa-share-alt text-info me-2"></i>Social media sharing integration</li>
-                            <li class="mb-2"><i class="fas fa-star text-info me-2"></i>Animated effects and 3D previews</li>
-                            <li class="mb-2"><i class="fab fa-whatsapp text-info me-2"></i>WhatsApp integration for easy sharing</li>
-                            <li class="mb-2"><i class="fas fa-chart-bar text-info me-2"></i>RSVP analytics and tracking</li>
-                            <li class="mb-2"><i class="fas fa-music text-info me-2"></i>Background music integration</li>
-                            <li class="mb-2"><i class="fas fa-vr-cardboard text-info me-2"></i>AR preview simulation</li>
-                            <li class="mb-2"><i class="fas fa-users text-info me-2"></i>Live collaboration features</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Usage Tips Card -->
-                <div class="card shadow-sm">
-                    <div class="card-header">
-                        <h5 class="mb-0">
-                            <i class="fas fa-lightbulb me-2"></i>Pro Tips
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use AI suggestions to create perfect wedding wording</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Try voice input for natural, conversational text</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Share QR codes for easy digital RSVP tracking</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use WhatsApp integration to send invites instantly</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Monitor RSVP analytics to track guest responses</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Preview in AR mode for immersive experience</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Download in multiple formats for different uses</li>
-                        </ul>
+                <div>
+                    <label style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Conjunction</label>
+                    <div class="conj-row">
+                        <button class="conj-btn active" data-conj="&amp;">&amp;</button>
+                        <button class="conj-btn" data-conj="and">and</button>
+                        <button class="conj-btn" data-conj="+">+</button>
                     </div>
                 </div>
             </div>
+
+            <!-- Couple Details -->
+            <span class="sec-head">The Couple</span>
+            <div class="f-group">
+                <label>Partner 1 Name *</label>
+                <div class="f-input-wrap">
+                    <input type="text" id="partner1" placeholder="e.g., Emma Rose Johnson" style="padding-right:32px">
+                    <button class="voice-btn" data-target="partner1" title="Voice input"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+            <div class="f-group">
+                <label>Partner 2 Name *</label>
+                <div class="f-input-wrap">
+                    <input type="text" id="partner2" placeholder="e.g., James William Williams" style="padding-right:32px">
+                    <button class="voice-btn" data-target="partner2" title="Voice input"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+
+            <!-- Ceremony -->
+            <span class="sec-head">Ceremony</span>
+            <div class="f-row">
+                <div class="f-group">
+                    <label>Date</label>
+                    <div class="f-input-wrap"><input type="date" id="weddingDate"></div>
+                </div>
+                <div class="f-group">
+                    <label>Time</label>
+                    <div class="f-input-wrap"><input type="time" id="ceremonyTime"></div>
+                </div>
+            </div>
+            <div class="f-group">
+                <label>Ceremony Venue</label>
+                <div class="f-input-wrap">
+                    <input type="text" id="ceremonyVenue" placeholder="e.g., St. Paul's Cathedral" style="padding-right:32px">
+                    <button class="voice-btn" data-target="ceremonyVenue" title="Voice input"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+            <div class="f-group">
+                <label>Venue Address</label>
+                <div class="f-input-wrap">
+                    <input type="text" id="ceremonyAddress" placeholder="e.g., 123 Church Lane, London">
+                </div>
+            </div>
+
+            <!-- Reception (optional) -->
+            <span class="sec-head">Reception <span style="opacity:.45;font-size:.6rem;letter-spacing:1px"> (optional)</span></span>
+            <div class="f-group">
+                <label>Reception Venue <span style="opacity:.5">(if different)</span></label>
+                <div class="f-input-wrap">
+                    <input type="text" id="receptionVenue" placeholder="e.g., The Grand Ballroom">
+                </div>
+            </div>
+            <div class="f-row">
+                <div class="f-group">
+                    <label>Reception Address</label>
+                    <div class="f-input-wrap"><input type="text" id="receptionAddress" placeholder="Address"></div>
+                </div>
+                <div class="f-group">
+                    <label>Reception Time</label>
+                    <div class="f-input-wrap"><input type="time" id="receptionTime"></div>
+                </div>
+            </div>
+
+            <!-- Extra Details -->
+            <span class="sec-head">Extra Details</span>
+            <div class="f-row">
+                <div class="f-group">
+                    <label>Dress Code</label>
+                    <div class="f-input-wrap"><input type="text" id="dressCode" placeholder="e.g., Black Tie"></div>
+                </div>
+                <div class="f-group">
+                    <label>Website / RSVP URL</label>
+                    <div class="f-input-wrap"><input type="text" id="websiteUrl" placeholder="yourwedding.com"></div>
+                </div>
+            </div>
+            <div class="f-group">
+                <label>Message / Quote</label>
+                <div class="f-input-wrap">
+                    <textarea id="message" placeholder="A personal note or quote for your guests..." style="padding-right:36px"></textarea>
+                    <button class="voice-btn" data-target="message" title="Voice input" style="top:10px"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+            <div class="f-row">
+                <div class="f-group">
+                    <label>RSVP Contact</label>
+                    <div class="f-input-wrap"><input type="text" id="rsvpContact" placeholder="Phone or Email"></div>
+                </div>
+                <div class="f-group">
+                    <label>RSVP By</label>
+                    <div class="f-input-wrap"><input type="date" id="rsvpDate"></div>
+                </div>
+            </div>
+
+            <!-- Extras -->
+            <span class="sec-head">Extras</span>
+
+            <div class="f-group">
+                <label>Couple Photo <span style="opacity:.5">(optional)</span></label>
+                <div class="photo-upload-area" id="photoUploadArea">
+                    <input type="file" id="photoInput" accept="image/*">
+                    <div id="photoUploadDefault">
+                        <i class="fas fa-camera" style="font-size:1.4rem;opacity:.3;margin-bottom:.3rem;display:block"></i>
+                        <span class="photo-upload-text">Click to upload couple photo</span>
+                    </div>
+                    <div id="photoUploadPreview" style="display:none">
+                        <img id="photoPreviewImg" class="photo-preview" src="" alt="Preview">
+                        <button class="photo-clear-btn" id="photoClearBtn"><i class="fas fa-times"></i> Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toggle-grid">
+                <div class="toggle-item" id="toggleQR">
+                    <i class="fas fa-qrcode"></i> QR Code
+                </div>
+                <div class="toggle-item on" id="toggleParticles">
+                    <i class="fas fa-sparkles"></i> Petals
+                </div>
+            </div>
+
+            <button class="gen-btn" id="generateBtn">
+                <i class="fas fa-ring me-2"></i>Generate Invitation 💍
+            </button>
         </div>
-		
-		<!-- Ad Section -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Advertisement</h5>
-                        <div class="ad-space">
-                            <!-- AdSense Ad Unit -->
-                            <ins class="adsbygoogle"
-                                style="display:block"
-                                data-ad-client="ca-pub-6204232626800687"
-                                data-ad-slot="YOUR_AD_SLOT_ID"
-                                data-ad-format="auto"
-                                data-full-width-responsive="true"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
+
+        <!-- ══════════ PREVIEW PANEL ══════════ -->
+        <div class="preview-panel">
+
+            <div class="preview-toolbar">
+                <div class="preview-live-badge">
+                    <div class="live-dot"></div> Live Preview
+                </div>
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoomOut">−</button>
+                    <span class="zoom-val" id="zoomVal">100%</span>
+                    <button class="zoom-btn" id="zoomIn">+</button>
+                </div>
+            </div>
+
+            <div class="inv-scaler" id="invScaler">
+                <div id="invWrapper">
+                    <div class="inv-placeholder" id="invPlaceholder">
+                        <i class="fas fa-heart"></i>
+                        <strong>Your invitation appears here</strong>
+                        <p>Fill in the details — preview updates live</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown to wedding -->
+            <div class="countdown-widget" id="countdownWidget">
+                <div class="cd-item"><span id="cdDays">--</span><small>Days</small></div>
+                <div class="cd-item"><span id="cdHours">--</span><small>Hours</small></div>
+                <div class="cd-item"><span id="cdMins">--</span><small>Mins</small></div>
+                <div class="cd-item"><span id="cdSecs">--</span><small>Secs</small></div>
+            </div>
+
+            <!-- Download -->
+            <div class="dl-row" id="dlRow" style="display:none">
+                <button class="act-btn" id="dlPNG"><i class="fas fa-image"></i> PNG</button>
+                <button class="act-btn" id="dlJPG"><i class="fas fa-file-image"></i> JPG</button>
+                <button class="act-btn" id="dlPDF"><i class="fas fa-file-pdf"></i> PDF</button>
+                <button class="act-btn" id="printBtn"><i class="fas fa-print"></i> Print</button>
+                <button class="act-btn" id="copyTextBtn"><i class="fas fa-copy"></i> Copy Text</button>
+            </div>
+
+            <!-- Share -->
+            <div class="share-row" id="shareRow" style="display:none">
+                <span class="share-label">Share:</span>
+                <button class="act-btn" id="shareWA" style="color:#25D366;border-color:#25D366"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button class="act-btn" id="shareFB" style="color:#1877f2;border-color:#1877f2"><i class="fab fa-facebook"></i> Facebook</button>
+                <button class="act-btn" id="shareXBtn"><i class="fab fa-x-twitter"></i> X</button>
+                <button class="act-btn" id="shareEmail"><i class="fas fa-envelope"></i> Email</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad -->
+    <div class="row mt-5 mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Advertisement</h5>
+                    <div class="ad-space">
+                        <ins class="adsbygoogle" style="display:block"
+                            data-ad-client="ca-pub-6204232626800687"
+                            data-ad-slot="9572280796"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer will be loaded dynamically -->
-    <div id="footer-container"></div>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="../../assets/js/main.js"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- html2pdf.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- html2canvas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- QR Code Generator -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-    <!-- Custom JS -->
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/miscellaneous/wedding-invitation-generator.js"></script>
+<script>
+(function () {
+'use strict';
+
+/* ── State ── */
+const S = {
+    theme:      'elegant',
+    accent:     '#C0826A',
+    font:       'font-great-vibes',
+    pattern:    'pat-solid',
+    anim:       'anim-zoom',
+    conjunction: '&',
+    photoUrl:   null,
+    showQR:     false,
+    showParticles: true,
+    generated:  false,
+};
+
+const THEMES = {
+    elegant:  { eyebrow:'Together with their families',             tagline:'request the honour of your presence at their wedding', ornaments:['💍','✦','💍','✦'] },
+    romantic: { eyebrow:'Two hearts, one love',                    tagline:'invite you to witness the beginning of their forever', ornaments:['🌸','🌹','🌸','🌹'] },
+    classic:  { eyebrow:'The honour of your presence is requested', tagline:'at the marriage of',                                   ornaments:['⚜','⚜','⚜','⚜'] },
+    vintage:  { eyebrow:'Request the pleasure of your company',    tagline:'at the celebration of their marriage',                 ornaments:['❧','❧','❧','❧'] },
+    garden:   { eyebrow:'Beneath the open sky',                    tagline:'invite you to share in their joy',                     ornaments:['✿','🌿','✿','🌿'] },
+    modern:   { eyebrow:'Join us as we celebrate',                 tagline:'the union of',                                        ornaments:['◇','◇','◇','◇'] },
+};
+
+const TEMPLATES = {
+    classic: {
+        theme:'elegant', accent:'#D4AF37', font:'font-great-vibes', pattern:'pat-solid',
+        partner1:'Emma Rose Johnson', partner2:'James William Williams',
+        weddingDate:'', ceremonyTime:'14:00', ceremonyVenue:"St. Paul's Cathedral",
+        ceremonyAddress:'The Cathedral Square, London EC4M 8AD',
+        receptionVenue:'The Grand Ballroom', receptionAddress:'1 Park Lane, London',
+        receptionTime:'18:00', dressCode:'Black Tie',
+        message:'Two souls, one love. Please join us as we begin our greatest adventure together.',
+        rsvpContact:'wedding@example.com', rsvpDate:'', websiteUrl:'',
+    },
+    romantic: {
+        theme:'romantic', accent:'#c8a0a0', font:'font-dancing', pattern:'pat-floral',
+        partner1:'Olivia Grace', partner2:'Liam Edward',
+        weddingDate:'', ceremonyTime:'12:00', ceremonyVenue:'Blooming Rose Estate',
+        ceremonyAddress:'Meadow Lane, Surrey GU12 5HJ',
+        receptionVenue:'', receptionAddress:'', receptionTime:'',
+        dressCode:'Garden Florals Welcome',
+        message:'In the garden of life, love is the most beautiful flower. We are delighted to share this bloom with you.',
+        rsvpContact:'+44 7700 900000', rsvpDate:'', websiteUrl:'',
+    },
+    destination: {
+        theme:'modern', accent:'#708090', font:'font-cormorant', pattern:'pat-lines',
+        partner1:'Sophie', partner2:'Marco',
+        weddingDate:'', ceremonyTime:'17:00', ceremonyVenue:'Amalfi Coast Terrace',
+        ceremonyAddress:'Via Cristoforo Colombo, Positano, Italy',
+        receptionVenue:'', receptionAddress:'', receptionTime:'',
+        dressCode:'Dressy Casual — Think Italian Summer',
+        message:'Pack your passport and dancing shoes. We are saying "I do" in Italy and we want you there!',
+        rsvpContact:'sophiemarco2025@gmail.com', rsvpDate:'', websiteUrl:'sophiemarco.com',
+    },
+    intimate: {
+        theme:'vintage', accent:'#800020', font:'font-cormorant', pattern:'pat-lace',
+        partner1:'Clara', partner2:'Noah',
+        weddingDate:'', ceremonyTime:'11:00', ceremonyVenue:'The Old Library',
+        ceremonyAddress:'Heritage Square, Edinburgh EH1 1BP',
+        receptionVenue:'', receptionAddress:'', receptionTime:'',
+        dressCode:'Smart Casual',
+        message:'In the quiet of a room full of books and loved ones, we choose each other. Thank you for being part of our story.',
+        rsvpContact:'claraandnoah@email.com', rsvpDate:'', websiteUrl:'',
+    },
+    modern: {
+        theme:'modern', accent:'#708090', font:'font-playfair', pattern:'pat-solid',
+        partner1:'Alex', partner2:'Jordan',
+        weddingDate:'', ceremonyTime:'15:00', ceremonyVenue:'The Rooftop Gallery',
+        ceremonyAddress:'88 Shoreditch High Street, London E1 6JJ',
+        receptionVenue:'', receptionAddress:'', receptionTime:'16:30',
+        dressCode:'Chic & Modern',
+        message:'Minimalism in décor, maximalism in love.',
+        rsvpContact:'alexandjordan.wedding@gmail.com', rsvpDate:'', websiteUrl:'alexjordanwedding.com',
+    },
+};
+
+/* ── DOM ── */
+const wrapper     = document.getElementById('invWrapper');
+const placeholder = document.getElementById('invPlaceholder');
+const invScaler   = document.getElementById('invScaler');
+const dlRow       = document.getElementById('dlRow');
+const shareRow    = document.getElementById('shareRow');
+const generateBtn = document.getElementById('generateBtn');
+const confettiCvs = document.getElementById('confettiCanvas');
+const confettiCtx = confettiCvs.getContext('2d');
+const cdWidget    = document.getElementById('countdownWidget');
+
+/* ── Helpers ── */
+function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function fmtDate(d) {
+    if (!d) return '';
+    const [y,m,day] = d.split('-').map(Number);
+    return new Date(y,m-1,day).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+function fmtTime(t) {
+    if (!t) return '';
+    const [h,m] = t.split(':').map(Number);
+    return `${h%12||12}:${String(m).padStart(2,'0')} ${h<12?'AM':'PM'}`;
+}
+function getField(id) { return document.getElementById(id)?.value?.trim()||''; }
+function alpha(hex,a) { return hex+Math.round(a*255).toString(16).padStart(2,'0'); }
+
+/* ── Theme ── */
+document.querySelectorAll('.theme-thumb').forEach(t => {
+    t.addEventListener('click', function() {
+        document.querySelectorAll('.theme-thumb').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        S.theme = this.dataset.theme;
+        if (S.generated) updatePreview();
+    });
+});
+
+/* ── Color ── */
+document.querySelectorAll('.color-pill').forEach(p => {
+    p.addEventListener('click', function() {
+        document.querySelectorAll('.color-pill').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        S.accent = this.dataset.color;
+        document.getElementById('customColor').value = S.accent;
+        if (S.generated) updatePreview();
+    });
+});
+document.getElementById('customColor').addEventListener('input', function() {
+    document.querySelectorAll('.color-pill').forEach(x => x.classList.remove('active'));
+    S.accent = this.value;
+    if (S.generated) updatePreview();
+});
+
+/* ── Style selects ── */
+['fontSelect','patternSelect','animSelect'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function() {
+        if (id === 'fontSelect')    S.font    = this.value;
+        if (id === 'patternSelect') S.pattern = this.value;
+        if (id === 'animSelect')    S.anim    = this.value;
+        if (S.generated) updatePreview();
+    });
+});
+
+/* ── Conjunction ── */
+document.querySelectorAll('.conj-btn').forEach(b => {
+    b.addEventListener('click', function() {
+        document.querySelectorAll('.conj-btn').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        S.conjunction = this.dataset.conj;
+        if (S.generated) updatePreview();
+    });
+});
+
+/* ── Live fields ── */
+let debounceTimer;
+const LIVE_FIELDS = ['partner1','partner2','weddingDate','ceremonyTime','ceremonyVenue','ceremonyAddress','receptionVenue','receptionAddress','receptionTime','dressCode','websiteUrl','message','rsvpContact','rsvpDate'];
+LIVE_FIELDS.forEach(id => {
+    document.getElementById(id)?.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => { if (S.generated) updatePreview(); }, 220);
+        autoSave();
+        if (id === 'weddingDate' || id === 'ceremonyTime') startCountdown();
+    });
+});
+
+/* ── Toggles ── */
+document.getElementById('toggleQR').addEventListener('click', function() {
+    S.showQR = !S.showQR;
+    this.classList.toggle('on', S.showQR);
+    if (S.generated) updatePreview();
+});
+document.getElementById('toggleParticles').addEventListener('click', function() {
+    S.showParticles = !S.showParticles;
+    this.classList.toggle('on', S.showParticles);
+    if (S.generated) updatePreview();
+});
+
+/* ── Photo upload ── */
+document.getElementById('photoInput').addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        S.photoUrl = e.target.result;
+        document.getElementById('photoPreviewImg').src = S.photoUrl;
+        document.getElementById('photoUploadDefault').style.display = 'none';
+        document.getElementById('photoUploadPreview').style.display = 'block';
+        if (S.generated) updatePreview();
+    };
+    reader.readAsDataURL(file);
+});
+document.getElementById('photoClearBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    S.photoUrl = null;
+    document.getElementById('photoInput').value = '';
+    document.getElementById('photoUploadDefault').style.display = 'block';
+    document.getElementById('photoUploadPreview').style.display = 'none';
+    if (S.generated) updatePreview();
+});
+
+/* ── Voice input ── */
+let recognition;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = false; recognition.interimResults = false; recognition.lang = 'en-GB';
+}
+document.querySelectorAll('.voice-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        if (!recognition) return;
+        const target = document.getElementById(this.dataset.target);
+        if (!target) return;
+        btn.classList.add('listening');
+        recognition.start();
+        recognition.onresult = e => { target.value = e.results[0][0].transcript; target.dispatchEvent(new Event('input')); };
+        recognition.onend = () => btn.classList.remove('listening');
+        recognition.onerror = () => btn.classList.remove('listening');
+    });
+});
+
+/* ── Zoom ── */
+let zoom = 1;
+function applyZoom() {
+    invScaler.style.transform = `scale(${zoom})`;
+    document.getElementById('zoomVal').textContent = Math.round(zoom*100)+'%';
+}
+document.getElementById('zoomIn').addEventListener('click',  () => { zoom = Math.min(1.5,zoom+.1); applyZoom(); });
+document.getElementById('zoomOut').addEventListener('click', () => { zoom = Math.max(0.4,zoom-.1); applyZoom(); });
+
+/* ── Templates ── */
+document.querySelectorAll('.tmpl-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const t = TEMPLATES[this.dataset.tmpl]; if (!t) return;
+        Object.entries(t).forEach(([k,v]) => {
+            if (['theme','accent','font','pattern'].includes(k)) {
+                S[k] = v;
+                if (k==='theme') document.querySelectorAll('.theme-thumb').forEach(th=>th.classList.toggle('active',th.dataset.theme===v));
+                if (k==='font')    document.getElementById('fontSelect').value = v;
+                if (k==='pattern') document.getElementById('patternSelect').value = v;
+            } else {
+                const el = document.getElementById(k); if (el) el.value = v;
+            }
+        });
+        document.querySelectorAll('.color-pill').forEach(p=>p.classList.toggle('active',p.dataset.color===t.accent));
+        document.getElementById('customColor').value = t.accent;
+        autoSave(); generateInvitation();
+    });
+});
+
+/* ── Build invitation HTML ── */
+function buildInvitation() {
+    const p1      = getField('partner1');
+    const p2      = getField('partner2');
+    const date    = getField('weddingDate');
+    const cTime   = getField('ceremonyTime');
+    const cVenue  = getField('ceremonyVenue');
+    const cAddr   = getField('ceremonyAddress');
+    const rVenue  = getField('receptionVenue');
+    const rAddr   = getField('receptionAddress');
+    const rTime   = getField('receptionTime');
+    const dress   = getField('dressCode');
+    const website = getField('websiteUrl');
+    const msg     = getField('message');
+    const rsvpC   = getField('rsvpContact');
+    const rsvpD   = getField('rsvpDate');
+
+    const cfg  = THEMES[S.theme];
+    const ac   = S.accent;
+    const acBg = alpha(ac, 0.12);
+
+    /* Particles */
+    const particles = S.showParticles ? Array.from({length:12},(_,i)=>{
+        const sz = 3+Math.random()*5;
+        const cols=[ac,'#fff','rgba(255,255,255,.5)'];
+        return `<div class="inv-p" style="left:${5+Math.random()*88}%;bottom:-8%;width:${sz}px;height:${sz}px;background:${cols[i%3]};animation-duration:${5+Math.random()*5}s;animation-delay:${Math.random()*5}s"></div>`;
+    }).join(''):'';
+
+    const patClass = S.pattern==='pat-solid'?'':S.pattern;
+
+    return `
+<div class="inv-card-outer">
+  <div class="inv-card theme-${esc(S.theme)} ${esc(S.font)} ${esc(S.anim)}">
+    <div class="inv-inner ${esc(patClass)}">
+      ${particles}
+      <div class="inv-corner tl">${cfg.ornaments[0]}</div>
+      <div class="inv-corner tr">${cfg.ornaments[1]}</div>
+      <div class="inv-corner bl">${cfg.ornaments[2]}</div>
+      <div class="inv-corner br">${cfg.ornaments[3]}</div>
+
+      ${S.photoUrl ? `<div class="inv-photo-wrap photo-circle"><img src="${S.photoUrl}" alt="Couple" style="border-color:${ac}"></div>`:''}
+
+      <p class="inv-eyebrow">${esc(cfg.eyebrow)}</p>
+      <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${ac},transparent)"></div>
+
+      <p class="inv-partner-name" style="color:${ac}">${esc(p1)||'Partner One'}</p>
+      <span class="inv-conjunction" style="color:${ac}">${esc(S.conjunction)}</span>
+      <p class="inv-partner-name" style="color:${ac}">${esc(p2)||'Partner Two'}</p>
+
+      <p class="inv-tagline">${esc(cfg.tagline)}</p>
+      <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${ac},transparent)"></div>
+
+      <div class="inv-details">
+        ${date ? `<div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-calendar-day"></i></div>
+          <span>${fmtDate(date)}</span>
+        </div>`:''}
+        ${cTime ? `<div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-clock"></i></div>
+          <span>Ceremony at ${fmtTime(cTime)}</span>
+        </div>`:''}
+        ${cVenue ? `<div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-church"></i></div>
+          <span>${esc(cVenue)}${cAddr?`<br><small style="opacity:.65">${esc(cAddr)}</small>`:''}</span>
+        </div>`:''}
+      </div>
+
+      ${rVenue ? `
+      <div class="inv-reception-block">
+        <div class="inv-divider-thin" style="background:${ac}"></div>
+        <p class="inv-ceremony-label">Reception${rTime?` at ${fmtTime(rTime)}`:''}</p>
+        <div class="inv-details">
+          <div class="inv-detail-row">
+            <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-glass-cheers"></i></div>
+            <span>${esc(rVenue)}${rAddr?`<br><small style="opacity:.65">${esc(rAddr)}</small>`:''}</span>
+          </div>
+        </div>
+      </div>`:'' }
+
+      ${dress ? `<div class="inv-details">
+        <div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-tshirt"></i></div>
+          <span><em>Dress Code:</em> ${esc(dress)}</span>
+        </div>
+      </div>`:''}
+
+      ${msg?`<div class="inv-message" style="background:${acBg};border-left-color:${ac}">&ldquo;${esc(msg)}&rdquo;</div>`:''}
+
+      ${S.showQR?`<div class="inv-qr-wrap"><canvas id="qrCanvas"></canvas><span class="inv-qr-label">Scan to RSVP</span></div>`:''}
+
+      ${(rsvpC||rsvpD)?`
+      <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${ac},transparent)"></div>
+      <div class="inv-rsvp-wrap">
+        <p class="inv-rsvp-label">RSVP${rsvpD?' by '+fmtDate(rsvpD):''}</p>
+        ${rsvpC?`<p class="inv-rsvp-value">${esc(rsvpC)}</p>`:''}
+      </div>`:''}
+    </div>
+  </div>
+</div>`;
+}
+
+/* ── QR code ── */
+function generateQR() {
+    if (!S.showQR) return;
+    const qrCanvas = document.getElementById('qrCanvas'); if (!qrCanvas) return;
+    const website = getField('websiteUrl');
+    const rsvpC   = getField('rsvpContact');
+    const cVenue  = getField('ceremonyVenue');
+    const content = website ? (website.startsWith('http') ? website : 'https://'+website)
+                  : rsvpC  ? `RSVP: ${rsvpC}`
+                  : cVenue ? `https://maps.google.com/?q=${encodeURIComponent(cVenue)}` : 'Wedding RSVP';
+    QRCode.toCanvas(qrCanvas, content, {width:120,margin:1,color:{dark:S.accent,light:'#ffffff00'}}, err=>{ if(err) console.warn(err); });
+}
+
+/* ── Update preview ── */
+function updatePreview() {
+    const old = wrapper.querySelector('.inv-card-outer');
+    if (old) old.remove();
+    placeholder.style.display = 'none';
+    const div = document.createElement('div');
+    div.innerHTML = buildInvitation();
+    wrapper.appendChild(div.firstElementChild);
+    setTimeout(generateQR, 80);
+}
+
+/* ── Generate (with confetti) ── */
+function generateInvitation() {
+    const p1 = getField('partner1');
+    if (!p1) {
+        const el = document.getElementById('partner1');
+        el.style.borderColor='#ef4444'; el.focus();
+        setTimeout(()=>el.style.borderColor='',2000); return;
+    }
+    S.generated = true;
+    updatePreview();
+    dlRow.style.display = 'flex';
+    shareRow.style.display = 'flex';
+    launchConfetti();
+    startCountdown();
+    autoSave();
+}
+generateBtn.addEventListener('click', generateInvitation);
+
+/* ── Countdown ── */
+let cdInterval;
+function startCountdown() {
+    const date = getField('weddingDate');
+    const time = getField('ceremonyTime')||'00:00';
+    if (!date) { cdWidget.classList.remove('visible'); return; }
+    const target = new Date(`${date}T${time}`);
+    if (isNaN(target)) { cdWidget.classList.remove('visible'); return; }
+    cdWidget.classList.add('visible');
+    clearInterval(cdInterval);
+    function tick() {
+        const diff = target - Date.now();
+        if (diff<=0) { ['cdDays','cdHours','cdMins','cdSecs'].forEach(id=>document.getElementById(id).textContent='00'); clearInterval(cdInterval); return; }
+        document.getElementById('cdDays').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
+        document.getElementById('cdHours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+        document.getElementById('cdMins').textContent  = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+        document.getElementById('cdSecs').textContent  = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    }
+    tick(); cdInterval = setInterval(tick, 1000);
+}
+
+/* ── Confetti (rose petals) ── */
+function launchConfetti() {
+    confettiCvs.width=window.innerWidth; confettiCvs.height=window.innerHeight;
+    confettiCvs.style.display='block';
+    const pal=[S.accent,'#FFB6C1','#D4AF37','#fff','#ffd6e5','#f5c5c5','#967BB6'];
+    const pieces=Array.from({length:120},()=>({
+        x:Math.random()*confettiCvs.width, y:-10-Math.random()*40,
+        w:4+Math.random()*8, h:3+Math.random()*3,
+        color:pal[Math.floor(Math.random()*pal.length)],
+        vy:2+Math.random()*2.5, vx:(Math.random()-.5)*2.5,
+        rot:Math.random()*360, rs:(Math.random()-.5)*6,
+    }));
+    let tick=0, frame;
+    function draw(){
+        confettiCtx.clearRect(0,0,confettiCvs.width,confettiCvs.height);
+        pieces.forEach(p=>{
+            confettiCtx.save();
+            confettiCtx.globalAlpha=Math.max(0,1-tick/110);
+            confettiCtx.translate(p.x,p.y); confettiCtx.rotate(p.rot*Math.PI/180);
+            confettiCtx.fillStyle=p.color;
+            confettiCtx.beginPath(); confettiCtx.ellipse(0,0,p.w/2,p.h/2,0,0,Math.PI*2);
+            confettiCtx.fill(); confettiCtx.restore();
+            p.x+=p.vx; p.y+=p.vy; p.rot+=p.rs;
+        });
+        if(++tick<140) frame=requestAnimationFrame(draw);
+        else { cancelAnimationFrame(frame); confettiCvs.style.display='none'; }
+    }
+    draw();
+}
+
+/* ── Downloads ── */
+async function getCardCanvas(scale) {
+    const card=wrapper.querySelector('.inv-card'); if(!card) return null;
+    return html2canvas(card,{scale:scale||2,useCORS:true,backgroundColor:null,logging:false});
+}
+document.getElementById('dlPNG').addEventListener('click',async()=>{ const c=await getCardCanvas(2); if(!c)return; const a=document.createElement('a'); a.download='wedding-invitation.png'; a.href=c.toDataURL('image/png'); a.click(); });
+document.getElementById('dlJPG').addEventListener('click',async()=>{ const c=await getCardCanvas(2); if(!c)return; const a=document.createElement('a'); a.download='wedding-invitation.jpg'; a.href=c.toDataURL('image/jpeg',.92); a.click(); });
+document.getElementById('dlPDF').addEventListener('click',async()=>{
+    const c=await getCardCanvas(2); if(!c)return;
+    const {jsPDF}=window.jspdf; const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    const w=190,h=(c.height*w)/c.width; pdf.addImage(c.toDataURL('image/png'),'PNG',10,10,w,h); pdf.save('wedding-invitation.pdf');
+});
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+
+document.getElementById('copyTextBtn').addEventListener('click', function(){
+    const p1=getField('partner1')||'Partner One', p2=getField('partner2')||'Partner Two';
+    const lines=['═══════════════════════════════════',`      ${p1} ${S.conjunction} ${p2}`,'     WEDDING INVITATION','═══════════════════════════════════',''];
+    if(getField('weddingDate')) lines.push(`📅 ${fmtDate(getField('weddingDate'))}`);
+    if(getField('ceremonyTime'))lines.push(`⛪ Ceremony at ${fmtTime(getField('ceremonyTime'))}`);
+    if(getField('ceremonyVenue'))lines.push(`📍 ${getField('ceremonyVenue')}${getField('ceremonyAddress')?'\n   '+getField('ceremonyAddress'):''}`);
+    if(getField('receptionVenue'))lines.push(`🥂 Reception: ${getField('receptionVenue')}${getField('receptionTime')?' at '+fmtTime(getField('receptionTime')):''}`);
+    if(getField('dressCode'))   lines.push(`👗 Dress Code: ${getField('dressCode')}`);
+    if(getField('message'))     lines.push('',`"${getField('message')}"`);
+    if(getField('rsvpContact')) lines.push('',`RSVP: ${getField('rsvpContact')}`);
+    if(getField('rsvpDate'))    lines.push(`By: ${fmtDate(getField('rsvpDate'))}`);
+    if(getField('websiteUrl'))  lines.push(`🌐 ${getField('websiteUrl')}`);
+    lines.push('','═══════════════════════════════════');
+    navigator.clipboard.writeText(lines.join('\n')).then(()=>{
+        this.innerHTML='<i class="fas fa-check"></i> Copied!';
+        setTimeout(()=>this.innerHTML='<i class="fas fa-copy"></i> Copy Text',2000);
+    });
+});
+
+/* ── Share ── */
+function shareText(){
+    const p1=getField('partner1')||'Partner One', p2=getField('partner2')||'Partner Two';
+    const date=getField('weddingDate'), venue=getField('ceremonyVenue'), rsvp=getField('rsvpContact');
+    return [`💍 You're invited to the wedding of *${p1} ${S.conjunction} ${p2}*!`,
+        date  ?`📅 ${fmtDate(date)}`:'',
+        venue ?`📍 ${venue}`:'',
+        rsvp  ?`RSVP: ${rsvp}`:'',
+    ].filter(Boolean).join('\n');
+}
+document.getElementById('shareWA').addEventListener('click',()=>window.open(`https://wa.me/?text=${encodeURIComponent(shareText())}`,'_blank'));
+document.getElementById('shareFB').addEventListener('click',()=>window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,'_blank','width=600,height=400'));
+document.getElementById('shareXBtn').addEventListener('click',()=>window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText())}`,'_blank','width=600,height=400'));
+document.getElementById('shareEmail').addEventListener('click',()=>{
+    const p1=getField('partner1')||'Partner One', p2=getField('partner2')||'Partner Two';
+    const sub=encodeURIComponent(`Wedding Invitation: ${p1} ${S.conjunction} ${p2}`);
+    window.location.href=`mailto:?subject=${sub}&body=${encodeURIComponent(shareText())}`;
+});
+
+/* ── Auto-save / load ── */
+const SAVE_KEY='wedding_inv_v2';
+function autoSave(){
+    const data={theme:S.theme,accent:S.accent,font:S.font,pattern:S.pattern,anim:S.anim,conjunction:S.conjunction,showQR:S.showQR,showParticles:S.showParticles};
+    LIVE_FIELDS.forEach(id=>{data[id]=getField(id);});
+    try{localStorage.setItem(SAVE_KEY,JSON.stringify(data));}catch(_){}
+}
+(function loadSaved(){
+    try{
+        const raw=localStorage.getItem(SAVE_KEY); if(!raw)return;
+        const d=JSON.parse(raw);
+        if(d.theme){S.theme=d.theme;document.querySelectorAll('.theme-thumb').forEach(t=>t.classList.toggle('active',t.dataset.theme===S.theme));}
+        if(d.accent){S.accent=d.accent;document.getElementById('customColor').value=S.accent;document.querySelectorAll('.color-pill').forEach(p=>p.classList.toggle('active',p.dataset.color===S.accent));}
+        if(d.font){S.font=d.font;document.getElementById('fontSelect').value=S.font;}
+        if(d.pattern){S.pattern=d.pattern;document.getElementById('patternSelect').value=S.pattern;}
+        if(d.anim){S.anim=d.anim;document.getElementById('animSelect').value=S.anim;}
+        if(d.conjunction){
+            S.conjunction=d.conjunction;
+            document.querySelectorAll('.conj-btn').forEach(b=>b.classList.toggle('active',b.dataset.conj===S.conjunction));
+        }
+        if(typeof d.showQR==='boolean'){S.showQR=d.showQR;document.getElementById('toggleQR').classList.toggle('on',S.showQR);}
+        if(typeof d.showParticles==='boolean'){S.showParticles=d.showParticles;document.getElementById('toggleParticles').classList.toggle('on',S.showParticles);}
+        LIVE_FIELDS.forEach(id=>{if(d[id]!==undefined){const el=document.getElementById(id);if(el)el.value=d[id];}});
+        if(d.weddingDate) startCountdown();
+    }catch(_){}
+})();
+})();
+</script>
 </body>
-</html> 
+</html>
