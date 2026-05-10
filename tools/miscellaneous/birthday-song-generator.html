@@ -1069,164 +1069,98 @@ function updateWishBtn() {
   if (wb) wb.textContent = name ? `🎂 Sing Happy Birthday to ${name}` : '🎂 Sing Birthday Wish';
 }
 
-// Style-specific sung Happy Birthday verses (spoken after the traditional song)
+// Personalised wish lines spoken AFTER the sung Happy Birthday (no song lines here)
 const WISH_VERSES = {
-  classic: (n, age, hobby, traits) => {
-    const lines = [
-      `Happy Birthday to you,`,
-      `Happy Birthday to you,`,
-      `Happy Birthday dear ${n}...`,
-      `Happy Birthday to you!`,
-      ``,
-      `May all your candles shine bright today, ${n}.`,
-      age   ? `${age} wonderful years, and every single one a blessing.` : `May every wish you make today come true.`,
-      hobby ? `Keep doing what you love — ${hobby.toLowerCase()} — it makes you shine.` : `May this year bring you more joy than any before.`,
-      traits.length ? `Your ${TRAIT_W[traits[0]] || 'wonderful spirit'} is one of the greatest gifts you give the world.` : `You are loved beyond words.`,
-      ``,
-      `Many happy returns of the day, dear ${n}. Happy Birthday!`,
-    ];
-    return lines.join('\n');
-  },
-  pop: (n, age, hobby, traits) => {
-    const lines = [
-      `Happy Birthday to you, yeah yeah!`,
-      `Happy Birthday to you, let's celebrate!`,
-      `Happy Birthday dear ${n}...`,
-      `Happy Birthday to you, whoa oh oh!`,
-      ``,
-      `${n}, you are absolutely amazing, and today is all about YOU!`,
-      age   ? `${age} years of being legendary — and you just keep getting better!` : `Another year, another level of awesome — that's you, ${n}!`,
-      hobby ? `${hobby} lover, star of the day — keep shining!` : `Stay brilliant, stay wonderful, stay you!`,
-      traits.length ? `That ${TRAIT_W[traits[0]] || 'incredible energy'} of yours? It lights up every room.` : `The world is lucky to have you in it.`,
-      ``,
-      `Happy Birthday, ${n}! Keep shining bright! Woohoo!`,
-    ];
-    return lines.join('\n');
-  },
-  rap: (n, age, hobby, traits) => {
-    const lines = [
-      `Yo! Happy Birthday to you,`,
-      `Happy Birthday to you, we're here for you too,`,
-      `Happy Birthday dear ${n},`,
-      `Happy Birthday to you — that's true!`,
-      ``,
-      `Shout out to ${n} on their special day, no cap!`,
-      age   ? `${age} years of greatness — the journey's just getting started.` : `Another year around the sun, and you only level up.`,
-      hobby ? `${hobby} game strong, birthday game stronger.` : `Keep doing you — that's the realest flex.`,
-      traits.length ? `That ${TRAIT_W[traits[0]] || 'legendary vibe'} never gets old. Real talk.` : `You're one of a kind, and everyone knows it.`,
-      ``,
-      `Happy Birthday, ${n}! Go off! Big birthday energy!`,
-    ];
-    return lines.join('\n');
-  },
-  country: (n, age, hobby, traits) => {
-    const lines = [
-      `Happy Birthday to you, yee-haw!`,
-      `Happy Birthday to you,`,
-      `Happy Birthday dear ${n}...`,
-      `Happy Birthday to you!`,
-      ``,
-      `Well, ${n}, today's your day and we're singing it from the rooftops!`,
-      age   ? `${age} wonderful years — each one sweeter than the last, just like you.` : `May today be as warm and golden as a country sunrise.`,
-      hobby ? `You love ${hobby.toLowerCase()}, and we love that about you more than you know.` : `May life keep giving you reasons to smile, laugh, and dance.`,
-      traits.length ? `That ${TRAIT_W[traits[0]] || 'golden heart'} of yours? It's the finest thing around.` : `You're the real gold at the end of the rainbow.`,
-      ``,
-      `Happy Birthday, ${n}! Y'all are so loved!`,
-    ];
-    return lines.join('\n');
-  },
-  ballad: (n, age, hobby, traits) => {
-    const lines = [
-      `Happy... Birthday... to you...`,
-      `Happy Birthday... to you...`,
-      `Happy Birthday... dear ${n}...`,
-      `Happy Birthday... to you...`,
-      ``,
-      `${n}... today we celebrate the beautiful soul that you are.`,
-      age   ? `${age} years of grace, of kindness, of quiet, extraordinary wonder.` : `Every year you grow more beautiful in everything you do.`,
-      hobby ? `Your love of ${hobby.toLowerCase()} is a gift — to yourself and to everyone who knows you.` : `The world is gentler and more beautiful because you are in it.`,
-      traits.length ? `Your ${TRAIT_W[traits[0]] || 'tender heart'} is one of the most precious things we know.` : `You are deeply, truly loved.`,
-      ``,
-      `Happy Birthday, ${n}. With all our love.`,
-    ];
-    return lines.join('\n');
-  },
-  kids: (n, age, hobby, traits) => {
-    const lines = [
-      `Happy Birthday to you! Hip hip hooray!`,
-      `Happy Birthday to you, it's your special day!`,
-      `Happy Birthday dear ${n}...`,
-      `Happy Birthday to you, yay yay yay!`,
-      ``,
-      `${n}! It's your birthday! Woohoo! Everybody cheer!`,
-      age   ? `You are ${age} years old today — how amazing is that?!` : `Today is YOUR super special day and we are SO happy!`,
-      hobby ? `${hobby} is so much fun — and you do it the BEST!` : `You are the most wonderful birthday star in the whole wide world!`,
-      ``,
-      `Happy Birthday, ${n}! We love you so so so much! Yaaaay!`,
-    ];
-    return lines.join('\n');
-  },
+  classic: (n, age, hobby, traits) => [
+    age   ? `${age} wonderful years, and every single one a blessing.` : `May every wish you make today come true.`,
+    hobby ? `Keep doing what you love: ${hobby.toLowerCase()}. It makes you shine.` : `May this year bring you more joy than any before.`,
+    traits.length ? `Your ${TRAIT_W[traits[0]] || 'wonderful spirit'} is one of the greatest gifts you give the world.` : `You are loved beyond words.`,
+    `Many happy returns of the day, dear ${n}. Happy Birthday!`,
+  ],
+  pop: (n, age, hobby, traits) => [
+    `${n}, you are absolutely amazing, and today is all about you!`,
+    age   ? `${age} years of being legendary. You just keep getting better!` : `Another year, another level of awesome. That is you, ${n}!`,
+    hobby ? `${hobby} lover, star of the day. Keep shining!` : `Stay brilliant, stay wonderful, stay you!`,
+    traits.length ? `That ${TRAIT_W[traits[0]] || 'incredible energy'} of yours? It lights up every room.` : `The world is lucky to have you in it.`,
+    `Happy Birthday, ${n}! Keep shining! Woohoo!`,
+  ],
+  rap: (n, age, hobby, traits) => [
+    `Shout out to ${n} on their special day!`,
+    age   ? `${age} years of greatness. The journey is just getting started.` : `Another year around the sun, and you only level up.`,
+    hobby ? `${hobby} game strong, birthday game stronger.` : `Keep doing you. That is the realest flex.`,
+    traits.length ? `That ${TRAIT_W[traits[0]] || 'legendary vibe'} never gets old. Real talk.` : `You are one of a kind and everyone knows it.`,
+    `Happy Birthday, ${n}! Go off!`,
+  ],
+  country: (n, age, hobby, traits) => [
+    `Well, ${n}, today is your day and we are singing it from the rooftops!`,
+    age   ? `${age} wonderful years, each one sweeter than the last, just like you.` : `May today be as warm and golden as a country sunrise.`,
+    hobby ? `You love ${hobby.toLowerCase()}, and we love that about you more than you know.` : `May life keep giving you reasons to smile, laugh, and dance.`,
+    traits.length ? `That ${TRAIT_W[traits[0]] || 'golden heart'} of yours is the finest thing around.` : `You are the real gold at the end of the rainbow.`,
+    `Happy Birthday, ${n}! Y'all are so loved!`,
+  ],
+  ballad: (n, age, hobby, traits) => [
+    `${n}, today we celebrate the beautiful soul that you are.`,
+    age   ? `${age} years of grace, of kindness, of quiet and extraordinary wonder.` : `Every year you grow more beautiful in everything you do.`,
+    hobby ? `Your love of ${hobby.toLowerCase()} is a gift to yourself and to everyone who knows you.` : `The world is gentler and more beautiful because you are in it.`,
+    traits.length ? `Your ${TRAIT_W[traits[0]] || 'tender heart'} is one of the most precious things we know.` : `You are deeply, truly loved.`,
+    `Happy Birthday, ${n}. With all our love.`,
+  ],
+  kids: (n, age, hobby, traits) => [
+    `${n}, it is your birthday! Woohoo! Everybody cheer!`,
+    age   ? `You are ${age} years old today. How amazing is that!` : `Today is your super special day and we are so so happy!`,
+    hobby ? `${hobby} is so much fun and you do it the best!` : `You are the most wonderful birthday star in the whole wide world!`,
+    `Happy Birthday, ${n}! We love you so so so much! Yaaaay!`,
+  ],
 };
 
 const TRAIT_W = {
-  funny: 'wonderful sense of humour',
-  sweet: 'beautiful kindness',
+  funny:       'wonderful sense of humour',
+  sweet:       'beautiful kindness',
   adventurous: 'adventurous spirit',
-  artistic: 'amazing creativity',
-  sporty: 'incredible energy',
-  nerdy: 'brilliant curious mind',
-  musical: 'love of music',
+  artistic:    'amazing creativity',
+  sporty:      'incredible energy',
+  nerdy:       'brilliant curious mind',
+  musical:     'love of music',
 };
 
 function speakBirthdayWish() {
-  if (!('speechSynthesis' in window)) { alert('Speech synthesis is not supported in your browser.'); return; }
+  if (!('speechSynthesis' in window)) { alert('Speech synthesis not supported in your browser.'); return; }
   const name  = document.getElementById('nameInput').value.trim() || 'you';
   const age   = document.getElementById('ageInput').value.trim();
   const hobby = document.getElementById('hobbyInput').value.trim();
   const wb    = document.getElementById('wishBtn');
+  const label = name !== 'you' ? `🎂 Sing Happy Birthday to ${name}` : '🎂 Sing Birthday Wish';
 
   if (window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    const label = name !== 'you' ? `🎂 Sing Happy Birthday to ${name}` : '🎂 Sing Birthday Wish';
+    stopSinging();
     if (wb) { wb.textContent = label; wb.classList.remove('speaking'); }
     return;
   }
 
-  const verseFn = WISH_VERSES[S.style] || WISH_VERSES.classic;
-  const text = verseFn(name, age, hobby, S.traits)
-    .replace(/[🎂🎈🎤🎧🤠🌹✨🎊🔥]/g, '');
+  const wishLines = (WISH_VERSES[S.style] || WISH_VERSES.classic)(name, age, hobby, S.traits);
+  const wCfg = { classic:{rate:0.70,bp:1.08}, pop:{rate:0.82,bp:1.15}, rap:{rate:0.90,bp:0.95},
+                 country:{rate:0.72,bp:1.05}, ballad:{rate:0.65,bp:1.10}, kids:{rate:0.85,bp:1.20} }[S.style]
+               || {rate:0.70, bp:1.08};
 
-  const utt = new SpeechSynthesisUtterance(text);
+  const wishParts = wishLines.map((line, i) => ({
+    text:  line,
+    pitch: wCfg.bp + (i % 2 === 0 ? 0 : 0.08),
+    rate:  wCfg.rate,
+  }));
 
-  // Style-specific speech settings
-  const speechSettings = {
-    classic: { rate: 0.78, pitch: 1.1 },
-    pop:     { rate: 0.90, pitch: 1.2 },
-    rap:     { rate: 1.00, pitch: 0.95 },
-    country: { rate: 0.80, pitch: 1.05 },
-    ballad:  { rate: 0.70, pitch: 1.15 },
-    kids:    { rate: 0.92, pitch: 1.25 },
-  };
-  const cfg = speechSettings[S.style] || speechSettings.classic;
-  utt.rate  = cfg.rate;
-  utt.pitch = cfg.pitch;
-
-  const doSpeak = () => {
-    const voices = window.speechSynthesis.getVoices();
-    const preferred = voices.find(v =>
-      /samantha|google uk english female|karen|moira|victoria|zira/i.test(v.name)
-    ) || voices.find(v => v.lang.startsWith('en') && /female/i.test(v.name))
-      || voices.find(v => v.lang.startsWith('en'));
-    if (preferred) utt.voice = preferred;
-    window.speechSynthesis.speak(utt);
-  };
-  window.speechSynthesis.getVoices().length ? doSpeak() : (window.speechSynthesis.onvoiceschanged = doSpeak);
-
+  const allParts = [...buildHBParts(name), { pause: 650 }, ...wishParts];
   if (wb) { wb.textContent = '⏹ Stop'; wb.classList.add('speaking'); }
-  utt.onend = utt.onerror = () => {
-    const label = name !== 'you' ? `🎂 Sing Happy Birthday to ${name}` : '🎂 Sing Birthday Wish';
-    if (wb) { wb.textContent = label; wb.classList.remove('speaking'); }
+
+  const doSing = () => {
+    const voices = window.speechSynthesis.getVoices();
+    const voice  = voices.find(v => /samantha|google uk english female|karen|moira|zira/i.test(v.name))
+                || voices.find(v => v.lang.startsWith('en') && /female/i.test(v.name))
+                || voices.find(v => v.lang.startsWith('en'));
+    singParts(allParts, voice, () => {
+      if (wb) { wb.textContent = label; wb.classList.remove('speaking'); }
+    });
   };
+  window.speechSynthesis.getVoices().length ? doSing() : (window.speechSynthesis.onvoiceschanged = doSing);
 }
 
 // ─── PILL CONTROLS ────────────────────────────────────────────────────────────
@@ -1263,6 +1197,41 @@ document.getElementById('nameInput').addEventListener('keydown', e => {
 document.getElementById('nameInput').addEventListener('input', updateWishBtn);
 document.getElementById('wishBtn').addEventListener('click', speakBirthdayWish);
 
+// ─── SINGING ENGINE ──────────────────────────────────────────────────────────
+let _singStop = false;
+function singParts(parts, voice, onDone) {
+  _singStop = false;
+  let idx = 0;
+  function next() {
+    if (_singStop || idx >= parts.length) { if (onDone) onDone(); return; }
+    const p = parts[idx++];
+    if (p.pause) { setTimeout(next, p.pause); return; }
+    if (!p.text || !p.text.trim()) { next(); return; }
+    const utt = new SpeechSynthesisUtterance(p.text);
+    utt.pitch = p.pitch !== undefined ? p.pitch : 1.0;
+    utt.rate  = p.rate  !== undefined ? p.rate  : 0.75;
+    if (voice) utt.voice = voice;
+    utt.onend  = next;
+    utt.onerror = () => { if (onDone) onDone(); };
+    window.speechSynthesis.speak(utt);
+  }
+  next();
+}
+function stopSinging() { _singStop = true; window.speechSynthesis.cancel(); }
+function buildHBParts(n) {
+  return [
+    { text: 'Happy Birthday,',   pitch: 1.05, rate: 0.58 },
+    { text: 'to you,',           pitch: 1.28, rate: 0.55 },
+    { text: 'Happy Birthday,',   pitch: 1.12, rate: 0.58 },
+    { text: 'to you,',           pitch: 1.32, rate: 0.55 },
+    { text: 'Happy Birthday,',   pitch: 1.48, rate: 0.52 },
+    { text: `dear ${n}...`,      pitch: 1.25, rate: 0.46 },
+    { text: 'Happy Birthday,',   pitch: 1.15, rate: 0.58 },
+    { text: 'to you!',           pitch: 0.85, rate: 0.60 },
+    { pause: 700 },
+  ];
+}
+
 // ─── QUICK SONGS ─────────────────────────────────────────────────────────────
 const QUICK_SONGS = [
   {
@@ -1272,7 +1241,13 @@ const QUICK_SONGS = [
     preview: 'Happy Birthday to you,\nHappy Birthday to you…',
     song: (n) =>
       `Happy Birthday to you,\nHappy Birthday to you,\nHappy Birthday dear ${n},\nHappy Birthday to you!\n\nMay all your wishes come true,\nAnd your dreams see you through,\nHappy Birthday dear ${n},\nHappy Birthday to you!`,
-    rate: 0.78, pitch: 1.1,
+    getParts: (n) => [
+      ...buildHBParts(n),
+      { text: 'May all your wishes come true,',    pitch: 1.08, rate: 0.65 },
+      { text: 'and your dreams see you through,',  pitch: 1.12, rate: 0.65 },
+      { text: `Happy Birthday dear ${n},`,         pitch: 1.22, rate: 0.58 },
+      { text: 'Happy Birthday to you!',             pitch: 0.88, rate: 0.60 },
+    ],
   },
   {
     id: 'sweet',
@@ -1281,7 +1256,15 @@ const QUICK_SONGS = [
     preview: 'Wishing you a happy birthday,\nFull of joy and full of cheer…',
     song: (n) =>
       `Wishing you a happy birthday,\nFull of joy and full of cheer,\nMay this day be extra special,\nThe brightest day of all the year!\n\nHappy Birthday, ${n}!\nYou are so loved today and always.`,
-    rate: 0.82, pitch: 1.1,
+    getParts: (n) => [
+      { text: 'Wishing you a happy birthday,',     pitch: 1.15, rate: 0.68 },
+      { text: 'full of joy and full of cheer,',    pitch: 1.20, rate: 0.68 },
+      { text: 'may this day be extra special,',    pitch: 1.25, rate: 0.65 },
+      { text: 'the brightest day of all the year!',pitch: 1.10, rate: 0.65 },
+      { pause: 500 },
+      { text: `Happy Birthday, ${n}!`,             pitch: 1.30, rate: 0.72 },
+      { text: 'You are so loved today and always.',pitch: 1.05, rate: 0.62 },
+    ],
   },
   {
     id: 'fun',
@@ -1290,7 +1273,17 @@ const QUICK_SONGS = [
     preview: 'Hip hip hooray!\nIt\'s your special day!…',
     song: (n) =>
       `Hip hip hooray!\nIt's your special day!\nBlow out the candles\nAnd shout hooray!\n\nIt's time to laugh, it's time to cheer,\n${n}, the greatest one here!\n\nHappy Birthday to you! Happy Birthday to you!\nHappy Birthday dear ${n}, Happy Birthday to you!`,
-    rate: 0.90, pitch: 1.2,
+    getParts: (n) => [
+      { text: 'Hip hip hooray!',                   pitch: 1.35, rate: 0.88 },
+      { text: "It's your special day!",            pitch: 1.40, rate: 0.85 },
+      { text: 'Blow out the candles,',             pitch: 1.25, rate: 0.82 },
+      { text: 'and shout hooray!',                 pitch: 1.38, rate: 0.88 },
+      { pause: 400 },
+      { text: "It's time to laugh, it's time to cheer,", pitch: 1.20, rate: 0.82 },
+      { text: `${n}, the greatest one here!`,      pitch: 1.30, rate: 0.85 },
+      { pause: 500 },
+      ...buildHBParts(n),
+    ],
   },
   {
     id: 'poem',
@@ -1299,7 +1292,20 @@ const QUICK_SONGS = [
     preview: 'Another year older,\nAnother year wiser…',
     song: (n) =>
       `Another year older,\nAnother year wiser,\nAnother year sweeter —\nCould life be any nicer?\n\nMay laughter fill your morning,\nMay peace fill your night,\nMay love surround you always\nAnd keep your world bright.\n\nHappy Birthday, ${n}!\nMay this year be your most beautiful yet.`,
-    rate: 0.80, pitch: 1.05,
+    getParts: (n) => [
+      { text: 'Another year older,',               pitch: 1.05, rate: 0.68 },
+      { text: 'another year wiser,',               pitch: 1.10, rate: 0.68 },
+      { text: 'another year sweeter —',            pitch: 1.15, rate: 0.65 },
+      { text: 'could life be any nicer?',          pitch: 1.08, rate: 0.65 },
+      { pause: 500 },
+      { text: 'May laughter fill your morning,',   pitch: 1.12, rate: 0.65 },
+      { text: 'may peace fill your night,',        pitch: 1.08, rate: 0.65 },
+      { text: 'may love surround you always,',     pitch: 1.15, rate: 0.65 },
+      { text: 'and keep your world bright.',       pitch: 1.02, rate: 0.62 },
+      { pause: 500 },
+      { text: `Happy Birthday, ${n}!`,             pitch: 1.20, rate: 0.70 },
+      { text: 'May this year be your most beautiful yet.', pitch: 1.05, rate: 0.62 },
+    ],
   },
   {
     id: 'blessing',
@@ -1308,7 +1314,20 @@ const QUICK_SONGS = [
     preview: 'May your birthday be filled with sunshine,\nMay your year be filled with cheer…',
     song: (n) =>
       `May your birthday be filled with sunshine,\nMay your year be filled with cheer,\nMay every wish you make come true\nOn this, your most special day, my dear.\n\nMay good health walk beside you,\nMay joy light up your way,\nAnd may you feel how deeply loved\nYou are each and every day.\n\nHappy Birthday, ${n}.\nYou are truly, deeply loved.`,
-    rate: 0.76, pitch: 1.08,
+    getParts: (n) => [
+      { text: 'May your birthday be filled with sunshine,', pitch: 1.10, rate: 0.65 },
+      { text: 'may your year be filled with cheer,',        pitch: 1.15, rate: 0.65 },
+      { text: 'may every wish you make come true,',         pitch: 1.20, rate: 0.65 },
+      { text: 'on this, your most special day, my dear.',   pitch: 1.08, rate: 0.62 },
+      { pause: 500 },
+      { text: 'May good health walk beside you,',           pitch: 1.12, rate: 0.65 },
+      { text: 'may joy light up your way,',                 pitch: 1.18, rate: 0.65 },
+      { text: 'and may you feel how deeply loved,',         pitch: 1.15, rate: 0.65 },
+      { text: 'you are each and every day.',                pitch: 1.05, rate: 0.62 },
+      { pause: 500 },
+      { text: `Happy Birthday, ${n}.`,                      pitch: 1.20, rate: 0.68 },
+      { text: 'You are truly, deeply loved.',               pitch: 1.02, rate: 0.60 },
+    ],
   },
 ];
 
@@ -1383,8 +1402,8 @@ function speakQuickSong(id, fromPanel) {
     ? document.getElementById(`qpanel-play-${id}`)
     : document.getElementById(`qplay-${id}`);
 
-  if (window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
+  if (window.speechSynthesis.speaking || _singStop === false && quickSpeaking === id) {
+    stopSinging();
     document.querySelectorAll('[id^="qplay-"], [id^="qpanel-play-"]').forEach(b => {
       b.textContent = b.id.startsWith('qpanel') ? '▶ Play Song' : '▶ Play';
     });
@@ -1394,28 +1413,24 @@ function speakQuickSong(id, fromPanel) {
 
   if (!fromPanel) showQuickSong(id);
 
-  const text = qs.song(name).replace(/[🎂🌸🎉📜✨]/g, '');
-  const utt  = new SpeechSynthesisUtterance(text);
-  utt.rate   = qs.rate;
-  utt.pitch  = qs.pitch;
   quickSpeaking = id;
-
-  const doSpeak = () => {
-    const voices = window.speechSynthesis.getVoices();
-    const v = voices.find(vx => /samantha|google uk english female|karen|moira/i.test(vx.name))
-           || voices.find(vx => vx.lang.startsWith('en'));
-    if (v) utt.voice = v;
-    window.speechSynthesis.speak(utt);
-  };
-  window.speechSynthesis.getVoices().length ? doSpeak() : (window.speechSynthesis.onvoiceschanged = doSpeak);
-
   if (playBtn) playBtn.textContent = '⏹ Stop';
-  utt.onend = utt.onerror = () => {
+
+  const onDone = () => {
     quickSpeaking = null;
     document.querySelectorAll('[id^="qplay-"], [id^="qpanel-play-"]').forEach(b => {
       b.textContent = b.id.startsWith('qpanel') ? '▶ Play Song' : '▶ Play';
     });
   };
+
+  const doSing = () => {
+    const voices = window.speechSynthesis.getVoices();
+    const voice  = voices.find(v => /samantha|google uk english female|karen|moira/i.test(v.name))
+                || voices.find(v => v.lang.startsWith('en') && /female/i.test(v.name))
+                || voices.find(v => v.lang.startsWith('en'));
+    singParts(qs.getParts(name), voice, onDone);
+  };
+  window.speechSynthesis.getVoices().length ? doSing() : (window.speechSynthesis.onvoiceschanged = doSing);
 }
 
 renderQuickGrid();
