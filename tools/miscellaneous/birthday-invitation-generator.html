@@ -6,473 +6,708 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birthday Invitation Generator - Animated Elegant Invites | Multi-Tools Hub</title>
-    <meta name="description" content="Create stunning animated birthday invitations with beautiful themes. Choose elegant, fun, modern, vintage, celestial or garden styles. Free, no sign-up.">
-    <meta name="keywords" content="birthday invitation generator, animated invitation, elegant birthday invite, free invitation maker">
+    <meta name="description" content="Create stunning animated birthday invitations with 6 themes, live preview, photo upload, QR code, countdown timer, and instant download. Free, no sign-up.">
+    <meta name="keywords" content="birthday invitation generator, animated invitation, elegant birthday invite, free invitation maker, photo invitation">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;1,400&family=Montserrat:wght@300;400;500;600&family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Montserrat:wght@300;400;500;600&family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="../../assets/css/style.css" rel="stylesheet">
     <link href="../../assets/css/tool-page.css" rel="stylesheet">
 
-    <style>
-        /* ─── Page Layout ─── */
-        .big-wrapper {
-            display: grid;
-            grid-template-columns: 420px 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-        @media (max-width: 900px) {
-            .big-wrapper { grid-template-columns: 1fr; }
-            .preview-panel { position: static; }
-        }
+<style>
+/* ══════════════════════════ Layout ══════════════════════════ */
+.tool-header { text-align:center; margin-bottom:1.5rem; }
+.tool-header h1 { margin-bottom:.3rem; }
+.tool-header p  { color:var(--text-secondary); font-size:.95rem; }
 
-        /* ─── Form Panel ─── */
-        .form-panel {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
-        }
-        .section-label {
-            font-size: .7rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            margin-bottom: .6rem;
-            display: block;
-        }
+.big-wrapper {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+@media (max-width: 960px) {
+    .big-wrapper { grid-template-columns: 1fr; }
+    .preview-panel { position: static !important; }
+}
 
-        /* ─── Theme Thumbnails ─── */
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 1rem;
-        }
-        .theme-thumb {
-            border-radius: 10px;
-            padding: 4px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all .2s;
-        }
-        .theme-thumb:hover { transform: translateY(-2px); }
-        .theme-thumb.active { border-color: #00c8ff; box-shadow: 0 0 0 3px rgba(0,200,255,.2); }
-        .theme-thumb-inner {
-            height: 68px;
-            border-radius: 7px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: .62rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .th-elegant  { background: linear-gradient(135deg,#fffbf0,#f5e6c8); color: #8B6914; }
-        .th-fun      { background: linear-gradient(135deg,#ff9fd2,#ffcf6e); color: #9c1a5c; }
-        .th-modern   { background: linear-gradient(135deg,#1a1a2e,#16213e); color: #00c8ff; }
-        .th-vintage  { background: linear-gradient(135deg,#f3e4d0,#d9bfa0); color: #6b3a2a; }
-        .th-celestial{ background: linear-gradient(135deg,#0d0221,#2d1b69); color: #c8a8ff; }
-        .th-garden   { background: linear-gradient(135deg,#d4edda,#a8d5b5); color: #1a5c2e; }
+/* ══════════════════════════ Quick Templates ══════════════════════════ */
+.tmpl-bar {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    background: var(--card-bg); border: 1px solid var(--border-color);
+    border-radius: 12px; padding: .7rem 1rem; margin-bottom: 1.5rem;
+}
+.tmpl-bar-label { font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); white-space:nowrap; }
+.tmpl-btn {
+    padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border-color);
+    background: transparent; color: var(--text-primary); font-size: .82rem;
+    cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.tmpl-btn:hover { border-color: #00c8ff; color: #00c8ff; background: rgba(0,200,255,.06); }
 
-        /* ─── Color Pills ─── */
-        .color-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
-        .color-pill {
-            width: 26px; height: 26px; border-radius: 50%;
-            cursor: pointer; border: 3px solid transparent;
-            transition: transform .2s, border-color .2s;
-            box-shadow: 0 1px 4px rgba(0,0,0,.3);
-        }
-        .color-pill:hover { transform: scale(1.2); }
-        .color-pill.active { border-color: var(--text-primary); transform: scale(1.15); }
+/* ══════════════════════════ Form Panel ══════════════════════════ */
+.form-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.4rem;
+}
+.sec-head {
+    font-size: .68rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-secondary); margin: 1rem 0 .5rem; display: flex;
+    align-items: center; gap: 6px;
+}
+.sec-head:first-child { margin-top: 0; }
+.sec-head::after { content:''; flex:1; height:1px; background:var(--border-color); }
 
-        /* ─── Form Fields ─── */
-        .f-group { margin-bottom: .9rem; }
-        .f-group label {
-            font-size: .7rem; font-weight: 600;
-            letter-spacing: .5px; text-transform: uppercase;
-            color: var(--text-secondary); margin-bottom: 4px; display: block;
-        }
-        .f-group input, .f-group textarea {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            padding: 9px 13px;
-            font-size: .9rem;
-            width: 100%;
-            transition: border-color .2s;
-        }
-        .f-group input:focus, .f-group textarea:focus {
-            border-color: #00c8ff; outline: none;
-            box-shadow: 0 0 0 3px rgba(0,200,255,.12);
-        }
-        .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .f-group textarea { resize: vertical; min-height: 80px; }
+/* Theme thumbnails */
+.theme-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-bottom:.5rem; }
+.theme-thumb {
+    border-radius:9px; padding:3px; cursor:pointer;
+    border:2px solid transparent; transition:all .18s;
+}
+.theme-thumb:hover { transform:translateY(-2px); }
+.theme-thumb.active { border-color:#00c8ff; box-shadow:0 0 0 3px rgba(0,200,255,.18); }
+.theme-thumb-inner {
+    height:62px; border-radius:7px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.6rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+}
+.th-elegant  { background:linear-gradient(135deg,#fffbf0,#f5e6c8); color:#8B6914; }
+.th-fun      { background:linear-gradient(135deg,#ff9fd2,#ffcf6e); color:#9c1a5c; }
+.th-modern   { background:linear-gradient(135deg,#1a1a2e,#16213e); color:#00c8ff; }
+.th-vintage  { background:linear-gradient(135deg,#f3e4d0,#d9bfa0); color:#6b3a2a; }
+.th-celestial{ background:linear-gradient(135deg,#0d0221,#2d1b69); color:#c8a8ff; }
+.th-garden   { background:linear-gradient(135deg,#d4edda,#a8d5b5); color:#1a5c2e; }
 
-        /* ─── Generate Button ─── */
-        .gen-btn {
-            width: 100%; padding: 13px;
-            background: linear-gradient(135deg, #00c8ff, #a855f7);
-            color: #fff; border: none; border-radius: 10px;
-            font-size: .95rem; font-weight: 600; letter-spacing: 1px;
-            cursor: pointer; transition: opacity .2s, transform .1s;
-            margin-top: .5rem;
-        }
-        .gen-btn:hover { opacity: .88; }
-        .gen-btn:active { transform: scale(.98); }
+/* Color pills */
+.color-bar { display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:.4rem; }
+.color-pill {
+    width:24px; height:24px; border-radius:50%; cursor:pointer;
+    border:3px solid transparent; box-shadow:0 1px 4px rgba(0,0,0,.35);
+    transition:transform .18s, border-color .18s;
+}
+.color-pill:hover { transform:scale(1.2); }
+.color-pill.active { border-color:var(--text-primary); transform:scale(1.18); }
+.color-custom {
+    width:24px; height:24px; border-radius:50%; border:2px solid var(--border-color);
+    cursor:pointer; overflow:hidden; padding:0;
+    background: conic-gradient(red,yellow,lime,cyan,blue,magenta,red);
+}
+.color-custom input[type=color] { opacity:0; width:100%; height:100%; cursor:pointer; border:none; padding:0; }
 
-        /* ─── Preview Panel ─── */
-        .preview-panel {
-            position: sticky;
-            top: 90px;
-        }
-        .preview-label {
-            font-size: .7rem; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--text-secondary);
-            margin-bottom: .8rem;
-        }
+/* Design controls grid */
+.design-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:.4rem; }
+.design-select {
+    background:var(--card-bg); border:1px solid var(--border-color);
+    border-radius:7px; color:var(--text-primary);
+    padding:7px 10px; font-size:.82rem; width:100%; cursor:pointer;
+}
+.design-select:focus { border-color:#00c8ff; outline:none; }
 
-        /* ─── Placeholder ─── */
-        .inv-placeholder {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            min-height: 420px;
-            color: var(--text-secondary); text-align: center; gap: 1rem;
-            border: 2px dashed var(--border-color); border-radius: 16px;
-        }
-        .inv-placeholder i { font-size: 3rem; opacity: .25; }
-        .inv-placeholder p { font-size: .85rem; opacity: .55; margin: .3rem 0 0; }
+/* Form fields */
+.f-group { margin-bottom:.7rem; }
+.f-group label {
+    font-size:.68rem; font-weight:600; letter-spacing:.5px;
+    text-transform:uppercase; color:var(--text-secondary);
+    margin-bottom:3px; display:block;
+}
+.f-input-wrap { position:relative; display:flex; align-items:center; }
+.f-input-wrap input, .f-input-wrap textarea {
+    flex:1; background:var(--card-bg); border:1px solid var(--border-color);
+    border-radius:7px; color:var(--text-primary); padding:8px 12px;
+    font-size:.88rem; width:100%; transition:border-color .2s;
+}
+.f-input-wrap textarea { resize:vertical; min-height:72px; }
+.f-input-wrap input:focus, .f-input-wrap textarea:focus {
+    border-color:#00c8ff; outline:none; box-shadow:0 0 0 2px rgba(0,200,255,.12);
+}
+.f-input-wrap .voice-btn {
+    position:absolute; right:8px; background:none; border:none;
+    color:var(--text-secondary); cursor:pointer; padding:4px; font-size:.85rem;
+    transition:color .2s;
+}
+.f-input-wrap .voice-btn:hover { color:#00c8ff; }
+.f-input-wrap .voice-btn.listening { color:#ef4444; animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.f-input-wrap input[type=date], .f-input-wrap input[type=time] {
+    color-scheme: dark;
+}
+.f-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.f-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
 
-        /* ─── Action Row ─── */
-        .action-row {
-            display: flex; gap: 8px; margin-top: .8rem; flex-wrap: wrap;
-        }
-        .act-btn {
-            flex: 1; min-width: 90px; padding: 9px 10px;
-            background: transparent; border: 1px solid var(--border-color);
-            border-radius: 8px; color: var(--text-primary);
-            font-size: .82rem; cursor: pointer; transition: all .2s;
-            display: flex; align-items: center; justify-content: center; gap: 5px;
-        }
-        .act-btn:hover { border-color: #00c8ff; color: #00c8ff; }
+/* Toggles */
+.toggle-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:.5rem; }
+.toggle-item {
+    display:flex; align-items:center; gap:6px;
+    padding:6px 8px; border-radius:7px; cursor:pointer;
+    border:1px solid var(--border-color); transition:all .2s;
+    font-size:.78rem; user-select:none;
+}
+.toggle-item.on { border-color:#00c8ff; background:rgba(0,200,255,.07); color:#00c8ff; }
+.toggle-item i { font-size:.75rem; }
 
-        /* ─── Confetti Canvas ─── */
-        #confettiCanvas {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none; z-index: 9999;
-            display: none;
-        }
+/* Photo upload */
+.photo-upload-area {
+    border:2px dashed var(--border-color); border-radius:10px;
+    padding:.8rem; text-align:center; cursor:pointer; transition:all .2s;
+    position:relative; overflow:hidden;
+}
+.photo-upload-area:hover { border-color:#00c8ff; }
+.photo-upload-area input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+.photo-preview {
+    width:80px; height:80px; border-radius:50%; object-fit:cover;
+    border:3px solid #00c8ff; margin:0 auto .5rem;
+    display:block;
+}
+.photo-upload-text { font-size:.78rem; color:var(--text-secondary); }
+.photo-clear-btn {
+    font-size:.72rem; color:#ef4444; background:none; border:none;
+    cursor:pointer; padding:2px 6px; margin-top:4px;
+}
 
-        /* ════════════════════════════════════
-           INVITATION CARD
-        ════════════════════════════════════ */
-        .inv-card-outer {
-            position: relative;
-            border-radius: 22px;
-            padding: 3px;
-            background: conic-gradient(from 0deg, #ffd700, #ff6b6b, #a855f7, #00c8ff, #ffd700);
-            animation: borderSpin 5s linear infinite;
-        }
-        @keyframes borderSpin {
-            to { filter: hue-rotate(360deg); }
-        }
+/* Generate button */
+.gen-btn {
+    width:100%; padding:13px;
+    background:linear-gradient(135deg,#00c8ff,#a855f7);
+    color:#fff; border:none; border-radius:10px;
+    font-size:.95rem; font-weight:600; letter-spacing:1px;
+    cursor:pointer; transition:opacity .2s, transform .1s;
+    margin-top:.8rem;
+}
+.gen-btn:hover { opacity:.88; }
+.gen-btn:active { transform:scale(.98); }
 
-        .inv-card {
-            border-radius: 20px;
-            overflow: hidden;
-            animation: cardReveal .8s cubic-bezier(.22,.68,0,1.2) both;
-        }
-        @keyframes cardReveal {
-            from { opacity: 0; transform: scale(.88) translateY(24px); }
-            to   { opacity: 1; transform: scale(1) translateY(0); }
-        }
+/* ══════════════════════════ Preview Panel ══════════════════════════ */
+.preview-panel { position:sticky; top:90px; }
 
-        .inv-inner {
-            position: relative;
-            padding: 3rem 2.5rem;
-            text-align: center;
-            overflow: hidden;
-        }
+.preview-toolbar {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:.8rem;
+}
+.preview-live-badge {
+    font-size:.65rem; letter-spacing:3px; text-transform:uppercase;
+    color:var(--text-secondary); display:flex; align-items:center; gap:5px;
+}
+.live-dot {
+    width:7px; height:7px; border-radius:50%; background:#10b981;
+    animation:blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.zoom-controls { display:flex; align-items:center; gap:4px; }
+.zoom-btn {
+    width:26px; height:26px; border-radius:6px; border:1px solid var(--border-color);
+    background:transparent; color:var(--text-primary); cursor:pointer;
+    font-size:.85rem; display:flex; align-items:center; justify-content:center;
+    transition:border-color .2s;
+}
+.zoom-btn:hover { border-color:#00c8ff; color:#00c8ff; }
+.zoom-val { font-size:.78rem; color:var(--text-secondary); min-width:36px; text-align:center; }
 
-        /* ─── Floating particles ─── */
-        .inv-p {
-            position: absolute;
-            border-radius: 50%;
-            animation: floatUp linear infinite;
-            pointer-events: none;
-        }
-        @keyframes floatUp {
-            0%   { transform: translateY(110%) rotate(0deg);   opacity: 0; }
-            10%  { opacity: .7; }
-            90%  { opacity: .6; }
-            100% { transform: translateY(-15%) rotate(720deg); opacity: 0; }
-        }
+.inv-scaler { transform-origin: top center; transition: transform .2s; }
 
-        /* ─── Corner ornaments ─── */
-        .inv-corner {
-            position: absolute; font-size: 1.3rem; opacity: .5;
-            animation: twinkle 2.5s ease-in-out infinite;
-            line-height: 1;
-        }
-        .inv-corner.tl { top: 14px; left: 16px; }
-        .inv-corner.tr { top: 14px; right: 16px; animation-delay: .6s; }
-        .inv-corner.bl { bottom: 14px; left: 16px; animation-delay: 1.2s; }
-        .inv-corner.br { bottom: 14px; right: 16px; animation-delay: 1.8s; }
-        @keyframes twinkle {
-            0%,100% { opacity: .25; transform: scale(.85); }
-            50%      { opacity: .8;  transform: scale(1.15); }
-        }
+/* Placeholder */
+.inv-placeholder {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-height:400px; color:var(--text-secondary); text-align:center; gap:1rem;
+    border:2px dashed var(--border-color); border-radius:16px;
+}
+.inv-placeholder i { font-size:2.8rem; opacity:.22; }
+.inv-placeholder strong { font-size:.95rem; }
+.inv-placeholder p { font-size:.82rem; opacity:.5; margin:.2rem 0 0; }
 
-        /* ─── Typography ─── */
-        .inv-eyebrow {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .7rem; letter-spacing: 4px;
-            text-transform: uppercase; opacity: .65;
-            margin-bottom: 1rem;
-        }
-        .inv-divider {
-            margin: .9rem auto; width: 90px; height: 1.5px; border-radius: 1px;
-        }
-        .inv-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.2rem; line-height: 1.1;
-            margin: 0 0 .25rem;
-        }
-        .inv-title.font-orbitron { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; letter-spacing: 2px; }
-        .inv-title.font-playfair { font-family: 'Playfair Display', serif; font-size: 2.6rem; }
-        .inv-title.font-cormorant { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-style: italic; }
+/* Countdown widget */
+.countdown-widget {
+    display:flex; gap:8px; margin-top:.8rem; display:none;
+}
+.countdown-widget.visible { display:flex; }
+.cd-item {
+    flex:1; text-align:center; padding:10px 5px;
+    background:var(--card-bg); border:1px solid var(--border-color);
+    border-radius:10px;
+}
+.cd-item span { display:block; font-size:1.6rem; font-weight:700; font-family:'JetBrains Mono',monospace; }
+.cd-item small { font-size:.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); }
 
-        .inv-tagline {
-            font-family: 'Playfair Display', serif;
-            font-style: italic; font-size: 1rem; opacity: .7;
-            margin-bottom: 1.2rem;
-        }
-        .inv-host-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .7rem; letter-spacing: 3px;
-            text-transform: uppercase; opacity: .6; margin-bottom: .2rem;
-        }
-        .inv-host-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;
-        }
+/* Action rows */
+.dl-row, .share-row {
+    display:flex; gap:6px; margin-top:.6rem; flex-wrap:wrap;
+}
+.act-btn {
+    flex:1; min-width:70px; padding:8px 6px;
+    background:transparent; border:1px solid var(--border-color);
+    border-radius:7px; color:var(--text-primary);
+    font-size:.78rem; cursor:pointer; transition:all .2s;
+    display:flex; align-items:center; justify-content:center; gap:4px;
+    white-space:nowrap;
+}
+.act-btn:hover { border-color:#00c8ff; color:#00c8ff; }
+.share-label { font-size:.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-secondary); display:flex; align-items:center; padding:0 4px; white-space:nowrap; }
 
-        .inv-details { display: flex; flex-direction: column; gap: .55rem; margin-bottom: 1.5rem; }
-        .inv-detail-row {
-            display: flex; align-items: center; justify-content: center; gap: .6rem;
-            font-family: 'Montserrat', sans-serif; font-size: .88rem;
-        }
-        .inv-detail-icon {
-            width: 24px; height: 24px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: .65rem; flex-shrink: 0; border: 1px solid;
-        }
+/* ══════════════════════════ Confetti ══════════════════════════ */
+#confettiCanvas {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    pointer-events:none; z-index:9999; display:none;
+}
 
-        .inv-message {
-            font-family: 'Playfair Display', serif;
-            font-style: italic; font-size: .95rem;
-            line-height: 1.65; opacity: .85;
-            margin: 1.2rem 0; padding: .9rem 1.4rem;
-            border-radius: 8px; border-left: 3px solid;
-        }
+/* ══════════════════════════ INVITATION CARD ══════════════════════════ */
 
-        .inv-rsvp-wrap {
-            padding-top: 1rem;
-        }
-        .inv-rsvp-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .65rem; letter-spacing: 3px;
-            text-transform: uppercase; opacity: .55;
-        }
-        .inv-rsvp-value {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem; margin-top: .2rem;
-        }
+/* Border wrapper — animated conic gradient */
+.inv-card-outer {
+    position:relative; border-radius:22px; padding:3px;
+    animation:borderHue 6s linear infinite;
+    background: conic-gradient(from 0deg, #ffd700 0%, #ff6b6b 25%, #a855f7 50%, #00c8ff 75%, #ffd700 100%);
+}
+@keyframes borderHue { to { filter:hue-rotate(360deg); } }
 
-        /* ════════════════════════════════════
-           THEMES
-        ════════════════════════════════════ */
+.inv-card { border-radius:20px; overflow:hidden; }
 
-        /* Elegant */
-        .theme-elegant .inv-inner { background: linear-gradient(160deg, #fffdf5 0%, #fff8e7 50%, #fef3d0 100%); color: #3d2b00; }
-        .theme-elegant .inv-title { }
-        .theme-elegant .inv-p { background: #D4AF37; }
-        .theme-elegant .inv-corner { color: #D4AF37; }
-        .theme-elegant .inv-message { background: rgba(212,175,55,.08); }
+/* Entrance animations */
+.anim-zoom  { animation:animZoom  .75s cubic-bezier(.22,.68,0,1.2) both; }
+.anim-fade  { animation:animFade  .6s ease both; }
+.anim-slide { animation:animSlide .65s cubic-bezier(.22,1,.36,1) both; }
+.anim-bounce{ animation:animBounce .8s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes animZoom   { from{opacity:0;transform:scale(.82) translateY(20px)} to{opacity:1;transform:none} }
+@keyframes animFade   { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+@keyframes animSlide  { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:none} }
+@keyframes animBounce { from{opacity:0;transform:scale(.7)} to{opacity:1;transform:none} }
 
-        /* Fun */
-        .theme-fun .inv-inner { background: linear-gradient(160deg, #fff0f9 0%, #ffe4f3 50%, #fff9e6 100%); color: #4a1525; }
-        .theme-fun .inv-p { background: #e91e8c; }
-        .theme-fun .inv-corner { color: #e91e8c; }
-        .theme-fun .inv-message { background: rgba(233,30,140,.07); }
+.inv-inner {
+    position:relative; overflow:hidden;
+    text-align:center;
+}
 
-        /* Modern */
-        .theme-modern .inv-inner { background: radial-gradient(ellipse at 50% 0%, #1a1a3e 0%, #0f0f1a 60%, #060610 100%); color: #dde4ff; }
-        .theme-modern .inv-p { background: #00c8ff; }
-        .theme-modern .inv-corner { color: #00c8ff; }
-        .theme-modern .inv-message { background: rgba(0,200,255,.07); }
+/* Floating particles */
+.inv-p {
+    position:absolute; border-radius:50%; pointer-events:none;
+    animation:floatUp linear infinite;
+}
+@keyframes floatUp {
+    0%  {transform:translateY(108%) rotate(0deg);opacity:0}
+    8%  {opacity:.7}
+    92% {opacity:.6}
+    100%{transform:translateY(-12%) rotate(720deg);opacity:0}
+}
 
-        /* Vintage */
-        .theme-vintage .inv-inner { background: linear-gradient(160deg, #faf3e6 0%, #f2e2c4 50%, #e8d0a8 100%); color: #4a2c0a; }
-        .theme-vintage .inv-p { background: #7B3F00; }
-        .theme-vintage .inv-corner { color: #7B3F00; }
-        .theme-vintage .inv-message { background: rgba(123,63,0,.07); }
+/* Corner ornaments */
+.inv-corner {
+    position:absolute; font-size:1.25rem; opacity:.45; line-height:1;
+    animation:twinkle 2.8s ease-in-out infinite;
+}
+.inv-corner.tl{top:13px;left:15px}
+.inv-corner.tr{top:13px;right:15px;animation-delay:.7s}
+.inv-corner.bl{bottom:13px;left:15px;animation-delay:1.4s}
+.inv-corner.br{bottom:13px;right:15px;animation-delay:2.1s}
+@keyframes twinkle {
+    0%,100%{opacity:.22;transform:scale(.82)}
+    50%    {opacity:.85;transform:scale(1.18)}
+}
 
-        /* Celestial */
-        .theme-celestial .inv-inner { background: radial-gradient(ellipse at 50% 0%, #2d1b69 0%, #0d0221 70%, #000010 100%); color: #e8d8ff; }
-        .theme-celestial .inv-p { background: #c8a8ff; }
-        .theme-celestial .inv-corner { color: #c8a8ff; }
-        .theme-celestial .inv-message { background: rgba(168,85,247,.1); }
+/* Photo */
+.inv-photo-wrap { margin:0 auto 1.2rem; }
+.inv-photo-wrap img {
+    object-fit:cover; display:block; margin:0 auto;
+    border:4px solid; box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+.photo-circle img { border-radius:50%; width:110px; height:110px; }
+.photo-rect   img { border-radius:14px; width:160px; height:110px; }
 
-        /* Garden */
-        .theme-garden .inv-inner { background: linear-gradient(160deg, #f0faf3 0%, #ddf2e5 50%, #cce8d8 100%); color: #1a3d25; }
-        .theme-garden .inv-p { background: #2d7a47; }
-        .theme-garden .inv-corner { color: #2d7a47; }
-        .theme-garden .inv-message { background: rgba(45,122,71,.07); }
+/* Typography */
+.inv-eyebrow {
+    font-family:'Montserrat',sans-serif; font-size:.68rem;
+    letter-spacing:4px; text-transform:uppercase; opacity:.6; margin-bottom:.8rem;
+}
+.inv-divider { margin:.8rem auto; width:80px; height:1.5px; border-radius:1px; }
+.inv-age-badge {
+    display:inline-block; padding:.2rem .9rem; border-radius:20px;
+    font-family:'Montserrat',sans-serif; font-size:.72rem; font-weight:700;
+    letter-spacing:3px; text-transform:uppercase; margin-bottom:.8rem;
+    border:2px solid;
+}
+.inv-title { margin:0 0 .2rem; line-height:1.1; }
+.inv-tagline {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:.95rem; opacity:.7; margin-bottom:1.2rem;
+}
+.inv-host-label {
+    font-family:'Montserrat',sans-serif; font-size:.66rem;
+    letter-spacing:3px; text-transform:uppercase; opacity:.55; margin-bottom:.15rem;
+}
+.inv-host-name {
+    font-family:'Playfair Display',serif; font-size:1.45rem;
+    font-weight:700; margin-bottom:1.3rem;
+}
+.inv-details { display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.3rem; }
+.inv-detail-row {
+    display:flex; align-items:center; justify-content:center; gap:.55rem;
+    font-family:'Montserrat',sans-serif; font-size:.85rem;
+}
+.inv-detail-icon {
+    width:22px; height:22px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.62rem; border:1px solid;
+}
+.inv-message {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:.92rem; line-height:1.65; opacity:.85;
+    margin:1.2rem 0; padding:.85rem 1.3rem;
+    border-radius:8px; border-left:3px solid;
+}
+.inv-qr-wrap {
+    margin:1.2rem auto .5rem;
+    display:flex; flex-direction:column; align-items:center; gap:.4rem;
+}
+.inv-qr-label {
+    font-family:'Montserrat',sans-serif; font-size:.63rem;
+    letter-spacing:2.5px; text-transform:uppercase; opacity:.55;
+}
+.inv-rsvp-wrap { padding-top:.8rem; }
+.inv-rsvp-label {
+    font-family:'Montserrat',sans-serif; font-size:.63rem;
+    letter-spacing:3px; text-transform:uppercase; opacity:.5;
+}
+.inv-rsvp-value { font-family:'Playfair Display',serif; font-size:.95rem; margin-top:.15rem; }
 
-        /* ─── Shimmer animation for title ─── */
-        @keyframes shimmer {
-            0%,100% { filter: brightness(1); }
-            50%      { filter: brightness(1.25) drop-shadow(0 0 8px currentColor); }
-        }
-        .inv-title { animation: shimmer 3s ease-in-out infinite; }
-    </style>
+/* Font faces */
+.font-great-vibes .inv-title { font-family:'Great Vibes',cursive; font-size:3.2rem; animation:shimmer 3.5s ease-in-out infinite; }
+.font-cormorant   .inv-title { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-style:italic; font-weight:300; }
+.font-orbitron    .inv-title { font-family:'Orbitron',sans-serif; font-size:1.65rem; letter-spacing:2px; }
+.font-pacifico    .inv-title { font-family:'Pacifico',cursive; font-size:2.2rem; }
+@keyframes shimmer {
+    0%,100%{filter:brightness(1)}
+    50%    {filter:brightness(1.3) drop-shadow(0 0 6px currentColor)}
+}
+
+/* ══ THEMES ══ */
+.theme-elegant .inv-inner  { background:linear-gradient(160deg,#fffdf5,#fff8e7 50%,#fef3d0 100%); color:#3d2b00; padding:3rem 2.5rem; }
+.theme-fun     .inv-inner  { background:linear-gradient(160deg,#fff0f9,#ffe4f3 50%,#fff9e6 100%); color:#4a1525; padding:3rem 2.5rem; }
+.theme-modern  .inv-inner  { background:radial-gradient(ellipse at 50% 0%,#1e1e3f 0%,#0f0f1a 65%,#060610 100%); color:#dde4ff; padding:3rem 2.5rem; }
+.theme-vintage .inv-inner  { background:linear-gradient(160deg,#faf3e6,#f2e2c4 50%,#e8d0a8 100%); color:#4a2c0a; padding:3rem 2.5rem; }
+.theme-celestial .inv-inner{ background:radial-gradient(ellipse at 50% 10%,#2d1b69 0%,#0d0221 70%,#000010 100%); color:#e8d8ff; padding:3rem 2.5rem; }
+.theme-garden  .inv-inner  { background:linear-gradient(160deg,#f0faf3,#ddf2e5 50%,#cce8d8 100%); color:#1a3d25; padding:3rem 2.5rem; }
+
+/* Particle & corner colors per theme */
+.theme-elegant  .inv-p,.theme-elegant  .inv-corner { color:#D4AF37; }
+.theme-fun      .inv-p,.theme-fun      .inv-corner { color:#e91e8c; }
+.theme-modern   .inv-p,.theme-modern   .inv-corner { color:#00c8ff; }
+.theme-vintage  .inv-p,.theme-vintage  .inv-corner { color:#7B3F00; }
+.theme-celestial.inv-p,.theme-celestial .inv-corner{ color:#c8a8ff; }
+.theme-garden   .inv-p,.theme-garden   .inv-corner { color:#2d7a47; }
+.theme-elegant  .inv-p { background:#D4AF37; }
+.theme-fun      .inv-p { background:#e91e8c; }
+.theme-modern   .inv-p { background:#00c8ff; }
+.theme-vintage  .inv-p { background:#7B3F00; }
+.theme-celestial .inv-p{ background:#c8a8ff; }
+.theme-garden   .inv-p { background:#2d7a47; }
+
+/* ══ PATTERNS ══ */
+.inv-inner.pat-dots::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image: radial-gradient(circle, rgba(255,255,255,.18) 1px, transparent 1px);
+    background-size: 18px 18px;
+}
+.inv-inner.pat-stars::after {
+    content:'★ ✦ ★ ✦'; position:absolute; inset:0; pointer-events:none;
+    font-size:1.2rem; color:rgba(255,255,255,.1); word-break:break-all;
+    overflow:hidden; display:flex; flex-wrap:wrap; align-items:flex-start;
+    letter-spacing:18px; line-height:2.2; padding:.5rem;
+}
+.inv-inner.pat-lines::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background: repeating-linear-gradient(-45deg, transparent 0, transparent 6px, rgba(255,255,255,.06) 6px, rgba(255,255,255,.06) 7px);
+}
+.inv-inner.pat-confetti::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,215,0,.12) 2px, transparent 2px),
+        radial-gradient(circle at 60% 15%, rgba(168,85,247,.12) 2px, transparent 2px),
+        radial-gradient(circle at 80% 60%, rgba(0,200,255,.12) 2px, transparent 2px),
+        radial-gradient(circle at 40% 70%, rgba(233,30,140,.12) 2px, transparent 2px),
+        radial-gradient(circle at 10% 80%, rgba(255,107,107,.12) 2px, transparent 2px);
+    background-size: 40px 40px, 35px 35px, 45px 45px, 38px 38px, 42px 42px;
+}
+
+/* print */
+@media print {
+    body > *:not(#print-zone), header, footer, nav, .form-panel, .tmpl-bar,
+    .countdown-widget, .dl-row, .share-row, .preview-toolbar, .tool-header,
+    .ad-space, #footer-container, #header-container { display:none !important; }
+    .big-wrapper { display:block !important; }
+    .preview-panel { position:static !important; }
+    .inv-card-outer { page-break-inside:avoid; }
+}
+</style>
 </head>
 <body>
 <div id="header-container"></div>
 <canvas id="confettiCanvas"></canvas>
 
-<div class="container py-5">
-    <h1 class="text-center mb-2">Birthday Invitation Generator</h1>
-    <p class="text-center mb-5" style="color:var(--text-secondary)">Design animated, elegant invitations in seconds — no sign-up needed</p>
+<div class="container py-4">
+    <div class="tool-header">
+        <h1>Birthday Invitation Generator</h1>
+        <p>Live preview · 6 themes · Photo upload · QR code · Download · Share</p>
+    </div>
 
-    <div class="big-wrapper mb-5">
+    <!-- Quick Templates -->
+    <div class="tmpl-bar">
+        <span class="tmpl-bar-label">Quick start:</span>
+        <button class="tmpl-btn" data-tmpl="kids">🎈 Kids Party</button>
+        <button class="tmpl-btn" data-tmpl="elegant">🥂 Elegant 30th</button>
+        <button class="tmpl-btn" data-tmpl="milestone">🎂 Milestone 50th</button>
+        <button class="tmpl-btn" data-tmpl="celestial">✨ Celestial Night</button>
+        <button class="tmpl-btn" data-tmpl="garden">🌸 Garden Party</button>
+    </div>
 
-        <!-- ══ FORM PANEL ══ -->
+    <div class="big-wrapper">
+
+        <!-- ══════════ FORM PANEL ══════════ -->
         <div class="form-panel">
 
-            <span class="section-label">// Theme</span>
+            <!-- Theme -->
+            <span class="sec-head">Theme</span>
             <div class="theme-grid">
-                <div class="theme-thumb active" data-theme="elegant">
-                    <div class="theme-thumb-inner th-elegant">Elegant</div>
-                </div>
-                <div class="theme-thumb" data-theme="fun">
-                    <div class="theme-thumb-inner th-fun">Fun</div>
-                </div>
-                <div class="theme-thumb" data-theme="modern">
-                    <div class="theme-thumb-inner th-modern">Modern</div>
-                </div>
-                <div class="theme-thumb" data-theme="vintage">
-                    <div class="theme-thumb-inner th-vintage">Vintage</div>
-                </div>
-                <div class="theme-thumb" data-theme="celestial">
-                    <div class="theme-thumb-inner th-celestial">Celestial</div>
-                </div>
-                <div class="theme-thumb" data-theme="garden">
-                    <div class="theme-thumb-inner th-garden">Garden</div>
+                <div class="theme-thumb active" data-theme="elegant"><div class="theme-thumb-inner th-elegant">Elegant</div></div>
+                <div class="theme-thumb" data-theme="fun"><div class="theme-thumb-inner th-fun">Fun</div></div>
+                <div class="theme-thumb" data-theme="modern"><div class="theme-thumb-inner th-modern">Modern</div></div>
+                <div class="theme-thumb" data-theme="vintage"><div class="theme-thumb-inner th-vintage">Vintage</div></div>
+                <div class="theme-thumb" data-theme="celestial"><div class="theme-thumb-inner th-celestial">Celestial</div></div>
+                <div class="theme-thumb" data-theme="garden"><div class="theme-thumb-inner th-garden">Garden</div></div>
+            </div>
+
+            <!-- Accent Color -->
+            <span class="sec-head">Accent Color</span>
+            <div class="color-bar" id="colorBar">
+                <div class="color-pill active" data-color="#D4AF37" style="background:#D4AF37" title="Gold"></div>
+                <div class="color-pill" data-color="#e91e8c" style="background:#e91e8c" title="Rose"></div>
+                <div class="color-pill" data-color="#00c8ff" style="background:#00c8ff" title="Cyan"></div>
+                <div class="color-pill" data-color="#a855f7" style="background:#a855f7" title="Purple"></div>
+                <div class="color-pill" data-color="#f59e0b" style="background:#f59e0b" title="Amber"></div>
+                <div class="color-pill" data-color="#10b981" style="background:#10b981" title="Emerald"></div>
+                <div class="color-pill" data-color="#ef4444" style="background:#ef4444" title="Red"></div>
+                <div class="color-pill" data-color="#ec4899" style="background:#ec4899" title="Pink"></div>
+                <div class="color-custom" title="Custom color">
+                    <input type="color" id="customColor" value="#D4AF37">
                 </div>
             </div>
 
-            <hr style="border-color:var(--border-color);margin:.8rem 0 1rem">
-
-            <span class="section-label">// Accent Color</span>
-            <div class="color-pills" id="colorPills">
-                <div class="color-pill active"  data-color="#D4AF37" style="background:#D4AF37"></div>
-                <div class="color-pill"          data-color="#e91e8c" style="background:#e91e8c"></div>
-                <div class="color-pill"          data-color="#00c8ff" style="background:#00c8ff"></div>
-                <div class="color-pill"          data-color="#a855f7" style="background:#a855f7"></div>
-                <div class="color-pill"          data-color="#f59e0b" style="background:#f59e0b"></div>
-                <div class="color-pill"          data-color="#10b981" style="background:#10b981"></div>
-                <div class="color-pill"          data-color="#ef4444" style="background:#ef4444"></div>
-                <div class="color-pill"          data-color="#ec4899" style="background:#ec4899"></div>
+            <!-- Design Controls -->
+            <span class="sec-head">Style</span>
+            <div class="design-grid">
+                <div>
+                    <label class="f-group" style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Font</label>
+                    <select class="design-select" id="fontSelect">
+                        <option value="font-great-vibes">Classic Script</option>
+                        <option value="font-cormorant">Cormorant Italic</option>
+                        <option value="font-orbitron">Modern Tech</option>
+                        <option value="font-pacifico">Playful</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="f-group" style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Pattern</label>
+                    <select class="design-select" id="patternSelect">
+                        <option value="pat-solid">Solid</option>
+                        <option value="pat-dots">Polka Dots</option>
+                        <option value="pat-stars">Stars</option>
+                        <option value="pat-lines">Diagonal Lines</option>
+                        <option value="pat-confetti">Confetti</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="f-group" style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Animation</label>
+                    <select class="design-select" id="animSelect">
+                        <option value="anim-zoom">Zoom In</option>
+                        <option value="anim-fade">Fade In</option>
+                        <option value="anim-slide">Slide In</option>
+                        <option value="anim-bounce">Bounce</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="f-group" style="font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-secondary);margin-bottom:3px;display:block">Photo shape</label>
+                    <select class="design-select" id="photoShapeSelect">
+                        <option value="photo-circle">Circle</option>
+                        <option value="photo-rect">Rounded</option>
+                    </select>
+                </div>
             </div>
 
-            <hr style="border-color:var(--border-color);margin:.8rem 0 1rem">
-
-            <span class="section-label">// Event Details</span>
+            <!-- Event Details -->
+            <span class="sec-head">Event Details</span>
 
             <div class="f-group">
                 <label>Event Title *</label>
-                <input type="text" id="eventName" placeholder="e.g., Emily's 30th Birthday">
+                <div class="f-input-wrap">
+                    <input type="text" id="eventName" placeholder="e.g., Emily's 30th Birthday" style="padding-right:32px">
+                    <button class="voice-btn" data-target="eventName" title="Voice input"><i class="fas fa-microphone"></i></button>
+                </div>
             </div>
-            <div class="f-group">
-                <label>Hosted by</label>
-                <input type="text" id="hostName" placeholder="e.g., The Johnson Family">
+            <div class="f-row">
+                <div class="f-group">
+                    <label>Hosted by</label>
+                    <div class="f-input-wrap">
+                        <input type="text" id="hostName" placeholder="e.g., The Smith Family" style="padding-right:32px">
+                        <button class="voice-btn" data-target="hostName" title="Voice input"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+                <div class="f-group">
+                    <label>Age <span style="opacity:.5">(optional)</span></label>
+                    <div class="f-input-wrap">
+                        <input type="number" id="age" placeholder="e.g., 30" min="1" max="150">
+                    </div>
+                </div>
             </div>
             <div class="f-row">
                 <div class="f-group">
                     <label>Date</label>
-                    <input type="date" id="eventDate">
+                    <div class="f-input-wrap"><input type="date" id="eventDate"></div>
                 </div>
                 <div class="f-group">
-                    <label>Time</label>
-                    <input type="time" id="eventTime">
+                    <label>Start Time</label>
+                    <div class="f-input-wrap"><input type="time" id="eventTime"></div>
+                </div>
+            </div>
+            <div class="f-row">
+                <div class="f-group">
+                    <label>End Time <span style="opacity:.5">(optional)</span></label>
+                    <div class="f-input-wrap"><input type="time" id="endTime"></div>
+                </div>
+                <div class="f-group">
+                    <label>Dress Code <span style="opacity:.5">(optional)</span></label>
+                    <div class="f-input-wrap">
+                        <input type="text" id="dressCode" placeholder="e.g., Black Tie">
+                    </div>
                 </div>
             </div>
             <div class="f-group">
-                <label>Venue</label>
-                <input type="text" id="venue" placeholder="e.g., The Grand Ballroom, London">
+                <label>Venue Name</label>
+                <div class="f-input-wrap">
+                    <input type="text" id="venue" placeholder="e.g., The Grand Ballroom" style="padding-right:32px">
+                    <button class="voice-btn" data-target="venue" title="Voice input"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+            <div class="f-group">
+                <label>Venue Address <span style="opacity:.5">(optional)</span></label>
+                <div class="f-input-wrap">
+                    <input type="text" id="venueAddress" placeholder="e.g., 123 Park Lane, London">
+                </div>
             </div>
             <div class="f-group">
                 <label>Personal Message</label>
-                <textarea id="message" placeholder="Add a warm personal note to your guests..."></textarea>
+                <div class="f-input-wrap">
+                    <textarea id="message" placeholder="Add a warm personal note to your guests..." style="padding-right:36px"></textarea>
+                    <button class="voice-btn" data-target="message" title="Voice input" style="top:10px"><i class="fas fa-microphone"></i></button>
+                </div>
             </div>
             <div class="f-row">
                 <div class="f-group">
                     <label>RSVP Contact</label>
-                    <input type="text" id="rsvpContact" placeholder="Phone or Email">
+                    <div class="f-input-wrap"><input type="text" id="rsvpContact" placeholder="Phone or Email"></div>
                 </div>
                 <div class="f-group">
                     <label>RSVP By</label>
-                    <input type="date" id="rsvpDate">
+                    <div class="f-input-wrap"><input type="date" id="rsvpDate"></div>
+                </div>
+            </div>
+
+            <!-- Extras -->
+            <span class="sec-head">Extras</span>
+
+            <!-- Photo upload -->
+            <div class="f-group">
+                <label>Photo <span style="opacity:.5">(optional)</span></label>
+                <div class="photo-upload-area" id="photoUploadArea">
+                    <input type="file" id="photoInput" accept="image/*">
+                    <div id="photoUploadDefault">
+                        <i class="fas fa-camera" style="font-size:1.4rem;opacity:.3;margin-bottom:.3rem;display:block"></i>
+                        <span class="photo-upload-text">Click to upload a photo</span>
+                    </div>
+                    <div id="photoUploadPreview" style="display:none">
+                        <img id="photoPreviewImg" class="photo-preview" src="" alt="Preview">
+                        <button class="photo-clear-btn" id="photoClearBtn"><i class="fas fa-times"></i> Remove photo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code toggle -->
+            <div class="toggle-grid">
+                <div class="toggle-item" id="toggleQR" title="Embed QR code in invitation">
+                    <i class="fas fa-qrcode"></i> QR Code
+                </div>
+                <div class="toggle-item on" id="toggleParticles" title="Floating particles">
+                    <i class="fas fa-sparkles"></i> Particles
                 </div>
             </div>
 
             <button class="gen-btn" id="generateBtn">
-                <i class="fas fa-magic me-2"></i>Generate Invitation
+                <i class="fas fa-magic me-2"></i>Generate &amp; Celebrate 🎉
             </button>
         </div>
 
-        <!-- ══ PREVIEW PANEL ══ -->
+        <!-- ══════════ PREVIEW PANEL ══════════ -->
         <div class="preview-panel">
-            <p class="preview-label">// Preview</p>
 
-            <div id="invWrapper">
-                <div class="inv-placeholder" id="invPlaceholder">
-                    <i class="fas fa-envelope-open"></i>
-                    <strong>Your invitation preview will appear here</strong>
-                    <p>Fill in the details and click Generate</p>
+            <div class="preview-toolbar">
+                <div class="preview-live-badge">
+                    <div class="live-dot"></div> Live Preview
+                </div>
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoomOut">−</button>
+                    <span class="zoom-val" id="zoomVal">100%</span>
+                    <button class="zoom-btn" id="zoomIn">+</button>
                 </div>
             </div>
 
-            <div class="action-row" id="actionRow" style="display:none">
+            <div class="inv-scaler" id="invScaler">
+                <div id="invWrapper">
+                    <div class="inv-placeholder" id="invPlaceholder">
+                        <i class="fas fa-envelope-open"></i>
+                        <strong>Your invitation appears here</strong>
+                        <p>Fill in the details — preview updates live</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown-widget" id="countdownWidget">
+                <div class="cd-item"><span id="cdDays">--</span><small>Days</small></div>
+                <div class="cd-item"><span id="cdHours">--</span><small>Hours</small></div>
+                <div class="cd-item"><span id="cdMins">--</span><small>Mins</small></div>
+                <div class="cd-item"><span id="cdSecs">--</span><small>Secs</small></div>
+            </div>
+
+            <!-- Download -->
+            <div class="dl-row" id="dlRow" style="display:none">
                 <button class="act-btn" id="dlPNG"><i class="fas fa-image"></i> PNG</button>
+                <button class="act-btn" id="dlJPG"><i class="fas fa-file-image"></i> JPG</button>
                 <button class="act-btn" id="dlPDF"><i class="fas fa-file-pdf"></i> PDF</button>
-                <button class="act-btn" id="copyLinkBtn"><i class="fas fa-link"></i> Copy Link</button>
-                <button class="act-btn" id="shareWA"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button class="act-btn" id="printBtn"><i class="fas fa-print"></i> Print</button>
+                <button class="act-btn" id="copyTextBtn"><i class="fas fa-copy"></i> Copy Text</button>
+            </div>
+
+            <!-- Share -->
+            <div class="share-row" id="shareRow" style="display:none">
+                <span class="share-label">Share:</span>
+                <button class="act-btn" id="shareWA" style="color:#25D366;border-color:#25D366"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button class="act-btn" id="shareFB" style="color:#1877f2;border-color:#1877f2"><i class="fab fa-facebook"></i> Facebook</button>
+                <button class="act-btn" id="shareXBtn" style="color:var(--text-primary)"><i class="fab fa-x-twitter"></i> X</button>
+                <button class="act-btn" id="shareEmail"><i class="fas fa-envelope"></i> Email</button>
             </div>
         </div>
     </div>
 
-    <!-- Ad Section -->
-    <div class="row mb-4">
+    <!-- Ad -->
+    <div class="row mt-5 mb-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-body text-center">
                     <h5 class="card-title">Advertisement</h5>
                     <div class="ad-space">
-                        <ins class="adsbygoogle"
-                            style="display:block"
+                        <ins class="adsbygoogle" style="display:block"
                             data-ad-client="ca-pub-6204232626800687"
                             data-ad-slot="9572280796"
                             data-ad-format="auto"
                             data-full-width-responsive="true"></ins>
-                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
                     </div>
                 </div>
             </div>
@@ -484,347 +719,527 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script src="../../assets/js/main.js"></script>
 
 <script>
 (function () {
-    'use strict';
+'use strict';
 
-    // ── State ──
-    let currentTheme = 'elegant';
-    let accentColor  = '#D4AF37';
+/* ── State ── */
+const S = {
+    theme:      'elegant',
+    accent:     '#D4AF37',
+    font:       'font-great-vibes',
+    pattern:    'pat-solid',
+    anim:       'anim-zoom',
+    photoShape: 'photo-circle',
+    photoUrl:   null,
+    showQR:     false,
+    showParticles: true,
+    generated:  false,
+};
 
-    const themeConfig = {
-        elegant:  {
-            eyebrow:  'You are cordially invited',
-            tagline:  'A birthday celebration to remember',
-            icons:    ['✦', '✦', '✦', '✦'],
-            titleFont: '',
-        },
-        fun: {
-            eyebrow:  "It's time to celebrate! 🎉",
-            tagline:  'Join the fun and let the party begin',
-            icons:    ['🎈', '🎉', '🎊', '🎂'],
-            titleFont: 'font-playfair',
-        },
-        modern: {
-            eyebrow:  'You are invited to join us',
-            tagline:  'A contemporary celebration of life',
-            icons:    ['◆', '◆', '◆', '◆'],
-            titleFont: 'font-orbitron',
-        },
-        vintage: {
-            eyebrow:  'The pleasure of your company is requested',
-            tagline:  'An occasion steeped in warmth and nostalgia',
-            icons:    ['❧', '❧', '❧', '❧'],
-            titleFont: 'font-cormorant',
-        },
-        celestial: {
-            eyebrow:  'Under the stars, we celebrate',
-            tagline:  'A cosmic gathering of hearts',
-            icons:    ['★', '✦', '★', '✦'],
-            titleFont: '',
-        },
-        garden: {
-            eyebrow:  'Amidst blooms and laughter',
-            tagline:  'A garden party to delight the senses',
-            icons:    ['✿', '✿', '✿', '✿'],
-            titleFont: 'font-cormorant',
-        },
+const THEMES = {
+    elegant:  { eyebrow:'You are cordially invited',        tagline:'A birthday celebration to remember',       icons:['✦','✦','✦','✦'] },
+    fun:      { eyebrow:"It's party time! 🎉",              tagline:'Join the fun — let the celebration begin', icons:['🎈','🎉','🎊','🎂'] },
+    modern:   { eyebrow:'You are invited to join us',       tagline:'A contemporary celebration of life',       icons:['◆','◆','◆','◆'] },
+    vintage:  { eyebrow:'The pleasure of your company is requested', tagline:'An occasion steeped in warmth and nostalgia', icons:['❧','❧','❧','❧'] },
+    celestial:{ eyebrow:'Under the stars, we celebrate',   tagline:'A cosmic gathering of hearts',             icons:['★','✦','★','✦'] },
+    garden:   { eyebrow:'Amidst blooms and laughter',      tagline:'A garden party to delight the senses',    icons:['✿','✿','✿','✿'] },
+};
+
+const TEMPLATES = {
+    kids: { theme:'fun', accent:'#e91e8c', font:'font-pacifico', pattern:'pat-confetti', eventName:"Lily's 7th Birthday!", hostName:'The Thompson Family', age:'7', eventDate:'', eventTime:'14:00', endTime:'17:00', venue:"Rainbow Play Centre", venueAddress:'45 Sunshine Avenue, Bristol', dressCode:'Come Dressed as Your Favourite Character', message:"It's going to be the most magical day full of games, cake, and surprises! 🌈", rsvpContact:'mum@example.com', rsvpDate:'' },
+    elegant: { theme:'elegant', accent:'#D4AF37', font:'font-great-vibes', pattern:'pat-solid', eventName:"Sarah's 30th Birthday", hostName:'James & The Collins Family', age:'30', eventDate:'', eventTime:'19:00', endTime:'23:00', venue:"The Grand Ballroom", venueAddress:'1 Park Lane, Mayfair, London', dressCode:'Black Tie', message:'Join us for an evening of elegance, laughter, and cherished memories as we celebrate three wonderful decades.', rsvpContact:'sarah30th@email.com', rsvpDate:'' },
+    milestone: { theme:'vintage', accent:'#7B3F00', font:'font-cormorant', pattern:'pat-lines', eventName:"Robert's 50th Birthday", hostName:'Margaret & The Williams Family', age:'50', eventDate:'', eventTime:'18:30', endTime:'22:30', venue:"The Heritage Hall", venueAddress:'The Old Manor, Surrey', dressCode:'Smart Casual', message:'Fifty years of wonderful adventures. Please join us in celebrating this golden milestone with the man who makes every moment special.', rsvpContact:'+44 7700 900123', rsvpDate:'' },
+    celestial: { theme:'celestial', accent:'#a855f7', font:'font-great-vibes', pattern:'pat-stars', eventName:"Luna's Celestial Birthday", hostName:'The Starlight Family', age:'', eventDate:'', eventTime:'20:00', endTime:'01:00', venue:"Skyview Rooftop Lounge", venueAddress:'88 Constellation Way, London', dressCode:'Star & Galaxy Theme', message:'Come dressed to dazzle under the stars as we celebrate a truly magical evening beneath the cosmos.', rsvpContact:'luna@starmail.com', rsvpDate:'' },
+    garden: { theme:'garden', accent:'#10b981', font:'font-cormorant', pattern:'pat-dots', eventName:"Rose's Garden Birthday", hostName:'The Petal Family', age:'', eventDate:'', eventTime:'12:00', endTime:'17:00', venue:"Blooming Gardens Estate", venueAddress:'Meadow Lane, Cotswolds', dressCode:'Floral & Garden Attire', message:'Celebrate among the flowers and fresh air. Bring your joy, your smiles, and your dancing shoes!', rsvpContact:'roseparty@garden.com', rsvpDate:'' },
+};
+
+/* ── DOM refs ── */
+const wrapper      = document.getElementById('invWrapper');
+const placeholder  = document.getElementById('invPlaceholder');
+const invScaler    = document.getElementById('invScaler');
+const dlRow        = document.getElementById('dlRow');
+const shareRow     = document.getElementById('shareRow');
+const generateBtn  = document.getElementById('generateBtn');
+const confettiCvs  = document.getElementById('confettiCanvas');
+const confettiCtx  = confettiCvs.getContext('2d');
+const cdWidget     = document.getElementById('countdownWidget');
+
+/* ── Helpers ── */
+function esc(s) {
+    return String(s || '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function fmtDate(d) {
+    if (!d) return '';
+    const [y,m,day] = d.split('-').map(Number);
+    return new Date(y,m-1,day).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+function fmtTime(t) {
+    if (!t) return '';
+    const [h,m] = t.split(':').map(Number);
+    return `${h%12||12}:${String(m).padStart(2,'0')} ${h<12?'AM':'PM'}`;
+}
+function getField(id) { return document.getElementById(id)?.value?.trim() || ''; }
+function alpha(hex, a) {
+    return hex + Math.round(a*255).toString(16).padStart(2,'0');
+}
+
+/* ── Theme & design selection ── */
+document.querySelectorAll('.theme-thumb').forEach(t => {
+    t.addEventListener('click', function() {
+        document.querySelectorAll('.theme-thumb').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        S.theme = this.dataset.theme;
+        if (S.generated) updatePreview();
+    });
+});
+
+document.querySelectorAll('.color-pill').forEach(p => {
+    p.addEventListener('click', function() {
+        document.querySelectorAll('.color-pill').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        S.accent = this.dataset.color;
+        document.getElementById('customColor').value = S.accent;
+        if (S.generated) updatePreview();
+    });
+});
+
+document.getElementById('customColor').addEventListener('input', function() {
+    document.querySelectorAll('.color-pill').forEach(x => x.classList.remove('active'));
+    S.accent = this.value;
+    if (S.generated) updatePreview();
+});
+
+['fontSelect','patternSelect','animSelect','photoShapeSelect'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function() {
+        if (id === 'fontSelect')       S.font       = this.value;
+        if (id === 'patternSelect')    S.pattern    = this.value;
+        if (id === 'animSelect')       S.anim       = this.value;
+        if (id === 'photoShapeSelect') S.photoShape = this.value;
+        if (S.generated) updatePreview();
+    });
+});
+
+/* ── Field change → live preview ── */
+let debounceTimer;
+const LIVE_FIELDS = ['eventName','hostName','age','eventDate','eventTime','endTime','venue','venueAddress','dressCode','message','rsvpContact','rsvpDate'];
+LIVE_FIELDS.forEach(id => {
+    document.getElementById(id)?.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => { if (S.generated) updatePreview(); }, 220);
+        autoSave();
+        if (id === 'eventDate' || id === 'eventTime') startCountdown();
+    });
+});
+
+/* ── Toggle buttons ── */
+document.getElementById('toggleQR').addEventListener('click', function() {
+    S.showQR = !S.showQR;
+    this.classList.toggle('on', S.showQR);
+    if (S.generated) updatePreview();
+});
+document.getElementById('toggleParticles').addEventListener('click', function() {
+    S.showParticles = !S.showParticles;
+    this.classList.toggle('on', S.showParticles);
+    if (S.generated) updatePreview();
+});
+
+/* ── Photo upload ── */
+document.getElementById('photoInput').addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        S.photoUrl = e.target.result;
+        document.getElementById('photoPreviewImg').src = S.photoUrl;
+        document.getElementById('photoUploadDefault').style.display = 'none';
+        document.getElementById('photoUploadPreview').style.display = 'block';
+        if (S.generated) updatePreview();
     };
+    reader.readAsDataURL(file);
+});
+document.getElementById('photoClearBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    S.photoUrl = null;
+    document.getElementById('photoInput').value = '';
+    document.getElementById('photoUploadDefault').style.display = 'block';
+    document.getElementById('photoUploadPreview').style.display = 'none';
+    if (S.generated) updatePreview();
+});
 
-    // ── DOM refs ──
-    const wrapper      = document.getElementById('invWrapper');
-    const placeholder  = document.getElementById('invPlaceholder');
-    const actionRow    = document.getElementById('actionRow');
-    const generateBtn  = document.getElementById('generateBtn');
-    const confettiCvs  = document.getElementById('confettiCanvas');
-    const confettiCtx  = confettiCvs.getContext('2d');
-
-    // ── Theme selection ──
-    document.querySelectorAll('.theme-thumb').forEach(thumb => {
-        thumb.addEventListener('click', function () {
-            document.querySelectorAll('.theme-thumb').forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            currentTheme = this.dataset.theme;
-        });
+/* ── Voice input ── */
+let recognition;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-GB';
+}
+document.querySelectorAll('.voice-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        if (!recognition) { return; }
+        const targetId = this.dataset.target;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        btn.classList.add('listening');
+        recognition.start();
+        recognition.onresult = e => {
+            target.value = e.results[0][0].transcript;
+            target.dispatchEvent(new Event('input'));
+        };
+        recognition.onend = () => btn.classList.remove('listening');
+        recognition.onerror = () => btn.classList.remove('listening');
     });
+});
 
-    // ── Color selection ──
-    document.querySelectorAll('.color-pill').forEach(pill => {
-        pill.addEventListener('click', function () {
-            document.querySelectorAll('.color-pill').forEach(p => p.classList.remove('active'));
-            this.classList.add('active');
-            accentColor = this.dataset.color;
+/* ── Zoom ── */
+let zoom = 1;
+function applyZoom() {
+    invScaler.style.transform = `scale(${zoom})`;
+    document.getElementById('zoomVal').textContent = Math.round(zoom * 100) + '%';
+}
+document.getElementById('zoomIn').addEventListener('click',  () => { zoom = Math.min(1.5, zoom + .1); applyZoom(); });
+document.getElementById('zoomOut').addEventListener('click', () => { zoom = Math.max(0.4, zoom - .1); applyZoom(); });
+
+/* ── Templates ── */
+document.querySelectorAll('.tmpl-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const t = TEMPLATES[this.dataset.tmpl];
+        if (!t) return;
+        Object.entries(t).forEach(([k, v]) => {
+            if (['theme','accent','font','pattern'].includes(k)) {
+                S[k] = v;
+                if (k === 'theme') {
+                    document.querySelectorAll('.theme-thumb').forEach(th => th.classList.toggle('active', th.dataset.theme === v));
+                }
+                if (k === 'font')    document.getElementById('fontSelect').value = v;
+                if (k === 'pattern') document.getElementById('patternSelect').value = v;
+            } else {
+                const el = document.getElementById(k);
+                if (el) el.value = v;
+            }
         });
+        // Update color pill
+        document.querySelectorAll('.color-pill').forEach(p => p.classList.toggle('active', p.dataset.color === t.accent));
+        document.getElementById('customColor').value = t.accent;
+        autoSave();
+        generateInvitation();
     });
+});
 
-    // ── Helpers ──
-    function fmtDate(d) {
-        if (!d) return '';
-        const [y, m, day] = d.split('-').map(Number);
-        return new Date(y, m - 1, day).toLocaleDateString('en-GB', {
-            weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-        });
+/* ══ BUILD INVITATION HTML ══ */
+function buildInvitation() {
+    const name      = getField('eventName');
+    const host      = getField('hostName');
+    const age       = getField('age');
+    const date      = getField('eventDate');
+    const time      = getField('eventTime');
+    const endTime   = getField('endTime');
+    const venue     = getField('venue');
+    const address   = getField('venueAddress');
+    const dress     = getField('dressCode');
+    const msg       = getField('message');
+    const rsvpC     = getField('rsvpContact');
+    const rsvpD     = getField('rsvpDate');
+
+    const cfg    = THEMES[S.theme];
+    const ac     = S.accent;
+    const acBg   = alpha(ac, 0.12);
+
+    /* Particles */
+    const particles = S.showParticles ? Array.from({length:14}, (_,i) => {
+        const sz = 4 + Math.random()*5;
+        const cols = [ac, '#fff', alpha(ac, 0.6)];
+        return `<div class="inv-p" style="left:${5+Math.random()*88}%;bottom:-8%;width:${sz}px;height:${sz}px;background:${cols[i%3]};animation-duration:${4+Math.random()*5}s;animation-delay:${Math.random()*5}s"></div>`;
+    }).join('') : '';
+
+    /* Time string */
+    let timeStr = fmtTime(time);
+    if (endTime) timeStr += ` – ${fmtTime(endTime)}`;
+
+    /* Pattern class */
+    const patClass = S.pattern === 'pat-solid' ? '' : S.pattern;
+
+    return `
+<div class="inv-card-outer">
+  <div class="inv-card theme-${esc(S.theme)} ${esc(S.font)} ${esc(S.anim)}">
+    <div class="inv-inner ${esc(patClass)}">
+      ${particles}
+
+      <div class="inv-corner tl">${cfg.icons[0]}</div>
+      <div class="inv-corner tr">${cfg.icons[1]}</div>
+      <div class="inv-corner bl">${cfg.icons[2]}</div>
+      <div class="inv-corner br">${cfg.icons[3]}</div>
+
+      ${S.photoUrl ? `
+      <div class="inv-photo-wrap ${esc(S.photoShape)}">
+        <img src="${S.photoUrl}" alt="Photo" style="border-color:${ac}">
+      </div>` : ''}
+
+      <p class="inv-eyebrow">${esc(cfg.eyebrow)}</p>
+      <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${ac},transparent)"></div>
+
+      ${age ? `<div class="inv-age-badge" style="color:${ac};border-color:${ac};background:${acBg}">Celebrating ${esc(age)} Years</div>` : ''}
+
+      <h1 class="inv-title" style="color:${ac}">${esc(name) || 'Your Special Day'}</h1>
+      <p class="inv-tagline">${esc(cfg.tagline)}</p>
+
+      <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${ac},transparent)"></div>
+
+      ${host ? `<p class="inv-host-label">Hosted by</p><p class="inv-host-name">${esc(host)}</p>` : ''}
+
+      <div class="inv-details">
+        ${date ? `<div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-calendar-day"></i></div>
+          <span>${fmtDate(date)}</span>
+        </div>` : ''}
+        ${time ? `<div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-clock"></i></div>
+          <span>${esc(timeStr)}</span>
+        </div>` : ''}
+        ${venue ? `<div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-map-marker-alt"></i></div>
+          <span>${esc(venue)}${address ? `<br><small style="opacity:.65">${esc(address)}</small>` : ''}</span>
+        </div>` : ''}
+        ${dress ? `<div class="inv-detail-row">
+          <div class="inv-detail-icon" style="background:${acBg};color:${ac};border-color:${ac}"><i class="fas fa-tshirt"></i></div>
+          <span><em>Dress Code:</em> ${esc(dress)}</span>
+        </div>` : ''}
+      </div>
+
+      ${msg ? `<div class="inv-message" style="background:${acBg};border-left-color:${ac}">&ldquo;${esc(msg)}&rdquo;</div>` : ''}
+
+      ${S.showQR ? `<div class="inv-qr-wrap">
+        <canvas id="qrCanvas"></canvas>
+        <span class="inv-qr-label">Scan to RSVP</span>
+      </div>` : ''}
+
+      ${(rsvpC || rsvpD) ? `
+      <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${ac},transparent)"></div>
+      <div class="inv-rsvp-wrap">
+        <p class="inv-rsvp-label">RSVP${rsvpD ? ' by ' + fmtDate(rsvpD) : ''}</p>
+        ${rsvpC ? `<p class="inv-rsvp-value">${esc(rsvpC)}</p>` : ''}
+      </div>` : ''}
+    </div>
+  </div>
+</div>`;
+}
+
+/* ── Generate QR Code ── */
+function generateQR() {
+    if (!S.showQR) return;
+    const qrCanvas = document.getElementById('qrCanvas');
+    if (!qrCanvas) return;
+    const rsvpC  = getField('rsvpContact');
+    const venue  = getField('venue');
+    const addr   = getField('venueAddress');
+    const content = rsvpC
+        ? `RSVP: ${rsvpC}`
+        : (venue ? `https://maps.google.com/?q=${encodeURIComponent(addr || venue)}` : 'Birthday Party RSVP');
+    QRCode.toCanvas(qrCanvas, content, {
+        width: 120, margin: 1,
+        color: { dark: S.accent, light: '#ffffff00' }
+    }, err => { if (err) console.warn('QR error', err); });
+}
+
+/* ── Update preview ── */
+function updatePreview() {
+    const old = wrapper.querySelector('.inv-card-outer');
+    if (old) old.remove();
+    placeholder.style.display = 'none';
+    const div = document.createElement('div');
+    div.innerHTML = buildInvitation();
+    wrapper.appendChild(div.firstElementChild);
+    setTimeout(generateQR, 80);
+}
+
+/* ── Generate (with confetti) ── */
+function generateInvitation() {
+    const name = getField('eventName');
+    if (!name) {
+        const el = document.getElementById('eventName');
+        el.style.borderColor = '#ef4444';
+        el.focus();
+        setTimeout(() => el.style.borderColor = '', 2000);
+        return;
     }
-    function fmtTime(t) {
-        if (!t) return '';
-        const [h, m] = t.split(':').map(Number);
-        return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
-    }
-    function hex(c, a) {
-        return c + Math.round(a * 255).toString(16).padStart(2, '0');
-    }
+    S.generated = true;
+    updatePreview();
+    dlRow.style.display = 'flex';
+    shareRow.style.display = 'flex';
+    launchConfetti();
+    startCountdown();
+    autoSave();
+}
 
-    // ── Build invitation HTML ──
-    function buildInvitation() {
-        const name   = document.getElementById('eventName').value.trim();
-        const host   = document.getElementById('hostName').value.trim();
-        const date   = document.getElementById('eventDate').value;
-        const time   = document.getElementById('eventTime').value;
-        const venueV = document.getElementById('venue').value.trim();
-        const msgV   = document.getElementById('message').value.trim();
-        const rsvpC  = document.getElementById('rsvpContact').value.trim();
-        const rsvpD  = document.getElementById('rsvpDate').value;
+generateBtn.addEventListener('click', generateInvitation);
 
-        const cfg   = themeConfig[currentTheme];
-        const icons = cfg.icons;
-
-        // Generate floating particles
-        const particles = Array.from({ length: 14 }, (_, i) => {
-            const sz = 4 + Math.random() * 5;
-            const colors = [accentColor, '#fff', hex(accentColor, 0.6)];
-            return `<div class="inv-p" style="
-                left:${5 + Math.random() * 88}%;
-                bottom:-8%;
-                width:${sz}px; height:${sz}px;
-                background:${colors[i % 3]};
-                animation-duration:${4 + Math.random() * 5}s;
-                animation-delay:${Math.random() * 5}s;
-            "></div>`;
-        }).join('');
-
-        const acBg  = hex(accentColor, 0.13);
-        const acBd  = accentColor;
-
-        return `
-        <div class="inv-card-outer">
-          <div class="inv-card theme-${currentTheme}" id="invCard">
-            <div class="inv-inner">
-              <div class="inv-particles">${particles}</div>
-
-              <div class="inv-corner tl">${icons[0]}</div>
-              <div class="inv-corner tr">${icons[1]}</div>
-              <div class="inv-corner bl">${icons[2]}</div>
-              <div class="inv-corner br">${icons[3]}</div>
-
-              <p class="inv-eyebrow">${cfg.eyebrow}</p>
-              <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${accentColor},transparent)"></div>
-
-              <h1 class="inv-title ${cfg.titleFont}" style="color:${accentColor}">${name || 'Your Special Day'}</h1>
-              <p class="inv-tagline">${cfg.tagline}</p>
-
-              <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${accentColor},transparent)"></div>
-
-              ${host ? `
-              <p class="inv-host-label">Hosted by</p>
-              <p class="inv-host-name">${host}</p>
-              ` : ''}
-
-              <div class="inv-details">
-                ${date ? `<div class="inv-detail-row">
-                  <div class="inv-detail-icon" style="background:${acBg};color:${accentColor};border-color:${acBd}">
-                    <i class="fas fa-calendar-day"></i>
-                  </div>
-                  <span>${fmtDate(date)}</span>
-                </div>` : ''}
-                ${time ? `<div class="inv-detail-row">
-                  <div class="inv-detail-icon" style="background:${acBg};color:${accentColor};border-color:${acBd}">
-                    <i class="fas fa-clock"></i>
-                  </div>
-                  <span>${fmtTime(time)}</span>
-                </div>` : ''}
-                ${venueV ? `<div class="inv-detail-row">
-                  <div class="inv-detail-icon" style="background:${acBg};color:${accentColor};border-color:${acBd}">
-                    <i class="fas fa-map-marker-alt"></i>
-                  </div>
-                  <span>${venueV}</span>
-                </div>` : ''}
-              </div>
-
-              ${msgV ? `
-              <div class="inv-message" style="background:${acBg};border-left-color:${accentColor}">
-                &ldquo;${msgV}&rdquo;
-              </div>` : ''}
-
-              ${(rsvpC || rsvpD) ? `
-              <div class="inv-divider" style="background:linear-gradient(90deg,transparent,${accentColor},transparent)"></div>
-              <div class="inv-rsvp-wrap">
-                <p class="inv-rsvp-label">RSVP${rsvpD ? ' by ' + fmtDate(rsvpD) : ''}</p>
-                ${rsvpC ? `<p class="inv-rsvp-value">${rsvpC}</p>` : ''}
-              </div>` : ''}
-            </div>
-          </div>
-        </div>`;
-    }
-
-    // ── Generate ──
-    generateBtn.addEventListener('click', function () {
-        const nameEl = document.getElementById('eventName');
-        if (!nameEl.value.trim()) {
-            nameEl.style.borderColor = '#ef4444';
-            nameEl.focus();
-            setTimeout(() => nameEl.style.borderColor = '', 2200);
+/* ── Countdown ── */
+let cdInterval;
+function startCountdown() {
+    const date = getField('eventDate');
+    const time = getField('eventTime') || '00:00';
+    if (!date) { cdWidget.classList.remove('visible'); return; }
+    const target = new Date(`${date}T${time}`);
+    if (isNaN(target)) { cdWidget.classList.remove('visible'); return; }
+    cdWidget.classList.add('visible');
+    clearInterval(cdInterval);
+    function tick() {
+        const diff = target - Date.now();
+        if (diff <= 0) {
+            ['cdDays','cdHours','cdMins','cdSecs'].forEach(id => document.getElementById(id).textContent = '00');
+            clearInterval(cdInterval);
             return;
         }
-
-        placeholder.style.display = 'none';
-        // Remove existing card
-        const old = document.getElementById('invCard');
-        if (old) old.closest('.inv-card-outer').remove();
-
-        const div = document.createElement('div');
-        div.innerHTML = buildInvitation();
-        wrapper.appendChild(div.firstElementChild);
-
-        actionRow.style.display = 'flex';
-        launchConfetti();
-        autoSave();
-    });
-
-    // ── Confetti ──
-    function launchConfetti() {
-        confettiCvs.width  = window.innerWidth;
-        confettiCvs.height = window.innerHeight;
-        confettiCvs.style.display = 'block';
-
-        const palette = [accentColor, '#ff6b6b', '#ffd700', '#a855f7', '#00c8ff', '#ffffff'];
-        const pieces  = Array.from({ length: 130 }, () => ({
-            x:      Math.random() * confettiCvs.width,
-            y:      -10 - Math.random() * 40,
-            w:      5 + Math.random() * 6,
-            h:      3 + Math.random() * 3,
-            color:  palette[Math.floor(Math.random() * palette.length)],
-            vy:     2.5 + Math.random() * 3,
-            vx:     (Math.random() - .5) * 2.5,
-            rot:    Math.random() * 360,
-            rs:     (Math.random() - .5) * 7,
-        }));
-
-        let frame, tick = 0;
-        function draw() {
-            confettiCtx.clearRect(0, 0, confettiCvs.width, confettiCvs.height);
-            pieces.forEach(p => {
-                confettiCtx.save();
-                confettiCtx.translate(p.x, p.y);
-                confettiCtx.rotate(p.rot * Math.PI / 180);
-                confettiCtx.globalAlpha = Math.max(0, 1 - tick / 100);
-                confettiCtx.fillStyle = p.color;
-                confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-                confettiCtx.restore();
-                p.x  += p.vx;
-                p.y  += p.vy;
-                p.rot += p.rs;
-            });
-            tick++;
-            if (tick < 130) {
-                frame = requestAnimationFrame(draw);
-            } else {
-                cancelAnimationFrame(frame);
-                confettiCvs.style.display = 'none';
-            }
-        }
-        draw();
+        document.getElementById('cdDays').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
+        document.getElementById('cdHours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+        document.getElementById('cdMins').textContent  = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+        document.getElementById('cdSecs').textContent  = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
     }
+    tick();
+    cdInterval = setInterval(tick, 1000);
+}
 
-    // ── Download PNG ──
-    document.getElementById('dlPNG').addEventListener('click', async function () {
-        const card = document.getElementById('invCard');
-        if (!card) return;
-        try {
-            const c = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null });
-            const a = document.createElement('a');
-            a.download = 'birthday-invitation.png';
-            a.href = c.toDataURL('image/png');
-            a.click();
-        } catch (e) {
-            alert('Could not export image. Please try again.');
-        }
-    });
-
-    // ── Download PDF ──
-    document.getElementById('dlPDF').addEventListener('click', async function () {
-        const card = document.getElementById('invCard');
-        if (!card) return;
-        try {
-            const { jsPDF } = window.jspdf;
-            const c = await html2canvas(card, { scale: 2, useCORS: true });
-            const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-            const w = 190;
-            const h = (c.height * w) / c.width;
-            pdf.addImage(c.toDataURL('image/png'), 'PNG', 10, 10, w, h);
-            pdf.save('birthday-invitation.pdf');
-        } catch (e) {
-            alert('Could not export PDF. Please try again.');
-        }
-    });
-
-    // ── Copy Link ──
-    document.getElementById('copyLinkBtn').addEventListener('click', function () {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            this.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            setTimeout(() => { this.innerHTML = '<i class="fas fa-link"></i> Copy Link'; }, 2000);
+/* ── Confetti ── */
+function launchConfetti() {
+    confettiCvs.width  = window.innerWidth;
+    confettiCvs.height = window.innerHeight;
+    confettiCvs.style.display = 'block';
+    const pal = [S.accent,'#ff6b6b','#ffd700','#a855f7','#00c8ff','#ffffff','#10b981'];
+    const pieces = Array.from({length:150}, () => ({
+        x: Math.random()*confettiCvs.width, y:-10-Math.random()*40,
+        w:5+Math.random()*7, h:3+Math.random()*3,
+        color: pal[Math.floor(Math.random()*pal.length)],
+        vy:2.5+Math.random()*3, vx:(Math.random()-.5)*3,
+        rot:Math.random()*360, rs:(Math.random()-.5)*8,
+    }));
+    let tick=0, frame;
+    function draw() {
+        confettiCtx.clearRect(0,0,confettiCvs.width,confettiCvs.height);
+        pieces.forEach(p => {
+            confettiCtx.save();
+            confettiCtx.globalAlpha = Math.max(0, 1-tick/110);
+            confettiCtx.translate(p.x, p.y);
+            confettiCtx.rotate(p.rot*Math.PI/180);
+            confettiCtx.fillStyle = p.color;
+            confettiCtx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+            confettiCtx.restore();
+            p.x+=p.vx; p.y+=p.vy; p.rot+=p.rs;
         });
-    });
-
-    // ── WhatsApp Share ──
-    document.getElementById('shareWA').addEventListener('click', function () {
-        const name  = document.getElementById('eventName').value.trim();
-        const date  = document.getElementById('eventDate').value;
-        const venueV = document.getElementById('venue').value.trim();
-        const parts = [
-            `🎂 You're invited to *${name || 'a birthday party'}*!`,
-            date  ? `📅 ${fmtDate(date)}` : '',
-            venueV ? `📍 ${venueV}` : '',
-            `\nCreate your own at: ${window.location.href}`,
-        ].filter(Boolean);
-        window.open(`https://wa.me/?text=${encodeURIComponent(parts.join('\n'))}`, '_blank');
-    });
-
-    // ── Auto-save ──
-    const FIELDS = ['eventName', 'hostName', 'eventDate', 'eventTime', 'venue', 'message', 'rsvpContact', 'rsvpDate'];
-
-    function autoSave() {
-        const data = {};
-        FIELDS.forEach(id => { data[id] = document.getElementById(id).value; });
-        data.theme  = currentTheme;
-        data.accent = accentColor;
-        try { localStorage.setItem('bday_invite_v2', JSON.stringify(data)); } catch (_) {}
+        if (++tick < 140) frame = requestAnimationFrame(draw);
+        else { cancelAnimationFrame(frame); confettiCvs.style.display='none'; }
     }
+    draw();
+}
 
-    // ── Load saved ──
+/* ── Downloads ── */
+async function getCardCanvas(scale) {
+    const card = wrapper.querySelector('.inv-card');
+    if (!card) return null;
+    return html2canvas(card, { scale: scale||2, useCORS:true, backgroundColor:null, logging:false });
+}
+
+document.getElementById('dlPNG').addEventListener('click', async () => {
+    const c = await getCardCanvas(2); if (!c) return;
+    const a = document.createElement('a'); a.download='birthday-invitation.png'; a.href=c.toDataURL('image/png'); a.click();
+});
+document.getElementById('dlJPG').addEventListener('click', async () => {
+    const c = await getCardCanvas(2); if (!c) return;
+    const a = document.createElement('a'); a.download='birthday-invitation.jpg'; a.href=c.toDataURL('image/jpeg',0.92); a.click();
+});
+document.getElementById('dlPDF').addEventListener('click', async () => {
+    const c = await getCardCanvas(2); if (!c) return;
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    const w=190, h=(c.height*w)/c.width;
+    pdf.addImage(c.toDataURL('image/png'),'PNG',10,10,w,h);
+    pdf.save('birthday-invitation.pdf');
+});
+document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+document.getElementById('copyTextBtn').addEventListener('click', function() {
+    const lines = [
+        '═══════════════════════════════════',
+        '       BIRTHDAY INVITATION',
+        '═══════════════════════════════════',
+        '',
+        getField('eventName') || 'Birthday Celebration',
+        '',
+    ];
+    if (getField('hostName'))     lines.push(`Hosted by: ${getField('hostName')}`,'');
+    if (getField('eventDate'))    lines.push(`📅 ${fmtDate(getField('eventDate'))}`);
+    if (getField('eventTime'))    lines.push(`🕐 ${fmtTime(getField('eventTime'))}${getField('endTime')?` – ${fmtTime(getField('endTime'))}`:''}`) ;
+    if (getField('venue'))        lines.push(`📍 ${getField('venue')}${getField('venueAddress')?`\n   ${getField('venueAddress')}`:''}`) ;
+    if (getField('dressCode'))    lines.push(`👗 Dress Code: ${getField('dressCode')}`);
+    if (getField('message'))      lines.push('', `"${getField('message')}"`);
+    if (getField('rsvpContact'))  lines.push('', `RSVP: ${getField('rsvpContact')}`);
+    if (getField('rsvpDate'))     lines.push(`By: ${fmtDate(getField('rsvpDate'))}`);
+    lines.push('','═══════════════════════════════════');
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+        this.innerHTML='<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => this.innerHTML='<i class="fas fa-copy"></i> Copy Text', 2000);
+    });
+});
+
+/* ── Social share ── */
+function shareText() {
+    const name  = getField('eventName') || 'a birthday party';
+    const date  = getField('eventDate');
+    const venue = getField('venue');
+    const rsvp  = getField('rsvpContact');
+    return [`🎂 You're invited to *${name}*!`,
+        date  ? `📅 ${fmtDate(date)}`     : '',
+        venue ? `📍 ${venue}`             : '',
+        rsvp  ? `RSVP: ${rsvp}`          : '',
+    ].filter(Boolean).join('\n');
+}
+document.getElementById('shareWA').addEventListener('click', () =>
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText())}`, '_blank'));
+document.getElementById('shareFB').addEventListener('click', () =>
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank','width=600,height=400'));
+document.getElementById('shareXBtn').addEventListener('click', () =>
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText())}`, '_blank','width=600,height=400'));
+document.getElementById('shareEmail').addEventListener('click', () => {
+    const sub = encodeURIComponent(`You're invited: ${getField('eventName') || 'Birthday Party'}`);
+    const body = encodeURIComponent(shareText());
+    window.location.href = `mailto:?subject=${sub}&body=${body}`;
+});
+
+/* ── Auto-save / load ── */
+const SAVE_KEY = 'bday_inv_v3';
+function autoSave() {
+    const data = { theme:S.theme, accent:S.accent, font:S.font, pattern:S.pattern, anim:S.anim, photoShape:S.photoShape, showQR:S.showQR, showParticles:S.showParticles };
+    LIVE_FIELDS.forEach(id => { data[id] = getField(id); });
+    try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch(_) {}
+}
+(function loadSaved() {
     try {
-        const saved = JSON.parse(localStorage.getItem('bday_invite_v2') || '{}');
-        FIELDS.forEach(id => {
-            if (saved[id]) document.getElementById(id).value = saved[id];
-        });
-        if (saved.theme) {
-            currentTheme = saved.theme;
-            document.querySelectorAll('.theme-thumb').forEach(t => {
-                t.classList.toggle('active', t.dataset.theme === currentTheme);
-            });
+        const raw = localStorage.getItem(SAVE_KEY);
+        if (!raw) return;
+        const d = JSON.parse(raw);
+        if (d.theme) {
+            S.theme = d.theme;
+            document.querySelectorAll('.theme-thumb').forEach(t => t.classList.toggle('active', t.dataset.theme === S.theme));
         }
-        if (saved.accent) {
-            accentColor = saved.accent;
-            document.querySelectorAll('.color-pill').forEach(p => {
-                p.classList.toggle('active', p.dataset.color === accentColor);
-            });
+        if (d.accent) {
+            S.accent = d.accent;
+            document.getElementById('customColor').value = S.accent;
+            document.querySelectorAll('.color-pill').forEach(p => p.classList.toggle('active', p.dataset.color === S.accent));
         }
-    } catch (_) {}
-
-    FIELDS.forEach(id => {
-        document.getElementById(id).addEventListener('input', autoSave);
-    });
+        if (d.font)       { S.font = d.font; document.getElementById('fontSelect').value = S.font; }
+        if (d.pattern)    { S.pattern = d.pattern; document.getElementById('patternSelect').value = S.pattern; }
+        if (d.anim)       { S.anim = d.anim; document.getElementById('animSelect').value = S.anim; }
+        if (d.photoShape) { S.photoShape = d.photoShape; document.getElementById('photoShapeSelect').value = S.photoShape; }
+        if (typeof d.showQR === 'boolean') { S.showQR = d.showQR; document.getElementById('toggleQR').classList.toggle('on', S.showQR); }
+        if (typeof d.showParticles === 'boolean') { S.showParticles = d.showParticles; document.getElementById('toggleParticles').classList.toggle('on', S.showParticles); }
+        LIVE_FIELDS.forEach(id => { if (d[id] !== undefined) { const el = document.getElementById(id); if (el) el.value = d[id]; } });
+        if (d.eventName) { startCountdown(); }
+    } catch(_) {}
+})();
 })();
 </script>
 </body>
