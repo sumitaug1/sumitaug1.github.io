@@ -374,6 +374,49 @@
     .theme-kids .song-section.is-chorus .song-text { color: #FFD93D; border-left-color: #FFD93D; }
     .theme-kids .song-text { line-height: 2.2; }
 
+    /* VOICE INPUT */
+    .input-with-voice { display: flex; gap: .45rem; align-items: flex-start; }
+    .input-with-voice input,
+    .input-with-voice textarea { flex: 1; min-width: 0; }
+    .voice-btn {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-dim);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      transition: all .2s;
+    }
+    .voice-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .voice-btn.listening { border-color: #E63946; color: #E63946; background: rgba(230,57,70,.12); animation: pulse .8s ease-in-out infinite; }
+
+    /* WISH BUTTON */
+    .wish-btn {
+      width: 100%;
+      padding: .72rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-dim);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .84rem;
+      cursor: pointer;
+      margin-top: .6rem;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .wish-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,.07); }
+    .wish-btn.speaking { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,.1); }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .main-wrapper { grid-template-columns: 1fr; }
@@ -406,7 +449,10 @@
 
       <div class="field-group">
         <label>Birthday Person's Name *</label>
-        <input type="text" id="nameInput" placeholder="e.g. Emma, James…" maxlength="40">
+        <div class="input-with-voice">
+          <input type="text" id="nameInput" placeholder="e.g. Emma, James…" maxlength="40">
+          <button class="voice-btn" onclick="startVoice('nameInput',this)" title="Speak name">🎤</button>
+        </div>
       </div>
 
       <div class="field-row">
@@ -465,15 +511,22 @@
 
       <div class="field-group">
         <label>Hobbies / Interests (optional)</label>
-        <input type="text" id="hobbyInput" placeholder="e.g. hiking, painting, cooking…">
+        <div class="input-with-voice">
+          <input type="text" id="hobbyInput" placeholder="e.g. hiking, painting, cooking…">
+          <button class="voice-btn" onclick="startVoice('hobbyInput',this)" title="Speak hobbies">🎤</button>
+        </div>
       </div>
 
       <div class="field-group">
         <label>Special Message to Include (optional)</label>
-        <textarea id="messageInput" placeholder="Add a personal line or heartfelt wish…"></textarea>
+        <div class="input-with-voice">
+          <textarea id="messageInput" placeholder="Add a personal line or heartfelt wish…"></textarea>
+          <button class="voice-btn" onclick="startVoice('messageInput',this)" title="Speak message">🎤</button>
+        </div>
       </div>
 
       <button class="generate-btn" id="generateBtn">✨ Compose Birthday Song</button>
+      <button class="wish-btn" id="wishBtn" title="Speak a personalised birthday greeting">🎂 Speak Birthday Wish</button>
     </div>
 
     <!-- Output -->
@@ -879,6 +932,100 @@ function showComposing() {
   setTimeout(generateSong, 1400);
 }
 
+// ─── VOICE INPUT ─────────────────────────────────────────────────────────────
+function startVoice(fieldId, btn) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { alert('Voice input requires Chrome or Edge.'); return; }
+  const rec = new SR();
+  rec.lang = 'en-US';
+  rec.interimResults = false;
+  rec.maxAlternatives = 1;
+  btn.classList.add('listening');
+  btn.textContent = '⏹';
+  rec.onresult = (e) => {
+    document.getElementById(fieldId).value = e.results[0][0].transcript;
+    btn.classList.remove('listening');
+    btn.textContent = '🎤';
+    // refresh wish button label if name changed
+    if (fieldId === 'nameInput') updateWishBtn();
+  };
+  rec.onerror = rec.onend = () => {
+    btn.classList.remove('listening');
+    btn.textContent = '🎤';
+  };
+  rec.start();
+}
+
+// ─── BIRTHDAY WISH SPEECH ─────────────────────────────────────────────────────
+function updateWishBtn() {
+  const name = document.getElementById('nameInput').value.trim();
+  const wb = document.getElementById('wishBtn');
+  if (wb) wb.textContent = name ? `🎂 Wish ${name} Happy Birthday` : '🎂 Speak Birthday Wish';
+}
+
+function speakBirthdayWish() {
+  if (!('speechSynthesis' in window)) { alert('Speech synthesis is not supported in your browser.'); return; }
+  const name  = document.getElementById('nameInput').value.trim() || 'you';
+  const age   = document.getElementById('ageInput').value.trim();
+  const hobby = document.getElementById('hobbyInput').value.trim();
+  const wb    = document.getElementById('wishBtn');
+
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    if (wb) { wb.textContent = name !== 'you' ? `🎂 Wish ${name} Happy Birthday` : '🎂 Speak Birthday Wish'; wb.classList.remove('speaking'); }
+    return;
+  }
+
+  const traitPhrases = {
+    funny: 'your wonderful sense of humour',
+    sweet: 'your beautiful kindness',
+    adventurous: 'your adventurous spirit',
+    artistic: 'your amazing creativity',
+    sporty: 'your incredible energy and drive',
+    nerdy: 'your brilliant curious mind',
+    musical: 'your love of music',
+  };
+  const agePhrase   = age   ? ` You are turning ${age} today` : '';
+  const traitMention = S.traits.length
+    ? ` We especially love ${S.traits.slice(0, 2).map(t => traitPhrases[t]).filter(Boolean).join(' and ')}.`
+    : '';
+  const hobbyMention = hobby
+    ? ` Keep enjoying ${hobby.toLowerCase()} — it's one of the things that makes you so special.`
+    : '';
+
+  const wish =
+    `Happy Birthday, ${name}!${agePhrase ? agePhrase + '.' : ''} ` +
+    `Today is all about you and we want you to know just how loved and appreciated you truly are.` +
+    `${traitMention}${hobbyMention} ` +
+    `May this birthday bring you everything your heart desires — joy, laughter, good health, and beautiful memories that last a lifetime. ` +
+    `Here is to you, ${name}. Happy Birthday!`;
+
+  const utt = new SpeechSynthesisUtterance(wish);
+  utt.rate  = 0.86;
+  utt.pitch = 1.08;
+
+  // pick a pleasant voice when available
+  const setVoice = () => {
+    const voices = window.speechSynthesis.getVoices();
+    const pick = voices.find(v =>
+      /samantha|google uk english female|karen|moira|victoria/i.test(v.name)
+    ) || voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female'))
+      || voices.find(v => v.lang.startsWith('en'));
+    if (pick) utt.voice = pick;
+    window.speechSynthesis.speak(utt);
+  };
+  if (window.speechSynthesis.getVoices().length) {
+    setVoice();
+  } else {
+    window.speechSynthesis.onvoiceschanged = setVoice;
+  }
+
+  if (wb) { wb.textContent = '⏹ Stop Wish'; wb.classList.add('speaking'); }
+  utt.onend = utt.onerror = () => {
+    if (wb) { wb.textContent = name !== 'you' ? `🎂 Wish ${name} Happy Birthday` : '🎂 Speak Birthday Wish'; wb.classList.remove('speaking'); }
+  };
+}
+
 // ─── PILL CONTROLS ────────────────────────────────────────────────────────────
 document.querySelectorAll('#styleGroup .pill').forEach(p => {
   p.addEventListener('click', () => {
@@ -910,6 +1057,8 @@ document.getElementById('generateBtn').addEventListener('click', () => {
 document.getElementById('nameInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') { S.variant = 0; showComposing(); }
 });
+document.getElementById('nameInput').addEventListener('input', updateWishBtn);
+document.getElementById('wishBtn').addEventListener('click', speakBirthdayWish);
 
 // ─── MUSIC NOTE PARTICLE CANVAS ───────────────────────────────────────────────
 (function () {
