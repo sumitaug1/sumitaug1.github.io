@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette Generator - Free Online Color Tool | Multi-Tools Hub</title>
+    <meta name="description" content="Generate beautiful color palettes from any base color. Get complementary, analogous, triadic, and monochromatic schemes with HEX, RGB, and HSL codes.">
+    <meta name="keywords" content="color palette generator, color scheme, color picker, complementary colors, hex color, rgb color, color tool">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../assets/css/tool-page.css" rel="stylesheet">
+    <style>
+      .cpg-swatch-row {
+        display: flex;
+        gap: 0;
+        border-radius: 6px;
+        overflow: hidden;
+        height: 120px;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
+      .cpg-swatch {
+        flex: 1;
+        position: relative;
+        transition: flex 0.3s ease;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 0.5rem;
+      }
+      .cpg-swatch:hover { flex: 1.6; }
+      .cpg-swatch-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.06em;
+        opacity: 0;
+        transition: opacity 0.2s;
+        padding: 2px 6px;
+        border-radius: 3px;
+        background: rgba(0,0,0,0.45);
+        white-space: nowrap;
+      }
+      .cpg-swatch:hover .cpg-swatch-label { opacity: 1; }
+      .cpg-swatch-copy {
+        position: absolute;
+        top: 6px; right: 6px;
+        width: 22px; height: 22px;
+        border-radius: 3px;
+        background: rgba(0,0,0,0.35);
+        border: none;
+        color: #fff;
+        font-size: 0.6rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .cpg-swatch:hover .cpg-swatch-copy { opacity: 1; }
+
+      .cpg-scheme-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+      .cpg-tab {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.85rem;
+        border: 1px solid rgba(0,200,255,0.22);
+        background: rgba(0,200,255,0.04);
+        color: rgba(216,221,232,0.5);
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .cpg-tab.active { border-color: #00c8ff; color: #00c8ff; background: rgba(0,200,255,0.12); }
+
+      .cpg-color-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+      .cpg-color-card {
+        border-radius: 5px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.06);
+        cursor: pointer;
+        transition: transform 0.15s, box-shadow 0.15s;
+      }
+      .cpg-color-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+      .cpg-color-preview { height: 80px; }
+      .cpg-color-info {
+        padding: 0.5rem 0.65rem;
+        background: rgba(5,9,18,0.9);
+      }
+      .cpg-hex {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: #e8eaf0;
+        display: block;
+      }
+      .cpg-rgb {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.58rem;
+        color: rgba(216,221,232,0.4);
+        display: block;
+        margin-top: 1px;
+      }
+      .cpg-copy-row { display: flex; gap: 4px; margin-top: 5px; }
+      .cpg-copy-btn {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.5rem;
+        letter-spacing: 0.08em;
+        padding: 2px 6px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: transparent;
+        color: rgba(216,221,232,0.45);
+        border-radius: 2px;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .cpg-copy-btn:hover { border-color: #00c8ff; color: #00c8ff; background: rgba(0,200,255,0.08); }
+
+      /* Color picker wrapper */
+      input[type="color"] {
+        width: 60px;
+        height: 44px;
+        border: 1px solid rgba(0,200,255,0.35);
+        border-radius: 4px;
+        padding: 2px;
+        background: transparent;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h1 class="mb-2">Color Palette Generator</h1>
+                <p class="lead">Pick a base color and instantly generate complementary, analogous, triadic, and more color schemes.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+
+                <!-- Input Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row g-3 align-items-end">
+                            <div class="col-auto">
+                                <label class="form-label" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// base color</label>
+                                <div class="d-flex align-items-center gap-2">
+                                    <input type="color" id="baseColor" value="#00c8ff">
+                                    <input type="text" class="form-control" id="hexInput" value="#00c8ff" style="font-family:'JetBrains Mono',monospace;max-width:120px;font-size:0.9rem" maxlength="7">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <label class="form-label" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// palette size</label>
+                                <select class="form-select" id="paletteSize" style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;max-width:130px">
+                                    <option value="5">5 colors</option>
+                                    <option value="7" selected>7 colors</option>
+                                    <option value="9">9 colors</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" id="generateBtn"><i class="fas fa-magic me-2"></i>Generate</button>
+                                <button class="btn btn-outline-secondary ms-2" id="randomBtn"><i class="fas fa-random me-2"></i>Random</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gradient preview -->
+                <div class="card mb-4">
+                    <div class="card-body pb-2">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.18em;color:rgba(0,200,255,0.35);text-transform:uppercase">// gradient preview (hover to copy)</span>
+                            <button class="btn btn-sm btn-outline-secondary" id="exportBtn"><i class="fas fa-download me-1"></i>Export CSS</button>
+                        </div>
+                        <div class="cpg-swatch-row" id="swatchRow"></div>
+                    </div>
+                </div>
+
+                <!-- Scheme tabs + colors -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                            <div class="cpg-scheme-tabs" id="schemeTabs">
+                                <button class="cpg-tab active" data-scheme="complementary">Complementary</button>
+                                <button class="cpg-tab" data-scheme="analogous">Analogous</button>
+                                <button class="cpg-tab" data-scheme="triadic">Triadic</button>
+                                <button class="cpg-tab" data-scheme="tetradic">Tetradic</button>
+                                <button class="cpg-tab" data-scheme="monochromatic">Monochromatic</button>
+                                <button class="cpg-tab" data-scheme="split">Split-Comp</button>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary" id="copyAllBtn"><i class="fas fa-copy me-1"></i>Copy All HEX</button>
+                        </div>
+                        <div class="cpg-color-row" id="colorRow"></div>
+                    </div>
+                </div>
+
+                <!-- Saved palettes -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0"><i class="fas fa-heart me-2" style="color:#a855f7"></i>Saved Palettes</h5>
+                            <button class="btn btn-sm btn-outline-danger" id="clearSavedBtn">Clear</button>
+                        </div>
+                        <div id="savedPalettes"><p style="color:rgba(216,221,232,0.35);font-size:0.85rem;text-align:center;margin:0">No saved palettes</p></div>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-sm btn-outline-secondary" id="savePaletteBtn"><i class="fas fa-bookmark me-1"></i>Save Current Palette</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Advertisement</h5>
+                        <div class="ad-space">
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6204232626800687" data-ad-slot="9572280796" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script>
+    (function(){
+      'use strict';
+
+      const baseColorEl  = document.getElementById('baseColor');
+      const hexInputEl   = document.getElementById('hexInput');
+      const paletteSizeEl= document.getElementById('paletteSize');
+      const generateBtn  = document.getElementById('generateBtn');
+      const randomBtn    = document.getElementById('randomBtn');
+      const swatchRow    = document.getElementById('swatchRow');
+      const colorRow     = document.getElementById('colorRow');
+      const exportBtn    = document.getElementById('exportBtn');
+      const copyAllBtn   = document.getElementById('copyAllBtn');
+      const savePaletteBtn=document.getElementById('savePaletteBtn');
+      const clearSavedBtn= document.getElementById('clearSavedBtn');
+      const savedPalettes= document.getElementById('savedPalettes');
+      const schemeTabs   = document.getElementById('schemeTabs');
+
+      let currentScheme = 'complementary';
+      let currentPalette = [];
+      let saved = JSON.parse(localStorage.getItem('cpgSaved') || '[]');
+
+      /* ── Color math ─────────────────────────────── */
+      function hexToHsl(hex) {
+        let r = parseInt(hex.slice(1,3),16)/255;
+        let g = parseInt(hex.slice(3,5),16)/255;
+        let b = parseInt(hex.slice(5,7),16)/255;
+        const max=Math.max(r,g,b), min=Math.min(r,g,b);
+        let h,s,l=(max+min)/2;
+        if(max===min){h=s=0;}else{
+          const d=max-min;
+          s=l>0.5?d/(2-max-min):d/(max+min);
+          switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;default:h=((r-g)/d+4)/6;}
+        }
+        return [h*360, s*100, l*100];
+      }
+
+      function hslToHex(h,s,l){
+        h/=360; s/=100; l/=100;
+        let r,g,b;
+        if(s===0){r=g=b=l;}else{
+          const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};
+          const q=l<0.5?l*(1+s):l+s-l*s;
+          const p=2*l-q;
+          r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3);
+        }
+        return '#'+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join('');
+      }
+
+      function hexToRgb(hex){
+        return {r:parseInt(hex.slice(1,3),16),g:parseInt(hex.slice(3,5),16),b:parseInt(hex.slice(5,7),16)};
+      }
+
+      function luminance(hex){const{r,g,b}=hexToRgb(hex);return 0.299*r+0.587*g+0.114*b;}
+      function textColor(hex){return luminance(hex)>128?'#111':'#fff';}
+
+      /* ── Scheme generators ──────────────────────── */
+      function generateScheme(hex, scheme, size) {
+        const [h,s,l] = hexToHsl(hex);
+        const n = parseInt(size);
+        switch(scheme) {
+          case 'complementary':
+            return [hex, hslToHex((h+30)%360,s,Math.min(l+10,90)), hslToHex((h+60)%360,s,l),
+                    hslToHex((h+150)%360,s,l), hslToHex((h+180)%360,s,l),
+                    hslToHex((h+210)%360,s,Math.min(l+10,90)), hslToHex((h+240)%360,s,l)].slice(0,n);
+          case 'analogous': {
+            const step = 30/((n-1)/2);
+            return Array.from({length:n},(_,i)=>hslToHex((h+(i-Math.floor(n/2))*step+360)%360,s,l));
+          }
+          case 'triadic':
+            return [hex,hslToHex((h+120)%360,s,l),hslToHex((h+240)%360,s,l),
+                    hslToHex((h+60)%360,s,Math.min(l+15,85)),hslToHex((h+180)%360,s,Math.min(l+15,85)),
+                    hslToHex((h+300)%360,s,Math.min(l+15,85)),hslToHex(h,s,Math.min(l+20,90))].slice(0,n);
+          case 'tetradic':
+            return [hex,hslToHex((h+90)%360,s,l),hslToHex((h+180)%360,s,l),hslToHex((h+270)%360,s,l),
+                    hslToHex((h+45)%360,s,Math.min(l+15,85)),hslToHex((h+135)%360,s,Math.min(l+15,85)),
+                    hslToHex((h+225)%360,s,Math.min(l+15,85))].slice(0,n);
+          case 'monochromatic': {
+            const steps = Array.from({length:n},(_,i)=>Math.round(10+i*(80/(n-1))));
+            return steps.map(li=>hslToHex(h,s,li));
+          }
+          case 'split':
+            return [hex,hslToHex((h+150)%360,s,l),hslToHex((h+210)%360,s,l),
+                    hslToHex((h+30)%360,s,Math.min(l+10,85)),hslToHex((h+330)%360,s,Math.min(l+10,85)),
+                    hslToHex(h,s,Math.min(l+20,90)),hslToHex(h,s,Math.max(l-20,10))].slice(0,n);
+          default: return [hex];
+        }
+      }
+
+      /* ── Render ─────────────────────────────────── */
+      function render() {
+        const hex = hexInputEl.value.trim();
+        if(!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
+        const n = parseInt(paletteSizeEl.value);
+        currentPalette = generateScheme(hex, currentScheme, n);
+
+        // Gradient swatch
+        swatchRow.innerHTML = currentPalette.map((c,i) => `
+          <div class="cpg-swatch" style="background:${c}" title="${c}" onclick="window._cpgCopy('${c}',this)">
+            <button class="cpg-swatch-copy" onclick="event.stopPropagation();window._cpgCopy('${c}',this)"><i class="fas fa-copy"></i></button>
+            <span class="cpg-swatch-label" style="color:${textColor(c)}">${c.toUpperCase()}</span>
+          </div>`).join('');
+
+        // Color cards
+        colorRow.innerHTML = currentPalette.map(c => {
+          const {r,g,b} = hexToRgb(c);
+          const [h,s,l] = hexToHsl(c);
+          return `<div class="cpg-color-card">
+            <div class="cpg-color-preview" style="background:${c}"></div>
+            <div class="cpg-color-info">
+              <span class="cpg-hex">${c.toUpperCase()}</span>
+              <span class="cpg-rgb">rgb(${r}, ${g}, ${b})</span>
+              <span class="cpg-rgb">hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)</span>
+              <div class="cpg-copy-row">
+                <button class="cpg-copy-btn" onclick="window._cpgCopy('${c.toUpperCase()}',this)">HEX</button>
+                <button class="cpg-copy-btn" onclick="window._cpgCopy('rgb(${r},${g},${b})',this)">RGB</button>
+                <button class="cpg-copy-btn" onclick="window._cpgCopy('hsl(${Math.round(h)},${Math.round(s)}%,${Math.round(l)}%)',this)">HSL</button>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+      }
+
+      window._cpgCopy = function(text, el) {
+        navigator.clipboard.writeText(text).then(() => {
+          const orig = el.innerHTML;
+          el.innerHTML = el.tagName === 'BUTTON' ? (el.classList.contains('cpg-swatch-copy') ? '<i class="fas fa-check"></i>' : '✓') : orig;
+          setTimeout(() => { el.innerHTML = orig; }, 1200);
+        });
+      };
+
+      /* ── Events ─────────────────────────────────── */
+      baseColorEl.oninput = () => { hexInputEl.value = baseColorEl.value; render(); };
+      hexInputEl.oninput  = () => {
+        let v = hexInputEl.value.trim();
+        if(!v.startsWith('#')) v = '#'+v;
+        if(/^#[0-9a-fA-F]{6}$/.test(v)) { baseColorEl.value = v; render(); }
+      };
+      paletteSizeEl.onchange = render;
+      generateBtn.onclick = render;
+
+      randomBtn.onclick = () => {
+        const h = '#'+Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0');
+        hexInputEl.value = h;
+        baseColorEl.value = h;
+        render();
+      };
+
+      schemeTabs.querySelectorAll('.cpg-tab').forEach(t => {
+        t.onclick = () => {
+          schemeTabs.querySelectorAll('.cpg-tab').forEach(x=>x.classList.remove('active'));
+          t.classList.add('active');
+          currentScheme = t.dataset.scheme;
+          render();
+        };
+      });
+
+      copyAllBtn.onclick = () => {
+        navigator.clipboard.writeText(currentPalette.map(c=>c.toUpperCase()).join(', ')).then(() => {
+          const orig = copyAllBtn.innerHTML;
+          copyAllBtn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+          setTimeout(()=>{ copyAllBtn.innerHTML = orig; },1500);
+        });
+      };
+
+      exportBtn.onclick = () => {
+        const vars = currentPalette.map((c,i)=>`  --color-${i+1}: ${c.toUpperCase()};`).join('\n');
+        const grad = `background: linear-gradient(90deg, ${currentPalette.join(', ')});`;
+        const css  = `:root {\n${vars}\n}\n\n/* Gradient */\n.my-gradient {\n  ${grad}\n}`;
+        navigator.clipboard.writeText(css).then(() => {
+          const orig = exportBtn.innerHTML;
+          exportBtn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+          setTimeout(()=>{ exportBtn.innerHTML = orig; },1500);
+        });
+      };
+
+      /* ── Saved palettes ─────────────────────────── */
+      savePaletteBtn.onclick = () => {
+        if (!currentPalette.length) return;
+        const entry = { colors: [...currentPalette], scheme: currentScheme, ts: Date.now() };
+        saved.unshift(entry);
+        if (saved.length > 10) saved.pop();
+        localStorage.setItem('cpgSaved', JSON.stringify(saved));
+        renderSaved();
+      };
+
+      clearSavedBtn.onclick = () => { saved=[]; localStorage.removeItem('cpgSaved'); renderSaved(); };
+
+      function renderSaved() {
+        if (!saved.length) { savedPalettes.innerHTML = '<p style="color:rgba(216,221,232,0.35);font-size:0.85rem;text-align:center;margin:0">No saved palettes</p>'; return; }
+        savedPalettes.innerHTML = saved.map((p,i) => `
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer" onclick="window._cpgLoad(${i})">
+            <div style="display:flex;flex:1;height:32px;border-radius:4px;overflow:hidden">
+              ${p.colors.map(c=>`<div style="flex:1;background:${c}"></div>`).join('')}
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:rgba(0,200,255,0.45)">${p.scheme}</span>
+          </div>`).join('');
+      }
+
+      window._cpgLoad = (i) => {
+        const p = saved[i];
+        // load first color as base
+        hexInputEl.value = p.colors[0];
+        baseColorEl.value = p.colors[0];
+        document.querySelector(`.cpg-tab[data-scheme="${p.scheme}"]`)?.click();
+        render();
+      };
+
+      renderSaved();
+      render();
+    })();
+    </script>
+</body>
+</html>
