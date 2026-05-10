@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNYPXS04ZV"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HNYPXS04ZV');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer - Free Online Timer | Multi-Tools Hub</title>
+    <meta name="description" content="Free online countdown timer with custom date and label. Count down to any event — New Year, birthday, deadline, or launch day.">
+    <meta name="keywords" content="countdown timer, online timer, event countdown, date countdown, free timer">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6204232626800687" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../assets/css/tool-page.css" rel="stylesheet">
+    <style>
+      .cdt-display {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 2rem 0;
+      }
+      .cdt-unit {
+        text-align: center;
+        min-width: 110px;
+      }
+      .cdt-num {
+        font-family: 'Orbitron', monospace;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #00c8ff;
+        text-shadow: 0 0 30px rgba(0,200,255,0.5);
+        line-height: 1;
+        display: block;
+        background: rgba(0,200,255,0.06);
+        border: 1px solid rgba(0,200,255,0.2);
+        border-radius: 6px;
+        padding: 0.5rem 1rem;
+        min-width: 110px;
+        transition: text-shadow 0.3s;
+      }
+      .cdt-num.pulse { text-shadow: 0 0 50px rgba(0,200,255,0.9); }
+      .cdt-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.55rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(0,200,255,0.45);
+        margin-top: 0.5rem;
+        display: block;
+      }
+      .cdt-sep {
+        font-family: 'Orbitron', monospace;
+        font-size: 3rem;
+        color: rgba(0,200,255,0.25);
+        align-self: flex-start;
+        padding-top: 0.55rem;
+      }
+      .cdt-event-name {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.2rem;
+        letter-spacing: 0.08em;
+        color: #e8eaf0;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+      .cdt-finished {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.4rem;
+        color: #a855f7;
+        text-align: center;
+        text-shadow: 0 0 24px rgba(168,85,247,0.6);
+        animation: cdt-glow 1.2s ease-in-out infinite alternate;
+      }
+      @keyframes cdt-glow {
+        from { text-shadow: 0 0 12px rgba(168,85,247,0.4); }
+        to   { text-shadow: 0 0 36px rgba(168,85,247,0.9); }
+      }
+      .cdt-progress {
+        height: 3px;
+        background: rgba(0,200,255,0.12);
+        border-radius: 2px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+      }
+      .cdt-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #00c8ff, #a855f7);
+        border-radius: 2px;
+        transition: width 1s linear;
+      }
+      .cdt-preset-btn {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        padding: 0.3rem 0.9rem;
+        border: 1px solid rgba(0,200,255,0.3);
+        background: rgba(0,200,255,0.05);
+        color: rgba(216,221,232,0.7);
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .cdt-preset-btn:hover {
+        background: rgba(0,200,255,0.15);
+        border-color: rgba(0,200,255,0.6);
+        color: #00c8ff;
+      }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h1 class="mb-2">Countdown Timer</h1>
+                <p class="lead">Count down to any date — events, deadlines, launches, birthdays.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8">
+
+                <!-- Setup Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3"><i class="fas fa-calendar-alt me-2" style="color:#00c8ff"></i>Set Your Countdown</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// event name</label>
+                                <input type="text" class="form-control" id="eventName" placeholder="New Year 2027" maxlength="60">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,200,255,0.6)">// target date & time</label>
+                                <input type="datetime-local" class="form-control" id="targetDate">
+                            </div>
+                        </div>
+                        <div class="mt-3 d-flex gap-2 flex-wrap align-items-center">
+                            <button class="btn btn-primary" id="startBtn"><i class="fas fa-play me-2"></i>Start Countdown</button>
+                            <button class="btn btn-outline-secondary btn-sm" id="resetBtn"><i class="fas fa-redo me-1"></i>Reset</button>
+                        </div>
+
+                        <!-- Presets -->
+                        <div class="mt-3">
+                            <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.16em;color:rgba(0,200,255,0.35);text-transform:uppercase;">// quick presets</span>
+                            <div class="d-flex gap-2 flex-wrap mt-2" id="presets"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Countdown Display -->
+                <div class="card mb-4" id="displayCard" style="display:none!important">
+                    <div class="card-body text-center py-4">
+                        <div class="cdt-event-name" id="displayName"></div>
+                        <div class="cdt-progress"><div class="cdt-progress-bar" id="progressBar" style="width:0%"></div></div>
+                        <div class="cdt-display" id="cdtDisplay">
+                            <div class="cdt-unit"><span class="cdt-num" id="cdtDays">000</span><span class="cdt-label">Days</span></div>
+                            <span class="cdt-sep">:</span>
+                            <div class="cdt-unit"><span class="cdt-num" id="cdtHours">00</span><span class="cdt-label">Hours</span></div>
+                            <span class="cdt-sep">:</span>
+                            <div class="cdt-unit"><span class="cdt-num" id="cdtMins">00</span><span class="cdt-label">Minutes</span></div>
+                            <span class="cdt-sep">:</span>
+                            <div class="cdt-unit"><span class="cdt-num" id="cdtSecs">00</span><span class="cdt-label">Seconds</span></div>
+                        </div>
+                        <div id="finishedMsg" style="display:none" class="cdt-finished">🎉 Time's Up!</div>
+                        <p class="mt-2 mb-0" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(216,221,232,0.35);" id="targetLabel"></p>
+                    </div>
+                </div>
+
+                <!-- Saved Countdowns -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0"><i class="fas fa-bookmark me-2" style="color:#a855f7"></i>Saved Countdowns</h5>
+                            <button class="btn btn-sm btn-outline-danger" id="clearSavedBtn">Clear All</button>
+                        </div>
+                        <div id="savedList"><p style="color:rgba(216,221,232,0.35);font-size:0.85rem;text-align:center;margin:0">No saved countdowns</p></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Advertisement</h5>
+                        <div class="ad-space">
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6204232626800687" data-ad-slot="9572280796" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script>
+    (function(){
+      'use strict';
+      const eventNameEl = document.getElementById('eventName');
+      const targetDateEl = document.getElementById('targetDate');
+      const startBtn     = document.getElementById('startBtn');
+      const resetBtn     = document.getElementById('resetBtn');
+      const displayCard  = document.getElementById('displayCard');
+      const displayName  = document.getElementById('displayName');
+      const progressBar  = document.getElementById('progressBar');
+      const cdtDays      = document.getElementById('cdtDays');
+      const cdtHours     = document.getElementById('cdtHours');
+      const cdtMins      = document.getElementById('cdtMins');
+      const cdtSecs      = document.getElementById('cdtSecs');
+      const finishedMsg  = document.getElementById('finishedMsg');
+      const targetLabel  = document.getElementById('targetLabel');
+      const savedList    = document.getElementById('savedList');
+      const clearSavedBtn= document.getElementById('clearSavedBtn');
+      const presetsEl    = document.getElementById('presets');
+
+      let interval = null;
+      let startMs  = null;
+      let endMs    = null;
+      let saved    = JSON.parse(localStorage.getItem('cdtSaved') || '[]');
+
+      // Set min datetime to now
+      const now = new Date();
+      const pad = n => String(n).padStart(2,'0');
+      targetDateEl.min = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+
+      // Presets
+      const PRESETS = [
+        { label: 'New Year 2027', fn: () => new Date('2027-01-01T00:00:00') },
+        { label: 'Christmas',     fn: () => { const d = new Date(); d.setMonth(11,25); d.setHours(0,0,0,0); if(d < new Date()) d.setFullYear(d.getFullYear()+1); return d; }},
+        { label: '+1 Hour',       fn: () => new Date(Date.now() + 3600000) },
+        { label: '+24 Hours',     fn: () => new Date(Date.now() + 86400000) },
+        { label: '+7 Days',       fn: () => new Date(Date.now() + 7*86400000) },
+        { label: '+30 Days',      fn: () => new Date(Date.now() + 30*86400000) },
+      ];
+
+      PRESETS.forEach(p => {
+        const btn = document.createElement('button');
+        btn.className = 'cdt-preset-btn';
+        btn.textContent = p.label;
+        btn.onclick = () => {
+          const d = p.fn();
+          eventNameEl.value = eventNameEl.value || p.label;
+          targetDateEl.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        };
+        presetsEl.appendChild(btn);
+      });
+
+      function fmt2(n) { return String(Math.floor(n)).padStart(2,'0'); }
+      function fmt3(n) { return String(Math.floor(n)).padStart(3,'0'); }
+
+      function tick() {
+        const remaining = endMs - Date.now();
+        if (remaining <= 0) {
+          cdtDays.textContent = '000'; cdtHours.textContent = '00';
+          cdtMins.textContent = '00'; cdtSecs.textContent = '00';
+          document.getElementById('cdtDisplay').style.display = 'none';
+          finishedMsg.style.display = 'block';
+          progressBar.style.width = '100%';
+          clearInterval(interval);
+          return;
+        }
+        const totalSec = Math.floor(remaining / 1000);
+        const d = Math.floor(totalSec / 86400);
+        const h = Math.floor((totalSec % 86400) / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = totalSec % 60;
+        cdtDays.textContent  = fmt3(d);
+        cdtHours.textContent = fmt2(h);
+        cdtMins.textContent  = fmt2(m);
+        cdtSecs.textContent  = fmt2(s);
+
+        // Pulse on second tick
+        [cdtSecs].forEach(el => {
+          el.classList.add('pulse');
+          setTimeout(() => el.classList.remove('pulse'), 200);
+        });
+
+        // Progress
+        if (startMs) {
+          const elapsed = Date.now() - startMs;
+          const total   = endMs - startMs;
+          progressBar.style.width = Math.min(100, (elapsed / total) * 100).toFixed(2) + '%';
+        }
+      }
+
+      function startCountdown(name, targetIso) {
+        clearInterval(interval);
+        endMs   = new Date(targetIso).getTime();
+        startMs = Date.now();
+        if (endMs <= startMs) { alert('Please select a future date and time.'); return; }
+
+        displayName.textContent = name || 'Countdown';
+        targetLabel.textContent = `Target: ${new Date(endMs).toLocaleString()}`;
+        displayCard.style.removeProperty('display');
+        document.getElementById('cdtDisplay').style.display = 'flex';
+        finishedMsg.style.display = 'none';
+        progressBar.style.width = '0%';
+
+        // Save
+        saved = saved.filter(s => s.name !== name);
+        saved.unshift({ name: name || 'Countdown', target: targetIso });
+        if (saved.length > 8) saved.pop();
+        localStorage.setItem('cdtSaved', JSON.stringify(saved));
+        renderSaved();
+
+        tick();
+        interval = setInterval(tick, 1000);
+      }
+
+      startBtn.onclick = () => {
+        if (!targetDateEl.value) { targetDateEl.focus(); return; }
+        startCountdown(eventNameEl.value.trim(), targetDateEl.value);
+      };
+
+      resetBtn.onclick = () => {
+        clearInterval(interval);
+        displayCard.style.display = 'none';
+        eventNameEl.value = '';
+        targetDateEl.value = '';
+        progressBar.style.width = '0%';
+      };
+
+      function renderSaved() {
+        if (!saved.length) { savedList.innerHTML = '<p style="color:rgba(216,221,232,0.35);font-size:0.85rem;text-align:center;margin:0">No saved countdowns</p>'; return; }
+        savedList.innerHTML = saved.map(s => {
+          const remaining = new Date(s.target) - Date.now();
+          const status = remaining > 0 ? `${Math.floor(remaining/86400000)}d remaining` : 'Finished';
+          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:0.45rem 0.6rem;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;border-radius:3px" onmouseenter="this.style.background='rgba(0,200,255,0.04)'" onmouseleave="this.style.background=''" onclick="window._cdtLoad('${s.name.replace(/'/g,"\\'")}','${s.target}')">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#00c8ff">${s.name}</span><br>
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:0.72rem;color:rgba(216,221,232,0.45)">${new Date(s.target).toLocaleString()} — ${status}</span>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(0,200,255,0.4)">Load →</span>
+          </div>`;
+        }).join('');
+      }
+
+      window._cdtLoad = (name, target) => {
+        eventNameEl.value = name;
+        targetDateEl.value = target.substring(0,16);
+        startCountdown(name, target);
+      };
+
+      clearSavedBtn.onclick = () => { saved = []; localStorage.removeItem('cdtSaved'); renderSaved(); };
+
+      renderSaved();
+    })();
+    </script>
+</body>
+</html>
