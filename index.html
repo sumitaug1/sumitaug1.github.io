@@ -1473,14 +1473,14 @@ footer::before {
   </div>
 </div>
 
-<!-- POPULAR TOOLS -->
+<!-- TRENDING TOOLS -->
 <div class="section reveal">
   <div class="s-head">
     <div>
-      <div class="s-label">POPULAR_TOOLS</div>
-      <div class="s-title">Most-used right now</div>
+      <div class="s-label">TRENDING <span style="color:var(--magenta);font-size:.6rem;letter-spacing:.12em;margin-left:8px;padding:2px 8px;border:1px solid rgba(255,45,120,0.4);border-radius:3px;">LAST 7 DAYS</span></div>
+      <div class="s-title">Trending This Week</div>
     </div>
-    <a href="#" class="s-link">LOAD ALL →</a>
+    <a href="#" class="s-link">VIEW ALL →</a>
   </div>
   <div class="tools-grid" id="toolsGrid"></div>
 </div>
@@ -1558,15 +1558,16 @@ const CATS = [
 ];
 
 const TOOLS = [
-  { name:'QR Code Generator',   emoji:'⬛', desc:'Generate QR codes from any URL, text or contact. Custom colours, high-res export.', cat:'IMAGE', clr:'#0ea5e9', path:'tools/image-tools/qr-code-generator.html', stars:'★★★★★' },
-  { name:'JSON Formatter',      emoji:'{}', desc:'Beautify, minify and validate JSON with syntax highlighting and error detection.',    cat:'DEV',   clr:'#f97316', path:'tools/developer-tools/json-formatter.html', stars:'★★★★★' },
-  { name:'PDF Merger',          emoji:'📎', desc:'Combine multiple PDFs into one document with drag-and-drop page ordering.',           cat:'PDF',   clr:'#ef4444', path:'tools/pdf-tools/pdf-merger.html', stars:'★★★★★' },
-  { name:'Password Generator',  emoji:'🔑', desc:'Generate cryptographically strong passwords with custom length and character sets.',  cat:'SEC',   clr:'#ec4899', path:'tools/security-tools/password-generator.html', stars:'★★★★★' },
-  { name:'Image Compressor',    emoji:'🗜️', desc:'Reduce image file size without visible quality loss. Drag &amp; drop, instant result.', cat:'IMAGE', clr:'#0ea5e9', path:'tools/image-tools/image-compressor.html', stars:'★★★★☆' },
-  { name:'Word Counter',        emoji:'📝', desc:'Count words, characters, sentences and reading time. Great for writers and editors.',  cat:'TEXT',  clr:'#a855f7', path:'tools/text-tools/word-counter.html', stars:'★★★★☆' },
-  { name:'Meta Tag Generator',  emoji:'🏷️', desc:'Generate perfect meta tags for SEO — title, description, Open Graph, Twitter Card.',  cat:'SEO',   clr:'#22c55e', path:'tools/seo-tools/meta-tag-generator.html', stars:'★★★★☆' },
-  { name:'BMI Calculator',      emoji:'⚖️', desc:'Calculate Body Mass Index with health assessment and ideal weight range.',             cat:'CALC',  clr:'#eab308', path:'tools/calculator-tools/bmi-calculator.html', stars:'★★★★☆' },
-  { name:'Base64 Encoder',      emoji:'🔐', desc:'Encode and decode Base64 strings instantly. Supports files and raw text.',             cat:'DEV',   clr:'#f97316', path:'tools/developer-tools/base64-encoder-decoder.html', stars:'★★★★☆' },
+  { name:'QR Code Generator',   emoji:'⬛', desc:'Generate QR codes from any URL, text or contact. Custom colours, high-res export.', cat:'IMAGE', clr:'#0ea5e9', path:'tools/image-tools/qr-code-generator.html',                 stars:'★★★★★' },
+  { name:'Image Compressor',    emoji:'🗜️', desc:'Reduce image file size without visible quality loss. Drag &amp; drop, instant result.', cat:'IMAGE', clr:'#0ea5e9', path:'tools/image-tools/image-compressor.html',             stars:'★★★★★' },
+  { name:'PDF Merger',          emoji:'📎', desc:'Combine multiple PDFs into one document with drag-and-drop page ordering.',           cat:'PDF',   clr:'#ef4444', path:'tools/pdf-tools/pdf-merger.html',                         stars:'★★★★★' },
+  { name:'Password Generator',  emoji:'🔑', desc:'Generate cryptographically strong passwords with custom length and character sets.',  cat:'SEC',   clr:'#ec4899', path:'tools/security-tools/password-generator.html',            stars:'★★★★★' },
+  { name:'Age Calculator',      emoji:'🎂', desc:'Calculate exact age in years, months and days. Countdown to next birthday included.', cat:'CALC',  clr:'#eab308', path:'tools/calculator-tools/age-calculator.html',              stars:'★★★★★' },
+  { name:'JSON Formatter',      emoji:'{}', desc:'Beautify, minify and validate JSON with syntax highlighting and error detection.',    cat:'DEV',   clr:'#f97316', path:'tools/developer-tools/json-formatter.html',               stars:'★★★★☆' },
+  { name:'Word Counter',        emoji:'📝', desc:'Count words, characters, sentences and reading time. Great for writers and editors.',  cat:'TEXT',  clr:'#a855f7', path:'tools/text-tools/word-counter.html',                    stars:'★★★★☆' },
+  { name:'BMI Calculator',      emoji:'⚖️', desc:'Calculate Body Mass Index with health assessment and ideal weight range.',             cat:'CALC',  clr:'#eab308', path:'tools/calculator-tools/bmi-calculator.html',             stars:'★★★★☆' },
+  { name:'Meta Tag Generator',  emoji:'🏷️', desc:'Generate perfect meta tags for SEO — title, description, Open Graph, Twitter Card.',  cat:'SEO',   clr:'#22c55e', path:'tools/seo-tools/meta-tag-generator.html',              stars:'★★★★☆' },
+  { name:'Base64 Encoder',      emoji:'🔐', desc:'Encode and decode Base64 strings instantly. Supports files and raw text.',             cat:'DEV',   clr:'#f97316', path:'tools/developer-tools/base64-encoder-decoder.html',      stars:'★★★★☆' },
 ];
 
 const HINTS = ['qr code','pdf merge','json format','word count','bmi calculator','password generator','image compress','meta tags'];
