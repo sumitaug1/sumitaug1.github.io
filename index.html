@@ -68,6 +68,7 @@ body {
   color: var(--text);
   font-family: 'Space Grotesk', sans-serif;
   overflow-x: hidden;
+  transition: background-color .4s ease;
 }
 
 /* ─── CUSTOM CURSOR (only on real mice; touch/trackpad keep native cursor) ─── */
@@ -1265,6 +1266,97 @@ footer::before {
   .search-glow { animation: none; opacity: .3; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ─── THEME PICKER ─── */
+.theme-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 500;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border-hot);
+  background: rgba(2,4,10,0.92);
+  backdrop-filter: blur(20px);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 0 20px rgba(0,200,255,0.2);
+  transition: box-shadow .2s, transform .15s;
+}
+.theme-btn:hover {
+  box-shadow: 0 0 30px rgba(0,200,255,0.5);
+  transform: scale(1.08);
+}
+.theme-panel {
+  position: fixed;
+  bottom: 5.4rem;
+  right: 2rem;
+  z-index: 500;
+  background: rgba(2,4,10,0.97);
+  border: 1px solid var(--border-hot);
+  border-radius: 10px;
+  padding: 1rem 1rem .85rem;
+  backdrop-filter: blur(30px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.7), 0 0 30px rgba(0,200,255,0.08);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .2s, transform .2s;
+  width: 210px;
+}
+.theme-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.theme-panel-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem;
+  color: var(--cyan);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: .75rem;
+  text-shadow: var(--glow-cyan);
+}
+.theme-swatches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+.theme-swatch {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  cursor: pointer;
+  padding: 7px 4px 5px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  transition: border-color .15s, background .15s;
+}
+.theme-swatch:hover { border-color: rgba(0,200,255,0.35); background: rgba(0,200,255,0.05); }
+.theme-swatch.active { border-color: var(--cyan); background: var(--cyan-dim); }
+.swatch-circle {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.18);
+  position: relative;
+}
+.theme-swatch.active .swatch-circle::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.8);
+}
+.swatch-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  color: var(--text-dim);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.theme-swatch.active .swatch-label { color: var(--cyan); }
 </style>
 </head>
 <body>
@@ -1441,6 +1533,13 @@ footer::before {
     <p>CRAFTED FOR DEVELOPERS &amp; CREATORS · FREE FOREVER</p>
   </div>
 </footer>
+
+<!-- THEME PICKER -->
+<button class="theme-btn" id="themeBtn" title="Change background theme" aria-label="Change background theme">🎨</button>
+<div class="theme-panel" id="themePanel" role="dialog" aria-label="Background theme picker">
+  <div class="theme-panel-title">// background</div>
+  <div class="theme-swatches" id="themeSwatches"></div>
+</div>
 
 <script>
 /* ── DATA ── */
@@ -1925,6 +2024,46 @@ setTimeout(()=>{ document.querySelectorAll('.reveal').forEach(el=>el.classList.a
 
 /* ── YEAR ── */
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ── THEME PICKER ── */
+const THEMES = [
+  { id:'void',     label:'Void',     bg:'#02040a', deep:'#060912', panel:'rgba(8,14,28,0.85)',   glass:'rgba(15,25,50,0.6)' },
+  { id:'midnight', label:'Midnight', bg:'#000814', deep:'#001428', panel:'rgba(0,15,35,0.85)',   glass:'rgba(0,20,45,0.6)' },
+  { id:'nebula',   label:'Nebula',   bg:'#06000e', deep:'#0e0020', panel:'rgba(14,0,28,0.85)',   glass:'rgba(20,0,40,0.6)' },
+  { id:'forest',   label:'Forest',   bg:'#010d05', deep:'#021508', panel:'rgba(2,15,8,0.85)',    glass:'rgba(5,25,12,0.6)' },
+  { id:'ember',    label:'Ember',    bg:'#0d0200', deep:'#180400', panel:'rgba(20,4,0,0.85)',    glass:'rgba(30,8,0,0.6)' },
+  { id:'slate',    label:'Slate',    bg:'#0a0a0f', deep:'#12121a', panel:'rgba(15,15,25,0.85)',  glass:'rgba(20,20,35,0.6)' },
+];
+
+function applyTheme(id) {
+  const t = THEMES.find(x => x.id === id) || THEMES[0];
+  const r = document.documentElement;
+  r.style.setProperty('--void', t.bg);
+  r.style.setProperty('--deep', t.deep);
+  r.style.setProperty('--panel', t.panel);
+  r.style.setProperty('--glass', t.glass);
+  localStorage.setItem('ikt-theme', id);
+  document.querySelectorAll('.theme-swatch').forEach(s => s.classList.toggle('active', s.dataset.id === id));
+}
+
+(function buildThemePicker() {
+  const swatchesEl = document.getElementById('themeSwatches');
+  THEMES.forEach(t => {
+    const div = document.createElement('div');
+    div.className = 'theme-swatch';
+    div.dataset.id = t.id;
+    div.innerHTML = `<div class="swatch-circle" style="background:${t.bg}"></div><span class="swatch-label">${t.label}</span>`;
+    div.addEventListener('click', () => applyTheme(t.id));
+    swatchesEl.appendChild(div);
+  });
+
+  const btn = document.getElementById('themeBtn');
+  const panel = document.getElementById('themePanel');
+  btn.addEventListener('click', e => { e.stopPropagation(); panel.classList.toggle('open'); });
+  document.addEventListener('click', e => { if (!panel.contains(e.target)) panel.classList.remove('open'); });
+
+  applyTheme(localStorage.getItem('ikt-theme') || 'void');
+})();
 </script>
 </body>
 </html>
