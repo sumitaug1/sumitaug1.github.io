@@ -399,6 +399,123 @@
             margin-top: 0.5rem; text-align: center;
         }
         .draw-countdown span { color: rgba(0,200,255,0.6); font-weight: 700; }
+
+        /* ── SPINNING CONIC GRADIENT BORDER ON GENERATOR CARD ── */
+        @property --ba { syntax: '<angle>'; inherits: true; initial-value: 0turn; }
+        @keyframes borderSpin { to { --ba: 1turn; } }
+        .card.shadow-sm:has(#generatorForm) {
+            background:
+                linear-gradient(rgba(4,8,20,0.97), rgba(4,8,20,0.97)) padding-box,
+                conic-gradient(from var(--ba) at 50% 50%,
+                    #00c8ff 0%, #9b5bff 25%, #ff2d78 50%, #ffaa00 75%, #00c8ff 100%
+                ) border-box !important;
+            border: 2px solid transparent !important;
+            animation: borderSpin 5s linear infinite !important;
+            box-shadow: 0 0 60px rgba(0,200,255,0.06), 0 0 120px rgba(155,91,255,0.04) !important;
+        }
+
+        /* ── RESULTS CARD HEADER ── */
+        #resultsCard { overflow: visible !important; }
+        #resultsCard .card-header {
+            background: linear-gradient(90deg, rgba(0,200,255,0.08), transparent, rgba(155,91,255,0.08)) !important;
+            border-bottom: 1px solid transparent !important;
+            background-clip: padding-box !important;
+            position: relative;
+        }
+        #resultsCard .card-header::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, #00c8ff, #9b5bff, #ff2d78, transparent);
+        }
+        #resultsCard .card-header h5 {
+            font-family: 'Orbitron', monospace !important;
+            font-size: 0.8rem !important; letter-spacing: 0.2em !important;
+            color: #00c8ff !important; text-transform: uppercase !important;
+        }
+
+        /* ── NUMBER SET WRAPPER ── */
+        .number-set {
+            background: linear-gradient(135deg, rgba(0,200,255,0.04) 0%, rgba(155,91,255,0.04) 100%) !important;
+            border: 1px solid rgba(0,200,255,0.12) !important;
+            border-radius: 14px !important; padding: 1.25rem 1rem !important;
+            margin-bottom: 0.85rem !important;
+            transition: border-color .35s, box-shadow .35s !important;
+            position: relative; overflow: hidden;
+        }
+        .number-set::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,200,255,0.4), transparent);
+        }
+        .number-set:hover {
+            border-color: rgba(0,200,255,0.35) !important;
+            box-shadow: 0 0 28px rgba(0,200,255,0.1) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* ── BIGGER LOTTERY BALLS ── */
+        .number-set .badge.bg-primary,
+        .number-set .badge.bg-success {
+            width: 58px !important; height: 58px !important;
+            font-size: 1.1rem !important; font-weight: 900 !important;
+            font-family: 'Orbitron', monospace !important;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22) !important;
+        }
+        .number-set .badge.bg-danger {
+            font-family: 'Orbitron', monospace !important; font-weight: 900 !important;
+            background: linear-gradient(135deg, #ff2d78, #8b0a30) !important;
+            box-shadow: 0 0 24px rgba(255,45,120,0.5), inset 0 2px 6px rgba(255,255,255,0.15) !important;
+            border: none !important; padding: 10px 18px !important; font-size: 0.88rem !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        /* ── BALL COLOUR CLASSES (applied by JS per number range) ── */
+        .ball-c0 { background: radial-gradient(circle at 35% 30%, #1de9ff, #006a8e) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22), 0 0 22px rgba(29,233,255,0.4) !important; }
+        .ball-c1 { background: radial-gradient(circle at 35% 30%, #ff2d78, #8b0a30) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22), 0 0 22px rgba(255,45,120,0.4) !important; }
+        .ball-c2 { background: radial-gradient(circle at 35% 30%, #a970ff, #4a1580) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22), 0 0 22px rgba(169,112,255,0.4) !important; }
+        .ball-c3 { background: radial-gradient(circle at 35% 30%, #ffcc00, #8a5c00) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22), 0 0 22px rgba(255,204,0,0.4) !important; color: #1a0a00 !important; }
+        .ball-c4 { background: radial-gradient(circle at 35% 30%, #00ff9d, #005c38) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22), 0 0 22px rgba(0,255,157,0.4) !important; color: #001a0e !important; }
+        .ball-c5 { background: radial-gradient(circle at 35% 30%, #ff7c35, #7a2200) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22), 0 0 22px rgba(255,124,53,0.4) !important; }
+        .ball-c6 { background: radial-gradient(circle at 35% 30%, #e0e8ff, #6870a8) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.6), inset 0 2px 7px rgba(255,255,255,0.22), 0 0 22px rgba(224,232,255,0.35) !important; color: #12123a !important; }
+
+        /* ── FORM LABELS PREMIUM STYLE ── */
+        .form-label {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.68rem !important; letter-spacing: 0.12em !important;
+            color: rgba(0,200,255,0.65) !important; text-transform: uppercase !important;
+        }
+
+        /* ── ALL CARD HEADERS ORBITRON ── */
+        .card-header h5, .card-header h6 {
+            font-family: 'Orbitron', monospace !important;
+            font-size: 0.76rem !important; letter-spacing: 0.15em !important;
+            text-transform: uppercase !important;
+        }
+
+        /* ── HOT / COLD BALLS UPGRADE ── */
+        #hotNumbers .badge, #coldNumbers .badge {
+            width: 40px !important; height: 40px !important;
+            font-family: 'Orbitron', monospace !important;
+            font-size: 0.78rem !important; font-weight: 700 !important;
+        }
+
+        /* ── WIN FLASH BANNER ── */
+        #winFlash {
+            display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+            padding: 11px 20px; text-align: center;
+            background: linear-gradient(90deg,#00c8ff,#9b5bff,#ff2d78,#ffaa00,#00c8ff);
+            background-size: 300%; -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
+            font-family: 'Orbitron', monospace; font-size: 0.72rem; letter-spacing: 0.22em;
+            animation: lottShimmer 1.4s linear infinite;
+            border-bottom: 1px solid rgba(0,200,255,0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        #winFlash::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(2,4,10,0.92); z-index: -1;
+        }
+        #winFlash.show { display: block; animation: winFlashIn .3s ease both, lottShimmer 1.4s linear infinite; }
+        @keyframes winFlashIn { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -1352,6 +1469,9 @@
     <!-- Footer will be loaded dynamically -->
     <div id="footer-container"></div>
 
+    <!-- Win Flash Banner -->
+    <div id="winFlash">🎰 &nbsp; LUCKY NUMBERS GENERATED &nbsp;·&nbsp; YOU COULD BE THE NEXT JACKPOT WINNER! &nbsp; 🏆</div>
+
     <!-- PWA Install Prompt -->
     <div id="pwaInstallPrompt">
         <div class="text-center">
@@ -1434,18 +1554,43 @@
         });
     })();
 
-    // ── BALL POP ANIMATION ──
+    // ── BALL POP + COLOUR CODING ──
     (function () {
         const container = document.getElementById('resultsContainer');
         if (!container) return;
+
+        const winFlash = document.getElementById('winFlash');
+        let flashTimer = null;
+
+        function showFlash() {
+            if (!winFlash) return;
+            winFlash.classList.add('show');
+            clearTimeout(flashTimer);
+            flashTimer = setTimeout(function () { winFlash.classList.remove('show'); }, 3200);
+        }
+
         const observer = new MutationObserver(function () {
             const fresh = container.querySelectorAll('.badge:not(.ball-pop-done)');
+            if (!fresh.length) return;
+
             fresh.forEach(function (b, i) {
                 b.classList.add('ball-pop-done');
                 b.style.animationDelay = (i * 0.07) + 's';
+
+                // colour-code by number range
+                const n = parseInt(b.textContent.trim(), 10);
+                if (!isNaN(n) && !b.classList.contains('bg-danger')) {
+                    const ci = Math.min(Math.floor(Math.max(n - 1, 0) / 10), 6);
+                    b.classList.remove('bg-primary', 'bg-success', 'bg-secondary', 'bg-info', 'bg-warning', 'bg-dark', 'bg-light');
+                    b.classList.add('ball-c' + ci);
+                }
+
                 b.classList.add('ball-pop');
             });
+
+            showFlash();
         });
+
         observer.observe(container, { childList: true, subtree: true });
     })();
 
