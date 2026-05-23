@@ -859,6 +859,20 @@ nav::after {
   user-select: none;
 }
 
+/* vertical padding so zoomed cards aren't clipped by overflow:hidden */
+.trending-wrap { padding: 1.2rem 0; }
+
+.trending-track .tool-tile {
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), border-color .3s, box-shadow .3s;
+}
+
+.trending-track .tool-tile:hover {
+  transform: scale(1.1);
+  z-index: 5;
+  border-color: var(--t-clr, var(--cyan));
+  box-shadow: 0 0 28px var(--t-clr, var(--cyan)), 0 12px 40px rgba(0,0,0,0.6);
+}
+
 .tool-tile {
   position: relative;
   background: var(--panel);
