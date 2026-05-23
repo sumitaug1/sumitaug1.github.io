@@ -2027,12 +2027,12 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 /* ── THEME PICKER ── */
 const THEMES = [
-  { id:'void',     label:'Void',     bg:'#02040a', deep:'#060912', panel:'rgba(8,14,28,0.85)',   glass:'rgba(15,25,50,0.6)' },
-  { id:'midnight', label:'Midnight', bg:'#000814', deep:'#001428', panel:'rgba(0,15,35,0.85)',   glass:'rgba(0,20,45,0.6)' },
-  { id:'nebula',   label:'Nebula',   bg:'#06000e', deep:'#0e0020', panel:'rgba(14,0,28,0.85)',   glass:'rgba(20,0,40,0.6)' },
-  { id:'forest',   label:'Forest',   bg:'#010d05', deep:'#021508', panel:'rgba(2,15,8,0.85)',    glass:'rgba(5,25,12,0.6)' },
-  { id:'ember',    label:'Ember',    bg:'#0d0200', deep:'#180400', panel:'rgba(20,4,0,0.85)',    glass:'rgba(30,8,0,0.6)' },
-  { id:'slate',    label:'Slate',    bg:'#0a0a0f', deep:'#12121a', panel:'rgba(15,15,25,0.85)',  glass:'rgba(20,20,35,0.6)' },
+  { id:'void',     label:'Void',     bg:'#02040a', deep:'#060912', panel:'rgba(8,14,28,0.85)',    glass:'rgba(15,25,50,0.6)' },
+  { id:'midnight', label:'Midnight', bg:'#040f28', deep:'#081840', panel:'rgba(8,20,55,0.88)',    glass:'rgba(10,28,70,0.65)' },
+  { id:'nebula',   label:'Nebula',   bg:'#10052a', deep:'#1a0840', panel:'rgba(22,8,48,0.88)',    glass:'rgba(30,10,60,0.65)' },
+  { id:'forest',   label:'Forest',   bg:'#021a06', deep:'#042e0a', panel:'rgba(4,28,8,0.88)',     glass:'rgba(6,40,12,0.65)' },
+  { id:'ember',    label:'Ember',    bg:'#200800', deep:'#351200', panel:'rgba(38,14,0,0.88)',    glass:'rgba(50,18,0,0.65)' },
+  { id:'slate',    label:'Slate',    bg:'#111118', deep:'#1a1a24', panel:'rgba(20,20,35,0.88)',   glass:'rgba(28,28,45,0.65)' },
 ];
 
 function applyTheme(id) {
@@ -2052,7 +2052,7 @@ function applyTheme(id) {
     const div = document.createElement('div');
     div.className = 'theme-swatch';
     div.dataset.id = t.id;
-    div.innerHTML = `<div class="swatch-circle" style="background:${t.bg}"></div><span class="swatch-label">${t.label}</span>`;
+    div.innerHTML = `<div class="swatch-circle" style="background:linear-gradient(135deg,${t.deep},${t.bg})"></div><span class="swatch-label">${t.label}</span>`;
     div.addEventListener('click', () => applyTheme(t.id));
     swatchesEl.appendChild(div);
   });
