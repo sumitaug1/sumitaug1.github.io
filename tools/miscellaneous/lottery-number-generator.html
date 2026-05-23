@@ -1932,6 +1932,71 @@
         form.addEventListener('submit', function () { setTimeout(burst, 380); });
     })();
 
+    // ── LOTTERY INFO PANEL + ODDS TABLE ──
+    (function () {
+        var LDATA = [
+            { id:'powerball',    name:'Powerball',             flag:'🇺🇸', format:'5/69 + PB 1/26',  odds:'1 in 292,201,338', diff:'hard',   days:'Mon · Wed · Sat', record:'$2.04B (Nov 2022)' },
+            { id:'megaMillions', name:'Mega Millions',         flag:'🇺🇸', format:'5/70 + MB 1/25',  odds:'1 in 302,575,350', diff:'hard',   days:'Tue · Fri',       record:'$1.602B (Aug 2023)' },
+            { id:'euroMillions', name:'EuroMillions',          flag:'🇪🇺', format:'5/50 + 2★/12',   odds:'1 in 139,838,160', diff:'hard',   days:'Tue · Fri',       record:'€230M (jackpot cap)' },
+            { id:'euroJackpot',  name:'EuroJackpot',           flag:'🇪🇺', format:'5/50 + 2/12',    odds:'1 in 95,344,200',  diff:'hard',   days:'Tue · Fri',       record:'€120M (jackpot cap)' },
+            { id:'ukLotto',      name:'UK National Lottery',   flag:'🇬🇧', format:'6/59',            odds:'1 in 45,057,474',  diff:'medium', days:'Wed · Sat',       record:'£66M (Jan 2016)' },
+            { id:'lottoMax',     name:'Lotto Max',             flag:'🇨🇦', format:'7/50',            odds:'1 in 33,294,800',  diff:'medium', days:'Tue · Fri',       record:'CA$70M (jackpot cap)' },
+            { id:'lotto649',     name:'Lotto 6/49',            flag:'🇨🇦', format:'6/49',            odds:'1 in 13,983,816',  diff:'medium', days:'Wed · Sat',       record:'CA$64.3M (Oct 2015)' },
+            { id:'ozLotto',      name:'Oz Lotto',              flag:'🇦🇺', format:'7/47',            odds:'1 in 45,379,620',  diff:'medium', days:'Tuesday',         record:'AU$111.97M (Nov 2012)' },
+            { id:'powerballAu',  name:'Powerball Australia',   flag:'🇦🇺', format:'7/35 + PB 1/20', odds:'1 in 134,490,400', diff:'hard',   days:'Thursday',        record:'AU$150M (Oct 2019)' },
+            { id:'megaSena',     name:'Mega-Sena',             flag:'🇧🇷', format:'6/60',            odds:'1 in 50,063,860',  diff:'medium', days:'Wed · Sat',       record:'R$541M (May 2023)' },
+            { id:'toto',         name:'Singapore Toto',        flag:'🇸🇬', format:'6/49',            odds:'1 in 13,983,816',  diff:'medium', days:'Mon · Thu',       record:'S$16M (jackpot cap)' },
+            { id:'keralaLottery',name:'Kerala Lottery',        flag:'🇮🇳', format:'6-digit',         odds:'~1 in 1,000,000',  diff:'easy',   days:'Daily',           record:'₹25 Crore (Onam)' },
+            { id:'lottoAmerica', name:'Lotto America',         flag:'🇺🇸', format:'5/52 + AS 1/10', odds:'1 in 25,989,600',  diff:'medium', days:'Mon · Wed · Sat', record:'$50.4M (Jan 2021)' },
+            { id:'lotto6aus49',  name:'German Lotto 6/49',     flag:'🇩🇪', format:'6/49 + 1/10',    odds:'1 in 139,838,160', diff:'hard',   days:'Wed · Sat',       record:'€45.38M' },
+            { id:'spanishLotto', name:'Spanish Lotto',         flag:'🇪🇸', format:'6/49 + 1/10',    odds:'1 in 139,838,160', diff:'hard',   days:'Thu · Sat',       record:'€94.4M (Oct 2021)' },
+        ];
+
+        var LMAP = {};
+        LDATA.forEach(function (d) { LMAP[d.id] = d; });
+
+        // ── Lottery info panel ──
+        var sel = document.getElementById('lotteryType');
+        var panel = document.getElementById('lottInfoPanel');
+        var elOdds = document.getElementById('lipOdds');
+        var elFmt  = document.getElementById('lipFormat');
+        var elDays = document.getElementById('lipDays');
+        var elRec  = document.getElementById('lipRecord');
+
+        function updatePanel() {
+            var d = LMAP[sel.value];
+            if (!d) { panel.style.display = 'none'; return; }
+            elOdds.textContent = d.odds;
+            elFmt.textContent  = d.format;
+            elDays.textContent = d.days;
+            elRec.textContent  = d.record;
+            panel.style.display = 'block';
+            panel.style.animation = 'none';
+            requestAnimationFrame(function () { panel.style.animation = 'fadeInUp .35s ease both'; });
+        }
+
+        if (sel && panel) { sel.addEventListener('change', updatePanel); updatePanel(); }
+
+        // ── Odds comparison table ──
+        var tbody = document.getElementById('oddsTableBody');
+        if (tbody) {
+            LDATA.forEach(function (d) {
+                var diffLabel = d.diff === 'easy' ? '<span class="odds-badge easy">EASY</span>'
+                              : d.diff === 'medium' ? '<span class="odds-badge medium">MEDIUM</span>'
+                              : '<span class="odds-badge hard">HARD</span>';
+                var tr = document.createElement('tr');
+                tr.innerHTML =
+                    '<td><span class="t-name">' + d.flag + ' ' + d.name + '</span></td>' +
+                    '<td><span class="t-format">' + d.format + '</span></td>' +
+                    '<td><span class="t-odds">' + d.odds + '</span></td>' +
+                    '<td>' + diffLabel + '</td>' +
+                    '<td><span class="t-days">' + d.days + '</span></td>' +
+                    '<td><span class="t-record">' + d.record + '</span></td>';
+                tbody.appendChild(tr);
+            });
+        }
+    })();
+
     // ── DRUM ROLL SUSPENSE BEFORE RESULTS ──
     (function () {
         var resultsCard = document.getElementById('resultsCard');
