@@ -840,23 +840,34 @@ nav::after {
   100% { transform: translateX(-50%); }
 }
 
-.trending-track .tool-tile {
-  width: 250px;
+.trend-item {
+  display: flex;
+  align-items: flex-end;
   flex-shrink: 0;
 }
 
 .trend-rank {
-  position: absolute;
-  bottom: 0;
-  right: 8px;
   font-family: 'Orbitron', monospace;
-  font-size: 4.5rem;
+  font-size: 9rem;
   font-weight: 900;
-  line-height: 1;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.06);
-  pointer-events: none;
+  -webkit-text-stroke: 3px rgba(200,216,240,0.3);
+  min-width: 64px;
+  text-align: right;
+  margin-right: -16px;
+  z-index: 1;
   user-select: none;
+  pointer-events: none;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+.trend-item .tool-tile {
+  width: 250px;
+  flex-shrink: 0;
+  z-index: 2;
 }
 
 /* vertical padding so zoomed cards aren't clipped by overflow:hidden */
@@ -1786,20 +1797,22 @@ const tg = document.getElementById('toolsGrid');
 [...TOOLS, ...TOOLS].forEach((t, i) => {
   const rank = (i % TOOLS.length) + 1;
   tg.insertAdjacentHTML('beforeend', `
-  <a href="${t.path}" class="tool-tile" style="--t-clr:${t.clr}">
-    <div class="tool-tile-corner"></div>
+  <div class="trend-item">
     <div class="trend-rank">${rank}</div>
-    <div class="tt-top">
-      <div class="tt-icon">${t.emoji}</div>
-      <div class="tt-badge">${t.cat}</div>
-    </div>
-    <div class="tt-name">${t.name}</div>
-    <div class="tt-desc">${t.desc}</div>
-    <div class="tt-foot">
-      <div class="tt-launch">LAUNCH TOOL <span>→</span></div>
-      <div class="tt-stars">${t.stars}</div>
-    </div>
-  </a>`);
+    <a href="${t.path}" class="tool-tile" style="--t-clr:${t.clr}">
+      <div class="tool-tile-corner"></div>
+      <div class="tt-top">
+        <div class="tt-icon">${t.emoji}</div>
+        <div class="tt-badge">${t.cat}</div>
+      </div>
+      <div class="tt-name">${t.name}</div>
+      <div class="tt-desc">${t.desc}</div>
+      <div class="tt-foot">
+        <div class="tt-launch">LAUNCH TOOL <span>→</span></div>
+        <div class="tt-stars">${t.stars}</div>
+      </div>
+    </a>
+  </div>`);
 });
 
 /* ── HINTS ── */
