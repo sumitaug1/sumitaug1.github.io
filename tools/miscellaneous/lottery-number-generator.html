@@ -177,11 +177,192 @@
             font-weight: 700;
             padding: 0 !important;
         }
+
+        /* ── PAGE DARK THEME ── */
+        body { background: #02040a !important; }
+        .card {
+            background: rgba(8,14,28,0.92) !important;
+            border: 1px solid rgba(0,200,255,0.15) !important;
+            color: #c8d8f0 !important;
+        }
+        .card-header {
+            background: rgba(0,200,255,0.05) !important;
+            border-bottom: 1px solid rgba(0,200,255,0.15) !important;
+        }
+        .card-header h5, .card-header h6, .card-body h6, .card-body p,
+        .card-body label, .card-body small, .card-body li, .card-body strong,
+        .form-label, .form-text, .lead { color: #c8d8f0 !important; }
+        .form-control, .form-select {
+            background: rgba(2,4,10,0.8) !important;
+            border: 1px solid rgba(0,200,255,0.2) !important;
+            color: #c8d8f0 !important;
+        }
+        .form-control:focus, .form-select:focus {
+            background: rgba(2,4,10,0.95) !important;
+            border-color: rgba(0,200,255,0.5) !important;
+            box-shadow: 0 0 0 3px rgba(0,200,255,0.1) !important;
+            color: #c8d8f0 !important;
+        }
+        .form-control::placeholder { color: rgba(200,216,240,0.3) !important; }
+        .form-text { color: rgba(200,216,240,0.4) !important; }
+        .alert-info {
+            background: rgba(0,200,255,0.07) !important;
+            border-color: rgba(0,200,255,0.2) !important;
+            color: #c8d8f0 !important;
+        }
+        .card.bg-light { background: rgba(255,255,255,0.04) !important; }
+        .text-muted { color: rgba(200,216,240,0.45) !important; }
+        .text-center.mb-4 { color: #c8d8f0 !important; }
+
+        /* ── HERO BANNER ── */
+        .lottery-hero {
+            background: linear-gradient(135deg, #020408 0%, #0a0420 45%, #020c04 100%);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,200,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .lottery-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% -10%, rgba(0,200,255,0.1) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .lottery-hero-badge {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem; letter-spacing: 0.2em;
+            color: #00ff9d; border: 1px solid rgba(0,255,157,0.35);
+            padding: 4px 14px; border-radius: 3px; margin-bottom: 1.2rem;
+            text-shadow: 0 0 10px rgba(0,255,157,0.5);
+        }
+        .lottery-hero-title {
+            font-family: 'Orbitron', monospace; font-weight: 900;
+            font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1.05; margin-bottom: 0.6rem;
+        }
+        .lottery-glow {
+            background: linear-gradient(90deg, #00c8ff, #ff2d78, #9b5bff, #00c8ff);
+            background-size: 250% 100%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            animation: lottShimmer 3.5s linear infinite;
+            filter: drop-shadow(0 0 18px rgba(0,200,255,0.45));
+            display: block;
+        }
+        @keyframes lottShimmer { 0%{background-position:0%} 100%{background-position:250%} }
+        .lottery-hero-sub {
+            display: block; color: rgba(200,216,240,0.55);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.55rem, 1.5vw, 0.75rem); letter-spacing: 0.35em;
+            text-transform: uppercase; margin-top: 0.3rem;
+        }
+        .lottery-hero-desc {
+            color: rgba(200,216,240,0.45); font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem; margin: 1rem auto 1.6rem; max-width: 420px;
+        }
+
+        /* ── JACKPOT TICKER ── */
+        .jackpot-ticker-wrap {
+            display: inline-flex; align-items: center; gap: 14px;
+            background: rgba(0,0,0,0.45); border: 1px solid rgba(255,170,0,0.35);
+            border-radius: 8px; padding: 10px 28px; margin-bottom: 1.8rem;
+            box-shadow: 0 0 20px rgba(255,170,0,0.08);
+        }
+        .jackpot-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            color: rgba(255,170,0,0.65); letter-spacing: 0.12em; text-transform: uppercase;
+        }
+        .jackpot-amount {
+            font-family: 'Orbitron', monospace; font-size: 1.5rem; font-weight: 900;
+            color: #ffaa00; text-shadow: 0 0 22px rgba(255,170,0,0.7); min-width: 160px;
+        }
+
+        /* ── DEMO FLOATING BALLS ── */
+        .lottery-balls-demo { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .demo-ball {
+            width: 46px; height: 46px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron', monospace; font-weight: 700; font-size: 0.85rem; color: #fff;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.2);
+            animation: ballFloat 3s ease-in-out infinite;
+            animation-delay: var(--d, 0s);
+        }
+        @keyframes ballFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+        /* ── LUCKY METER ── */
+        .lucky-meter-wrap {
+            margin: 1rem 0 0.5rem;
+            padding: 0.9rem 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,255,157,0.15);
+            border-radius: 8px;
+        }
+        .lucky-meter-header {
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+            color: #00ff9d; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;
+        }
+        .lucky-pct { color: #ffaa00; font-weight: 700; }
+        .lucky-meter-bg {
+            height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden;
+        }
+        .lucky-meter-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #00c8ff, #00ff9d, #ffaa00);
+            border-radius: 4px;
+            transition: width 1.4s cubic-bezier(.34,1.56,.64,1);
+            box-shadow: 0 0 10px rgba(0,200,255,0.5);
+        }
+
+        /* ── ENHANCED GENERATE BUTTON ── */
+        button[type="submit"].btn-primary {
+            background: linear-gradient(135deg, #00c8ff, #9b5bff) !important;
+            border: none !important;
+            font-family: 'Orbitron', monospace !important;
+            font-weight: 700 !important; font-size: 0.8rem !important;
+            letter-spacing: 0.1em !important; padding: 14px 24px !important;
+            box-shadow: 0 0 22px rgba(0,200,255,0.35) !important;
+            animation: btnGlow 2.5s ease-in-out infinite !important;
+        }
+        button[type="submit"].btn-primary:hover {
+            box-shadow: 0 0 40px rgba(0,200,255,0.7), 0 0 80px rgba(155,91,255,0.3) !important;
+            transform: translateY(-2px);
+            animation: none !important;
+        }
+        @keyframes btnGlow {
+            0%,100% { box-shadow: 0 0 22px rgba(0,200,255,0.35) !important; }
+            50%      { box-shadow: 0 0 38px rgba(0,200,255,0.65), 0 0 60px rgba(155,91,255,0.2) !important; }
+        }
+
+        /* ── BALL REVEAL ANIMATION ── */
+        @keyframes ballReveal {
+            0%   { transform: scale(0) rotate(-180deg) translateY(-20px); opacity: 0; }
+            70%  { transform: scale(1.2) rotate(8deg) translateY(0); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .ball-pop { animation: ballReveal 0.45s cubic-bezier(.34,1.56,.64,1) both; }
     </style>
 </head>
 <body>
     <!-- Header will be loaded dynamically -->
     <div id="header-container"></div>
+
+    <!-- HERO BANNER -->
+    <div class="lottery-hero">
+        <div class="container position-relative">
+            <div class="lottery-hero-badge">✦ FREE &nbsp;·&nbsp; NO SIGN-UP &nbsp;·&nbsp; 200+ LOTTERIES</div>
+            <h1 class="lottery-hero-title">
+                <span class="lottery-glow">LOTTERY</span>
+                <span class="lottery-hero-sub">NUMBER GENERATOR</span>
+            </h1>
+            <p class="lottery-hero-desc">Pick your lucky numbers for Powerball, Mega Millions, EuroMillions &amp; more</p>
+            <div class="jackpot-ticker-wrap">
+                <span class="jackpot-label">🏆 Est. Powerball Jackpot</span>
+                <span class="jackpot-amount" id="jackpotTicker">$0</span>
+            </div>
+            <div class="lottery-balls-demo" id="demoBalls"></div>
+        </div>
+    </div>
 
     <div class="container mt-4">
         <div class="row">
@@ -1129,5 +1310,86 @@
     <!-- Custom JS -->
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/miscellaneous/lottery-number-generator.js"></script>
+
+    <script>
+    // ── JACKPOT TICKER COUNT-UP ──
+    (function () {
+        const el = document.getElementById('jackpotTicker');
+        if (!el) return;
+        const target = 892400000;
+        const dur = 2400;
+        const start = performance.now();
+        function tick(now) {
+            const t = Math.min((now - start) / dur, 1);
+            const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            el.textContent = '$' + Math.floor(eased * target).toLocaleString();
+            if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    })();
+
+    // ── DEMO FLOATING BALLS ──
+    (function () {
+        const container = document.getElementById('demoBalls');
+        if (!container) return;
+        const palette = ['#00c8ff', '#ff2d78', '#9b5bff', '#ffaa00', '#00ff9d', '#ff6b35'];
+        const nums = [];
+        while (nums.length < 6) {
+            const n = Math.floor(Math.random() * 69) + 1;
+            if (!nums.includes(n)) nums.push(n);
+        }
+        nums.forEach(function (n, i) {
+            const ball = document.createElement('div');
+            ball.className = 'demo-ball';
+            ball.style.setProperty('--d', (i * 0.22) + 's');
+            ball.style.background = 'radial-gradient(circle at 35% 32%, ' + palette[i] + 'cc, ' + palette[i] + '55)';
+            ball.style.border = '2px solid ' + palette[i] + '88';
+            ball.textContent = n;
+            container.appendChild(ball);
+        });
+    })();
+
+    // ── LUCKY METER ──
+    (function () {
+        const form = document.getElementById('generatorForm');
+        if (!form) return;
+        const btnRow = form.querySelector('.d-flex.gap-2');
+        if (!btnRow) return;
+        const meter = document.createElement('div');
+        meter.className = 'lucky-meter-wrap';
+        meter.innerHTML =
+            '<div class="lucky-meter-header">' +
+            '<span>// LUCK INDEX</span>' +
+            '<span class="lucky-pct" id="luckyPct">—</span>' +
+            '</div>' +
+            '<div class="lucky-meter-bg"><div class="lucky-meter-fill" id="luckyFill"></div></div>';
+        btnRow.parentNode.insertBefore(meter, btnRow);
+
+        form.addEventListener('submit', function () {
+            const pct = Math.floor(Math.random() * 38) + 62;
+            setTimeout(function () {
+                const p = document.getElementById('luckyPct');
+                const f = document.getElementById('luckyFill');
+                if (p) p.textContent = pct + '%';
+                if (f) f.style.width = pct + '%';
+            }, 350);
+        });
+    })();
+
+    // ── BALL POP ANIMATION ──
+    (function () {
+        const container = document.getElementById('resultsContainer');
+        if (!container) return;
+        const observer = new MutationObserver(function () {
+            const fresh = container.querySelectorAll('.badge:not(.ball-pop-done)');
+            fresh.forEach(function (b, i) {
+                b.classList.add('ball-pop-done');
+                b.style.animationDelay = (i * 0.07) + 's';
+                b.classList.add('ball-pop');
+            });
+        });
+        observer.observe(container, { childList: true, subtree: true });
+    })();
+    </script>
 </body>
 </html> 
