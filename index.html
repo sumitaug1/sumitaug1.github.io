@@ -809,6 +809,56 @@ nav::after {
 @media(max-width:900px) { .tools-grid { grid-template-columns: 1fr 1fr; } }
 @media(max-width:600px) { .tools-grid { grid-template-columns: 1fr; } }
 
+/* ─── TRENDING SCROLL ROW ─── */
+.trending-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.trending-wrap::before,
+.trending-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.trending-wrap::before { left: 0;  background: linear-gradient(90deg,  var(--void), transparent); }
+.trending-wrap::after  { right: 0; background: linear-gradient(270deg, var(--void), transparent); }
+
+.trending-track {
+  display: flex;
+  gap: 1.2rem;
+  width: max-content;
+  padding: 0.6rem 0 1.4rem;
+  animation: trendScroll 45s linear infinite;
+}
+.trending-track:hover { animation-play-state: paused; }
+
+@keyframes trendScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.trending-track .tool-tile {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.trend-rank {
+  position: absolute;
+  bottom: 0;
+  right: 8px;
+  font-family: 'Orbitron', monospace;
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.06);
+  pointer-events: none;
+  user-select: none;
+}
+
 .tool-tile {
   position: relative;
   background: var(--panel);
@@ -1482,7 +1532,9 @@ footer::before {
     </div>
     <a href="#" class="s-link">VIEW ALL →</a>
   </div>
-  <div class="tools-grid" id="toolsGrid"></div>
+  <div class="trending-wrap">
+    <div class="trending-track" id="toolsGrid"></div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -1715,12 +1767,14 @@ CATS.forEach(c=>{
   });
 })();
 
-/* ── RENDER TOOLS ── */
+/* ── RENDER TRENDING TOOLS (doubled for seamless loop) ── */
 const tg = document.getElementById('toolsGrid');
-TOOLS.forEach(t=>{
+[...TOOLS, ...TOOLS].forEach((t, i) => {
+  const rank = (i % TOOLS.length) + 1;
   tg.insertAdjacentHTML('beforeend', `
   <a href="${t.path}" class="tool-tile" style="--t-clr:${t.clr}">
     <div class="tool-tile-corner"></div>
+    <div class="trend-rank">${rank}</div>
     <div class="tt-top">
       <div class="tt-icon">${t.emoji}</div>
       <div class="tt-badge">${t.cat}</div>
