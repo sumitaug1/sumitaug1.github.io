@@ -510,6 +510,124 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
+        /* ── LOTTERY INFO PANEL ── */
+        .lottery-info-panel {
+            background: linear-gradient(135deg, rgba(0,200,255,0.04), rgba(155,91,255,0.04));
+            border: 1px solid rgba(0,200,255,0.18);
+            border-radius: 12px; padding: 1rem 1.1rem 0.9rem; margin-bottom: 1.2rem;
+        }
+        .lip-header {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+            letter-spacing: 0.18em; color: rgba(0,200,255,0.5);
+            text-transform: uppercase; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .lip-header::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(90deg, rgba(0,200,255,0.2), transparent);
+        }
+        .lip-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem;
+        }
+        @media (min-width: 576px) { .lip-grid { grid-template-columns: repeat(4, 1fr); } }
+        .lip-item { text-align: center; }
+        .lip-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.54rem;
+            letter-spacing: 0.12em; color: rgba(200,216,240,0.35);
+            text-transform: uppercase; margin-bottom: 4px;
+        }
+        .lip-value {
+            font-family: 'Orbitron', monospace; font-size: 0.7rem;
+            font-weight: 700; color: #c8d8f0; line-height: 1.3;
+        }
+        .lip-value.gold { color: #ffaa00; }
+        .lip-value.cyan { color: #00c8ff; }
+        .lip-value.green { color: #00ff9d; }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+        /* ── HERO STAT CHIPS ── */
+        .hero-stat-chips {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 1.4rem;
+        }
+        .hero-chip {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.56rem;
+            letter-spacing: 0.12em; color: rgba(200,216,240,0.5);
+            background: rgba(0,200,255,0.04); border: 1px solid rgba(0,200,255,0.1);
+            border-radius: 20px; padding: 5px 13px; white-space: nowrap;
+        }
+
+        /* ── ODDS COMPARISON TABLE ── */
+        .odds-table { width: 100%; border-collapse: collapse; }
+        .odds-table thead th {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.12em; color: rgba(0,200,255,0.55);
+            text-transform: uppercase; padding: 8px 10px;
+            border-bottom: 1px solid rgba(0,200,255,0.15); text-align: left;
+        }
+        .odds-table tbody td {
+            padding: 10px 10px; font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.82rem; color: #c8d8f0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            vertical-align: middle;
+        }
+        .odds-table tbody tr:hover td { background: rgba(0,200,255,0.03); }
+        .odds-table .t-name {
+            font-family: 'Orbitron', monospace; font-size: 0.68rem;
+            font-weight: 700; color: #00c8ff;
+        }
+        .odds-table .t-odds { font-family: 'JetBrains Mono', monospace; color: #ff2d78; font-size: 0.76rem; }
+        .odds-table .t-record { color: #ffaa00; font-size: 0.78rem; }
+        .odds-table .t-format { font-size: 0.76rem; color: rgba(200,216,240,0.55); }
+        .odds-table .t-days { font-size: 0.76rem; color: #00ff9d; }
+        .odds-badge {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.08em;
+        }
+        .odds-badge.easy { background: rgba(0,255,157,0.1); color: #00ff9d; border: 1px solid rgba(0,255,157,0.2); }
+        .odds-badge.medium { background: rgba(255,170,0,0.1); color: #ffaa00; border: 1px solid rgba(255,170,0,0.2); }
+        .odds-badge.hard { background: rgba(255,45,120,0.1); color: #ff2d78; border: 1px solid rgba(255,45,120,0.2); }
+
+        /* ── HOW IT WORKS STEPS ── */
+        .steps-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; }
+        @media (min-width: 768px) { .steps-row { grid-template-columns: repeat(4,1fr); } }
+        .step-card {
+            background: rgba(0,200,255,0.03); border: 1px solid rgba(0,200,255,0.1);
+            border-radius: 10px; padding: 1.1rem 0.9rem; text-align: center; position: relative;
+            transition: border-color .3s, transform .3s;
+        }
+        .step-card:hover { border-color: rgba(0,200,255,0.3); transform: translateY(-3px); }
+        .step-num {
+            font-family: 'Orbitron', monospace; font-size: 1.4rem; font-weight: 900;
+            line-height: 1; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00c8ff, #9b5bff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .step-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+        .step-title {
+            font-family: 'Orbitron', monospace; font-size: 0.62rem; font-weight: 700;
+            letter-spacing: 0.12em; color: #c8d8f0; text-transform: uppercase; margin-bottom: 0.4rem;
+        }
+        .step-desc { font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; color: rgba(200,216,240,0.45); }
+        .step-connector {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .step-card { position: relative; }
+            .step-card:not(:last-child)::after {
+                content: '→'; position: absolute; right: -18px; top: 50%;
+                transform: translateY(-50%); color: rgba(0,200,255,0.3);
+                font-size: 1rem; z-index: 1;
+            }
+        }
+
+        /* ── WORLD RECORDS BAR ── */
+        .records-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+        @media (min-width: 576px) { .records-row { grid-template-columns: repeat(4,1fr); } }
+        .record-item { text-align: center; padding: 0.8rem; background: rgba(255,170,0,0.04); border: 1px solid rgba(255,170,0,0.12); border-radius: 10px; }
+        .record-num { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 900; color: #ffaa00; }
+        .record-label { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; color: rgba(200,216,240,0.4); text-transform: uppercase; margin-top: 3px; }
+
         #winFlash::before {
             content: ''; position: absolute; inset: 0;
             background: rgba(2,4,10,0.92); z-index: -1;
@@ -536,6 +654,13 @@
                 <span class="jackpot-amount" id="jackpotTicker">$0</span>
             </div>
             <div class="lottery-balls-demo" id="demoBalls"></div>
+            <div class="hero-stat-chips">
+                <span class="hero-chip">🌍 &nbsp;200+ LOTTERIES</span>
+                <span class="hero-chip">⚡ &nbsp;INSTANT PICKS</span>
+                <span class="hero-chip">🆓 &nbsp;COMPLETELY FREE</span>
+                <span class="hero-chip">📱 &nbsp;MOBILE READY</span>
+                <span class="hero-chip">🔒 &nbsp;NO SIGN-UP</span>
+            </div>
         </div>
     </div>
 
@@ -1125,6 +1250,29 @@
                                 <div id="lotteryTypeHelp" class="form-text">Choose from 200+ global lottery types or create custom settings</div>
                             </div>
 
+                            <!-- Dynamic Lottery Info Panel -->
+                            <div id="lottInfoPanel" class="lottery-info-panel" style="display:none">
+                                <div class="lip-header">// lottery info</div>
+                                <div class="lip-grid">
+                                    <div class="lip-item">
+                                        <div class="lip-label">🎯 Jackpot Odds</div>
+                                        <div class="lip-value" id="lipOdds">—</div>
+                                    </div>
+                                    <div class="lip-item">
+                                        <div class="lip-label">🔢 Format</div>
+                                        <div class="lip-value cyan" id="lipFormat">—</div>
+                                    </div>
+                                    <div class="lip-item">
+                                        <div class="lip-label">📅 Draw Days</div>
+                                        <div class="lip-value green" id="lipDays">—</div>
+                                    </div>
+                                    <div class="lip-item">
+                                        <div class="lip-label">🏆 Record Jackpot</div>
+                                        <div class="lip-value gold" id="lipRecord">—</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Custom Settings (initially hidden) -->
                             <div id="customSettings" class="mb-4" style="display: none;" role="region" aria-labelledby="customSettingsTitle">
                                 <h6 id="customSettingsTitle" class="mb-3">Custom Lottery Settings</h6>
@@ -1397,46 +1545,92 @@
                     </div>
                 </div>
 
-                <!-- Information Card -->
+                <!-- How It Works -->
                 <div class="card mt-4 shadow-sm">
                     <div class="card-header">
-                        <h5 class="mb-0">About Lottery Number Generator</h5>
+                        <h5 class="mb-0">⚡ How It Works</h5>
                     </div>
                     <div class="card-body">
-                        <p>This comprehensive lottery number generator supports 200+ global lottery types with advanced features for the ultimate lottery experience. Key features include:</p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-globe text-info me-2"></i><strong>200+ Global Lotteries:</strong> Powerball, Mega Millions, EuroMillions, UK Lotto, and more</li>
-                            <li class="mb-2"><i class="fas fa-robot text-info me-2"></i><strong>AI Lucky Pick:</strong> Personalized numbers based on birthday and zodiac</li>
-                            <li class="mb-2"><i class="fas fa-chart-line text-info me-2"></i><strong>Lottery Info & Results:</strong> Real-time jackpots, draw dates, and official links</li>
-                            <li class="mb-2"><i class="fas fa-share-alt text-info me-2"></i><strong>Save & Share:</strong> Download images and share on social media</li>
-                            <li class="mb-2"><i class="fas fa-language text-info me-2"></i><strong>Multilingual Support:</strong> Available in English, Spanish, French, Hindi, and Chinese</li>
-                            <li class="mb-2"><i class="fas fa-mobile-alt text-info me-2"></i><strong>Mobile-First PWA:</strong> Install as app, offline support, touch gestures</li>
-                            <li class="mb-2"><i class="fas fa-star text-info me-2"></i><strong>Fun Extras:</strong> Hot/cold numbers, lottery trivia, lucky generators</li>
-                            <li class="mb-2"><i class="fas fa-universal-access text-info me-2"></i><strong>Accessibility:</strong> Screen reader support, keyboard navigation, high contrast</li>
-                            <li class="mb-2"><i class="fas fa-bell text-info me-2"></i><strong>User Engagement:</strong> Reminders, calendar integration, favorites system</li>
-                            <li class="mb-2"><i class="fas fa-search text-info me-2"></i><strong>SEO Optimized:</strong> Global keywords, structured data, social media tags</li>
-                        </ul>
+                        <div class="steps-row">
+                            <div class="step-card">
+                                <div class="step-num">01</div>
+                                <div class="step-icon">🌍</div>
+                                <div class="step-title">Pick Lottery</div>
+                                <div class="step-desc">Choose from 200+ lotteries worldwide — Powerball, EuroMillions, Toto, Kerala & more</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">02</div>
+                                <div class="step-icon">🎂</div>
+                                <div class="step-title">AI Lucky Pick</div>
+                                <div class="step-desc">Enter birthday + zodiac for numbers personalised to your cosmic energy</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">03</div>
+                                <div class="step-icon">🎰</div>
+                                <div class="step-title">Generate</div>
+                                <div class="step-desc">Hit Generate for cryptographically random numbers — up to 10 sets at once</div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-num">04</div>
+                                <div class="step-icon">📤</div>
+                                <div class="step-title">Save & Share</div>
+                                <div class="step-desc">Download as PDF/image or share instantly via WhatsApp, Twitter & more</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Usage Tips Card -->
+                <!-- Lottery Odds Comparison -->
                 <div class="card mt-4 shadow-sm">
                     <div class="card-header">
-                        <h5 class="mb-0">Usage Tips</h5>
+                        <h5 class="mb-0">🎯 Lottery Odds Comparison</h5>
+                    </div>
+                    <div class="card-body" style="overflow-x:auto; padding: 0.5rem;">
+                        <table class="odds-table">
+                            <thead>
+                                <tr>
+                                    <th>Lottery</th>
+                                    <th>Format</th>
+                                    <th>Jackpot Odds</th>
+                                    <th>Difficulty</th>
+                                    <th>Draw Days</th>
+                                    <th>Record Jackpot</th>
+                                </tr>
+                            </thead>
+                            <tbody id="oddsTableBody">
+                                <!-- filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- World Records -->
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">🏆 Lottery World Records</h5>
                     </div>
                     <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Choose Your Lottery:</strong> Select from 200+ global lottery types</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>AI Lucky Pick:</strong> Enter your birthday and zodiac for personalized numbers</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Customize Settings:</strong> Adjust number ranges and sets as needed</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Save Favorites:</strong> Store your favorite number combinations</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Set Reminders:</strong> Get notified before your favorite lottery draws</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Calendar Integration:</strong> Add lottery draws to Google Calendar or Outlook</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Share & Connect:</strong> Share your numbers on social media platforms</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Check Results:</strong> Use quick links to verify official lottery results</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Mobile Experience:</strong> Install as PWA for app-like experience</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Fun Features:</strong> Explore hot/cold numbers, trivia, and lucky generators</li>
-                        </ul>
+                        <div class="records-row">
+                            <div class="record-item">
+                                <div class="record-num">$2.04B</div>
+                                <div class="record-label">Largest Jackpot Ever<br>(Powerball, Nov 2022)</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-num">€230M</div>
+                                <div class="record-label">EuroMillions Cap<br>(Europe's Biggest)</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-num">1 in 302M</div>
+                                <div class="record-label">Longest Odds<br>(Mega Millions)</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-num">AU$150M</div>
+                                <div class="record-label">Australia Record<br>(Powerball, Oct 2019)</div>
+                            </div>
+                        </div>
+                        <p style="font-family:'Space Grotesk',sans-serif;font-size:0.8rem;color:rgba(200,216,240,0.4);margin-top:1rem;margin-bottom:0;">
+                            💡 <strong style="color:rgba(200,216,240,0.6);">Fun fact:</strong> Your odds of winning Powerball are roughly 1 in 292 million — about the same as flipping heads on a coin 28 times in a row. But someone always wins!
+                        </p>
                     </div>
                 </div>
             </div>
