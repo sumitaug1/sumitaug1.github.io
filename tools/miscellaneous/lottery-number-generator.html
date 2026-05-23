@@ -341,6 +341,64 @@
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
         .ball-pop { animation: ballReveal 0.45s cubic-bezier(.34,1.56,.64,1) both; }
+
+        /* ── BODY DOT GRID ── */
+        body::before {
+            content: '';
+            position: fixed; inset: 0; z-index: -1;
+            background-image: radial-gradient(circle, rgba(0,200,255,0.045) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+        }
+
+        /* ── HERO SCAN LINES ── */
+        .lottery-hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent, transparent 2px,
+                rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+            );
+            pointer-events: none;
+        }
+
+        /* ── GENERATOR CARD GLOW PULSE ── */
+        .card.shadow-sm:has(#generatorForm) {
+            animation: cardGlowPulse 3.5s ease-in-out infinite;
+        }
+        @keyframes cardGlowPulse {
+            0%,100% { box-shadow: 0 0 12px rgba(0,200,255,0.06) !important; }
+            50%     { box-shadow: 0 0 32px rgba(0,200,255,0.22), 0 0 60px rgba(155,91,255,0.1) !important; }
+        }
+
+        /* ── DRUM ROLL OVERLAY ── */
+        #drumRollOverlay {
+            display: none; position: absolute; inset: 0; z-index: 10;
+            background: rgba(2,4,10,0.93); border-radius: inherit;
+            align-items: center; justify-content: center; flex-direction: column; gap: 14px;
+        }
+        #drumRollOverlay.active { display: flex; }
+        .drum-label {
+            font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700;
+            background: linear-gradient(90deg,#00c8ff,#ff2d78,#9b5bff,#00c8ff);
+            background-size: 250% 100%; -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
+            animation: lottShimmer 1s linear infinite;
+        }
+        .drum-dots { display: flex; gap: 8px; }
+        .drum-dot {
+            width: 11px; height: 11px; border-radius: 50%; background: #00c8ff;
+            animation: ballFloat 0.55s ease-in-out infinite;
+        }
+
+        /* ── COUNTDOWN ── */
+        .draw-countdown {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+            color: rgba(200,216,240,0.35); letter-spacing: 0.12em;
+            margin-top: 0.5rem; text-align: center;
+        }
+        .draw-countdown span { color: rgba(0,200,255,0.6); font-weight: 700; }
     </style>
 </head>
 <body>
@@ -1389,6 +1447,175 @@
             });
         });
         observer.observe(container, { childList: true, subtree: true });
+    })();
+
+    // ── HERO STAR PARTICLES ──
+    (function () {
+        const hero = document.querySelector('.lottery-hero');
+        if (!hero) return;
+        const canvas = document.createElement('canvas');
+        canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.5;z-index:0;';
+        hero.insertBefore(canvas, hero.firstChild);
+        const ctx = canvas.getContext('2d');
+        const stars = [];
+
+        function resize() {
+            canvas.width = hero.offsetWidth;
+            canvas.height = hero.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        for (var i = 0; i < 90; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.4 + 0.2,
+                vx: (Math.random() - 0.5) * 0.15,
+                vy: -(Math.random() * 0.25 + 0.05),
+                o: Math.random() * 0.6 + 0.2,
+                do: (Math.random() - 0.5) * 0.015
+            });
+        }
+
+        (function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(function (s) {
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0,200,255,' + Math.max(0.05, Math.min(0.85, s.o)) + ')';
+                ctx.fill();
+                s.x += s.vx; s.y += s.vy;
+                s.o += s.do;
+                if (s.o < 0.1 || s.o > 0.85) s.do *= -1;
+                if (s.y < -4) { s.y = canvas.height + 4; s.x = Math.random() * canvas.width; }
+                if (s.x < -4 || s.x > canvas.width + 4) { s.x = Math.random() * canvas.width; s.y = Math.random() * canvas.height; }
+            });
+            requestAnimationFrame(draw);
+        })();
+    })();
+
+    // ── COUNTDOWN TO NEXT POWERBALL DRAW ──
+    (function () {
+        const tickerWrap = document.querySelector('.jackpot-ticker-wrap');
+        if (!tickerWrap) return;
+        const el = document.createElement('div');
+        el.className = 'draw-countdown';
+        tickerWrap.insertAdjacentElement('afterend', el);
+
+        function nextDraw() {
+            var now = new Date();
+            var drawDays = [1, 3, 6]; // Mon, Wed, Sat
+            var day = now.getDay();
+            var minDiff = 8;
+            drawDays.forEach(function (d) {
+                var diff = d - day;
+                if (diff <= 0) diff += 7;
+                if (diff < minDiff) minDiff = diff;
+            });
+            var next = new Date(now);
+            next.setDate(now.getDate() + minDiff);
+            next.setHours(22, 59, 0, 0);
+            return next;
+        }
+
+        function tick() {
+            var diff = nextDraw() - Date.now();
+            if (diff <= 0) { el.innerHTML = '<span>🔴 DRAW IN PROGRESS</span>'; return; }
+            var d = Math.floor(diff / 86400000);
+            var h = Math.floor((diff % 86400000) / 3600000);
+            var m = Math.floor((diff % 3600000) / 60000);
+            var s = Math.floor((diff % 60000) / 1000);
+            el.innerHTML = 'NEXT DRAW IN: '
+                + (d > 0 ? '<span>' + d + 'd</span> ' : '')
+                + '<span>' + String(h).padStart(2, '0') + 'h</span> '
+                + '<span>' + String(m).padStart(2, '0') + 'm</span> '
+                + '<span>' + String(s).padStart(2, '0') + 's</span>';
+        }
+        tick();
+        setInterval(tick, 1000);
+    })();
+
+    // ── CONFETTI BURST ON GENERATE ──
+    (function () {
+        var form = document.getElementById('generatorForm');
+        if (!form) return;
+
+        function burst() {
+            var canvas = document.createElement('canvas');
+            canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            document.body.appendChild(canvas);
+            var ctx = canvas.getContext('2d');
+            var cols = ['#00c8ff','#ff2d78','#9b5bff','#ffaa00','#00ff9d','#ff6b35','#ffffff'];
+            var pieces = [];
+            var cx = window.innerWidth / 2;
+            var cy = window.innerHeight * 0.38;
+
+            for (var i = 0; i < 90; i++) {
+                var angle = Math.random() * Math.PI * 2;
+                var speed = Math.random() * 11 + 5;
+                pieces.push({
+                    x: cx + (Math.random() - 0.5) * 120,
+                    y: cy,
+                    vx: Math.cos(angle) * speed * 0.6,
+                    vy: -(Math.random() * 14 + 7),
+                    col: cols[Math.floor(Math.random() * cols.length)],
+                    w: Math.random() * 9 + 4,
+                    h: Math.random() * 4 + 2,
+                    rot: Math.random() * 360,
+                    rv: (Math.random() - 0.5) * 10,
+                    life: 1
+                });
+            }
+
+            (function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                var any = false;
+                pieces.forEach(function (p) {
+                    if (p.life <= 0) return;
+                    any = true;
+                    p.vy += 0.45; p.x += p.vx; p.y += p.vy; p.rot += p.rv; p.life -= 0.011;
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, p.life);
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rot * Math.PI / 180);
+                    ctx.fillStyle = p.col;
+                    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                    ctx.restore();
+                });
+                if (any) requestAnimationFrame(draw);
+                else canvas.remove();
+            })();
+        }
+
+        form.addEventListener('submit', function () { setTimeout(burst, 380); });
+    })();
+
+    // ── DRUM ROLL SUSPENSE BEFORE RESULTS ──
+    (function () {
+        var resultsCard = document.getElementById('resultsCard');
+        if (!resultsCard) return;
+
+        resultsCard.style.position = 'relative';
+        var overlay = document.createElement('div');
+        overlay.id = 'drumRollOverlay';
+
+        var dotsHtml = '';
+        for (var i = 0; i < 5; i++) {
+            dotsHtml += '<div class="drum-dot" style="animation-delay:' + (i * 0.11) + 's"></div>';
+        }
+        overlay.innerHTML = '<div class="drum-label">🎰 DRAWING NUMBERS...</div><div class="drum-dots">' + dotsHtml + '</div>';
+        resultsCard.appendChild(overlay);
+
+        var form = document.getElementById('generatorForm');
+        if (form) {
+            form.addEventListener('submit', function () {
+                overlay.classList.add('active');
+                setTimeout(function () { overlay.classList.remove('active'); }, 900);
+            });
+        }
     })();
     </script>
 </body>
